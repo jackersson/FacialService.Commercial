@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FacialService", "FacialService.vcxproj", "{C93F7B75-DA6B-42A0-A298-2A9EE67567B7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BioContracts", "..\BioContracts\BioContracts.vcxproj", "{C0ACDCD9-7D23-440B-8805-E32647F2FD2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +17,10 @@ Global
 		{C93F7B75-DA6B-42A0-A298-2A9EE67567B7}.Debug|Win32.Build.0 = Debug|Win32
 		{C93F7B75-DA6B-42A0-A298-2A9EE67567B7}.Release|Win32.ActiveCfg = Release|Win32
 		{C93F7B75-DA6B-42A0-A298-2A9EE67567B7}.Release|Win32.Build.0 = Release|Win32
+		{C0ACDCD9-7D23-440B-8805-E32647F2FD2D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C0ACDCD9-7D23-440B-8805-E32647F2FD2D}.Debug|Win32.Build.0 = Debug|Win32
+		{C0ACDCD9-7D23-440B-8805-E32647F2FD2D}.Release|Win32.ActiveCfg = Release|Win32
+		{C0ACDCD9-7D23-440B-8805-E32647F2FD2D}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
