@@ -1,7 +1,7 @@
 #ifndef IFaceCharacteristics_INCLUDED
 #define IFaceCharacteristics_INCLUDED
 
-#include "service_context.hpp"
+#include "services/service_context.hpp"
 
 namespace BioContracts
 {

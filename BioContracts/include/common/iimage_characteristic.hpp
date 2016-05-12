@@ -1,8 +1,8 @@
 #ifndef IImageCharacteristics_INCLUDED
 #define IImageCharacteristics_INCLUDED
 
-#include "service_context.hpp"
-#include "iface_characteristics.hpp"
+#include "services/service_context.hpp"
+#include "common/iface_characteristics.hpp"
 
 namespace BioContracts
 {

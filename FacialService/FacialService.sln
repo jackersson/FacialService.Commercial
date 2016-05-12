@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FacialService", "FacialServ
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BioContracts", "..\BioContracts\BioContracts.vcxproj", "{C0ACDCD9-7D23-440B-8805-E32647F2FD2D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FacialEngineFRsdk", "..\FacialEngineFRsdk\FacialEngineFRsdk.vcxproj", "{38726227-1ED7-42DD-BC79-22AB98173C95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,6 +23,10 @@ Global
 		{C0ACDCD9-7D23-440B-8805-E32647F2FD2D}.Debug|Win32.Build.0 = Debug|Win32
 		{C0ACDCD9-7D23-440B-8805-E32647F2FD2D}.Release|Win32.ActiveCfg = Release|Win32
 		{C0ACDCD9-7D23-440B-8805-E32647F2FD2D}.Release|Win32.Build.0 = Release|Win32
+		{38726227-1ED7-42DD-BC79-22AB98173C95}.Debug|Win32.ActiveCfg = Debug|Win32
+		{38726227-1ED7-42DD-BC79-22AB98173C95}.Debug|Win32.Build.0 = Debug|Win32
+		{38726227-1ED7-42DD-BC79-22AB98173C95}.Release|Win32.ActiveCfg = Release|Win32
+		{38726227-1ED7-42DD-BC79-22AB98173C95}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

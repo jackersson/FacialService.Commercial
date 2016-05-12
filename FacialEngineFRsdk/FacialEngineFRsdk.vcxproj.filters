@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="include\biotasks">
+      <UniqueIdentifier>{f448cb00-5535-46bc-a19a-4f74488aa84c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\feedback">
+      <UniqueIdentifier>{3792cf60-84fc-4df3-99d6-3d508d7de7b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\utils">
+      <UniqueIdentifier>{fd567a36-3a7e-430f-92ba-da2b4b965443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\biotasks">
+      <UniqueIdentifier>{4502e71e-d11d-4329-bff2-c45e5c1bad93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utils">
+      <UniqueIdentifier>{1671292f-a0af-4978-9cff-ac6351d3fd6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\feedback">
+      <UniqueIdentifier>{c32731ec-10b8-42e6-ab83-aed98350c2c9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\biotasks\facial_acquisition.hpp">
+      <Filter>include\biotasks</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\facial_enrollment.hpp">
+      <Filter>include\biotasks</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\facial_verification.hpp">
+      <Filter>include\biotasks</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\ienrollment_able.hpp">
+      <Filter>include\biotasks</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\ienrollment_processor.hpp">
+      <Filter>include\biotasks</Filter>
+    </ClInclude>
+    <ClInclude Include="include\feedback\facial_acquisiton_feedback.hpp">
+      <Filter>include\feedback</Filter>
+    </ClInclude>
+    <ClInclude Include="include\feedback\facial_enrollment_feedback.hpp">
+      <Filter>include\feedback</Filter>
+    </ClInclude>
+    <ClInclude Include="include\feedback\facial_verification_feedback.hpp">
+      <Filter>include\feedback</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utils\face_vacs_io_utils.hpp">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\facial_engine.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utils\frsdk_face_characteristics.hpp">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\biotasks\facial_acquisition.cpp">
+      <Filter>src\biotasks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\facial_enrollment.cpp">
+      <Filter>src\biotasks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\facial_verification.cpp">
+      <Filter>src\biotasks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\face_vacs_io_utils.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\facial_engine.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,8 +1,8 @@
 #ifndef IFacialEngine_INCLUDED
 #define IFacialEngine_INCLUDED
 
-#include "bio_service.pb.h"
-#include "iimage_characteristic.hpp"
+#include "protobufs/bio_service.pb.h"
+#include "common/iimage_characteristic.hpp"
 #include <string>
 namespace BioContracts
 {
