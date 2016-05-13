@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\gflags.2.1.2.1\build\native\gflags.props" Condition="Exists('packages\gflags.2.1.2.1\build\native\gflags.props')" />
+  <Import Project="packages\grpc.dependencies.openssl.1.0.204.1\build\native\grpc.dependencies.openssl.props" Condition="Exists('packages\grpc.dependencies.openssl.1.0.204.1\build\native\grpc.dependencies.openssl.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -38,7 +40,9 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="UserMacros">
+    <NuGetPackageImportStamp>929a57a2</NuGetPackageImportStamp>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
@@ -51,11 +55,14 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0603;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\FVSDK_8_9_5\include;$(SolutionDir)\packages\gtest.1.7.0\build\native\include;$(SolutionDir)\packages\gflags.2.1.2.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\include;F:\Biometric Software\C++\git\FacialService\include;F:\Biometric Software\C++\git\FacialEngineFRsdk\include;F:\Biometric Software\C++\git\BioGrpc\include;F:\Biometric Software\C++\git\BioContracts\include;C:\grpc-13.01\third_party\protobuf\src;C:\grpc-13.01;C:\grpc-13.01\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\FVSDK_8_9_5\lib\x86_32\msc_12.0-ipp_crtdll_g;C:\grpc-13.01\vsprojects\$(Configuration);$(SolutionDir)\packages\gflags.2.1.2.1\build\native\$(Platform)\$(PlatformToolset)\dynamic\Lib;$(SolutionDir)\packages\gtest.1.7.0\build\native\lib\$(Configuration);$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static\cdecl;$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static;C:\grpc-13.01\third_party\protobuf\cmake\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;gflagsd.lib;gtestd.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;libfrsdk-8.9.5d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -67,6 +74,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\FVSDK_8_9_5\include;$(SolutionDir)\packages\gtest.1.7.0\build\native\include;$(SolutionDir)\packages\gflags.2.1.2.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\include;F:\Biometric Software\C++\git\FacialService\include;F:\Biometric Software\C++\git\FacialEngineFRsdk\include;F:\Biometric Software\C++\git\BioGrpc\include;F:\Biometric Software\C++\git\BioContracts\include;C:\grpc-13.01\third_party\protobuf\src;C:\grpc-13.01;C:\grpc-13.01\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,8 +84,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\clients_starter.hpp" />
+    <ClInclude Include="include\facial_service_starter.hpp" />
+    <ClInclude Include="include\recognition_engines_context.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BioContracts\BioContracts.vcxproj">
+      <Project>{c0acdcd9-7d23-440b-8805-e32647f2fd2d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\BioGrpc\BioGrpc.vcxproj">
+      <Project>{664df468-034e-4800-8fec-7bc1ba61ca22}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\FacialEngineFRsdk\FacialEngineFRsdk.vcxproj">
+      <Project>{38726227-1ed7-42dd-bc79-22ab98173c95}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\grpc.dependencies.zlib.redist.1.2.8.10\build\native\grpc.dependencies.zlib.redist.targets" Condition="Exists('packages\grpc.dependencies.zlib.redist.1.2.8.10\build\native\grpc.dependencies.zlib.redist.targets')" />
+    <Import Project="packages\grpc.dependencies.zlib.1.2.8.10\build\native\grpc.dependencies.zlib.targets" Condition="Exists('packages\grpc.dependencies.zlib.1.2.8.10\build\native\grpc.dependencies.zlib.targets')" />
+    <Import Project="packages\grpc.dependencies.openssl.redist.1.0.204.1\build\native\grpc.dependencies.openssl.redist.targets" Condition="Exists('packages\grpc.dependencies.openssl.redist.1.0.204.1\build\native\grpc.dependencies.openssl.redist.targets')" />
+    <Import Project="packages\grpc.dependencies.openssl.1.0.204.1\build\native\grpc.dependencies.openssl.targets" Condition="Exists('packages\grpc.dependencies.openssl.1.0.204.1\build\native\grpc.dependencies.openssl.targets')" />
+    <Import Project="packages\gtest.1.7.0\build\native\gtest.targets" Condition="Exists('packages\gtest.1.7.0\build\native\gtest.targets')" />
+    <Import Project="packages\gflags.2.1.2.1\build\native\gflags.targets" Condition="Exists('packages\gflags.2.1.2.1\build\native\gflags.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\grpc.dependencies.zlib.redist.1.2.8.10\build\native\grpc.dependencies.zlib.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\grpc.dependencies.zlib.redist.1.2.8.10\build\native\grpc.dependencies.zlib.redist.targets'))" />
+    <Error Condition="!Exists('packages\grpc.dependencies.zlib.1.2.8.10\build\native\grpc.dependencies.zlib.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\grpc.dependencies.zlib.1.2.8.10\build\native\grpc.dependencies.zlib.targets'))" />
+    <Error Condition="!Exists('packages\grpc.dependencies.openssl.redist.1.0.204.1\build\native\grpc.dependencies.openssl.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\grpc.dependencies.openssl.redist.1.0.204.1\build\native\grpc.dependencies.openssl.redist.targets'))" />
+    <Error Condition="!Exists('packages\grpc.dependencies.openssl.1.0.204.1\build\native\grpc.dependencies.openssl.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\grpc.dependencies.openssl.1.0.204.1\build\native\grpc.dependencies.openssl.props'))" />
+    <Error Condition="!Exists('packages\grpc.dependencies.openssl.1.0.204.1\build\native\grpc.dependencies.openssl.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\grpc.dependencies.openssl.1.0.204.1\build\native\grpc.dependencies.openssl.targets'))" />
+    <Error Condition="!Exists('packages\gtest.1.7.0\build\native\gtest.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\gtest.1.7.0\build\native\gtest.targets'))" />
+    <Error Condition="!Exists('packages\gflags.2.1.2.1\build\native\gflags.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\gflags.2.1.2.1\build\native\gflags.props'))" />
+    <Error Condition="!Exists('packages\gflags.2.1.2.1\build\native\gflags.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\gflags.2.1.2.1\build\native\gflags.targets'))" />
+  </Target>
 </Project>
