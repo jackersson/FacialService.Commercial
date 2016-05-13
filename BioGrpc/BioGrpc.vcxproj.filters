@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="include\handlers">
+      <UniqueIdentifier>{c395ffa5-b7a5-46d0-95a4-5f1e234e1c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\clients">
+      <UniqueIdentifier>{195b820f-3565-41ca-a2e4-bf498715e9a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\services">
+      <UniqueIdentifier>{ecbf933e-ff2a-49ea-8ff2-e1ce99ca3e6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\clients">
+      <UniqueIdentifier>{4ab3fb0a-5170-4b68-b82d-71def7b6afd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\services">
+      <UniqueIdentifier>{1fbd589f-371c-4601-bf85-78580601a84d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\handlers">
+      <UniqueIdentifier>{c226338a-47ed-4c32-9d8e-f84444220214}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\calls">
+      <UniqueIdentifier>{860960c2-c7e5-4328-be10-f2d8e8ca4baa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\utils">
+      <UniqueIdentifier>{905db80c-2bd7-407f-96ad-59691b99ce72}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\clients\bio_clients_manager.hpp">
+      <Filter>include\clients</Filter>
+    </ClInclude>
+    <ClInclude Include="include\clients\bio_database_service_client.hpp">
+      <Filter>include\clients</Filter>
+    </ClInclude>
+    <ClInclude Include="include\handlers\facial_acquisition_handler.hpp">
+      <Filter>include\handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\handlers\facial_enrollment_handler.hpp">
+      <Filter>include\handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\calls\add_facial_image_call.hpp">
+      <Filter>include\calls</Filter>
+    </ClInclude>
+    <ClInclude Include="include\services\bio_service_manager.hpp">
+      <Filter>include\services</Filter>
+    </ClInclude>
+    <ClInclude Include="include\services\facial_service_impl.hpp">
+      <Filter>include\services</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utils\response_convertor.hpp">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\handlers\facial_acquisition_handler.cpp">
+      <Filter>src\handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\handlers\facial_enrollment_handler.cpp">
+      <Filter>src\handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\services\bio_service_manager.cpp">
+      <Filter>src\services</Filter>
+    </ClCompile>
+    <ClCompile Include="src\services\facial_service_impl.cpp">
+      <Filter>src\services</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -80,5 +80,8 @@
     <ClInclude Include="include\engine\irecognition_engines_context.hpp">
       <Filter>include\engine</Filter>
     </ClInclude>
+    <ClInclude Include="include\common\face_features.hpp">
+      <Filter>include\common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
