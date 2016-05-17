@@ -17,13 +17,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -57,6 +57,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static\cdecl;C:\grpc-13.01\third_party\protobuf\cmake\$(Configuration);$(SolutionDir)\packages\gtest.1.7.0\build\native\lib\$(Configuration);$(SolutionDir)\packages\gflags.2.1.2.1\build\native\$(Platform)\$(PlatformToolset)\static\Lib;C:\grpc-13.01\vsprojects\$(Configuration);C:\FVSDK_8_9_5\lib\x86_32\msc_12.0-ipp_crtdll_g;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;gflagsd.lib;gtestd.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;libfrsdk-8.9.5d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -67,7 +69,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0603;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>F:\Biometric Software\C++\git\BioContracts\include;$(LocalDebuggerWorkingDirectory)\include;C:\grpc-13.01\third_party\protobuf\src;C:\grpc-13.01\include;C:\grpc-13.01;C:\FVSDK_8_9_5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -75,6 +77,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static\cdecl;C:\grpc-13.01\third_party\protobuf\cmake\$(Configuration);$(SolutionDir)\packages\gtest.1.7.0\build\native\lib\$(Configuration);$(SolutionDir)\packages\gflags.2.1.2.1\build\native\$(Platform)\$(PlatformToolset)\static\Lib;C:\grpc-13.01\vsprojects\$(Configuration);C:\FVSDK_8_9_5\lib\x86_32\msc_12.0-ipp_crtdll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;gflags.lib;gtest.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;libfrsdk-8.9.5.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -83,19 +87,27 @@
     <ClInclude Include="include\biotasks\facial_verification.hpp" />
     <ClInclude Include="include\biotasks\ienrollment_able.hpp" />
     <ClInclude Include="include\biotasks\ienrollment_processor.hpp" />
+    <ClInclude Include="include\biotasks\ifir_builder.hpp" />
+    <ClInclude Include="include\biotasks\iverification_able.hpp" />
+    <ClInclude Include="include\biotasks\iverification_processor.hpp" />
     <ClInclude Include="include\facial_engine.hpp" />
     <ClInclude Include="include\feedback\facial_acquisiton_feedback.hpp" />
     <ClInclude Include="include\feedback\facial_enrollment_feedback.hpp" />
     <ClInclude Include="include\feedback\facial_verification_feedback.hpp" />
+    <ClInclude Include="include\utils\compliance_iso_characteristics.h" />
+    <ClInclude Include="include\utils\face_vacs_includes.hpp" />
     <ClInclude Include="include\utils\face_vacs_io_utils.hpp" />
     <ClInclude Include="include\utils\frsdk_face_characteristics.hpp" />
+    <ClInclude Include="include\utils\utils.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="src\biotasks\facial_acquisition.cpp" />
     <ClCompile Include="src\biotasks\facial_enrollment.cpp" />
     <ClCompile Include="src\biotasks\facial_verification.cpp" />
     <ClCompile Include="src\facial_engine.cpp" />
     <ClCompile Include="src\utils\face_vacs_io_utils.cpp" />
+    <ClCompile Include="src\utils\utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

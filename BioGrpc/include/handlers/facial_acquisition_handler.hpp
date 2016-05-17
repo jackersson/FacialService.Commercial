@@ -55,8 +55,10 @@ namespace BioGrpc
 		{			
 			std::string image_bytestring = request_.bytestring();
 
+			BioContracts::RawImage image(image_bytestring, image_bytestring.size());
+
 			BioContracts::ImageCharacteristicsConstRef resp =
-				facial_engine_->acquire(image_bytestring, image_bytestring.size());
+				facial_engine_->acquire(image);
 
 			ResponseConvertor convertor;
 			std::shared_ptr<BioService::PortraitCharacteristic>

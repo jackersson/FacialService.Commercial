@@ -1,7 +1,7 @@
 #ifndef IBioDatabaseClient_INCLUDED
 #define IBioDatabaseClient_INCLUDED
 
-#include "bio_service.pb.h"
+#include "protobufs/bio_service.pb.h"
 namespace BioContracts
 {
 	class IBioDatabaseClient

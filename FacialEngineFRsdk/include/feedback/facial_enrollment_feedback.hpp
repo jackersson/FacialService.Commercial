@@ -1,30 +1,15 @@
 #ifndef FacialEnrollmentFeedback_INCLUDED
 #define FacialEnrollmentFeedback_INCLUDED
 
-#include "engine/ifacial_engine.hpp"
-
-#include <frsdk/config.h>
-#include <frsdk/image.h>
-#include <frsdk/tokenface.h>
-#include <frsdk/portrait.h>
-#include <frsdk/eyes.h>
-#include <frsdk/cbeff.h>
-#include <frsdk/fir.h>
 #include <frsdk/enroll.h>
 
-#include <functional>
 
 namespace BioFacialEngine
 {
-	typedef std::function<void(const FRsdk::FIR& fir)> FirCallback;
-
 	class FacialEnrollmentFeedback : public FRsdk::Enrollment::FeedbackBody
 	{
 	public:
-		FacialEnrollmentFeedback(std::string& fir_bytestring) : fir_bytestring_(fir_bytestring) //setFir(setFirFunction), fir_(fir)
-		{
-			
-		}
+		FacialEnrollmentFeedback( BioContracts::IdentificationRecordRef fir) : fir_(fir) {}
 		~FacialEnrollmentFeedback() {}
 
 		void start() {}
@@ -35,16 +20,27 @@ namespace BioFacialEngine
 		void eyesFound(const FRsdk::Eyes::Location& eyes){}
 		void eyesNotFound() {}
 
-
 		void success(const FRsdk::FIR& fir)
 		{			
-			std::stringstream fir_bytestring_stream;
+			std::ostringstream fir_bytestring_stream;
 			fir_bytestring_stream << fir;
-			fir_bytestring_ = fir_bytestring_stream.str();				
+			fir_->copyFrom(fir_bytestring_stream.str());// = new BioContracts::Testable(fir.size());
+			//std::ostringstream fir_bytestring_stream;
+			//fir_bytestring_stream << fir;
+			//fir_bytestring_ = fir_bytestring_stream.str();	
+			//fir_bytestring_ = std::make_shared<unsigned char>(new unsigned char[fir.size()]);
+			//fir.serialize(fir_bytestring_.get());
+
+			//std::string cfg_path = "C:\\FVSDK_8_9_5\\etc\\frsdk.cfg";
+			//FRsdk::Configuration config(cfg_path);
+			//FRsdk::FIRBuilder fb(config);
+			//std::istringstream istr(fir_bytestring_);
+			//fb.build(istr);
+
+			std::cout << "test "  << std::endl;
 		}
 
-		void failure(){		
-		}
+		void failure(){}
 
 		
 	private:
@@ -52,9 +48,8 @@ namespace BioFacialEngine
 		void operator=(const FacialEnrollmentFeedback&);
 
 	private:
-		std::string& fir_bytestring_;
-		//FRsdk::FIR& fir_;
-		FirCallback setFir;
+		BioContracts::IdentificationRecordRef fir_;
+		
 	};
 }
 #endif

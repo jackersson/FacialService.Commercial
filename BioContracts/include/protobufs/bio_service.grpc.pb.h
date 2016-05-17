@@ -45,11 +45,16 @@ class BiometricFacialSevice GRPC_FINAL {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationFeedback>> AsyncVerify(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationFeedback>>(AsyncVerifyRaw(context, request, cq));
     }
+    virtual ::grpc::Status VerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::BioService::VerificationResult* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationResult>> AsyncVerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationResult>>(AsyncVerifyFaceRaw(context, request, cq));
+    }
   private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::Response>* AsyncAddSocketRaw(::grpc::ClientContext* context, const ::BioService::SocketConfiguration& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::PortraitCharacteristic>* AsyncAcquireRaw(::grpc::ClientContext* context, const ::BioService::Photo& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::EnrollmentFeedback>* AsyncEnrollRaw(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationFeedback>* AsyncVerifyRaw(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationResult>* AsyncVerifyFaceRaw(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub GRPC_FINAL : public StubInterface {
    public:
@@ -70,6 +75,10 @@ class BiometricFacialSevice GRPC_FINAL {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::VerificationFeedback>> AsyncVerify(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::VerificationFeedback>>(AsyncVerifyRaw(context, request, cq));
     }
+    ::grpc::Status VerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::BioService::VerificationResult* response) GRPC_OVERRIDE;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::VerificationResult>> AsyncVerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::VerificationResult>>(AsyncVerifyFaceRaw(context, request, cq));
+    }
 
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
@@ -77,10 +86,12 @@ class BiometricFacialSevice GRPC_FINAL {
     ::grpc::ClientAsyncResponseReader< ::BioService::PortraitCharacteristic>* AsyncAcquireRaw(::grpc::ClientContext* context, const ::BioService::Photo& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
     ::grpc::ClientAsyncResponseReader< ::BioService::EnrollmentFeedback>* AsyncEnrollRaw(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
     ::grpc::ClientAsyncResponseReader< ::BioService::VerificationFeedback>* AsyncVerifyRaw(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
+    ::grpc::ClientAsyncResponseReader< ::BioService::VerificationResult>* AsyncVerifyFaceRaw(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
     const ::grpc::RpcMethod rpcmethod_AddSocket_;
     const ::grpc::RpcMethod rpcmethod_Acquire_;
     const ::grpc::RpcMethod rpcmethod_Enroll_;
     const ::grpc::RpcMethod rpcmethod_Verify_;
+    const ::grpc::RpcMethod rpcmethod_VerifyFace_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -92,6 +103,7 @@ class BiometricFacialSevice GRPC_FINAL {
     virtual ::grpc::Status Acquire(::grpc::ServerContext* context, const ::BioService::Photo* request, ::BioService::PortraitCharacteristic* response);
     virtual ::grpc::Status Enroll(::grpc::ServerContext* context, const ::BioService::AcquiredData* request, ::BioService::EnrollmentFeedback* response);
     virtual ::grpc::Status Verify(::grpc::ServerContext* context, const ::BioService::AcquiredData* request, ::BioService::VerificationFeedback* response);
+    virtual ::grpc::Status VerifyFace(::grpc::ServerContext* context, const ::BioService::VerificationData* request, ::BioService::VerificationResult* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_AddSocket : public BaseClass {
@@ -173,7 +185,27 @@ class BiometricFacialSevice GRPC_FINAL {
       ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_AddSocket<WithAsyncMethod_Acquire<WithAsyncMethod_Enroll<WithAsyncMethod_Verify<Service > > > > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_VerifyFace : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(Service *service) {}
+   public:
+    WithAsyncMethod_VerifyFace() {
+      ::grpc::Service::MarkMethodAsync(4);
+    }
+    ~WithAsyncMethod_VerifyFace() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status VerifyFace(::grpc::ServerContext* context, const ::BioService::VerificationData* request, ::BioService::VerificationResult* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestVerifyFace(::grpc::ServerContext* context, ::BioService::VerificationData* request, ::grpc::ServerAsyncResponseWriter< ::BioService::VerificationResult>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_AddSocket<WithAsyncMethod_Acquire<WithAsyncMethod_Enroll<WithAsyncMethod_Verify<WithAsyncMethod_VerifyFace<Service > > > > > AsyncService;
   template <class BaseClass>
   class WithGenericMethod_AddSocket : public BaseClass {
    private:
@@ -242,6 +274,23 @@ class BiometricFacialSevice GRPC_FINAL {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
+  template <class BaseClass>
+  class WithGenericMethod_VerifyFace : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(Service *service) {}
+   public:
+    WithGenericMethod_VerifyFace() {
+      ::grpc::Service::MarkMethodGeneric(4);
+    }
+    ~WithGenericMethod_VerifyFace() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status VerifyFace(::grpc::ServerContext* context, const ::BioService::VerificationData* request, ::BioService::VerificationResult* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
 };
 
 class BiometricFingerprintSevice GRPC_FINAL {
@@ -249,29 +298,24 @@ class BiometricFingerprintSevice GRPC_FINAL {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    std::unique_ptr< ::grpc::ClientReaderInterface< ::BioService::EnrollmentFeedback>> EnrollFingerprint(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request) {
-      return std::unique_ptr< ::grpc::ClientReaderInterface< ::BioService::EnrollmentFeedback>>(EnrollFingerprintRaw(context, request));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::BioService::EnrollmentFeedback>> AsyncEnrollFingerprint(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::BioService::EnrollmentFeedback>>(AsyncEnrollFingerprintRaw(context, request, cq, tag));
+    virtual ::grpc::Status EnrollFingerprint(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request, ::BioService::EnrollmentFeedback* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::EnrollmentFeedback>> AsyncEnrollFingerprint(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::EnrollmentFeedback>>(AsyncEnrollFingerprintRaw(context, request, cq));
     }
     virtual ::grpc::Status VerifyFingerprint(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::BioService::VerificationFeedback* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationFeedback>> AsyncVerifyFingerprint(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationFeedback>>(AsyncVerifyFingerprintRaw(context, request, cq));
     }
   private:
-    virtual ::grpc::ClientReaderInterface< ::BioService::EnrollmentFeedback>* EnrollFingerprintRaw(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request) = 0;
-    virtual ::grpc::ClientAsyncReaderInterface< ::BioService::EnrollmentFeedback>* AsyncEnrollFingerprintRaw(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::EnrollmentFeedback>* AsyncEnrollFingerprintRaw(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationFeedback>* AsyncVerifyFingerprintRaw(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub GRPC_FINAL : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
-    std::unique_ptr< ::grpc::ClientReader< ::BioService::EnrollmentFeedback>> EnrollFingerprint(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request) {
-      return std::unique_ptr< ::grpc::ClientReader< ::BioService::EnrollmentFeedback>>(EnrollFingerprintRaw(context, request));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncReader< ::BioService::EnrollmentFeedback>> AsyncEnrollFingerprint(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncReader< ::BioService::EnrollmentFeedback>>(AsyncEnrollFingerprintRaw(context, request, cq, tag));
+    ::grpc::Status EnrollFingerprint(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request, ::BioService::EnrollmentFeedback* response) GRPC_OVERRIDE;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::EnrollmentFeedback>> AsyncEnrollFingerprint(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::EnrollmentFeedback>>(AsyncEnrollFingerprintRaw(context, request, cq));
     }
     ::grpc::Status VerifyFingerprint(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::BioService::VerificationFeedback* response) GRPC_OVERRIDE;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::VerificationFeedback>> AsyncVerifyFingerprint(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) {
@@ -280,8 +324,7 @@ class BiometricFingerprintSevice GRPC_FINAL {
 
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
-    ::grpc::ClientReader< ::BioService::EnrollmentFeedback>* EnrollFingerprintRaw(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request) GRPC_OVERRIDE;
-    ::grpc::ClientAsyncReader< ::BioService::EnrollmentFeedback>* AsyncEnrollFingerprintRaw(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request, ::grpc::CompletionQueue* cq, void* tag) GRPC_OVERRIDE;
+    ::grpc::ClientAsyncResponseReader< ::BioService::EnrollmentFeedback>* AsyncEnrollFingerprintRaw(::grpc::ClientContext* context, const ::BioService::FingerprintAcquiredData& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
     ::grpc::ClientAsyncResponseReader< ::BioService::VerificationFeedback>* AsyncVerifyFingerprintRaw(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
     const ::grpc::RpcMethod rpcmethod_EnrollFingerprint_;
     const ::grpc::RpcMethod rpcmethod_VerifyFingerprint_;
@@ -292,7 +335,7 @@ class BiometricFingerprintSevice GRPC_FINAL {
    public:
     Service();
     virtual ~Service();
-    virtual ::grpc::Status EnrollFingerprint(::grpc::ServerContext* context, const ::BioService::FingerprintAcquiredData* request, ::grpc::ServerWriter< ::BioService::EnrollmentFeedback>* writer);
+    virtual ::grpc::Status EnrollFingerprint(::grpc::ServerContext* context, const ::BioService::FingerprintAcquiredData* request, ::BioService::EnrollmentFeedback* response);
     virtual ::grpc::Status VerifyFingerprint(::grpc::ServerContext* context, const ::BioService::AcquiredData* request, ::BioService::VerificationFeedback* response);
   };
   template <class BaseClass>
@@ -307,12 +350,12 @@ class BiometricFingerprintSevice GRPC_FINAL {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status EnrollFingerprint(::grpc::ServerContext* context, const ::BioService::FingerprintAcquiredData* request, ::grpc::ServerWriter< ::BioService::EnrollmentFeedback>* writer) GRPC_FINAL GRPC_OVERRIDE {
+    ::grpc::Status EnrollFingerprint(::grpc::ServerContext* context, const ::BioService::FingerprintAcquiredData* request, ::BioService::EnrollmentFeedback* response) GRPC_FINAL GRPC_OVERRIDE {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestEnrollFingerprint(::grpc::ServerContext* context, ::BioService::FingerprintAcquiredData* request, ::grpc::ServerAsyncWriter< ::BioService::EnrollmentFeedback>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncServerStreaming(0, context, request, writer, new_call_cq, notification_cq, tag);
+    void RequestEnrollFingerprint(::grpc::ServerContext* context, ::BioService::FingerprintAcquiredData* request, ::grpc::ServerAsyncResponseWriter< ::BioService::EnrollmentFeedback>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -348,7 +391,7 @@ class BiometricFingerprintSevice GRPC_FINAL {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status EnrollFingerprint(::grpc::ServerContext* context, const ::BioService::FingerprintAcquiredData* request, ::grpc::ServerWriter< ::BioService::EnrollmentFeedback>* writer) GRPC_FINAL GRPC_OVERRIDE {
+    ::grpc::Status EnrollFingerprint(::grpc::ServerContext* context, const ::BioService::FingerprintAcquiredData* request, ::BioService::EnrollmentFeedback* response) GRPC_FINAL GRPC_OVERRIDE {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -381,8 +424,13 @@ class BiometricDatabaseService GRPC_FINAL {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::DatabaseFacialImageResponse>> AsyncAddFacialImage(::grpc::ClientContext* context, const ::BioService::FacialImage& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::DatabaseFacialImageResponse>>(AsyncAddFacialImageRaw(context, request, cq));
     }
+    virtual ::grpc::Status AddFingerprintImage(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::BioService::DatabaseFingerprintImageResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::DatabaseFingerprintImageResponse>> AsyncAddFingerprintImage(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::DatabaseFingerprintImageResponse>>(AsyncAddFingerprintImageRaw(context, request, cq));
+    }
   private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::DatabaseFacialImageResponse>* AsyncAddFacialImageRaw(::grpc::ClientContext* context, const ::BioService::FacialImage& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::DatabaseFingerprintImageResponse>* AsyncAddFingerprintImageRaw(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub GRPC_FINAL : public StubInterface {
    public:
@@ -391,11 +439,17 @@ class BiometricDatabaseService GRPC_FINAL {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::DatabaseFacialImageResponse>> AsyncAddFacialImage(::grpc::ClientContext* context, const ::BioService::FacialImage& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::DatabaseFacialImageResponse>>(AsyncAddFacialImageRaw(context, request, cq));
     }
+    ::grpc::Status AddFingerprintImage(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::BioService::DatabaseFingerprintImageResponse* response) GRPC_OVERRIDE;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::DatabaseFingerprintImageResponse>> AsyncAddFingerprintImage(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::DatabaseFingerprintImageResponse>>(AsyncAddFingerprintImageRaw(context, request, cq));
+    }
 
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     ::grpc::ClientAsyncResponseReader< ::BioService::DatabaseFacialImageResponse>* AsyncAddFacialImageRaw(::grpc::ClientContext* context, const ::BioService::FacialImage& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
+    ::grpc::ClientAsyncResponseReader< ::BioService::DatabaseFingerprintImageResponse>* AsyncAddFingerprintImageRaw(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
     const ::grpc::RpcMethod rpcmethod_AddFacialImage_;
+    const ::grpc::RpcMethod rpcmethod_AddFingerprintImage_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -404,6 +458,7 @@ class BiometricDatabaseService GRPC_FINAL {
     Service();
     virtual ~Service();
     virtual ::grpc::Status AddFacialImage(::grpc::ServerContext* context, const ::BioService::FacialImage* request, ::BioService::DatabaseFacialImageResponse* response);
+    virtual ::grpc::Status AddFingerprintImage(::grpc::ServerContext* context, const ::BioService::FingerprintImage* request, ::BioService::DatabaseFingerprintImageResponse* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_AddFacialImage : public BaseClass {
@@ -425,7 +480,27 @@ class BiometricDatabaseService GRPC_FINAL {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_AddFacialImage<Service > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_AddFingerprintImage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(Service *service) {}
+   public:
+    WithAsyncMethod_AddFingerprintImage() {
+      ::grpc::Service::MarkMethodAsync(1);
+    }
+    ~WithAsyncMethod_AddFingerprintImage() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AddFingerprintImage(::grpc::ServerContext* context, const ::BioService::FingerprintImage* request, ::BioService::DatabaseFingerprintImageResponse* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestAddFingerprintImage(::grpc::ServerContext* context, ::BioService::FingerprintImage* request, ::grpc::ServerAsyncResponseWriter< ::BioService::DatabaseFingerprintImageResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_AddFacialImage<WithAsyncMethod_AddFingerprintImage<Service > > AsyncService;
   template <class BaseClass>
   class WithGenericMethod_AddFacialImage : public BaseClass {
    private:
@@ -439,6 +514,23 @@ class BiometricDatabaseService GRPC_FINAL {
     }
     // disable synchronous version of this method
     ::grpc::Status AddFacialImage(::grpc::ServerContext* context, const ::BioService::FacialImage* request, ::BioService::DatabaseFacialImageResponse* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_AddFingerprintImage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(Service *service) {}
+   public:
+    WithGenericMethod_AddFingerprintImage() {
+      ::grpc::Service::MarkMethodGeneric(1);
+    }
+    ~WithGenericMethod_AddFingerprintImage() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status AddFingerprintImage(::grpc::ServerContext* context, const ::BioService::FingerprintImage* request, ::BioService::DatabaseFingerprintImageResponse* response) GRPC_FINAL GRPC_OVERRIDE {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }

@@ -62,7 +62,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0603;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\grpc-13.01\third_party\protobuf\src;C:\grpc-13.01\include;C:\grpc-13.01;$(LocalDebuggerWorkingDirectory)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -82,8 +82,12 @@
   <ItemGroup>
     <ClInclude Include="include\client\ibio_database_client.hpp" />
     <ClInclude Include="include\common\face_features.hpp" />
+    <ClInclude Include="include\common\identification_record.hpp" />
     <ClInclude Include="include\common\iface_characteristics.hpp" />
     <ClInclude Include="include\common\iimage_characteristic.hpp" />
+    <ClInclude Include="include\common\matches.hpp" />
+    <ClInclude Include="include\common\raw_image.hpp" />
+    <ClInclude Include="include\common\verification_result.hpp" />
     <ClInclude Include="include\engine\ifacial_engine.hpp" />
     <ClInclude Include="include\engine\irecognition_engines_context.hpp" />
     <ClInclude Include="include\protobufs\bio_service.grpc.pb.h" />

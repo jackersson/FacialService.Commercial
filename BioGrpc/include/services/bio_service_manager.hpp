@@ -15,7 +15,7 @@ namespace BioGrpc
 	{
 	public:
 		BioServiceManager(const BioContracts::IRecognitionEnginesContext& context);
-		~BioServiceManager() {}
+		~BioServiceManager() { stop(); }
 
 		void start(BioContracts::IServiceConfiguration& configuration);
 		void stop();

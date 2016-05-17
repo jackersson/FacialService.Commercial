@@ -1,19 +1,7 @@
 #ifndef FacialVerificationFeedback_INCLUDED
 #define FacialVerificationFeedback_INCLUDED
 
-#include "engine/ifacial_engine.hpp"
-
-#include <frsdk/config.h>
-#include <frsdk/image.h>
-#include <frsdk/tokenface.h>
-#include <frsdk/portrait.h>
-#include <frsdk/eyes.h>
-#include <frsdk/cbeff.h>
-#include <frsdk/fir.h>
-#include <frsdk/enroll.h>
 #include <frsdk/verify.h>
-
-#include <functional>
 
 namespace BioFacialEngine
 {
@@ -38,6 +26,7 @@ namespace BioFacialEngine
 		void match(const FRsdk::Score& s)
 		{
 			score_ = s;
+			std::cout << s << std::endl;
 		}
 
 		void success()
@@ -46,6 +35,7 @@ namespace BioFacialEngine
 		}
 
 		void failure(){
+			std::cout << "t" << std::endl;
 		}
 
 

@@ -66,6 +66,24 @@
     <ClInclude Include="include\utils\frsdk_face_characteristics.hpp">
       <Filter>include\utils</Filter>
     </ClInclude>
+    <ClInclude Include="include\biotasks\ifir_builder.hpp">
+      <Filter>include\biotasks</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\iverification_processor.hpp">
+      <Filter>include\biotasks</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utils\face_vacs_includes.hpp">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utils\compliance_iso_characteristics.h">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utils\utils.hpp">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\iverification_able.hpp">
+      <Filter>include\biotasks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\biotasks\facial_acquisition.cpp">
@@ -82,6 +100,12 @@
     </ClCompile>
     <ClCompile Include="src\facial_engine.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\utils.cpp">
+      <Filter>src\utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,10 +1,9 @@
 #ifndef IEnrollmentAble_INCLUDED
 #define IEnrollmentAble_INCLUDED
 
-#include <string>
-
-//#include <frsdk\enroll.h>
 #include "ienrollment_processor.hpp"
+
+#include <string>
 namespace BioFacialEngine
 {
 	class IEnrollmentAble

@@ -50,6 +50,7 @@ namespace BioGrpc
 		server_->Shutdown();
 		for (auto it = services_.begin(); it != services_.end(); ++it)
 			it->get()->stop();
+		services_.clear();
 	}
 
 }

@@ -53,6 +53,7 @@ namespace BioFacialEngine
 	ImageCharacteristicsType
 	FacialAcquisition::acquire(FaceVacsImage image)
 	{		
+
 		FRsdk::Face::LocationSet faceLocations =
 			face_finder_->find(*image, MIN_EYE_DISTANCE, MAX_EYE_DISTANCE);		
 

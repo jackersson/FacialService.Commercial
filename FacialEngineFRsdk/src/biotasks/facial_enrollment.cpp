@@ -1,4 +1,6 @@
 #include "biotasks/facial_enrollment.hpp"
+#include "feedback/facial_enrollment_feedback.hpp"
+
 
 
 namespace BioFacialEngine
@@ -30,34 +32,55 @@ namespace BioFacialEngine
 	{
 		try
 		{
-			processor_ = new FRsdk::Enrollment::Processor(*configuration);
+			processor_   = new FRsdk::Enrollment::Processor(*configuration);
+
+			
+			std::shared_ptr<FirBilder> ptr(new FirBilder(configuration));
+			fir_builder_ = ptr;
 			return true;
 		}	
 		catch (std::exception& e) { std::cout << e.what(); return false; }
 	}
 
-	std::string FacialEnrollment::enroll(const FRsdk::Image& image)
+	
+	BioContracts::IdentificationRecordRef FacialEnrollment::enroll(const FRsdk::Image& image)
 	{		
-		std::shared_ptr<std::string> fir_bytestring(new std::string(""));
+		BioContracts::IdentificationRecordRef fir(new BioContracts::IdentificationRecord(""));
+		enroll(image, fir);
+		return fir;
+	}
 
+	void FacialEnrollment::enroll(const FRsdk::Image& image, BioContracts::IdentificationRecordRef fir)
+	{		
 		FRsdk::SampleSet images;
 		images.push_back(image);
 
 		FRsdk::Enrollment::Feedback
-			feedback(new FacialEnrollmentFeedback(*(fir_bytestring.get())));
+			feedback(new FacialEnrollmentFeedback(fir));
 
-		processor_->process(images.begin(), images.end(), feedback);		
-
-		return *fir_bytestring;
+		processor_->process(images.begin(), images.end(), feedback);
 	}
 
-	void FacialEnrollment::enroll(IEnrollmentAble& face_characteristic)
+	void FacialEnrollment::enroll(IEnrollmentAble& enrollment_able)
+	{
+		enrollment_able.enroll(*this);
+	}
+	
+	/*
+	void FacialEnrollment::enroll(FRsdkFaceCharacteristic& face_characteristic)
 	{
 		face_characteristic.enroll(*this);	
 	}
+	*/
 
 	void FacialEnrollment::enroll(const std::string& filename)
 	{
 
+	}
+
+	FRsdkFir FacialEnrollment::build(const std::string& bytes)
+	{
+		return fir_builder_->build(bytes);
+		//return result;
 	}
 }
