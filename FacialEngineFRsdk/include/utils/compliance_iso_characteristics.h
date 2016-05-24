@@ -6,6 +6,9 @@
 #include <frsdk/cbeff.h>
 #include <frsdk/portraittests.h>
 
+#include <Windows.h>
+#include <ppl.h>
+
 namespace BioFacialEngine
 {
 	class ComplianceIsoCharacteristics
@@ -14,35 +17,24 @@ namespace BioFacialEngine
 		int analyze(const FRsdk::ISO_19794_5::FullFrontal::Compliance& iso_compliance)
 		{
 			int result = 0;
-			setFlag(result, iso_compliance.onlyOneFaceVisible()      , BioService::OnlyOneFaceVisible);
-			setFlag(result, iso_compliance.goodVerticalFacePosition(), BioService::goodVerticalFacePosition);
-			setFlag(result, iso_compliance.horizontallyCenteredFace(), BioService::horizontallyCenteredFace);
-			setFlag(result, iso_compliance.widthOfHead()             , BioService::widthOfHead);
-			setFlag(result, iso_compliance.lengthOfHead()            , BioService::lengthOfHead);
-			setFlag(result, iso_compliance.widthOfHeadBestPractice() , BioService::widthOfHeadBestPractice);
-			setFlag(result, iso_compliance.lengthOfHeadBestPractice(), BioService::lengthOfHeadBestPractice);
-			setFlag(result, iso_compliance.resolution()              , BioService::resolution);
-			setFlag(result, iso_compliance.resolutionBestPractice(), BioService::resolutionBestPractice);
-			setFlag(result, iso_compliance.imageWidthToHeightBestPractice(), BioService::imageWidthToHeightBestPractice);
-			setFlag(result, iso_compliance.goodExposure(), BioService::goodExposure);
-			setFlag(result, iso_compliance.goodGrayScaleProfile(), BioService::goodGrayScaleProfile);
-			setFlag(result, iso_compliance.hasNaturalSkinColour(), BioService::hasNaturalSkinColour);
-			setFlag(result, iso_compliance.noHotSpots(), BioService::noHotSpots);
-			setFlag(result, iso_compliance.isBackgroundUniformBestPractice(), BioService::isBackgroundUniformBestPractice);
+			unsigned int start = clock();
+			concurrency::task_group tg;
 
+			concurrency::parallel_invoke(
+				[&](){setIsoComplianceMain(result, iso_compliance);	},
+				[&](){setIsoComplianceBest(result, iso_compliance);	},
+				[&](){setIsoComplianceAdditional(result, iso_compliance);	}
+									
 
-
-			setFlag(result, iso_compliance.isFrontal(), BioService::isFrontal);
-			setFlag(result, iso_compliance.isFrontalBestPractice(), BioService::isFrontalBestPractice);
-			setFlag(result, iso_compliance.isLightingUniform(), BioService::isLightingUniform);
-			setFlag(result, iso_compliance.eyesOpenBestPractice(), BioService::eyesOpenBestPractice);
-			setFlag(result, iso_compliance.eyesGazeFrontalBestPractice(), BioService::eyesGazeFrontalBestPractice);
-			setFlag(result, iso_compliance.eyesNotRedBestPractice(), BioService::eyesNotRedBestPractice);
-			setFlag(result, iso_compliance.noTintedGlasses(), BioService::noTintedGlasses);
-			setFlag(result, iso_compliance.isSharp(), BioService::isSharp);
-			setFlag(result, iso_compliance.mouthClosedBestPractice(), BioService::mouthClosedBestPractice);
-
+		  );
+			
+			std::cout  << "iso compliance " << clock() - start << std::endl;
 			return result;
+		}
+
+		void test()
+		{
+
 		}
 
 		bool isIsoCompliant(int flag)
@@ -85,6 +77,57 @@ namespace BioFacialEngine
 
 		bool hasFlag(int flag, BioService::IsoComplianceTemplate place){
 			return (flag & place) == place;
+		}
+
+		void setIsoComplianceMain(int& result, const FRsdk::ISO_19794_5::FullFrontal::Compliance& iso_compliance)
+		{
+			return;
+			concurrency::parallel_invoke(
+				[&](){setFlag(result, iso_compliance.onlyOneFaceVisible()      , BioService::OnlyOneFaceVisible);				},
+				[&](){setFlag(result, iso_compliance.goodVerticalFacePosition(), BioService::goodVerticalFacePosition);	},
+				[&](){setFlag(result, iso_compliance.horizontallyCenteredFace(), BioService::horizontallyCenteredFace);	},
+				[&](){setFlag(result, iso_compliance.widthOfHead()             , BioService::widthOfHead);							},
+				[&](){setFlag(result, iso_compliance.lengthOfHead()            , BioService::lengthOfHead);							},
+			  [&](){setFlag(result, iso_compliance.resolution()              , BioService::resolution);								},
+			  [&](){setFlag(result, iso_compliance.goodExposure()            , BioService::goodExposure);							},						     
+			  [&](){setFlag(result, iso_compliance.goodGrayScaleProfile()    , BioService::goodGrayScaleProfile);			},									
+			  [&](){setFlag(result, iso_compliance.hasNaturalSkinColour()    , BioService::hasNaturalSkinColour);			},									
+			  [&](){setFlag(result, iso_compliance.noHotSpots()              , BioService::noHotSpots);								}
+			);
+			
+		}
+
+		void setIsoComplianceBest(int& result, const FRsdk::ISO_19794_5::FullFrontal::Compliance& iso_compliance)
+		{
+			return;
+			/*
+			concurrency::parallel_invoke(
+
+			[&]() {setFlag(result, iso_compliance.widthOfHeadBestPractice(), BioService::widthOfHeadBestPractice);								 },
+			[&]() {setFlag(result, iso_compliance.lengthOfHeadBestPractice(), BioService::lengthOfHeadBestPractice);							 },
+			[&]() {setFlag(result, iso_compliance.resolutionBestPractice(), BioService::resolutionBestPractice);									 },
+			[&]() {setFlag(result, iso_compliance.imageWidthToHeightBestPractice(), BioService::imageWidthToHeightBestPractice);	 },
+																																																														
+			[&]() {setFlag(result, iso_compliance.isBackgroundUniformBestPractice(), BioService::isBackgroundUniformBestPractice); },
+			[&]() {setFlag(result, iso_compliance.eyesOpenBestPractice(), BioService::eyesOpenBestPractice);											 },
+			[&]() {setFlag(result, iso_compliance.eyesGazeFrontalBestPractice(), BioService::eyesGazeFrontalBestPractice);				 },
+			[&]() {setFlag(result, iso_compliance.eyesNotRedBestPractice(), BioService::eyesNotRedBestPractice);									 },
+			[&]() {setFlag(result, iso_compliance.mouthClosedBestPractice(), BioService::mouthClosedBestPractice);  					     }
+			);
+			*/
+		}
+
+		void setIsoComplianceAdditional(int& result, const FRsdk::ISO_19794_5::FullFrontal::Compliance& iso_compliance)
+		{			
+			return;
+			concurrency::parallel_invoke(
+				[&]()  {setFlag(result, iso_compliance.isFrontal(), BioService::isFrontal);											},									
+		   	[&]()  {setFlag(result, iso_compliance.isLightingUniform(), BioService::isLightingUniform);			},										
+		  	[&]()  {setFlag(result, iso_compliance.noTintedGlasses(), BioService::noTintedGlasses);					},														
+		  	[&]()  {setFlag(result, iso_compliance.isSharp(), BioService::isSharp);													}												
+
+			);
+			
 		}
 	};
 

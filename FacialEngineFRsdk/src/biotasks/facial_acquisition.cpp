@@ -2,6 +2,10 @@
 #include "utils/face_vacs_io_utils.hpp"
 
 #include <iostream>
+
+#include <Windows.h>
+#include <ppl.h>
+
 namespace BioFacialEngine
 {
 	FacialAcquisition::FacialAcquisition(const std::string& configuration_filename)
@@ -53,22 +57,33 @@ namespace BioFacialEngine
 	ImageCharacteristicsType
 	FacialAcquisition::acquire(FaceVacsImage image)
 	{		
-
+		unsigned int start = clock();
 		FRsdk::Face::LocationSet faceLocations =
 			face_finder_->find(*image, MIN_EYE_DISTANCE, MAX_EYE_DISTANCE);		
 
 		if (faceLocations.size() < 1)		
 			throw AcquisitionError("Unable to locate face");
 
-		std::shared_ptr<ImageCharacteristics> image_characteristics(new ImageCharacteristics());
+		std::shared_ptr<ImageCharacteristics> image_characteristics(new ImageCharacteristics(image));
 
-		for (auto face = faceLocations.begin(); face != faceLocations.end(); ++face)
+		concurrency::parallel_for_each( faceLocations.cbegin(), faceLocations.cend(),
+			                             [&](FRsdk::Face::Location face)
 		{
-			FRsdk::Eyes::LocationSet eyesLocations = 	eyes_finder_->find(*image, *face);
-			image_characteristics->push(*face, eyesLocations);			
-		}
+			FRsdk::Eyes::LocationSet eyesLocations = eyes_finder_->find(*image, face);
+			if ( eyesLocations.size() > 0)
+			{
+				//FRsdk::AnnotatedImage im(*image, eyesLocations.front());
+				//FRsdk::CountedPtr<FRsdk::AnnotatedImage> extracted(new FRsdk::AnnotatedImage(token_face_creator_->extractMinimal(im)));
+				image_characteristics->push(face, eyesLocations);
+			}
+		});
+		std::cout << " image char creation  = " << clock() - start << std::endl;
+		//unsigned int start = clock();
+		//image_characteristics->analyze(*portrait_analyzer_, *iso_19794_test_, *token_face_creator_);
+		//std::cout << " acquisition creation  = " << clock() - start << std::endl;
+		
 
-		image_characteristics->analyze(*image, *portrait_analyzer_, *iso_19794_test_, *token_face_creator_);		
+			
 
 		return image_characteristics;
 	}

@@ -85,6 +85,8 @@
     <ClInclude Include="include\biotasks\facial_acquisition.hpp" />
     <ClInclude Include="include\biotasks\facial_enrollment.hpp" />
     <ClInclude Include="include\biotasks\facial_verification.hpp" />
+    <ClInclude Include="include\biotasks\iacquire_able.hpp" />
+    <ClInclude Include="include\biotasks\iaquisition_processor.hpp" />
     <ClInclude Include="include\biotasks\ienrollment_able.hpp" />
     <ClInclude Include="include\biotasks\ienrollment_processor.hpp" />
     <ClInclude Include="include\biotasks\ifir_builder.hpp" />
@@ -95,6 +97,7 @@
     <ClInclude Include="include\feedback\facial_enrollment_feedback.hpp" />
     <ClInclude Include="include\feedback\facial_verification_feedback.hpp" />
     <ClInclude Include="include\utils\compliance_iso_characteristics.h" />
+    <ClInclude Include="include\utils\face_vacs_convertion.hpp" />
     <ClInclude Include="include\utils\face_vacs_includes.hpp" />
     <ClInclude Include="include\utils\face_vacs_io_utils.hpp" />
     <ClInclude Include="include\utils\frsdk_face_characteristics.hpp" />

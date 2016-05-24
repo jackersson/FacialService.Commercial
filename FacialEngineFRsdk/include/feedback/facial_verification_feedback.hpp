@@ -10,12 +10,12 @@ namespace BioFacialEngine
 	class FacialVerificationFeedback : public FRsdk::Verification::FeedbackBody
 	{
 	public:
-		FacialVerificationFeedback(FRsdk::Score& score/*const FirCallback& setFirFunction*/) 
-			                         : score_(score) //:  setFir(setFirFunction)
-		{}
+		FacialVerificationFeedback(const BioContracts::Match match) : success_(false), match_(match) {}
 		~FacialVerificationFeedback() {}
 
-		void start() {}
+		void start() {
+			success_ = false;		
+		}
 		void end() {}
 
 		void processingImage(const FRsdk::Image& frame){}
@@ -23,29 +23,31 @@ namespace BioFacialEngine
 		void eyesFound(const FRsdk::Eyes::Location& eyes){}
 		void eyesNotFound() {}
 
-		void match(const FRsdk::Score& s)
-		{
-			score_ = s;
-			std::cout << s << std::endl;
+		void match(const FRsdk::Score& s)	{
+			score_ = s;			
+			success_ = true;
 		}
 
-		void success()
-		{
-			//setFir(fir);
+		void success(){
+			success_ = true;
 		}
 
 		void failure(){
-			std::cout << "t" << std::endl;
+			success_ = false;
 		}
 
+		const BioContracts::Match result() const	{
+			return BioContracts::Match(match_.targetFaceId(), match_.comparisonFaceId(), score_);
+		}
 
 	private:
 		FacialVerificationFeedback(const FacialVerificationFeedback&);
 		void operator=(const FacialVerificationFeedback&);
 
 	private:
-		FRsdk::Score& score_;
-		//FirCallback setFir;
+		BioContracts::Match match_;
+		float score_;
+		bool success_;
 	};
 }
 #endif

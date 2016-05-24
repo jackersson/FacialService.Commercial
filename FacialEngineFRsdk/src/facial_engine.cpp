@@ -2,6 +2,8 @@
 #include "facial_engine.hpp"
 #include "utils/face_vacs_io_utils.hpp"
 
+#include <Windows.h>
+#include <ppl.h>
 
 namespace BioFacialEngine
 {
@@ -39,12 +41,13 @@ namespace BioFacialEngine
 	FacialEngine::enrollPerformer(FaceVacsImage image)
 	{		
 		ImageCharacteristicsType im_ch(acquisition_->acquire(image));
-
+		/*
 		if (im_ch->hasFaces())
 		{
 			FRsdkFaceCharacteristic face = im_ch->getEnrollmentAbleFace();
 			enrollment_->enroll(face);
 		}
+		*/
 		return im_ch;
 	}
 
@@ -56,11 +59,11 @@ namespace BioFacialEngine
 
 		ImageCharacteristicsType im_ch(acquisition_->acquire(image));
 
-		if (im_ch->hasFaces())
-		{
-			FRsdkFaceCharacteristic face = im_ch->getEnrollmentAbleFace();
-			enrollment_->enroll(face);
-		}
+		//if (im_ch->hasFaces())
+		//{
+		//	FRsdkFaceCharacteristic face = im_ch->getEnrollmentAbleFace();
+			//enrollment_->enroll(face);
+		//}
 		return im_ch;
 	}
 
@@ -81,8 +84,39 @@ namespace BioFacialEngine
 		FacialEngine::verify( const std::string& first
 		                    , const std::string& second)
 	{
-		ImageCharacteristicsType target     = enrollFromFile(first);
-		ImageCharacteristicsType comparison = enrollFromFile(second);
+		ImageCharacteristicsType target    ;
+		ImageCharacteristicsType comparison;
+
+		unsigned int start = clock();
+		
+		concurrency::parallel_invoke(
+			[&]() { target     = enrollFromFile(first ); },
+			[&]() { comparison = enrollFromFile(second); }
+		);
+		
+
+		//target = enrollFromFile(first);
+		//comparison = enrollFromFile(second);
+
+		std::cout << clock() - start << std::endl;
+
+		/*
+		std::for_each(begin(words), end(words), [&](const wstring& word) {
+			// Increment the count of words that are at least the minimum length.
+			if (word.length() >= min_length)
+			{
+				auto find = counts.find(word);
+				if (find != end(counts))
+					find->second++;
+				else
+					counts.insert(make_pair(word, 1));
+			}
+		});
+		*/
+
+
+		//ImageCharacteristicsType target     = enrollFromFile(first);
+		//ImageCharacteristicsType comparison = enrollFromFile(second);
 
 		BioContracts::Matches matches;
 		//		BioContracts::Matches matches = verification_->verify(target, comparison);

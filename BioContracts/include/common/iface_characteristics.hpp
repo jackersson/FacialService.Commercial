@@ -11,16 +11,16 @@ namespace BioContracts
 	public:
 		virtual unsigned int age() const = 0;
 
-		virtual bool  hasFace() const = 0;
+		//virtual bool  hasFace() const = 0;
 		//virtual const FaceLocation faceLocation() const = 0;
 
-		virtual bool  hasEyes() const = 0;
-		virtual const EyesDetails eyesDetails() const = 0;
+		//virtual bool  hasEyes() const = 0;
+		//virtual const EyesDetails eyesDetails() const = 0;
 
 		virtual bool  isMale()                      const = 0;
-		virtual bool  isCompliant()                 const = 0;
-		virtual int   isoCompliantResult()          const = 0;
-		virtual bool  isCompliantWithBestPractice() const = 0;
+		//virtual bool  isCompliant()                 const = 0;
+		//virtual int   isoCompliantResult()          const = 0;
+		//virtual bool  isCompliantWithBestPractice() const = 0;
 		virtual float eyeDistance()                 const = 0;
 		virtual float glasses()                     const = 0;
 		virtual float naturalSkinColor()            const = 0;
@@ -31,15 +31,30 @@ namespace BioContracts
 		virtual float crown()                       const = 0;
 		virtual float leftEar()                     const = 0;
 		virtual float rightEar()                    const = 0;
-		virtual float confidence()                  const = 0;		
+		//virtual float confidence()                  const = 0;		
 		virtual float mouthClosed()                 const = 0;	
 
 		virtual const BioContracts::Position         faceCenter()   const = 0;
 		virtual const BioContracts::SurroundingBox   faceBox()      const = 0;
-		virtual const std::string&                   firTemplate()  const = 0;
+		//virtual const std::string&                   firTemplate()  const = 0;
 		virtual const BioContracts::Ethnicity        ethnicity()    const = 0;
 
 	};
+
+	class IComlianceIsoTemplate
+	{
+		virtual bool isoCompatible()          const = 0;																          
+		virtual int  isoTemplate()            const = 0;
+		virtual bool bestPracticeCompatible() const = 0;		
+	};
+
+	class IFace
+	{
+		virtual const IComlianceIsoTemplate& isoCompliance()   const = 0;
+		virtual const IFaceCharacteristics&  characteristics() const = 0;
+	};
+
+
 }
 
 #endif

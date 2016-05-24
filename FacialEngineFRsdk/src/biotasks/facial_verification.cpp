@@ -34,8 +34,8 @@ namespace BioFacialEngine
 			processor_      = new FRsdk::Verification::Processor(*configuration);
 			score_mappings_ = new FRsdk::ScoreMappings(*configuration);
 
-			std::shared_ptr<FirBilder> ptr(new FirBilder(configuration));
-			fir_builder_ = ptr;
+			//std::shared_ptr<FirBilder> ptr(new FirBilder(configuration));
+			//fir_builder_ = ptr;
 			return true;
 		}
 		catch (std::exception& e) { std::cout << e.what(); return false; }
@@ -73,15 +73,15 @@ namespace BioFacialEngine
 
 		FRsdk::CountedPtr<FRsdk::Score> result = new FRsdk::Score(.0f);
 
-		FRsdk::Verification::Feedback
-			feedback(new FacialVerificationFeedback(*result));
+		//FRsdk::Verification::Feedback
+			//feedback(new FacialVerificationFeedback(*result));
 
-		std::cout << fir.size() << std::endl;
+		//std::cout << fir.size() << std::endl;
 
-		processor_->process( images.begin(), images.end()
-			                 , fir
-			                 , 0.01f
-			                 , feedback);
+		//processor_->process( images.begin(), images.end()
+			               //  , fir
+			               //  , 0.01f
+			            //     , feedback);
 
 		return *result;
 	}

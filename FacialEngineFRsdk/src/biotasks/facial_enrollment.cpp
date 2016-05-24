@@ -35,8 +35,8 @@ namespace BioFacialEngine
 			processor_   = new FRsdk::Enrollment::Processor(*configuration);
 
 			
-			std::shared_ptr<FirBilder> ptr(new FirBilder(configuration));
-			fir_builder_ = ptr;
+			//std::shared_ptr<FirBilder> ptr(new FirBilder(configuration));
+			//fir_builder_ = ptr;
 			return true;
 		}	
 		catch (std::exception& e) { std::cout << e.what(); return false; }
@@ -55,10 +55,10 @@ namespace BioFacialEngine
 		FRsdk::SampleSet images;
 		images.push_back(image);
 
-		FRsdk::Enrollment::Feedback
-			feedback(new FacialEnrollmentFeedback(fir));
+		//FRsdk::Enrollment::Feedback
+			//feedback(new FacialEnrollmentFeedback(fir));
 
-		processor_->process(images.begin(), images.end(), feedback);
+		//processor_->process(images.begin(), images.end(), feedback);
 	}
 
 	void FacialEnrollment::enroll(IEnrollmentAble& enrollment_able)

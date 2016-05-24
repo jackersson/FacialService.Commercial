@@ -22,9 +22,11 @@ namespace BioFacialEngine
 		FacialAcquisition(FaceVacsConfiguration configuration);
 		~FacialAcquisition() {}
 
+		ImageCharacteristicsType acquire(FaceVacsImage image);
+
 		ImageCharacteristicsType acquire(const std::string& filename);
 
-		ImageCharacteristicsType acquire(FaceVacsImage image);
+		//ImageCharacteristicsType acquire(FaceVacsImage image);
 
 	private:
 		bool init(FaceVacsConfiguration configuration);
@@ -38,7 +40,7 @@ namespace BioFacialEngine
 		FaceVacsTfcreator         token_face_creator_;
 
 	private:
-		const float MIN_EYE_DISTANCE = 0.05f;
+		const float MIN_EYE_DISTANCE = 0.1f;
 		const float MAX_EYE_DISTANCE = 0.4f;
 	};
 
