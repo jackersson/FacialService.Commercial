@@ -71,6 +71,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0603;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>F:\Biometric Software\C++\git\BioContracts\include;$(LocalDebuggerWorkingDirectory)\include;C:\grpc-13.01\third_party\protobuf\src;C:\grpc-13.01\include;C:\grpc-13.01;C:\FVSDK_8_9_5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

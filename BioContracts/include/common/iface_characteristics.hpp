@@ -34,8 +34,8 @@ namespace BioContracts
 		//virtual float confidence()                  const = 0;		
 		virtual float mouthClosed()                 const = 0;	
 
-		virtual const BioContracts::Position         faceCenter()   const = 0;
-		virtual const BioContracts::SurroundingBox   faceBox()      const = 0;
+		virtual const BioContracts::IPosition&       faceCenter()   const = 0;
+		virtual const BioContracts::IBox&            faceBox()      const = 0;
 		//virtual const std::string&                   firTemplate()  const = 0;
 		virtual const BioContracts::Ethnicity        ethnicity()    const = 0;
 
@@ -48,11 +48,6 @@ namespace BioContracts
 		virtual bool bestPracticeCompatible() const = 0;		
 	};
 
-	class IFace
-	{
-		virtual const IComlianceIsoTemplate& isoCompliance()   const = 0;
-		virtual const IFaceCharacteristics&  characteristics() const = 0;
-	};
 
 
 }

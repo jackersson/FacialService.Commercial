@@ -25,9 +25,149 @@
 #include <ppl.h>
 
 namespace BioFacialEngine
-{
-	class ImageCharacteristics;	
-	//class FacialAcquisition   ;
+{	
+
+  class FRsdkPositionW : public BioContracts::IPosition
+  {
+  public:
+  	FRsdkPositionW(const FRsdk::Position& position) : position_(position.x(), position.y()) {}
+		FRsdkPositionW(float xx = 0, float yy = 0) : position_(xx, yy) {}
+
+		void copyFrom(const FRsdk::Position& position)
+		{
+			position_.first = position.x();
+			position_.second = position.y();
+		}
+
+		void copyFrom(float xx, float yy)
+		{
+			position_.first =  xx;
+			position_.second = yy;
+		}
+  
+  	float x() const {
+  		return position_.first;
+  	}
+  
+  	float y() const {
+  		return position_.second;
+  	}
+    
+  private:
+		std::pair<float, float> position_;
+  };
+  
+	class FRsdkFaceW : public BioContracts::IFace
+  {
+  public:
+  	FRsdkFaceW(const FRsdk::Face::Location& location) : face_(location) {
+  		std::cout << "face : " << location.pos.x() << " " << location.pos.y() << std::endl;
+  	}
+  
+  	float confidence() const {
+  		return face_.confidence;
+  	}
+  
+  	float width()   const {
+  		return face_.width;
+  	}
+  
+  	float rotationAngle() const {
+  		return face_.rotationAngle;
+  	}
+
+	   
+  	const FRsdk::Face::Location& instance() const {
+  		return face_;
+  	}
+  
+  private:
+  	FRsdk::Face::Location face_;
+  };
+  
+  
+	class FRsdkEye : public BioContracts::IEye
+  {
+  public:
+  	FRsdkEye(const FRsdk::Position& pos, float confidence) : position_(pos), confidence_(confidence) {
+  		std::cout << "eyes : " << pos.x() << " " << pos.y() << std::endl;
+  	}
+  
+  	const FRsdkPositionW& position() const	{
+  		return position_;
+  	}
+  
+  	float confidence() const {
+  		return confidence_;
+  	}
+  private:
+  	float confidence_;
+  	FRsdkPositionW position_;
+  };
+  
+	class FRsdkEyesW : public BioContracts::IEyes
+  {
+  public:
+  	FRsdkEyesW(  const FRsdk::Eyes::Location& location) 
+  		         : eyes_  (location)
+  		         , eyes_w_( FRsdkEye(location.first , location.firstConfidence )
+  		         , FRsdkEye(location.second, location.secondConfidence))
+  	{}
+  
+		const BioContracts::IEye& left() const {
+  		return eyes_w_.first;
+  	}
+  
+		const BioContracts::IEye& right() const {
+  		return eyes_w_.second;
+  	}
+  		
+  	const FRsdk::Eyes::Location& instance() const {
+  		return eyes_;
+  	}
+  private:
+  	FRsdk::Eyes::Location eyes_;
+  	std::pair<FRsdkEye, FRsdkEye> eyes_w_;
+  };
+  
+	class FRsdkBoxW : public BioContracts::IBox
+  {
+  public:
+  	FRsdkBoxW( const FRsdk::Box& box)
+  		       : origin_((float)box.originx(), (float)box.originy())
+						 , end_   ((float)box.endx()   , (float)box.endy())
+  	{}
+
+		FRsdkBoxW(float originx = 0, float originy = 0, float endx = 0, float endy = 0)
+		        	: origin_(originx, originy)
+							, end_(endx, endy)
+  	{}
+
+		void copyFrom(const FRsdk::Box& box)
+		{		
+			origin_.copyFrom(box.originx(), box.originy());
+			end_   .copyFrom(box.endx(), box.endy());		
+		}
+  
+		const BioContracts::IPosition& origin() const {
+  		return origin_;
+  	}
+  
+		const BioContracts::IPosition& end() const {
+  		return end_;
+  	}
+		
+		const unsigned int size() const {
+			return (unsigned int ) std::abs((origin_.x() - end_.x()) * (origin_.y() - end_.y()));
+		}  	
+  		
+  	
+  private:
+  	
+  	FRsdkPositionW origin_;
+		FRsdkPositionW end_;
+  };
+
 
 	class FRsdkIsoCompliance : public BioContracts::IComlianceIsoTemplate
 	{
@@ -74,19 +214,10 @@ namespace BioFacialEngine
 	public:
 		FRsdkFaceCharacteristic( const FRsdk::Portrait::Characteristics& portrait)
 		                       : portrait_characteristics_(portrait)
-		{
-			//unsigned int start = clock();
-			//portrait.isMale();
-			//portrait.age();
-			/*
-			concurrency::parallel_invoke(
-				//[&]() {				std::cout << "age : " << portrait.age() << std::endl; },
-				[&]() {				std::cout << "male : " << portrait.isMale() << std::endl; },
-			[&]() {				std::cout << "male : " << portrait.isMale() << std::endl; }
-			);
-			*/
-		
-			//std::cout << "pr age" << clock() - start << std::endl;
+													 , face_center_()
+													 , bounding_box_()
+		{			
+
 		}
 
 		~FRsdkFaceCharacteristic() {}
@@ -146,20 +277,18 @@ namespace BioFacialEngine
 			return portrait_characteristics_.mouthClosed();
 		}
 
-		const BioContracts::Position faceCenter() const	{
-			return converter_.toPosition(portrait_characteristics_.faceCenter());
+		const BioContracts::IPosition& faceCenter() const	{
+			face_center_.copyFrom(portrait_characteristics_.faceCenter());
+			return face_center_;
 		}
 
-		const BioContracts::SurroundingBox faceBox() const	{
-			return converter_.toSurroundingBox(FRsdk::Portrait::earToEarChinCrownSurroundingBox(portrait_characteristics_));
+		const BioContracts::IBox& faceBox() const	{
+			bounding_box_.copyFrom(FRsdk::Portrait::earToEarChinCrownSurroundingBox(portrait_characteristics_));
+			return bounding_box_;
 		}
 
-		unsigned int faceSize() const	{
-			BioContracts::SurroundingBox box = faceBox();
-			BioContracts::Position origin(box.origin());
-			BioContracts::Position end(box.end());
-
-			return (unsigned int)std::abs((origin.x() - end.x()) * (origin.y() - end.y()));
+		unsigned int faceSize() const	{		
+			return faceBox().size();
 		}
 
 		unsigned int age() const	{
@@ -174,19 +303,6 @@ namespace BioFacialEngine
 			return portrait_characteristics_;
 		}		
 
-		/*
-		void operator=(FRsdk::Portrait::Characteristics const& value)	{
-			portrait_characteristics_ = value;
-		}
-		*/
-		/*
-		public implicit operator FRsdkFaceCharacteristic(double value)
-		{
-			return new Velocity(value);
-		}
-		*/
-
-
 	private:
 		//FRsdkFaceCharacteristic( const FRsdk::Portrait::Characteristics& portrait)
 		//                       : portrait_characteristics_(portrait)
@@ -197,440 +313,14 @@ namespace BioFacialEngine
 	private:
 		FRsdk::Portrait::Characteristics  portrait_characteristics_;
 
-
-		FaceVacsConvertion converter_;
+		mutable FRsdkPositionW face_center_ ;
+		mutable FRsdkBoxW      bounding_box_;
+		//FaceVacsConvertion converter_;
 
 		//const float HALF_PROBABILITY          = 0.5f;
 	};
-
-	class FRsdkFace : public BioContracts::IFace
-	{
-	public:
-		friend ImageCharacteristics;
-
-		~FRsdkFace() {}		
-
-		float faceWidth() const	{
-			return face_.width;
-		}
-
-		bool hasEyes() const {
-			return eyes_.size() > 0;
-		}
-		
-		bool hasFace() const	{
-			return face_.confidence > FACE_CONFIDENCE_THRESHOLD;
-		}
-
-		bool hasFIR() const	{
-			return fir_ != NULL;
-		}
-
-		bool hasFacialImage() const
-		{
-			return (facial_image_ != NULL);
-		}
-
-		bool canBuildFIR() const	{
-			return identification_record_->size() > 0;
-		}
-
-		float confidence() const {
-			return face_.confidence;
-		}
-
-		const FRsdk::Eyes::LocationSet& eyes() const	{
-			return eyes_;
-		}
-
-		const FRsdk::Face::Location& face() const	{
-			return face_;
-		}
-
-		const FRsdk::FIR& fir() const	{
-			return *fir_;
-		}
-
-		const BioContracts::IComlianceIsoTemplate& isoCompliance() const	{
-			return *iso_compliance_;
-		}
-
-		const BioContracts::IFaceCharacteristics& characteristics() const	{
-			return *face_characteristics_;
-		}
-
-		BioContracts::IdentificationRecordRef identificationRecord() {
-			return identification_record_;
-		}
-
-	private:
-		FRsdkFace( const FRsdk::Face::Location& face
-		         , const FRsdk::Eyes::LocationSet& eyes )
-						 : face_(face)
-						 , eyes_(eyes) 						
-						 , identification_record_(new BioContracts::IdentificationRecord(""))
-		{}
-
-
-		void setFaceCharacteristics(const FRsdkFaceCharacteristic& face_characteristics) {
-			(*face_characteristics_) = face_characteristics;
-		}
-
-		void setIsoComplianceResult(const FRsdkIsoCompliance& iso_compliance ) {
-			(*iso_compliance_) = iso_compliance;
-		}
-
-		void setFir(const FRsdk::FIR& fir)	{
-			(*fir_) = fir;
-		}
-			
-
-
-	private:
-		FRsdk::Face::Location                                          face_;
-		FRsdk::Eyes::LocationSet                                       eyes_; 
-
-		FRsdk::CountedPtr<FRsdk::AnnotatedImage>                       facial_image_;
-
-		BioContracts::IdentificationRecordRef                          identification_record_;
-		FRsdk::CountedPtr<FRsdk::FIR>                                  fir_;
-
-		std::shared_ptr<FRsdkIsoCompliance>      iso_compliance_      ;
-		std::shared_ptr<FRsdkFaceCharacteristic> face_characteristics_;
-
-		const float FACE_CONFIDENCE_THRESHOLD = 1.0f;
-
-	};
-
 	
-
-	/*
-
-	class BioFace : public BioContracts::IFaceCharacteristics
-		                            , public IEnrollmentAble
-		                            , public IVerificationAble
-	{
-	public:
-		friend ImageCharacteristics;
-				
-		~BioFace() {}
-
-		void generateID()
-		{
-			if (id_ > 0)
-				return;
-
-			Utils utils;
-			id_ = utils.getTicks();
-		}
-
-		void acquire( const FRsdk::Image& image
-			          , const FRsdk::Portrait::Analyzer& analyzer
-			          , const FRsdk::ISO_19794_5::FullFrontal::Test& iso19794Test
-			          , FRsdk::ISO_19794_5::TokenFace::Creator& extractor	)
-		{
-			generateID();
-
-			/*
-			if (!hasEyes())
-				return;
-						
-			FRsdk::AnnotatedImage annotatedImage(image, eyes_.front());	
-			
-			concurrency::parallel_invoke (
-				[&]() {	extract(annotatedImage, extractor);              },
-				[&]() { acquire(annotatedImage, analyzer, iso19794Test); }
-			);		
-			
-		}
-
-
-		//make private
-		void extract(const FRsdk::Image& image, FRsdk::ISO_19794_5::TokenFace::Creator& extractor)
-		{
-			/*
-			if (!hasEyes() || hasFacialImage())
-				return;
-
-			FRsdk::AnnotatedImage annotatedImage(image, eyes_.front());
-
-			extract(annotatedImage, extractor);
-		
-		}
-
-		void extract(const FRsdk::AnnotatedImage& annotatedImage, FRsdk::ISO_19794_5::TokenFace::Creator& extractor)
-		{			
-			//if (!hasFacialImage())
-				//image_ = new FRsdk::AnnotatedImage(extractor.extract(annotatedImage));
-		}
-
-		//without extraction
-		void acquire( const FRsdk::Image& image
-			          , const FRsdk::Portrait::Analyzer& analyzer
-			          , const FRsdk::ISO_19794_5::FullFrontal::Test& iso19794Test )
-		{
-			/*
-			generateID();
-
-			if (!hasEyes())
-				return;
-
-			FRsdk::AnnotatedImage annotatedImage(image, eyes_.front());
-
-			portrait_characteristics_ = new FRsdk::Portrait::Characteristics(analyzer.analyze(annotatedImage));	
-		
-		}
-
-		//make private
-		void acquire( const FRsdk::AnnotatedImage& annotatedImage
-			          , const FRsdk::Portrait::Analyzer& analyzer
-			          , const FRsdk::ISO_19794_5::FullFrontal::Test& iso19794Test)
-		{			
-			/*portrait_characteristics_ = new FRsdk::Portrait::Characteristics(analyzer.analyze(annotatedImage));
-			iso_compilance_ = new FRsdk::ISO_19794_5::FullFrontal::Compliance(
-				iso19794Test.assess(*portrait_characteristics_)); 
-		
-		}
-
-  #pragma region fields
-		long id() const
-		{
-			return id_;
-		}
-
-		/*
-		const BioContracts::EyesDetails eyesDetails() const
-		{
-			return toEyesDetails(eyes_.front());
-		}
-	
-
-#pragma endregion fields
-		void enroll(IEnrollmentProcessor& processor)
-		{
-			//if (!hasFacialImage())
-				//return;
-
-			unsigned int start = clock();
-
-			//processor.enroll(annotatedImage(), identification_record_);
-			std::cout << " template creation  = " << clock() - start << std::endl;		
-		}
-		
-		float verifyWith( const FRsdk::Image& image
-			              , IVerificationProcessor& processor)
-		{
-			
-			//if (!hasFace() || !hasEyes())
-			//	return 0.0f;
-
-			//if (fir_bytestring_.size() <= 0)
-				//return 0.0f;
-
-			//if (identification_record_ == NULL)
-			//	return 0.0f;
-
-			//std::cout << "test 3 "  << id_ << std::endl;
-			//std::cout << "test 3 " << fir_->size() << " " << id_ << std::endl;
-
-			//if (fir_ == NULL)
-				//fir_ = processor.build(identification_record_->fir());
-
-
-		//	std::cout << fir_->size() << std::endl;
-			//if (!hasFir())
-			//	return 0.0f;
-				//fir_ = processor.build(fir_bytestring_);	
-
-			//float res = processor.verify(image, *fir_);
-			return NULL;
-			//return res;
-		}
-
-		/*
-		const BioContracts::FaceLocation faceLocation() const
-		{		
-			return toFaceLocation(face_);
-		}
-		
-
-		//const BioContracts::EyeLocation eyesLocation() const
-		//{		
-		//	return toEyesLocation(eyes_.front());
-		//}
-
-	private:
-		//BioFace(), identification_record_(new BioContracts::IdentificationRecord(""))
-														
-		//{}
-
-  private:
-	
-
-	private:
-		
-		long id_;
-
-		//std::string fir_bytestring_;	
-		//FRsdk::Face::Location                                          face_                    ;
-		//FRsdk::Eyes::LocationSet                                       eyes_                    ;		
-		//FRsdk::CountedPtr<FRsdk::AnnotatedImage>                       image_                   ;
-		//FRsdk::CountedPtr<FRsdk::Portrait::Characteristics>            portrait_characteristics_;
-		//FRsdk::CountedPtr<FRsdk::ISO_19794_5::FullFrontal::Compliance> iso_compilance_          ;
-		//FRsdk::CountedPtr<FRsdk::FIR>                                  fir_;
-
-		//BioContracts::IdentificationRecordRef identification_record_;;
-
-		//const float FACE_CONFIDENCE_THRESHOLD = 1.0f;
-		//const float HALF_PROBABILITY          = 0.5f;
-
-		
-	};
-	*/
-	typedef std::shared_ptr<FRsdkFace> FaceItemType;
-	struct FRsdkFaceCharacteristicComparator
-	{
-		bool operator()( const FaceItemType& first
-		             	 , const FaceItemType& second)
-		{
-			return (first->faceWidth() < second->faceWidth());
-		}
-	};
-	
-
-	class ImageCharacteristics : public BioContracts::IImageCharacteristics
-	{		
-	public:
-
-		ImageCharacteristics(FaceVacsImage image) : image_(image){}
-		~ImageCharacteristics()
-		{
-			clear();
-		}
-
-		void push( const FRsdk::Face::Location& face
-			       , const FRsdk::Eyes::LocationSet& eyes
-						  )
-		{						
-			faces_.push_back(FaceItemType(new FRsdkFace(face, eyes)));
-		}
-
-		void acquire( const FRsdk::Portrait::Analyzer& analyzer
-			          , const FRsdk::ISO_19794_5::FullFrontal::Test& iso19794Test ) 
-		{
-			concurrency::parallel_for_each( faces_.cbegin(), faces_.cend(),
-				                             [&](FaceItemType face)
-			{			
-				//face->acquire(*image_, analyzer, iso19794Test);
-			});
-		}
-
-		void acquire( const FRsdk::Portrait::Analyzer& analyzer
-			          , const FRsdk::ISO_19794_5::FullFrontal::Test& iso19794Test
-			          , FRsdk::ISO_19794_5::TokenFace::Creator& extractor) 
-		{
-			concurrency::parallel_for_each( faces_.cbegin(), faces_.cend(),
-				                             [&](FaceItemType face)
-			{
-				//face->acquire(*image_, analyzer, iso19794Test, extractor);
-			});
-		}
-
-		void enroll( const FRsdk::Portrait::Analyzer& analyzer
-			         , const FRsdk::ISO_19794_5::FullFrontal::Test& iso19794Test
-			         , FRsdk::ISO_19794_5::TokenFace::Creator& extractor 
-			         , IEnrollmentProcessor& processor                   )
-		{
-			concurrency::parallel_for_each(   faces_.cbegin(), faces_.cend(),
-				                             [&](FaceItemType face)
-			{				
-				//face->extract(*image_, extractor);
-
-				//concurrency::parallel_invoke(
-				//	[&]() {face->acquire(*image_, analyzer, iso19794Test); },
-				//	[&]() {face->enroll(processor); }
-			//	);
-
-			});
-		}
-
-		void verify(ImageCharacteristics& image, IVerificationProcessor& processor)
-		{
-			
-			concurrency::parallel_for_each( faces_.cbegin(), faces_.cend(),
-				                             [&](FaceItemType first)
-			{
-				concurrency::parallel_for_each(image.cbegin(), image.cend(),
-					                             [&](FaceItemType second )
-				{
-					//first->verifyWith(second->annotatedImage(), processor);
-				});
-			});
-			
-		}
-
-		void analyze( const FRsdk::Portrait::Analyzer& analyzer
-			          , const FRsdk::ISO_19794_5::FullFrontal::Test& iso19794Test
-			          , FRsdk::ISO_19794_5::TokenFace::Creator& extractor)
-		{
-			concurrency::parallel_for_each( faces_.cbegin(), faces_.cend(),
-				                             [&](FaceItemType face)
-			{
-				//face->acquire(*image_, analyzer, iso19794Test, extractor);
-			});
-
-			
-			FRsdkFaceCharacteristicComparator comparator;
-			std::sort(faces_.begin(), faces_.end(), comparator); //from min size to max size			
-		}
-		
-		FRsdkFace& getFrontFace() const
-		{
-			return *(faces_.back());
-		}
-
-		bool hasFaces() const
-		{
-			return size() > 0;
-		}
-		
-		size_t size() const { return faces_.size(); }
-
-		FRsdkFace& operator[](size_t index) const
-		{
-			if (index >= size())
-				throw std::invalid_argument("Index out of range");
-
-			return *(faces_[index]);
-		}
-				
-		void clear() { 
-			faces_.clear();
-		};
-		
-		
-	public:
-		const std::vector<FaceItemType>::const_iterator cbegin() const
-		{
-			return faces_.begin();
-		}
-
-		const std::vector<FaceItemType>::const_iterator cend() const
-		{
-			return faces_.end();
-		}		
-		
-	private:
-		ImageCharacteristics(const ImageCharacteristics& that);	
-
-	private:	
-		FaceVacsImage             image_;
-		std::vector<FaceItemType> faces_;
-
-
-	};
-
-	typedef std::shared_ptr<ImageCharacteristics> ImageCharacteristicsType;
 }
+
 
 #endif

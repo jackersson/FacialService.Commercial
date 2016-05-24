@@ -14,6 +14,11 @@ namespace BioFacialEngine
 	typedef FRsdk::CountedPtr<FRsdk::ISO_19794_5::TokenFace::Creator> FaceVacsTfcreator       ;
 	typedef FRsdk::CountedPtr<FRsdk::Configuration>                   FaceVacsConfiguration   ;
 
+	typedef std::pair<FRsdk::Face::Location, FRsdk::Eyes::Location>    FaceVacsFullFace;
+	
+	typedef FRsdk::CountedPtr<FRsdk::Portrait::Characteristics>             FaceVacsPortraitCharacteristicsPtr;
+	typedef FRsdk::CountedPtr<FRsdk::ISO_19794_5::FullFrontal::Compliance>  FaceVacsCompliancePtr;	
+
 	class FacialAcquisition 
 	{
 
@@ -22,11 +27,71 @@ namespace BioFacialEngine
 		FacialAcquisition(FaceVacsConfiguration configuration);
 		~FacialAcquisition() {}
 
-		ImageCharacteristicsType acquire(FaceVacsImage image);
+		void findFace(FaceVacsImage image, std::vector<FaceVacsFullFace>& faces)
+		{
+			try
+			{
+				FRsdk::Face::LocationSet faceLocations =
+					face_finder_->find(*image, MIN_EYE_DISTANCE, MAX_EYE_DISTANCE);
 
-		ImageCharacteristicsType acquire(const std::string& filename);
+				if (faceLocations.size() < 1)
+				{
+					std::cout << "any face not found";
+					return;
+				}
 
-		//ImageCharacteristicsType acquire(FaceVacsImage image);
+				concurrency::parallel_for_each(faceLocations.cbegin(), faceLocations.cend(),
+					[&](FRsdk::Face::Location face)
+				{
+					FRsdk::Eyes::LocationSet eyesLocations = eyes_finder_->find(*image, face);
+					if (eyesLocations.size() > 0)
+						faces.push_back(FaceVacsFullFace(face, eyesLocations.front()));
+				});
+			}
+			catch (std::exception& ex)
+			{
+				std::cout << ex.what() << std::endl;
+			}
+		}
+
+		FaceVacsPortraitCharacteristicsPtr analyze(const FRsdk::AnnotatedImage& image)
+		{			
+			try	{			
+				FaceVacsPortraitCharacteristicsPtr pch 
+					= new FRsdk::Portrait::Characteristics(portrait_analyzer_->analyze(image));
+				return pch;
+			}
+			catch (std::exception& ex)	{			
+				std::cout << ex.what() << std::endl;
+			}
+			return nullptr;
+		}
+
+		FaceVacsCompliancePtr isoComplianceTest(const FRsdk::Portrait::Characteristics& pch)
+		{		
+			try	{
+				FaceVacsCompliancePtr result = new FRsdk::ISO_19794_5::FullFrontal::Compliance 
+					                                ( iso_19794_test_->assess(pch));
+
+				return result;
+			}
+			catch (std::exception& ex)	{				
+				std::cout << ex.what() << std::endl;
+			}
+			return nullptr;
+		}
+
+		FaceVacsImage extractFace(const FRsdk::AnnotatedImage& image)
+		{			
+			try	{
+				FaceVacsImage result = new FRsdk::Image(token_face_creator_->extract(image).first);
+				return result;
+			}
+			catch (std::exception& ex)	{			
+				std::cout << ex.what() << std::endl;
+			}
+			return nullptr;
+		}
 
 	private:
 		bool init(FaceVacsConfiguration configuration);
@@ -44,6 +109,7 @@ namespace BioFacialEngine
 		const float MAX_EYE_DISTANCE = 0.4f;
 	};
 
+	typedef std::shared_ptr<FacialAcquisition> FaceVacsAcquisitionPtr;
 	
 	class AcquisitionError : public std::exception
 	{

@@ -12,137 +12,9 @@
 
 using namespace ::Concurrency;
 using namespace BioFacialEngine;
+using namespace BioContracts;
 
 #include <iostream>
-
-class IPosition
-{
-public :
-	virtual float x() const = 0;
-	virtual float y() const = 0;	
-};
-
-class IFace
-{
-public:
-	virtual float confidence()    const = 0;
-	virtual float width()         const = 0;
-	virtual float rotationAngle() const = 0;	 
-
-	virtual const IPosition& position()  const = 0;
-};
-
-class FRsdkPositionW : public IPosition
-{
-public:
-	FRsdkPositionW(const FRsdk::Position& position) : position_(position) {}
-
-	float x() const {
-		return position_.x();
-	}
-
-	float y() const {
-		return position_.y();
-	}
-
-	const FRsdk::Position& instance() const {
-		return position_;
-	}
-
-private:
-	FRsdk::Position position_;;
-};
-
-class FRsdkFaceW : public IFace
-{
-public:
-	FRsdkFaceW(const FRsdk::Face::Location& location) : face_(location) {
-		std::cout << "face : " << location.pos.x() << " " << location.pos.y() << std::endl;
-	}
-
-	float confidence() const {
-		return face_.confidence;
-	}
-
-	float width()   const {
-		return face_.width;
-	}
-
-	float rotationAngle() const {
-		return face_.rotationAngle;
-	}
-
-	const FRsdkPositionW& position() const {
-		return face_.pos;
-	}
-
-	const FRsdk::Face::Location& instance() const {
-		return face_;
-	}
-
-private:
-	FRsdk::Face::Location face_;
-};
-
-class IEye
-{
-public: 
-	virtual const IPosition& position() const = 0;
-
-	virtual float confidence() const = 0;
-};
-
-class FRsdkEye : public IEye
-{
-public:
-	FRsdkEye(const FRsdk::Position& pos, float confidence) : position_(pos), confidence_(confidence) {
-		std::cout << "eyes : " << pos.x() << " " << pos.y() << std::endl;
-	}
-
-	const FRsdkPositionW& position() const	{
-		return position_;
-	}
-
-	float confidence() const {
-		return confidence_;
-	}
-private:
-	float confidence_;
-	FRsdkPositionW position_;
-};
-
-class IEyes
-{
-public:
-	virtual const IEye& left() const = 0;
-	virtual const IEye& right() const = 0;
-};
-
-
-class FRsdkEyesW : public IEyes
-{
-public:
-	FRsdkEyesW(  const FRsdk::Eyes::Location& location) 
-		         : eyes_  (location)
-		         , eyes_w_( FRsdkEye(location.first , location.firstConfidence )
-		         , FRsdkEye(location.second, location.secondConfidence))
-	{}
-
-	const IEye& left() const {
-		return eyes_w_.first;
-	}
-
-	const IEye& right() const {
-		return eyes_w_.second;
-	}
-		
-	const FRsdk::Eyes::Location& instance() const {
-		return eyes_;
-	}
-private:
-	FRsdk::Eyes::Location eyes_;
-	std::pair<FRsdkEye, FRsdkEye> eyes_w_;
-};
 
 typedef std::pair<std::string, long> BioWorkItem;
 
@@ -184,7 +56,6 @@ private:
 
 typedef std::shared_ptr<FRsdkFaceCharacteristic> FRsdkFaceCharacteristicPtr;
 
-
 enum BiometricTask : long
 {
 	  FaceFind             = 1 << 0
@@ -209,13 +80,13 @@ public:
 					, fir_(new FacialEnrollmentFeedback())
 	{
 		Utils utils;
-		id_ = std::abs(utils.getTicks());
+		id_ = /*std::abs(utils.getTicks())*/ faceLocation.pos.x();
 	}
 
 
 	int id() const { return id_; }
 
-	const std::string& imageId() const	{
+	const std::string imageId() const	{
 		return image_->name();
 	}
 
@@ -418,60 +289,7 @@ private:
 
 typedef std::shared_ptr<Veryfier> VeryfierPtr;
 
-class PipelineTaskItem
-{
-public:
-	PipelineTaskItem(FaceInfoPtr item, long task) : task_item_(item, task)
-		                                            , done_query_count_(0)
-		                                            , finished_tasks_()
-	{
-		setDone(BiometricTask::FaceFind);
-	}
 
-	PipelineTaskItem(const FaceInfoTaskItem& item) : task_item_(item)
-		                                             , done_query_count_(0)
-		                                             , finished_tasks_() 
-	{
-		setDone(BiometricTask::FaceFind);
-	}
-
-	FaceInfoPtr item() const	{
-		return task_item_.first;
-	}
-
-	bool hasTask(BiometricTask task) const {
-		return (task_item_.second & task) == task;
-	}
-
-	void setDone(BiometricTask task)	{
-		std::lock_guard<std::mutex> lock(g_i_mutex);
-		finished_tasks_ |= task;
-		
-	}
-	
-	bool done() const {
-		bool result = finished_tasks_ == task_item_.second;
-		++done_query_count_;
-
-		bool problem = !result && done_query_count_ >= MAX_QUERY_COUNT;
-		if (problem)
-			std::cout << "not done problem" << std::endl;
-		
-		//assert( !result && done_query_count_ >= MAX_QUERY_COUNT );
-
-		return result;
-	}
-
-private:
-	FaceInfoTaskItem task_item_;	
-
-	long finished_tasks_;
-	std::mutex g_i_mutex;
-	mutable size_t done_query_count_;
-
-	const size_t MAX_QUERY_COUNT = 3;
-};
-typedef std::shared_ptr<PipelineTaskItem> PipelineTaskItemPtr;
 
 class ImageInfo 
 {
@@ -484,6 +302,15 @@ public:
 
 	FaceVacsImage image() const {
 		return image_;
+	}
+
+	void addRange(const std::vector<FaceVacsFullFace>& faces)
+	{
+		parallel_for_each(faces.begin(), faces.end(), 
+			[&](const FaceVacsFullFace& face) {
+				addFace(face.first, face.second);
+		  }
+		);
 	}
 
 	void addFace( const FRsdk::Face::Location& faceLocation
@@ -522,6 +349,108 @@ private:
 
 typedef std::shared_ptr<ImageInfo>    ImageInfoPtr;
 typedef std::pair<ImageInfoPtr, long> ImageInfoTaskItem;
+
+class ImageInfoPipelineItem 
+{
+private:
+	struct signal {};
+
+	int m_capacity   ;
+	int working_units;
+	unbounded_buffer<signal> m_completedItems;
+
+public:
+	ImageInfoPipelineItem(ImageInfoPtr ptr) : image_info_(ptr), m_capacity(ptr->size()), working_units(0){}
+
+	void FreePipelineSlot(){
+		send(m_completedItems, signal());
+	}
+
+	void WaitForAvailablePipelineSlot()	{
+		if (working_units < m_capacity)
+			++working_units;
+		else
+			receive(m_completedItems);
+	}
+
+	void WaitForObject()	{
+		while (working_units > 0)
+		{
+			--working_units;
+			receive(m_completedItems);
+		}
+	}
+
+private:
+	ImageInfoPipelineItem(const ImageInfoPipelineItem&);
+	ImageInfoPipelineItem const & operator=(ImageInfoPipelineItem const&);
+
+private:
+	ImageInfoPtr image_info_;
+
+};
+
+typedef std::shared_ptr<ImageInfoPipelineItem> ImageInfoPipelineItemPtr;
+
+class PipelineTaskItem
+{
+public:
+	PipelineTaskItem(ImageInfoPipelineItemPtr parent, FaceInfoPtr item, long task) : task_item_(item, task)
+		                                                                            , done_query_count_(0)
+		                                                                            , finished_tasks_()
+																																								, parent_(parent)
+	{
+		setDone(BiometricTask::FaceFind);
+		parent->WaitForAvailablePipelineSlot();
+	}
+	/*
+	PipelineTaskItem(const FaceInfoTaskItem& item) : task_item_(item)
+		                                             , done_query_count_(0)
+		                                             , finished_tasks_() 
+																								 , parent_(item.)
+	{
+		setDone(BiometricTask::FaceFind);
+	}
+	*/
+	FaceInfoPtr item() const	{
+		return task_item_.first;
+	}
+
+	bool hasTask(BiometricTask task) const {
+		return (task_item_.second & task) == task;
+	}
+
+	void setDone(BiometricTask task)	{
+		std::lock_guard<std::mutex> lock(g_i_mutex);
+		finished_tasks_ |= task;
+		
+	}
+	
+	bool done() const {
+		bool result = finished_tasks_ == task_item_.second;
+		++done_query_count_;
+
+		bool problem = !result && done_query_count_ >= MAX_QUERY_COUNT;
+		if (problem)
+			std::cout << "not done problem" << std::endl;
+		
+		if (result)
+			parent_->FreePipelineSlot();
+		//assert( !result && done_query_count_ >= MAX_QUERY_COUNT );
+
+		return result;
+	}
+
+private:
+	FaceInfoTaskItem task_item_;	
+	ImageInfoPipelineItemPtr parent_;
+	long finished_tasks_;
+	std::mutex g_i_mutex;
+	mutable size_t done_query_count_;
+
+	const size_t MAX_QUERY_COUNT = 3;
+};
+typedef std::shared_ptr<PipelineTaskItem> PipelineTaskItemPtr;
 
 class IImagePipeline
 {
@@ -576,19 +505,19 @@ public:
 	  try
 	  {
 	  	parallel_invoke(
-	  
-	    [&](){face_finder_        = new FRsdk::Face::Finder(*configuration);											},
-	    [&](){eyes_finder_        = new FRsdk::Eyes::Finder(*configuration);											},
-	  	[&](){portrait_analyzer_  = new FRsdk::Portrait::Analyzer(*configuration);								},
-	    [&](){iso_19794_test_     = new FRsdk::ISO_19794_5::FullFrontal::Test(*configuration);		},
-	    [&](){token_face_creator_ = new FRsdk::ISO_19794_5::TokenFace::Creator(*configuration);		},
-	  	[&](){enroller_           = new FRsdk::Enrollment::Processor(*configuration);             },
-	  	[&](){
+				[&]() {
+				  FaceVacsAcquisitionPtr ptr(new FacialAcquisition(configuration));
+				  acquisition_ = ptr;		
+			  },	   
+	  	  [&](){enroller_           = new FRsdk::Enrollment::Processor(*configuration);             },
+	  	  [&](){
 
-			VeryfierPtr ver(new Veryfier(configuration));
-			veryfier_ = ver;
-		},
-	  	[&](){	FirBuilderRef ptr(new FirBilder(configuration)); fir_builder_ = ptr; }
+			    VeryfierPtr ver(new Veryfier(configuration));
+			    veryfier_ = ver;
+		    },
+	  	  [&](){	
+					FirBuilderRef ptr(new FirBilder(configuration)); fir_builder_ = ptr;
+				}
 	  
 	  	);		
 	  	return true;
@@ -600,48 +529,39 @@ public:
 
 	ImageInfoPtr LoadBioImage(const std::string& filename)
 	{		 
-		ImageInfoPtr image(new ImageInfo(filename));
-		std::cout << "loaded face " << filename << std::endl;
+		ImageInfoPtr image(new ImageInfo(filename));	
 		return image;
   }
 
 	void FaceFind(ImageInfoPtr pInfo)
 	{
 		FaceVacsImage image = pInfo->image();
-		FRsdk::Face::LocationSet faceLocations =
-			face_finder_->find(*image, MIN_EYE_DISTANCE, MAX_EYE_DISTANCE);
 
-		if (faceLocations.size() < 1)
-		{
-			std::cout << "any face not found";
-			return;
-		}
-	
-		concurrency::parallel_for_each( faceLocations.cbegin(), faceLocations.cend(),
-		                              	[&](FRsdk::Face::Location face)
-		{
-			FRsdk::Eyes::LocationSet eyesLocations = eyes_finder_->find(*image, face);
-			if (eyesLocations.size() > 0)						
-				pInfo->addFace(face, eyesLocations.front());			
-		});	
+		std::vector<FaceVacsFullFace> faces;
+		acquisition_->findFace(image, faces);
+
+		pInfo->addRange(faces);	
 	}
 
 	void PortraitCharacteristicFind(FaceInfoPtr pInfo)
 	{			
-		FRsdkFaceCharacteristicPtr portrait(new FRsdkFaceCharacteristic(portrait_analyzer_->analyze(pInfo->annotatedImage())));
+		FaceVacsPortraitCharacteristicsPtr pch = acquisition_->analyze(pInfo->annotatedImage());		
+		FRsdkFaceCharacteristicPtr portrait(new FRsdkFaceCharacteristic(*pch));
 		pInfo->updatePortraitCharacteristics(portrait);	
 	}
 
 	void IsoComplianceTest(FaceInfoPtr pInfo)
 	{
 		FRsdk::Portrait::Characteristics portrait = pInfo->characteristics().portraitCharacteristics();
-		FRsdkIsoCompliancePtr iso(new FRsdkIsoCompliance(iso_19794_test_->assess(portrait)));
+		FaceVacsCompliancePtr result = acquisition_->isoComplianceTest(portrait);
+
+		FRsdkIsoCompliancePtr iso(new FRsdkIsoCompliance(*result));
 		pInfo->updateIsoCompliance(iso);
 	}
 
 	void FacialImageExtractor(FaceInfoPtr pInfo){
-		FaceVacsImage image = new FRsdk::Image(token_face_creator_->extract(pInfo->annotatedImage()).first);
-		pInfo->setFacialImage(image);
+		FaceVacsImage result = acquisition_->extractFace(pInfo->annotatedImage());		
+		pInfo->setFacialImage(result);
 	}
 
 	void Enrollment(FaceInfoPtr pInfo)
@@ -653,8 +573,7 @@ public:
 		FRsdk::Enrollment::Feedback
 			feedback((pInfo->enrollmentRecord()));
 
-		enroller_->process(images.begin(), images.end(), feedback);
-		std::cout << "enrolled " << pInfo->id() << std::endl;
+		enroller_->process(images.begin(), images.end(), feedback);		
 	}
 
 
@@ -664,14 +583,10 @@ public:
 	}
 
 private:
-	FaceVacsFaceFinder         face_finder_       ;
-	FaceVacsEyesFinder         eyes_finder_       ;
-	FaceVacsTfcreator          token_face_creator_;
-	FaceVacsPortraitAnalyzer   portrait_analyzer_ ;
-	FaceVacsIso19794Test       iso_19794_test_    ;
-	FRsdkEnrollmentProcessor   enroller_          ;
-	VeryfierPtr                veryfier_          ;
-	FirBuilderRef              fir_builder_       ;
+	FaceVacsAcquisitionPtr     acquisition_;	
+	FRsdkEnrollmentProcessor   enroller_   ;
+	VeryfierPtr                veryfier_   ;
+	FirBuilderRef              fir_builder_;
 private:
 	const float MIN_EYE_DISTANCE = 0.1f;
 	const float MAX_EYE_DISTANCE = 0.4f;
@@ -721,6 +636,7 @@ public:
 			if (!IsCancellationPending() && (nullptr != pInfo))			
 				pipeline_->FaceFind(pInfo);
 			
+			std::cout << "FaceFind" << std::endl;
 		}
 		catch (std::exception& e)	{
 			ShutdownOnError(0, pInfo->filename(), e);
@@ -736,6 +652,8 @@ public:
 			{
 				pipeline_->IsoComplianceTest(face);
 				pInfo->setDone(BiometricTask::IsoComplianceTest);
+
+				std::cout << "IsoComplianceTest" << std::endl;
 			}
 		}
 		catch (std::exception& e)	{
@@ -753,6 +671,8 @@ public:
 			{
 				pipeline_->PortraitCharacteristicFind(face);
 				pInfo->setDone(BiometricTask::PortraitAnalysis);
+
+				std::cout << "PortraitAnalysis" << std::endl;
 			}
 		}
 		catch (std::exception& e)	{
@@ -769,6 +689,8 @@ public:
 			{
 				pipeline_->FacialImageExtractor(face);
 				pInfo->setDone(BiometricTask::FaceImageExtraction);
+
+				std::cout << "FaceImageExtraction" << std::endl;
 			}
 		}
 		catch (std::exception& e)	{
@@ -849,13 +771,15 @@ private:
 	std::unique_ptr<call<PipelineTaskItemPtr>>  m_enrollment_processor_  ;
 	std::unique_ptr<call<PipelineTaskItemPtr>>  m_verification_processor_;
 	std::unique_ptr<call<PipelineTaskItemPtr>>  m_finish_;
-		
+			
 	PipelineGovernor m_governor;
 	
 	std::vector<long> m_queueSizes;
+
+	static const  unsigned int MAX_PIPELINE_SLOT_COUNT = 25;
 public:
 	ImageAgentPipelineBalanced(ImagePipelinePtr pipeline) : AgentBase(pipeline)
-		                                                    , m_governor(GetPipelineCapacity() * 3)
+		                                                    , m_governor(MAX_PIPELINE_SLOT_COUNT)
 		                                                    , m_face_finder_           (nullptr)
 		                                                    , m_facial_image_extractor_(nullptr)
 		                                                    , m_face_analyzer_         (nullptr)
@@ -863,126 +787,116 @@ public:
 		                                                    , m_enrollment_processor_  (nullptr)
 		                                                    , m_finish_(nullptr)		
 	{
+	
 		m_queueSizes.resize(5, 0);
 		Initialize(); 
 	}
 	
 	void Initialize()
-	{  		
-	m_face_finder_ = std::unique_ptr<call<ImageInfoTaskItem>>(new call<ImageInfoTaskItem>(
-			 [this](ImageInfoTaskItem pInfo)
-        {
-				  ImageInfoPtr image = pInfo.first;
-				  long task          = pInfo.second;
-
-				  this->FindFace(image);
-
-				parallel_for_each(image->cbegin(), image->cend(),
-				  [&](FaceInfoPtr face)
-				  {
-				   
-					 PipelineTaskItemPtr item(new PipelineTaskItem(face, task));
-				  
-				   if (item->hasTask(BiometricTask::PortraitAnalysis))
-				  	 asend(*m_face_analyzer_, item);
-				  
-					 if (item->hasTask(BiometricTask::FaceImageExtraction))
-				  	 asend(*m_facial_image_extractor_, item);
-				  	 
-				  });					
-        } 
-     ));		 
-		 
-		 m_facial_image_extractor_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
-			 [this](PipelineTaskItemPtr pInfo)
-       {
-				 this->Extract(pInfo);						
-				 if (pInfo->hasTask(BiometricTask::Enrollment))				 
-					 asend(*m_enrollment_processor_, pInfo);
-				 else 
-					 asend(*m_finish_, pInfo);
-        }          
-     ));
-
-		
-		 
-		 m_enrollment_processor_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
-		 [this](PipelineTaskItemPtr pInfo)
-		 {
-			  this->Enrollment(pInfo);
-			 if (pInfo->hasTask(BiometricTask::Verification))
-				 {
-					 asend(*m_verification_processor_, pInfo);
-				 }
-			   else
-			  	 asend(*m_finish_, pInfo);
-		 }
-	 ));
-
-		 m_verification_processor_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
-			 [this](PipelineTaskItemPtr pInfo)
-		 {
-			 this->Enrollment(pInfo);
-			 if (pInfo->hasTask(BiometricTask::Verification))
-			 {
-				 //asend(*m_verification, pInfo);
-			 }
-			 else
+	{  				 
+		m_facial_image_extractor_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
+		  [this](PipelineTaskItemPtr pInfo)
+      {
+			 this->Extract(pInfo);						
+			 if (pInfo->hasTask(BiometricTask::Enrollment))				 
+				 asend(*m_enrollment_processor_, pInfo);
+			 else 
 				 asend(*m_finish_, pInfo);
-		 }
-		 ));
+       }          
+    ));		
 
-		 m_face_analyzer_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
-			 [this](PipelineTaskItemPtr pInfo)
-       {
-			   this->PortraitCharacteristicFind(pInfo);		
-
-				 if (pInfo->hasTask(BiometricTask::IsoComplianceTest))
-					 asend(*m_iso_compliance_test_, pInfo);
-				 else 
-				   asend(*m_finish_, pInfo);
-       }         
-     ));		 
-
-		 m_iso_compliance_test_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
-			 [this](PipelineTaskItemPtr pInfo)
-		 {
-			 this->IsoComplianceTest(pInfo);
-			 asend(*m_finish_, pInfo);
-		 }
-		 ));
+		m_face_analyzer_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
+		  [this](PipelineTaskItemPtr pInfo)
+		  {
+		 	 this->PortraitCharacteristicFind(pInfo);		  
+		 	 if (pInfo->hasTask(BiometricTask::IsoComplianceTest))
+		 		 asend(*m_iso_compliance_test_, pInfo);
+		 	 else
+		 		 asend(*m_finish_, pInfo);
+		  }
+		));
 		 
-		 m_finish_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
-			 [this](PipelineTaskItemPtr pInfo)
-       {               
-			   if (pInfo->done())			   				
-				   m_governor.FreePipelineSlot();			   						
-       }			
-     ));			
-   }
+	  m_enrollment_processor_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
+	    [this](PipelineTaskItemPtr pInfo)
+		  {
+		    this->Enrollment(pInfo);
+		    if (pInfo->hasTask(BiometricTask::Verification))				 
+		   	  asend(*m_verification_processor_, pInfo);				 
+			  else
+			    asend(*m_finish_, pInfo);
+		  }
+	  ));
 
-	 void run()
-	 {}
+		m_verification_processor_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
+			[this](PipelineTaskItemPtr pInfo)
+		  {
+		    this->Verification(pInfo->item());			
+			  asend(*m_finish_, pInfo);
+		  }
+		));		
 
-	 void push(const std::vector<BioWorkItem>& filenames)
-	 {
-		 parallel_for_each(filenames.cbegin(), filenames.cend(), 
-	   [&](BioWorkItem work_item) {
-			 push(work_item);
-		 });		 
-	 }
+	  m_iso_compliance_test_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
+			[this](PipelineTaskItemPtr pInfo)
+		  {
+			  this->IsoComplianceTest(pInfo);
+			  asend(*m_finish_, pInfo);
+		  }
+	  ));
+		 
+	   m_finish_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
+			[this](PipelineTaskItemPtr pInfo)
+      {               
+			  if (pInfo->done())			   				
+				  m_governor.FreePipelineSlot();			   						
+      }			
+    ));			
+  }
 
-	 void push(const BioWorkItem& work_item) {
-		 ImageInfoPtr pInfo = this->LoadBioImage(work_item.first);
-		 if (nullptr != pInfo)
-		 {
-			 ImageInfoTaskItem info(pInfo, work_item.second);
-			 m_governor.WaitForAvailablePipelineSlot();
-			 asend(*m_face_finder_, info);
-		 }
+	void run()
+	{}
 
-		// return pInfo; 
-	 }
+	 //void push(const std::vector<BioWorkItem>& filenames)
+	// {
+		 //parallel_for_each(filenames.cbegin(), filenames.cend(), 
+	   //[&](BioWorkItem work_item) {
+			// push(work_item);
+		// });		
+	// }
+
+	ImageInfoPtr push(const BioWorkItem& work_item)
+	{
+		ImageInfoPtr pInfo = this->LoadBioImage(work_item.first);
+		 		 
+		if (nullptr == pInfo)
+			return nullptr;
+
+
+
+	  ImageInfoTaskItem info(pInfo, work_item.second);
+		this->FindFace(pInfo);
+
+		ImageInfoPipelineItemPtr ptr(new ImageInfoPipelineItem(pInfo));
+
+		long task_configuration = work_item.second;
+		parallel_for_each(pInfo->cbegin(), pInfo->cend(),
+		  [&](FaceInfoPtr face)
+		  {
+				PipelineTaskItemPtr item(new PipelineTaskItem(ptr, face, task_configuration));
+		  
+		  	m_governor.WaitForAvailablePipelineSlot();
+		  	if (item->hasTask(BiometricTask::PortraitAnalysis))
+		  	 asend(*m_face_analyzer_, item);
+		  
+		  	if (item->hasTask(BiometricTask::FaceImageExtraction))
+		  	 asend(*m_facial_image_extractor_, item);		  
+	    });				 
+
+		ptr->WaitForObject();
+
+		//m_governor.WaitForEmptyPipeline();
+
+		return pInfo; 
+	}
 
 	 void acquire(const std::string& object, long configuration = FAST_PORTRAIT_ANALYSIS) 
 	 {
@@ -1003,7 +917,7 @@ public:
 		items.push_back(BioWorkItem(object , object_configuration ));
 		items.push_back(BioWorkItem(subject, subject_configuration));
 
-		push(items);
+		//push(items);
   }
 
   void identify(const std::string& object, const std::vector<std::string>& subjects) {
@@ -1032,36 +946,20 @@ private:
 
 int main(int argc, char** argv)
 {	
-	/*
-	long acquiredd = FaceFind | PortraitAnalysis | FaceImageExtraction | IsoComplianceTest;
-	long t = 0;
-
-	t |= BiometricTask::FaceFind;
-	std::cout << t << " " << BiometricTask::FaceFind << std::endl;
-
-	t |= BiometricTask::FaceImageExtraction;
-	std::cout << t << " " << BiometricTask::FaceImageExtraction << std::endl;
-
-	t |= BiometricTask::PortraitAnalysis;
-	std::cout << t << " " << BiometricTask::PortraitAnalysis << std::endl;
-
-	t |= BiometricTask::IsoComplianceTest;
-	std::cout << t << " " << BiometricTask::IsoComplianceTest << " " << acquiredd << std::endl;
-
-	std::cin.get();
-	return 0;
-	*/
 
 	std::string cfg_path = "C:\\FVSDK_8_9_5\\etc\\frsdk.cfg";
 	std::shared_ptr<FRsdkTasks> task(new FRsdkTasks(cfg_path));
 
-	long acquire = FaceFind | PortraitAnalysis /*| FaceImageExtraction*/ | IsoComplianceTest;//| Enrollment;
+	long acquire = FaceFind | PortraitAnalysis | FaceImageExtraction | IsoComplianceTest | Enrollment;
 	long acquire2 = FaceFind | PortraitAnalysis | FaceImageExtraction;
 	std::vector<BioWorkItem> filenames;
-	filenames.push_back(BioWorkItem("C:\\Users\\jacke\\Desktop\\3423.jpg" , acquire));
-	filenames.push_back(BioWorkItem("C:\\Users\\jacke\\Desktop\\3423.jpg" , acquire));
+	BioWorkItem test("C:\\Users\\jacke\\Desktop\\3423.jpg", acquire);
+	BioWorkItem test2("C:\\Users\\jacke\\Desktop\\shwarc.jpg", acquire);
+	filenames.push_back(BioWorkItem(test));
+	//filenames.push_back(BioWorkItem("C:\\Users\\jacke\\Desktop\\shwarc.jpg" , acquire));
 	//filenames.push_back(BioWorkItem("C:\\Users\\jacke\\Desktop\\shwarc.jpg", acquire));
 	
+	/*
 	unsigned int start = clock();
 
 	parallel_for_each(filenames.cbegin(), filenames.cend(),
@@ -1072,52 +970,48 @@ int main(int argc, char** argv)
 		concurrency::parallel_for_each(ptr->cbegin(), ptr->cend(),
 			[&](FaceInfoPtr face)
 		{
+			task->FacialImageExtractor(face);
 			task->PortraitCharacteristicFind(face);
 			task->IsoComplianceTest(face);
+			task->Enrollment(face);
 		});
 	});
 
 	std::cout << "no" << clock() - start << std::endl;
-	
+	*/
 	
 
 	ImageAgentPipelineBalanced pipeline(task);
 
 	pipeline.run();
 
-	 start = clock();
-	pipeline.push(filenames);
-	pipeline.stop();
+	unsigned int start = clock();
+	ImageInfoPtr ptr1 = nullptr;
+	ImageInfoPtr ptr2 = nullptr;
+	parallel_invoke(
+		[&]() { ptr1 = pipeline.push(test); },
+		[&]() { ptr2 = pipeline.push(test2); }
+		
+	);
+
+
+	for (auto it = ptr1->cbegin(); it != ptr1->cend(); ++it)
+	{
+		std::cout << "has fir = " << (*it)->id() << " " << (*it)->hasFir() << std::endl;
+	}
+
+	for (auto it = ptr2->cbegin(); it != ptr2->cend(); ++it)
+	{
+		std::cout << "has fir = " <<  (*it)->id() << " " << (*it)->hasFir() << std::endl;
+	}
+
 	std::cout << "pipeline = " << clock() - start << std::endl;
-	
 	std::cin.get();
-	std::cout << std::endl;
-	/*
-	long acquire2 = FaceFind | PortraitAnalysis ;
-	filenames.clear();
-	filenames.push_back(BioWorkItem("C:\\Users\\jacke\\Desktop\\shwarc.jpg", acquire2));
-	pipeline.push(filenames);
-	pipeline.stop();
-	*/
-
-	//std::string cfg_path = "C:\\FVSDK_8_9_5\\etc\\frsdk.cfg";
-	//FacialEngine engine(cfg_path);
-
-	//std::string filename  = "C:\\Users\\jacke\\Desktop\\3423.jpg";
-	//std::string filename2 = "C:\\Users\\jacke\\Desktop\\shwarc.jpg";
-
-	//std::string file1( readFileBytes(filename));
-	//std::string file2( readFileBytes(filename2));
-
-	//RawImage raw1 = readFileBytes(filename);//, file1.size());
-	//RawImage raw2 = readFileBytes(filename2);
-
-	//engine.acquire(filename);
-
-	//std::cin.get();
+	std::cout << std::endl;	
 
 
 	return 0;
 }
+
 
 

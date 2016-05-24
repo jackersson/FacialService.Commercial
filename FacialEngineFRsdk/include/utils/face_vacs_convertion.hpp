@@ -8,6 +8,7 @@
 
 namespace BioFacialEngine
 {
+	/*
 	class FaceVacsConvertion
 	{
 	public:
@@ -68,6 +69,7 @@ namespace BioFacialEngine
 			return sbox;
 		}
 	};
+	*/
 }
 
 #endif

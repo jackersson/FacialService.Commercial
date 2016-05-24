@@ -5,89 +5,61 @@
 
 namespace BioContracts
 {
-	class Position
-	{
-	public:	
-		Position() {}
-		Position(const int& x, const int& y) : p((float)x, (float)y) { }
-		Position(const float& x, const float& y) : p(x, y) { }
-		Position(const Position& rhs) : p(rhs.p) { }
-
-		float x() const { return p.first; }
-	
-		float y() const { return p.second; }
-	private:
-		std::pair<float, float> p;
-	};
-
-	class SurroundingBox
+	class IPosition
 	{
 	public:
-		SurroundingBox(int originx, int originy, int endx, int endy)
-		{
-			Position origin_temp(originx, originy);
-			Position end_temp   (endx   , endy);
-			box_ = std::pair<Position, Position>( origin_temp, end_temp );
+		virtual float x() const = 0;
+		virtual float y() const = 0;
+	};
+
+	class Position : public IPosition
+	{
+	public:
+		Position(float x, float y) :par_(x, y) {}
+
+		float x() const{
+			return par_.first;
 		}
-		SurroundingBox(const Position& origin, const Position& end) : box_(origin, end) {}
-		SurroundingBox(const SurroundingBox& rhs) : box_(rhs.box_) { }
 
-		Position origin() const { return box_.first; }
+		float y() const{
+			return par_.second;
+		}
 
-		Position end   () const { return box_.second; }
 	private:
-		std::pair<Position, Position> box_;
+		std::pair<float, float> par_;
 	};
 
-	class FaceLocation
-	{
-	public :
-		FaceLocation( const Position& p, float w
-			          , float c = 0.0f, float rotationAngle_ = 0.0f)
-			          : pos(p), width(w),
-			            confidence(c), rotationAngle(rotationAngle_) { }
-
-		Position pos;       
-		float    width;        
-		float    confidence;   
-		float    rotationAngle;
-	};
-
-	class EyeLocation
+	class IFace
 	{
 	public:
-		EyeLocation( const Position& pos
-			         , float conf            = 0.0f
-			         , bool  is_open         = false
-			         , bool  is_red          = false
-			         , bool  is_tined        = false
-			         , float gaze_frontal = 0.0f	)
-							 : position(pos)    , confidence(conf)
-			         , isOpen(is_open)  , isRed(is_red)
-							 , isTined(is_tined), gazeFrontal(gaze_frontal)
-		{ }
-
-		Position position     ;         
-		float    confidence   ;
-		bool     isOpen       ;
-	  bool     isRed        ;
-		bool     isTined      ;
-		float    gazeFrontal;
+		virtual float confidence()    const = 0;
+		virtual float width()         const = 0;
+		virtual float rotationAngle() const = 0;		
 	};
 
-	class EyesDetails
+	class IEye
 	{
 	public:
-		EyesDetails(const EyeLocation& origin, const EyeLocation& end) : eyes_(origin, end) {}
-		EyesDetails(const EyesDetails& rhs) : eyes_(rhs.eyes_) { }
+		virtual const IPosition& position() const = 0;
 
-		EyeLocation left() const { return eyes_.first; }
-
-		EyeLocation right() const { return eyes_.second; }
-	private:
-		std::pair<EyeLocation, EyeLocation> eyes_;
+		virtual float confidence() const = 0;
 	};
 
+	class IEyes
+	{
+	public:
+		virtual const IEye& left() const = 0;
+		virtual const IEye& right() const = 0;
+	};
+
+	class IBox
+	{
+	public:
+		virtual const IPosition& origin() const = 0;
+		virtual const IPosition& end   () const = 0;	
+
+		virtual const unsigned int size() const = 0;
+	};
 	
 
 	enum Gender
