@@ -93,6 +93,9 @@
     <ClInclude Include="include\utils\face_vacs_convertion.hpp">
       <Filter>include\utils</Filter>
     </ClInclude>
+    <ClInclude Include="include\utils\work_unit_governor.hpp">
+      <Filter>include\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\biotasks\facial_acquisition.cpp">

@@ -10,6 +10,8 @@
 #include <queue>
 #include <time.h>
 
+#include "utils\work_unit_governor.hpp"
+
 using namespace ::Concurrency;
 using namespace BioFacialEngine;
 using namespace BioContracts;
@@ -17,42 +19,6 @@ using namespace BioContracts;
 #include <iostream>
 
 typedef std::pair<std::string, long> BioWorkItem;
-
-class PipelineGovernor
-{
-private:
-	struct signal {};
-
-	int m_capacity;
-	int m_phase;
-	unbounded_buffer<signal> m_completedItems;
-
-public:
-	PipelineGovernor(int capacity) : m_phase(0), m_capacity(capacity) {}
-		
-	void FreePipelineSlot(){
-		send(m_completedItems, signal());
-	}
-
-	void WaitForAvailablePipelineSlot()	{
-		if (m_phase < m_capacity)
-			++m_phase;
-		else
-			receive(m_completedItems);
-	}
-	
-	void WaitForEmptyPipeline()	{
-		while (m_phase > 0)
-		{
-			--m_phase;
-			receive(m_completedItems);
-		}
-	}
-
-private:
-	PipelineGovernor(const PipelineGovernor&);
-	PipelineGovernor const & operator=(PipelineGovernor const&);
-};
 
 typedef std::shared_ptr<FRsdkFaceCharacteristic> FRsdkFaceCharacteristicPtr;
 
@@ -350,36 +316,13 @@ private:
 typedef std::shared_ptr<ImageInfo>    ImageInfoPtr;
 typedef std::pair<ImageInfoPtr, long> ImageInfoTaskItem;
 
-class ImageInfoPipelineItem 
+class ImageInfoPipelineItem : public Pipeline::WorkUnitGovernor
 {
-private:
-	struct signal {};
-
-	int m_capacity   ;
-	int working_units;
-	unbounded_buffer<signal> m_completedItems;
-
 public:
-	ImageInfoPipelineItem(ImageInfoPtr ptr) : image_info_(ptr), m_capacity(ptr->size()), working_units(0){}
-
-	void FreePipelineSlot(){
-		send(m_completedItems, signal());
-	}
-
-	void WaitForAvailablePipelineSlot()	{
-		if (working_units < m_capacity)
-			++working_units;
-		else
-			receive(m_completedItems);
-	}
-
-	void WaitForObject()	{
-		while (working_units > 0)
-		{
-			--working_units;
-			receive(m_completedItems);
-		}
-	}
+	ImageInfoPipelineItem(ImageInfoPtr ptr)
+		                   : image_info_(ptr)
+											 , WorkUnitGovernor(ptr->size())		
+	{}	
 
 private:
 	ImageInfoPipelineItem(const ImageInfoPipelineItem&);
@@ -387,7 +330,6 @@ private:
 
 private:
 	ImageInfoPtr image_info_;
-
 };
 
 typedef std::shared_ptr<ImageInfoPipelineItem> ImageInfoPipelineItemPtr;
@@ -396,12 +338,17 @@ class PipelineTaskItem
 {
 public:
 	PipelineTaskItem(ImageInfoPipelineItemPtr parent, FaceInfoPtr item, long task) : task_item_(item, task)
-		                                                                            , done_query_count_(0)
-		                                                                            , finished_tasks_()
-																																								, parent_(parent)
+		                                                                             , done_query_count_(0)
+		                                                                             , finished_tasks_()
+																																								 , parent_(parent)
+																																								 , start_time_(clock())
 	{
 		setDone(BiometricTask::FaceFind);
-		parent->WaitForAvailablePipelineSlot();
+		parent->AddWorkingUnit();
+	}
+
+	clock_t startTime() const {
+		return start_time_;
 	}
 	/*
 	PipelineTaskItem(const FaceInfoTaskItem& item) : task_item_(item)
@@ -431,11 +378,13 @@ public:
 		++done_query_count_;
 
 		bool problem = !result && done_query_count_ >= MAX_QUERY_COUNT;
-		if (problem)
-			std::cout << "not done problem" << std::endl;
+		if (problem || result)
+		{
+			parent_->FreeUnit();
+			if (problem)
+		  	std::cout << "not done problem" << std::endl;
+		}
 		
-		if (result)
-			parent_->FreePipelineSlot();
 		//assert( !result && done_query_count_ >= MAX_QUERY_COUNT );
 
 		return result;
@@ -447,7 +396,7 @@ private:
 	long finished_tasks_;
 	std::mutex g_i_mutex;
 	mutable size_t done_query_count_;
-
+	clock_t start_time_;
 	const size_t MAX_QUERY_COUNT = 3;
 };
 typedef std::shared_ptr<PipelineTaskItem> PipelineTaskItemPtr;
@@ -509,7 +458,10 @@ public:
 				  FaceVacsAcquisitionPtr ptr(new FacialAcquisition(configuration));
 				  acquisition_ = ptr;		
 			  },	   
-	  	  [&](){enroller_           = new FRsdk::Enrollment::Processor(*configuration);             },
+					[&](){
+					FacialEnrollmentPtr ver(new FacialEnrollment(configuration));					
+					enrollment_ = ver;
+				},
 	  	  [&](){
 
 			    VeryfierPtr ver(new Veryfier(configuration));
@@ -562,18 +514,24 @@ public:
 	void FacialImageExtractor(FaceInfoPtr pInfo){
 		FaceVacsImage result = acquisition_->extractFace(pInfo->annotatedImage());		
 		pInfo->setFacialImage(result);
+
+		std::cout << "extraction stage " << clock() << std::endl;
 	}
 
 	void Enrollment(FaceInfoPtr pInfo)
 	{		
-		FRsdk::SampleSet images;
+		//FRsdk::SampleSet images;
 
-		images.push_back(pInfo->facialImage());
+		//images.push_back(pInfo->facialImage());
+
+		std::cout << "enrollment stage " << clock() << std::endl;
 
 		FRsdk::Enrollment::Feedback
 			feedback((pInfo->enrollmentRecord()));
 
-		enroller_->process(images.begin(), images.end(), feedback);		
+		enrollment_->enroll(pInfo->facialImage(), feedback);
+
+		std::cout << "enrollment stage finnished " << clock() << std::endl;
 	}
 
 
@@ -584,7 +542,8 @@ public:
 
 private:
 	FaceVacsAcquisitionPtr     acquisition_;	
-	FRsdkEnrollmentProcessor   enroller_   ;
+	FacialEnrollmentPtr        enrollment_;
+	//FRsdkEnrollmentProcessor   enroller_   ;
 	VeryfierPtr                veryfier_   ;
 	FirBuilderRef              fir_builder_;
 private:
@@ -760,23 +719,40 @@ private:
 		ImagePipelinePtr pipeline_;
 };
 
+struct ComparePipelineTaskItemPtr
+{
+	bool operator()(const PipelineTaskItemPtr lhs, const PipelineTaskItemPtr rhs) const
+	{
+		return (lhs->startTime() > rhs->startTime());
+	}
+};
+
 
 class ImageAgentPipelineBalanced : public AgentBase
 {
 private:
+
+	typedef std::unique_ptr<call<PipelineTaskItemPtr>> PipelineItemCallPtr;
+
 	std::unique_ptr<call<ImageInfoTaskItem>>    m_face_finder_           ;
-	std::unique_ptr<call<PipelineTaskItemPtr>>  m_facial_image_extractor_;
-	std::unique_ptr<call<PipelineTaskItemPtr>>  m_face_analyzer_         ;
-	std::unique_ptr<call<PipelineTaskItemPtr>>  m_iso_compliance_test_   ;
-	std::unique_ptr<call<PipelineTaskItemPtr>>  m_enrollment_processor_  ;
-	std::unique_ptr<call<PipelineTaskItemPtr>>  m_verification_processor_;
-	std::unique_ptr<call<PipelineTaskItemPtr>>  m_finish_;
-			
-	PipelineGovernor m_governor;
-	
+	PipelineItemCallPtr  m_facial_image_extractor_;
+	PipelineItemCallPtr  m_face_analyzer_         ;
+	PipelineItemCallPtr  m_iso_compliance_test_   ;
+
+	std::vector<PipelineItemCallPtr>  m_enrollment_processors_  ;
+
+	PipelineItemCallPtr  m_verification_processor_;
+	PipelineItemCallPtr  m_finish_;
+
+	PipelineItemCallPtr m_multiplexer;
+	std::priority_queue<PipelineTaskItemPtr, std::vector<PipelineTaskItemPtr>, ComparePipelineTaskItemPtr> m_multiplexQueue;
+	unbounded_buffer<PipelineTaskItemPtr> m_multiplexBuffer;
+	Pipeline::WorkUnitGovernor m_governor;
+	int m_nextFilter;
 	std::vector<long> m_queueSizes;
 
 	static const  unsigned int MAX_PIPELINE_SLOT_COUNT = 25;
+	static const  unsigned int MAX_ENROLMENT_BRANCHES_COUNT = 3;
 public:
 	ImageAgentPipelineBalanced(ImagePipelinePtr pipeline) : AgentBase(pipeline)
 		                                                    , m_governor(MAX_PIPELINE_SLOT_COUNT)
@@ -784,11 +760,13 @@ public:
 		                                                    , m_facial_image_extractor_(nullptr)
 		                                                    , m_face_analyzer_         (nullptr)
 		                                                    , m_iso_compliance_test_   (nullptr)
-		                                                    , m_enrollment_processor_  (nullptr)
+		                                                    //, m_enrollment_processor_  (nullptr)
 		                                                    , m_finish_(nullptr)		
+																												, m_nextFilter(0)
 	{
 	
 		m_queueSizes.resize(5, 0);
+		m_enrollment_processors_.resize(MAX_ENROLMENT_BRANCHES_COUNT);
 		Initialize(); 
 	}
 	
@@ -799,7 +777,7 @@ public:
       {
 			 this->Extract(pInfo);						
 			 if (pInfo->hasTask(BiometricTask::Enrollment))				 
-				 asend(*m_enrollment_processor_, pInfo);
+				 asend(m_multiplexBuffer, pInfo);
 			 else 
 				 asend(*m_finish_, pInfo);
        }          
@@ -815,7 +793,31 @@ public:
 		 		 asend(*m_finish_, pInfo);
 		  }
 		));
-		 
+
+		for (int i = 0; i < MAX_ENROLMENT_BRANCHES_COUNT; ++i)
+    {
+			m_enrollment_processors_[i] = PipelineItemCallPtr(new call<PipelineTaskItemPtr>(
+				[this, i](PipelineTaskItemPtr pInfo)
+         {					 
+					this->Enrollment(pInfo);
+					asend(*m_multiplexer, pInfo);					
+         },          
+				 [this, i](PipelineTaskItemPtr pInfo)->bool
+         {              
+           if ((nullptr != pInfo) && (i != m_nextFilter))
+               return false;
+					 ++m_nextFilter;
+					 if (m_nextFilter >= MAX_ENROLMENT_BRANCHES_COUNT)
+						 m_nextFilter = 0;
+           return true;
+				 }
+       ));
+			 m_multiplexBuffer.link_target(m_enrollment_processors_[i].get());
+	   }
+
+
+
+			/*
 	  m_enrollment_processor_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
 	    [this](PipelineTaskItemPtr pInfo)
 		  {
@@ -826,6 +828,28 @@ public:
 			    asend(*m_finish_, pInfo);
 		  }
 	  ));
+		*/
+
+		
+		m_multiplexer = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
+			[this](PipelineTaskItemPtr pInfo)
+      {
+        m_multiplexQueue.push(pInfo);
+        while ((m_multiplexQueue.size() > 0))
+        {           
+         // asend(m_multiplexBuffer, m_multiplexQueue.top());
+					PipelineTaskItemPtr item = m_multiplexQueue.top();
+					if (item->hasTask(BiometricTask::Verification))
+						asend(*m_verification_processor_, pInfo);
+					else
+						asend(*m_finish_, pInfo);
+
+          m_multiplexQueue.pop();         
+        }
+      }
+    ));
+		
+
 
 		m_verification_processor_ = std::unique_ptr<call<PipelineTaskItemPtr>>(new call<PipelineTaskItemPtr>(
 			[this](PipelineTaskItemPtr pInfo)
@@ -847,7 +871,7 @@ public:
 			[this](PipelineTaskItemPtr pInfo)
       {               
 			  if (pInfo->done())			   				
-				  m_governor.FreePipelineSlot();			   						
+				  m_governor.FreeUnit();			   						
       }			
     ));			
   }
@@ -883,7 +907,7 @@ public:
 		  {
 				PipelineTaskItemPtr item(new PipelineTaskItem(ptr, face, task_configuration));
 		  
-		  	m_governor.WaitForAvailablePipelineSlot();
+		  	m_governor.AddWorkingUnit();
 		  	if (item->hasTask(BiometricTask::PortraitAnalysis))
 		  	 asend(*m_face_analyzer_, item);
 		  
@@ -891,9 +915,7 @@ public:
 		  	 asend(*m_facial_image_extractor_, item);		  
 	    });				 
 
-		ptr->WaitForObject();
-
-		//m_governor.WaitForEmptyPipeline();
+		ptr->Wait();
 
 		return pInfo; 
 	}
@@ -926,7 +948,7 @@ public:
 
   void stop()
   {
-    m_governor.WaitForEmptyPipeline();
+    m_governor.Wait();
 	  done();
   }
 
@@ -988,13 +1010,30 @@ int main(int argc, char** argv)
 	unsigned int start = clock();
 	ImageInfoPtr ptr1 = nullptr;
 	ImageInfoPtr ptr2 = nullptr;
+	ImageInfoPtr ptr3 = nullptr;
 	parallel_invoke(
-		[&]() { ptr1 = pipeline.push(test); },
-		[&]() { ptr2 = pipeline.push(test2); }
+		[&]() {
+		
+		ptr1 = pipeline.push(test);
+		std::cout << "first = " << clock() - start << std::endl;
+
+	},
+		[&]() { 
+
+		
+		ptr2 = pipeline.push(test2);
+		std::cout << "second = " << clock() - start << std::endl;
+	},
+
+		[&]() {
+
+		ptr3 = pipeline.push(test2);
+		std::cout << "third = " << clock() - start << std::endl;
+	}
 		
 	);
 
-
+	/*
 	for (auto it = ptr1->cbegin(); it != ptr1->cend(); ++it)
 	{
 		std::cout << "has fir = " << (*it)->id() << " " << (*it)->hasFir() << std::endl;
@@ -1004,7 +1043,7 @@ int main(int argc, char** argv)
 	{
 		std::cout << "has fir = " <<  (*it)->id() << " " << (*it)->hasFir() << std::endl;
 	}
-
+	*/
 	std::cout << "pipeline = " << clock() - start << std::endl;
 	std::cin.get();
 	std::cout << std::endl;	

@@ -104,6 +104,7 @@
     <ClInclude Include="include\utils\face_vacs_io_utils.hpp" />
     <ClInclude Include="include\utils\frsdk_face_characteristics.hpp" />
     <ClInclude Include="include\utils\utils.hpp" />
+    <ClInclude Include="include\utils\work_unit_governor.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
