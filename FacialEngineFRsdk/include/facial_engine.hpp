@@ -22,7 +22,7 @@ namespace BioFacialEngine
 
 	private:
 		std::unique_ptr<FacialAcquisition>  acquisition_ ;
-		std::unique_ptr<FacialEnrollment>   enrollment_  ;
+		std::unique_ptr<FacialEnrollmentProcessor>   enrollment_  ;
 		std::unique_ptr<FacialVerification> verification_;
 
 

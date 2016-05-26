@@ -32,7 +32,7 @@ namespace BioFacialService
 
 		std::shared_ptr<BioContracts::IFacialEngine> facialEngine() const
 		{
-			return facial_engine_;
+			return nullptr;
 		}
 
 	private:

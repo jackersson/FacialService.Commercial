@@ -1,8 +1,10 @@
 #ifndef FacialAcquisition_INCLUDED
 #define FacialAcquisition_INCLUDED
 
-#include "utils/frsdk_face_characteristics.hpp"
-#include "utils/face_vacs_io_utils.hpp"
+#include "utils/face_vacs_includes.hpp"
+#include "wrappers/face_info.hpp"
+
+#include <frsdk/tokenface.h>
 
 namespace BioFacialEngine
 {	
@@ -14,24 +16,23 @@ namespace BioFacialEngine
 	typedef FRsdk::CountedPtr<FRsdk::ISO_19794_5::TokenFace::Creator> FaceVacsTfcreator       ;
 	typedef FRsdk::CountedPtr<FRsdk::Configuration>                   FaceVacsConfiguration   ;
 
-	typedef std::pair<FRsdk::Face::Location, FRsdk::Eyes::Location>    FaceVacsFullFace;
+	
 	
 	typedef FRsdk::CountedPtr<FRsdk::Portrait::Characteristics>             FaceVacsPortraitCharacteristicsPtr;
 	typedef FRsdk::CountedPtr<FRsdk::ISO_19794_5::FullFrontal::Compliance>  FaceVacsCompliancePtr;	
 
 	class FacialAcquisition 
 	{
-
 	public:
-		FacialAcquisition(const std::string& configuration_filename);
-		FacialAcquisition(FaceVacsConfiguration configuration);
+		explicit FacialAcquisition(const std::string& configuration_filename);
+		explicit FacialAcquisition(FaceVacsConfiguration configuration);
 		~FacialAcquisition() {}
 
-		void findFace(FaceVacsImage image, std::vector<FaceVacsFullFace>& faces)
+		void findFace(FRsdkTypes::FaceVacsImage image, std::vector<FRsdkEntities::FaceVacsFullFace>& faces)
 		{
 			try
 			{
-				FRsdk::Face::LocationSet faceLocations =
+				auto faceLocations =
 					face_finder_->find(*image, MIN_EYE_DISTANCE, MAX_EYE_DISTANCE);
 
 				if (faceLocations.size() < 1)
@@ -43,9 +44,9 @@ namespace BioFacialEngine
 				concurrency::parallel_for_each(faceLocations.cbegin(), faceLocations.cend(),
 					[&](FRsdk::Face::Location face)
 				{
-					FRsdk::Eyes::LocationSet eyesLocations = eyes_finder_->find(*image, face);
+					auto eyesLocations = eyes_finder_->find(*image, face);
 					if (eyesLocations.size() > 0)
-						faces.push_back(FaceVacsFullFace(face, eyesLocations.front()));
+						faces.push_back(FRsdkEntities::FaceVacsFullFace(face, eyesLocations.front()));
 				});
 			}
 			catch (std::exception& ex)
@@ -54,11 +55,11 @@ namespace BioFacialEngine
 			}
 		}
 
-		FaceVacsPortraitCharacteristicsPtr analyze(const FRsdk::AnnotatedImage& image)
+		FaceVacsPortraitCharacteristicsPtr analyze(const FRsdk::AnnotatedImage& image) const
 		{			
 			try	{			
-				FaceVacsPortraitCharacteristicsPtr pch 
-					= new FRsdk::Portrait::Characteristics(portrait_analyzer_->analyze(image));
+				FaceVacsPortraitCharacteristicsPtr pch (
+					new FRsdk::Portrait::Characteristics(portrait_analyzer_->analyze(image)));
 				return pch;
 			}
 			catch (std::exception& ex)	{			
@@ -67,11 +68,11 @@ namespace BioFacialEngine
 			return nullptr;
 		}
 
-		FaceVacsCompliancePtr isoComplianceTest(const FRsdk::Portrait::Characteristics& pch)
+		FaceVacsCompliancePtr isoComplianceTest(const FRsdk::Portrait::Characteristics& pch) const
 		{		
 			try	{
-				FaceVacsCompliancePtr result = new FRsdk::ISO_19794_5::FullFrontal::Compliance 
-					                                ( iso_19794_test_->assess(pch));
+				FaceVacsCompliancePtr result ( new FRsdk::ISO_19794_5::FullFrontal::Compliance 
+					                                ( iso_19794_test_->assess(pch)));
 
 				return result;
 			}
@@ -81,10 +82,10 @@ namespace BioFacialEngine
 			return nullptr;
 		}
 
-		FaceVacsImage extractFace(const FRsdk::AnnotatedImage& image)
+		FRsdkTypes::FaceVacsImage extractFace(const FRsdk::AnnotatedImage& image) const
 		{			
 			try	{
-				FaceVacsImage result = new FRsdk::Image(token_face_creator_->extract(image).first);
+				FRsdkTypes::FaceVacsImage result( new FRsdk::Image(token_face_creator_->extract(image).first) );
 				return result;
 			}
 			catch (std::exception& ex)	{			
@@ -114,9 +115,9 @@ namespace BioFacialEngine
 	class AcquisitionError : public std::exception
 	{
 	public:
-		AcquisitionError(const std::string& msg_) throw() : msg(msg_) {}
+		explicit AcquisitionError(const std::string& msg_) throw() : msg(msg_) {}
 		~AcquisitionError() throw() { }
-		const char* what() const throw() { return msg.c_str(); }
+		const char* what() const  throw() { return msg.c_str(); }
 	private:
 		std::string msg;
 	};

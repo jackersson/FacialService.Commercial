@@ -87,24 +87,26 @@
     <ClInclude Include="include\biotasks\facial_acquisition.hpp" />
     <ClInclude Include="include\biotasks\facial_enrollment.hpp" />
     <ClInclude Include="include\biotasks\facial_verification.hpp" />
-    <ClInclude Include="include\biotasks\iacquire_able.hpp" />
-    <ClInclude Include="include\biotasks\iaquisition_processor.hpp" />
-    <ClInclude Include="include\biotasks\ienrollment_able.hpp" />
-    <ClInclude Include="include\biotasks\ienrollment_processor.hpp" />
     <ClInclude Include="include\biotasks\ifir_builder.hpp" />
-    <ClInclude Include="include\biotasks\iverification_able.hpp" />
-    <ClInclude Include="include\biotasks\iverification_processor.hpp" />
     <ClInclude Include="include\facial_engine.hpp" />
-    <ClInclude Include="include\feedback\facial_acquisiton_feedback.hpp" />
     <ClInclude Include="include\feedback\facial_enrollment_feedback.hpp" />
     <ClInclude Include="include\feedback\facial_verification_feedback.hpp" />
-    <ClInclude Include="include\utils\compliance_iso_characteristics.h" />
-    <ClInclude Include="include\utils\face_vacs_convertion.hpp" />
+    <ClInclude Include="include\pipeline\biometric_pipeline_load_balanced.hpp" />
+    <ClInclude Include="include\pipeline\face_info_awaitable.hpp" />
+    <ClInclude Include="include\pipeline\frsdk_biometric_processor.hpp" />
+    <ClInclude Include="include\pipeline\ibiometric_processor.hpp" />
+    <ClInclude Include="include\pipeline\image_info_awaitable.hpp" />
+    <ClInclude Include="include\pipeline\pipeline_agent.hpp" />
+    <ClInclude Include="include\pipeline\pipeline_item_holders.hpp" />
     <ClInclude Include="include\utils\face_vacs_includes.hpp" />
     <ClInclude Include="include\utils\face_vacs_io_utils.hpp" />
-    <ClInclude Include="include\utils\frsdk_face_characteristics.hpp" />
     <ClInclude Include="include\utils\utils.hpp" />
-    <ClInclude Include="include\utils\work_unit_governor.hpp" />
+    <ClInclude Include="include\utils\pipeline_governor.hpp" />
+    <ClInclude Include="include\wrappers\face_info.hpp" />
+    <ClInclude Include="include\wrappers\frsdk_basic_wrappers.hpp" />
+    <ClInclude Include="include\wrappers\frsdk_face_characteristics.hpp" />
+    <ClInclude Include="include\wrappers\frsdk_iso_compliance.hpp" />
+    <ClInclude Include="include\wrappers\image_info.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -112,6 +114,8 @@
     <ClCompile Include="src\biotasks\facial_enrollment.cpp" />
     <ClCompile Include="src\biotasks\facial_verification.cpp" />
     <ClCompile Include="src\facial_engine.cpp" />
+    <ClCompile Include="src\pipeline\biometric_pipeline_balanced.cpp" />
+    <ClCompile Include="src\pipeline\face_info_awaitable.cpp" />
     <ClCompile Include="src\utils\face_vacs_io_utils.cpp" />
     <ClCompile Include="src\utils\utils.cpp" />
   </ItemGroup>

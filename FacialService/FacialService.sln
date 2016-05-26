@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FacialEngineFRsdk", "..\Fac
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BioGrpc", "..\BioGrpc\BioGrpc.vcxproj", "{664DF468-034E-4800-8FEC-7BC1BA61CA22}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Console", "..\Console\Console.vcxproj", "{555AAFB5-8FA2-4BBE-B46F-F9E530D0AF85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -33,6 +35,10 @@ Global
 		{664DF468-034E-4800-8FEC-7BC1BA61CA22}.Debug|Win32.Build.0 = Debug|Win32
 		{664DF468-034E-4800-8FEC-7BC1BA61CA22}.Release|Win32.ActiveCfg = Release|Win32
 		{664DF468-034E-4800-8FEC-7BC1BA61CA22}.Release|Win32.Build.0 = Release|Win32
+		{555AAFB5-8FA2-4BBE-B46F-F9E530D0AF85}.Debug|Win32.ActiveCfg = Debug|Win32
+		{555AAFB5-8FA2-4BBE-B46F-F9E530D0AF85}.Debug|Win32.Build.0 = Debug|Win32
+		{555AAFB5-8FA2-4BBE-B46F-F9E530D0AF85}.Release|Win32.ActiveCfg = Release|Win32
+		{555AAFB5-8FA2-4BBE-B46F-F9E530D0AF85}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

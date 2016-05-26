@@ -10,7 +10,7 @@ namespace BioFacialEngine
 
 	FacialEngine::FacialEngine( const std::string& frsdk_configuration)
 		                        : acquisition_ ( new FacialAcquisition (frsdk_configuration))
-		                        , enrollment_  ( new FacialEnrollment  (frsdk_configuration))
+		                        , enrollment_  ( new FacialEnrollmentProcessor  (frsdk_configuration))
 														, verification_( new FacialVerification(frsdk_configuration))
 	{
 	}

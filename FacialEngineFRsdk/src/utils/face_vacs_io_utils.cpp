@@ -6,6 +6,8 @@
 #include <frsdk/png.h>
 #include <frsdk/pgm.h>
 
+using namespace FRsdkTypes;
+
 namespace BioFacialEngine
 {
 	std::map<std::string, BioService::ImageFormat> FaceVacsIOUtils::image_formats_ = {

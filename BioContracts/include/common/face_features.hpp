@@ -1,13 +1,13 @@
 #ifndef FaceFeatures_INCLUDED
 #define FaceFeatures_INCLUDED
 
-#include <iostream>
-
 namespace BioContracts
 {
 	class IPosition
 	{
 	public:
+		virtual ~IPosition() {}
+
 		virtual float x() const = 0;
 		virtual float y() const = 0;
 	};
@@ -17,11 +17,11 @@ namespace BioContracts
 	public:
 		Position(float x, float y) :par_(x, y) {}
 
-		float x() const{
+		float x() const override{
 			return par_.first;
 		}
 
-		float y() const{
+		float y() const override {
 			return par_.second;
 		}
 
@@ -32,6 +32,8 @@ namespace BioContracts
 	class IFace
 	{
 	public:
+		virtual ~IFace() {}
+
 		virtual float confidence()    const = 0;
 		virtual float width()         const = 0;
 		virtual float rotationAngle() const = 0;		
@@ -40,6 +42,8 @@ namespace BioContracts
 	class IEye
 	{
 	public:
+		virtual ~IEye() {}
+
 		virtual const IPosition& position() const = 0;
 
 		virtual float confidence() const = 0;
@@ -48,6 +52,8 @@ namespace BioContracts
 	class IEyes
 	{
 	public:
+		virtual ~IEyes() {}
+
 		virtual const IEye& left() const = 0;
 		virtual const IEye& right() const = 0;
 	};
@@ -55,10 +61,12 @@ namespace BioContracts
 	class IBox
 	{
 	public:
+		virtual ~IBox() {}
+
 		virtual const IPosition& origin() const = 0;
 		virtual const IPosition& end   () const = 0;	
 
-		virtual const unsigned int size() const = 0;
+		virtual int size() const = 0;
 	};
 	
 

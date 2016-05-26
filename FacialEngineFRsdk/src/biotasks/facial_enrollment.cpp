@@ -1,47 +1,36 @@
 #include "biotasks/facial_enrollment.hpp"
-#include "feedback/facial_enrollment_feedback.hpp"
+#include "../../../FacialService/include/clients_starter.hpp"
 
-
+using namespace FRsdkTypes;
 
 namespace BioFacialEngine
 {
-	FacialEnrollment::FacialEnrollment(const std::string& configuration_filename)
+	FacialEnrollmentProcessor::FacialEnrollmentProcessor(const std::string& configuration_filename)
 	{
-		bool is_ok = false;
+	
 		try
 		{
-			FaceVacsConfiguration configuration = new FRsdk::Configuration(configuration_filename);
-			is_ok = init(configuration);
+			FaceVacsConfiguration configuration(new FRsdk::Configuration(configuration_filename));
+			init(configuration);
 		}
 		catch (std::exception& e) {
 			std::cout << e.what();
 		}
-
-		if (!is_ok)
-			this->~FacialEnrollment();
 	}
 
 
-	FacialEnrollment::FacialEnrollment(FaceVacsConfiguration configuration)
+	FacialEnrollmentProcessor::FacialEnrollmentProcessor(FaceVacsConfiguration configuration)
 	{
-		if (!init(configuration))
-			this->~FacialEnrollment();
+		init(configuration);
 	}
 
-	bool FacialEnrollment::init(FaceVacsConfiguration configuration)
+	bool FacialEnrollmentProcessor::init(FaceVacsConfiguration configuration)
 	{
 		try
-		{			
-			EnrollmentProcessorPoolPtr pool(new EnrollmentProcessorPool(configuration));
-			pool_ = pool;			
+		{						
+			load_balancer_ = std::make_shared<EnrollmentLoadBalancer>(configuration);
 			return true;
 		}	
 		catch (std::exception& e) { std::cout << e.what(); return false; }
-	}
-	
-	FRsdkFir FacialEnrollment::build(const std::string& bytes)
-	{
-		return fir_builder_->build(bytes);
-		//return result;
-	}
+	}	
 }

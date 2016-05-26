@@ -31,6 +31,15 @@
     <Filter Include="src\feedback">
       <UniqueIdentifier>{c32731ec-10b8-42e6-ab83-aed98350c2c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\wrappers">
+      <UniqueIdentifier>{088f0713-f748-40ae-aebd-8383981f8135}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\pipeline">
+      <UniqueIdentifier>{b8a1bc27-8f5c-4c8d-a13c-317b7538be3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\pipeline">
+      <UniqueIdentifier>{2484a703-2a2c-4598-9a04-4ee529fe7ed0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\biotasks\facial_acquisition.hpp">
@@ -41,15 +50,6 @@
     </ClInclude>
     <ClInclude Include="include\biotasks\facial_verification.hpp">
       <Filter>include\biotasks</Filter>
-    </ClInclude>
-    <ClInclude Include="include\biotasks\ienrollment_able.hpp">
-      <Filter>include\biotasks</Filter>
-    </ClInclude>
-    <ClInclude Include="include\biotasks\ienrollment_processor.hpp">
-      <Filter>include\biotasks</Filter>
-    </ClInclude>
-    <ClInclude Include="include\feedback\facial_acquisiton_feedback.hpp">
-      <Filter>include\feedback</Filter>
     </ClInclude>
     <ClInclude Include="include\feedback\facial_enrollment_feedback.hpp">
       <Filter>include\feedback</Filter>
@@ -63,38 +63,53 @@
     <ClInclude Include="include\facial_engine.hpp">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\utils\frsdk_face_characteristics.hpp">
-      <Filter>include\utils</Filter>
-    </ClInclude>
     <ClInclude Include="include\biotasks\ifir_builder.hpp">
-      <Filter>include\biotasks</Filter>
-    </ClInclude>
-    <ClInclude Include="include\biotasks\iverification_processor.hpp">
       <Filter>include\biotasks</Filter>
     </ClInclude>
     <ClInclude Include="include\utils\face_vacs_includes.hpp">
       <Filter>include\utils</Filter>
     </ClInclude>
-    <ClInclude Include="include\utils\compliance_iso_characteristics.h">
-      <Filter>include\utils</Filter>
-    </ClInclude>
     <ClInclude Include="include\utils\utils.hpp">
       <Filter>include\utils</Filter>
     </ClInclude>
-    <ClInclude Include="include\biotasks\iverification_able.hpp">
-      <Filter>include\biotasks</Filter>
-    </ClInclude>
-    <ClInclude Include="include\biotasks\iacquire_able.hpp">
-      <Filter>include\biotasks</Filter>
-    </ClInclude>
-    <ClInclude Include="include\biotasks\iaquisition_processor.hpp">
-      <Filter>include\biotasks</Filter>
-    </ClInclude>
-    <ClInclude Include="include\utils\face_vacs_convertion.hpp">
+    <ClInclude Include="include\utils\pipeline_governor.hpp">
       <Filter>include\utils</Filter>
     </ClInclude>
-    <ClInclude Include="include\utils\work_unit_governor.hpp">
-      <Filter>include\utils</Filter>
+    <ClInclude Include="include\wrappers\face_info.hpp">
+      <Filter>include\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wrappers\frsdk_face_characteristics.hpp">
+      <Filter>include\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wrappers\frsdk_basic_wrappers.hpp">
+      <Filter>include\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wrappers\frsdk_iso_compliance.hpp">
+      <Filter>include\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wrappers\image_info.hpp">
+      <Filter>include\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pipeline\pipeline_item_holders.hpp">
+      <Filter>include\pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pipeline\image_info_awaitable.hpp">
+      <Filter>include\pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pipeline\face_info_awaitable.hpp">
+      <Filter>include\pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pipeline\frsdk_biometric_processor.hpp">
+      <Filter>include\pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pipeline\ibiometric_processor.hpp">
+      <Filter>include\pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pipeline\pipeline_agent.hpp">
+      <Filter>include\pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pipeline\biometric_pipeline_load_balanced.hpp">
+      <Filter>include\pipeline</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +133,12 @@
     </ClCompile>
     <ClCompile Include="src\utils\utils.cpp">
       <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pipeline\biometric_pipeline_balanced.cpp">
+      <Filter>src\pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pipeline\face_info_awaitable.cpp">
+      <Filter>src\pipeline</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

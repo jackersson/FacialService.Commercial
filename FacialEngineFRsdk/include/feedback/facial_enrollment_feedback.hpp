@@ -2,9 +2,9 @@
 #define FacialEnrollmentFeedback_INCLUDED
 
 #include <frsdk/enroll.h>
+#include "utils/face_vacs_includes.hpp"
 
-
-namespace BioFacialEngine
+namespace FacialFeedback
 {
 	typedef FRsdk::CountedPtr<FRsdk::FIR> FirPtr;
 	class FacialEnrollmentFeedback : public FRsdk::Enrollment::FeedbackBody
@@ -13,20 +13,20 @@ namespace BioFacialEngine
 		FacialEnrollmentFeedback() : success_(false), fir_(nullptr) {}
 		~FacialEnrollmentFeedback() {}
 
-		void start() {
+		void start() override {
 			fir_     = nullptr;
 			success_ = false  ;
 		}
-		void end() {}
+		void end() override {}
 
-		void processingImage(const FRsdk::Image& frame){}
+		void processingImage(const FRsdk::Image& frame) override {}
 
-		void eyesFound(const FRsdk::Eyes::Location& eyes){}
-		void eyesNotFound() {}
+		void eyesFound(const FRsdk::Eyes::Location& eyes) override{}
+		void eyesNotFound() override {}
 
-		void success(const FRsdk::FIR& fir)
+		void success(const FRsdk::FIR& fir) override
 		{			
-			fir_ = new FRsdk::FIR(fir);
+			fir_     = new FRsdk::FIR(fir);
 			success_ = true;
 			//std::ostringstream fir_bytestring_stream;
 			//fir_bytestring_stream << fir;
@@ -46,7 +46,7 @@ namespace BioFacialEngine
 			//std::cout << "test "  << std::endl;
 		}
 
-		void failure() {
+		void failure() override {
 			success_ = false;
 		}
 
