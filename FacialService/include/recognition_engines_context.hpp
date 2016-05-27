@@ -8,40 +8,28 @@ namespace BioFacialService
 {
 	class RecognitionEnginesContext : public BioContracts::IRecognitionEnginesContext
 	{
+		typedef std::shared_ptr<BioFacialEngine::FacialEngine> FacialEnginePtr;
 	public:
 
 		RecognitionEnginesContext(){}
-		~RecognitionEnginesContext(){}
+		virtual ~RecognitionEnginesContext(){}
 
 		void createFacialEngine(const std::string& configuration_filename)
-		{
-			if (hasFacialEngine())
-				facial_engine_.reset();
-
-			//std::shared_ptr<BioFacialEngine::FacialEngine> facial_engine(
-			//	new BioFacialEngine::FacialEngine(configuration_filename));
-			//std::string test = "";
-			//BioFacialEngine::FacialEngine* fc = new BioFacialEngine::FacialEngine(configuration_filename);
-			facial_engine_ = std::make_shared<BioFacialEngine::FacialEngine>(configuration_filename);
+		{		
+			facial_engine_.reset();			
+			//facial_engine_ = std::make_shared<BioFacialEngine::FacialEngine>(configuration_filename);
 		}
 
-		bool hasFacialEngine() const
+		BioContracts::IFacialEnginePtr facial_engine() override
 		{
-			return facial_engine_.get() != NULL;
-		}
-
-		std::shared_ptr<BioContracts::IFacialEngine> facialEngine() const
-		{
-			return nullptr;
+			return facial_engine_;
 		}
 
 	private:
 		RecognitionEnginesContext(const RecognitionEnginesContext&);
 		RecognitionEnginesContext& operator=(const RecognitionEnginesContext&);
 
-	private:
-		std::shared_ptr<BioFacialEngine::FacialEngine> facial_engine_;
-
+		FacialEnginePtr facial_engine_;
 	};
 }
 

@@ -5,13 +5,14 @@
 #include "common/face_features.hpp"
 #include "common\iface_characteristics.hpp"
 #include "common\iimage_characteristic.hpp"
+#include <common/matches.hpp>
 
 namespace BioGrpc
 {
 	class ResponseConvertor 
 	{
 	public:
-
+		/*
 		BioService::VerificationResult* getProtoVerificationResult( BioContracts::VerificationResult& vr)
 		{
 			BioService::VerificationResult* verification_data = new BioService::VerificationResult();
@@ -38,10 +39,10 @@ namespace BioGrpc
 			proto_match.set_target_face_id    (match.targetFaceId()    );
 			proto_match.set_match             (match.match()           );
 		}
-
+		*/
 
 		BioService::PortraitCharacteristic*
-			getPortraitCharacteristics(BioContracts::ImageCharacteristicsConstRef characteristics)
+			getPortraitCharacteristics(BioContracts::IImageInfoPtr characteristics)
 		{
 			BioService::PortraitCharacteristic* proto	= new BioService::PortraitCharacteristic();	
 
@@ -51,31 +52,34 @@ namespace BioGrpc
 		}
 
 		void updatePortraitCharacteristics( BioService::PortraitCharacteristic& proto
-			                                , BioContracts::ImageCharacteristicsConstRef characteristics)
+			                                , BioContracts::IImageInfoPtr characteristics)
 		{
 			for (size_t i = 0; i < characteristics->size(); ++i)
 			{
-				const BioContracts::IFaceCharacteristics& face = (*characteristics)[i];
+				const BioContracts::IFaceInfo& face = (*characteristics)[i];
 				BioService::FaceCharacteristic* proto_face = proto.add_faces();
-				updateFaceCharacteristicResponse(*proto_face, face);
+				updateFaceCharacteristicResponse(*proto_face, face.characteristics());
+				update_iso_compliance_info(*proto_face, face.iso_compliance());
+				update_min_face_info      (*proto_face, face.face());
+				update_eyes_info          (*proto_face, face.eyes());
 			}
 		}
 		
 		BioService::FacialImage* getFacialImage( long owner_biometric_data_id
 			                                     , const BioService::Photo& photo 
-																					 , BioContracts::ImageCharacteristicsConstRef)
+																					 , BioContracts::IImageInfoPtr )
 		{
-			BioService::FacialImage* facial_image = new BioService::FacialImage();
-			/*
+			auto facial_image = new BioService::FacialImage();
+			
 			facial_image->set_allocated_image(new BioService::Photo(photo));
 
-			for (auto it = characteristics.cbegin(); it != characteristics.cend(); ++it)
-			{
-				BioFacialEngine::FRsdkFaceCharacteristic face = *(it->get());
-				BioService::FaceCharacteristic* proto_face = facial_image->add_faces();
-				updateFaceCharacteristicResponse(*proto_face, face);
-			}
-			*/
+			//for (auto it = characteristics.cbegin(); it != characteristics.cend(); ++it)
+			//{
+			//	BioFacialEngine::FRsdkFaceCharacteristic face = *(it->get());
+			//	BioService::FaceCharacteristic* proto_face = facial_image->add_faces();
+			//	updateFaceCharacteristicResponse(*proto_face, face);
+			//}
+			//*/
 		//	BioFacialEngine::FRsdkFaceCharacteristic face = characteristics.getEnrollmentAbleFace();
 
 			//facial_image->set_template_(face.firTemplate());
@@ -86,10 +90,7 @@ namespace BioGrpc
 		//todo will send to database
 		void updateFaceCharacteristicResponse( BioService::FaceCharacteristic& proto_face
 			                                   , const BioContracts::IFaceCharacteristics& face)
-		{						
-			if (!face.hasFace())
-				return;
-
+		{	
 			proto_face.set_allocated_box(toProtoSurroundingBox(face.faceBox()));
 			proto_face.set_eye_distance (face.eyeDistance());
 			proto_face.set_allocated_face_center(toProtoPosition(face.faceCenter()));
@@ -107,10 +108,27 @@ namespace BioGrpc
 			proto_face.set_ethnithity(toProtoEthnithity(face.ethnicity()));
 			proto_face.set_age(face.age());			
 			proto_face.set_gender(toProtoGender(face.isMale()));
-			proto_face.set_allocated_eyes(toProtoEyesCharacteristics(face.eyesDetails()));
-			proto_face.set_compliance_iso(face.isoCompliantResult());
-			proto_face.set_good          (face.isCompliant());
-			proto_face.set_best_practices(face.isCompliantWithBestPractice());			
+				
+		}
+
+		void update_iso_compliance_info( BioService::FaceCharacteristic& proto_face
+		                         , const BioContracts::IComlianceIsoTemplate& face) const
+		{
+			proto_face.set_compliance_iso(face.isoTemplate()            );
+			proto_face.set_good          (face.isoCompatible()          );
+			proto_face.set_best_practices(face.bestPracticeCompatible() );
+		}
+
+		void update_min_face_info( BioService::FaceCharacteristic& proto_face
+		                         , const BioContracts::IFace& face) const
+		{
+			proto_face.set_confidence(face.confidence());			
+		}
+
+		void update_eyes_info( BioService::FaceCharacteristic& proto_face
+			                   , const BioContracts::IEyes& eyes)
+		{
+			proto_face.set_allocated_eyes(toProtoEyesCharacteristics(eyes));
 		}
 
 		BioService::Gender toProtoGender(bool is_male)
@@ -119,9 +137,9 @@ namespace BioGrpc
 				             : BioService::Gender::Female;
 		}
 
-		BioService::SurroundingBox* toProtoSurroundingBox(BioContracts::SurroundingBox box)
+		BioService::SurroundingBox* toProtoSurroundingBox(const BioContracts::IBox& box)
 		{
-			BioService::SurroundingBox* proto_box = new BioService::SurroundingBox();
+			auto proto_box = new BioService::SurroundingBox();
 			proto_box->set_allocated_begin(toProtoPosition(box.origin()));
 			proto_box->set_allocated_end  (toProtoPosition(box.end()));
 			return proto_box;
@@ -140,9 +158,9 @@ namespace BioGrpc
 			}
 		}
 		
-		BioService::EyesCharacteristic* toProtoEyesCharacteristics(const BioContracts::EyesDetails& eyes)
+		BioService::EyesCharacteristic* toProtoEyesCharacteristics(const BioContracts::IEyes& eyes)
 		{
-			BioService::EyesCharacteristic* proto_eyes = new BioService::EyesCharacteristic();
+			auto proto_eyes = new BioService::EyesCharacteristic();
 
 			proto_eyes->set_allocated_left_eye(
 				toProtoDetailedEyes(eyes.left()));
@@ -153,31 +171,31 @@ namespace BioGrpc
 			return proto_eyes;
 		}
 
-		BioService::DetailedEyeCharacteristic* toProtoDetailedEyes(const BioContracts::EyeLocation& eye)
+		BioService::DetailedEyeCharacteristic* toProtoDetailedEyes(const BioContracts::IEye& eye)
 		{
-			BioService::DetailedEyeCharacteristic* proto_detailed_eyes = new BioService::DetailedEyeCharacteristic();
-			proto_detailed_eyes->set_allocated_position(toProtoPosition(eye.position));
-			proto_detailed_eyes->set_confidence        (eye.confidence   );
-			proto_detailed_eyes->set_is_gaze_frontal   (eye.gazeFrontal  );
-			proto_detailed_eyes->set_is_open           (eye.isOpen       );
-			proto_detailed_eyes->set_is_red            (eye.isRed        );
-			proto_detailed_eyes->set_is_tined          (eye.isTined      );
+			auto proto_detailed_eyes = new BioService::DetailedEyeCharacteristic();
+			proto_detailed_eyes->set_allocated_position(toProtoPosition(eye.position()));
+			proto_detailed_eyes->set_confidence        (eye.confidence()    );
+			proto_detailed_eyes->set_is_gaze_frontal   (eye.gaze_frontal()  );
+			proto_detailed_eyes->set_is_open           (eye.open()          );
+			proto_detailed_eyes->set_is_red            (eye.red()           );
+			proto_detailed_eyes->set_is_tined          (eye.tinted()        );
 			return proto_detailed_eyes;
 		}
 
-		BioService::Position* toProtoPosition(const BioContracts::FaceLocation& face)
-		{
-			return toProtoPosition(face.pos);
-		}
+		//BioService::Position* toProtoPosition(const BioContracts::FaceLocation& face)
+		//{
+		//	return toProtoPosition(face.pos);
+	//	}
 
-		BioService::Position* toProtoPosition( const BioContracts::Position& pos  )
+		BioService::Position* toProtoPosition( const BioContracts::IPosition& pos  )
 		{
 			return toProtoPosition(pos.x(), pos.y());
 		}
 		
 		BioService::Position* toProtoPosition( float xpos, float ypos	)
 		{
-			BioService::Position* proto_position = new BioService::Position();
+			auto proto_position = new BioService::Position();
 			proto_position->set_x(xpos);
 			proto_position->set_y(ypos);
 			return proto_position;

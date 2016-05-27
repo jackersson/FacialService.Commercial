@@ -4,15 +4,16 @@
 #include "feedback/facial_enrollment_feedback.hpp"
 #include "utils/face_vacs_includes.hpp"
 #include "wrappers/frsdk_face_characteristics.hpp"
+#include "common/iimage_characteristic.hpp"
 
 namespace FRsdkEntities
 {
-	class FaceInfo
+	class FaceInfo : public BioContracts::IFaceInfo
   {
   public:
   	FaceInfo( const FRsdk::Face::Location& faceLocation
   		      , const FRsdk::Eyes::Location& eyes
-  					, const FRsdkTypes::FaceVacsImage          image)
+  					, const FRsdkTypes::FaceVacsImage image)
   					:	face_ (faceLocation)
   					, eyes_ (eyes )
   					, parent_image_(image)
@@ -42,9 +43,29 @@ namespace FRsdkEntities
   		return FRsdk::AnnotatedImage(*parent_image_, eyes_.instance());
   	}
   
-  	const FRsdkFaceCharacteristic& characteristics() const	{
+  	const FRsdkFaceCharacteristic& characteristics() const override	{
   		return *portrait_characteristics_;
   	}
+
+		const FRsdkIsoCompliance& iso_compliance() const override {
+			return *iso_compliance_;
+  	}
+
+		const BioContracts::IFace& face() const override	{
+			return face_;
+  	}
+
+		const BioContracts::IEyes& eyes()	const override {
+
+			if (portrait_characteristics_ != nullptr)	{
+				portrait_characteristics_->set_eyes_characteristics(eyes_);			
+			}
+			return eyes_;
+		}
+
+		std::string identification_record() const override	{
+			return enrollment_data()->bytestring();
+		}
   
   	FRsdkTypes::FaceVacsImage extracted_image() const	{
   		return extracted_image_;
@@ -54,10 +75,7 @@ namespace FRsdkEntities
   		extracted_image_ = token;
   	}
   
-  	std::string identification_record() const	{
-  		return enrollment_data()->bytestring();
-  	}
-  
+		
   	FacialFeedback::FacialEnrollmentFeedbackPtr enrollment_data() const {	
   		return fir_;
   	}
@@ -76,8 +94,9 @@ namespace FRsdkEntities
   
   	int id_;
   
-  	FRsdkFaceW        face_ ;
-  	FRsdkEyesW        eyes_ ;
+  	FRsdkFaceW          face_ ;
+  	mutable FRsdkEyesW  eyes_ ;
+
   	FRsdkTypes::FaceVacsImage     parent_image_   ;
   	FRsdkTypes::FaceVacsImage     extracted_image_;
   

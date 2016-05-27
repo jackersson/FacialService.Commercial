@@ -10,18 +10,18 @@ namespace BioContracts
 	{
 	public:
 		VerificationResult( const Matches& matches
-			                , ImageCharacteristicsConstRef first
-											, ImageCharacteristicsConstRef second) 
+			                ,  IImageInfoPtr first
+											,  IImageInfoPtr  second)
 											: matches_(matches)
 											, p(first, second)										
 		{}
 
 		const Matches& matches() const { return matches_; }
-		ImageCharacteristicsConstRef first() const { return p.first; }
-		ImageCharacteristicsConstRef second() const { return p.second; }
+		IImageInfoPtr  first() const { return p.first; }
+		IImageInfoPtr  second() const { return p.second; }
 	private:
 		Matches matches_;
-		std::pair<ImageCharacteristicsConstRef, ImageCharacteristicsConstRef> p;
+		std::pair<IImageInfoPtr, IImageInfoPtr> p;
 	};
 }
 

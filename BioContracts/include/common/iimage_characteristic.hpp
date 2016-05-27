@@ -1,23 +1,37 @@
-#ifndef IImageCharacteristics_INCLUDED
-#define IImageCharacteristics_INCLUDED
+#ifndef IImageInfo_INCLUDED
+#define IImageInfo_INCLUDED
 
-#include "services/service_context.hpp"
 #include "common/iface_characteristics.hpp"
+#include <string>
 
 namespace BioContracts
 {
 
-	class IImageCharacteristics
+	class IFaceInfo
 	{
 	public:
-		//typedef const BioContracts::IImageCharacteristics& ImageCharacteristicsConstRef;
+		virtual ~IFaceInfo() {}
 
-		virtual size_t size() const = 0;
-		virtual const IFace& operator[](size_t index) const = 0;
-	
+		virtual const IFaceCharacteristics& characteristics() const = 0;
+		virtual const IComlianceIsoTemplate& iso_compliance() const = 0;
+
+		virtual const IFace& face() const = 0;
+		virtual const IEyes& eyes()	const = 0;
+
+		virtual std::string identification_record() const = 0;
 	};
 
-	typedef std::shared_ptr<BioContracts::IImageCharacteristics> ImageCharacteristicsConstRef;
+	class IImageInfo
+	{
+	public:
+		virtual ~IImageInfo() {}
+
+		virtual size_t size() const = 0;
+		virtual const IFaceInfo& operator[](size_t index) const = 0;	
+	};
+
+	typedef std::shared_ptr<IFaceInfo>  IFaceInfoPtr ;
+	typedef std::shared_ptr<IImageInfo> IImageInfoPtr;
 }
 
 #endif

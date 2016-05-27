@@ -1,7 +1,7 @@
 #ifndef AddFacialImageCall_INCLUDED
 #define AddFacialImageCall_INCLUDED
 
-#include "bio_service.pb.h"
+#include "protobufs/bio_service.pb.h"
 #include <grpc++\grpc++.h>
 
 namespace BioGrpc

@@ -1,39 +1,40 @@
 #include <memory>
 
-class Unc
+namespace test1
 {
-public:
-	Unc() {}
+	class Unc
+	{
+	public:
+		Unc() {}
 
-private:
-	Unc(const Unc&);
-	Unc const & operator=(Unc const&);
-};
+		virtual ~Unc() {}
 
-template<typename T>
-class UncT : public Unc
+		virtual void test() = 0;
+
+	private:
+		Unc(const Unc&);
+		Unc const & operator=(Unc const&);
+	};
+}
+namespace test2
 {
-public:
-	UncT() {}
+	class Uncc : public test1::Unc
+	{
+	public:
+		Uncc() {}
 
-private:
-	UncT(const UncT&);
-	UncT const & operator=(UncT const&);
-};
+		void test() override{}
 
-class Uncc : public UncT<int>
-{
-public:
-	Uncc() {}
+	private:
+		Uncc(const Uncc&);
+		Uncc const & operator=(Uncc const&);
+	};
+}
 
-private:
-	Uncc(const Uncc&);
-	Uncc const & operator=(Uncc const&);
-};
+typedef std::shared_ptr<test1::Unc>  UncPtr;
+typedef std::shared_ptr<test2::Uncc> UnccPtr;
 
-typedef std::shared_ptr<Uncc> UnccPtr;
-
-void ccc(UnccPtr cc_uncc)
+void ccc(UncPtr cc_uncc)
 {
 	
 }
@@ -43,7 +44,7 @@ void ccc(UnccPtr cc_uncc)
 
 int main()
 {
-	auto uncc = std::make_shared<Uncc>();
+	auto uncc = std::make_shared<test2::Uncc>();
 	ccc(uncc);
 	return 0;
 }

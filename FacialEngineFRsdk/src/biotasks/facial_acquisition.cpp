@@ -1,39 +1,22 @@
 #include "biotasks/facial_acquisition.hpp"
-#include "utils/face_vacs_io_utils.hpp"
-
-#include <iostream>
-
-#include <Windows.h>
-#include <ppl.h>
 
 namespace BioFacialEngine
 {
 	FacialAcquisition::FacialAcquisition(const std::string& configuration_filename)
-	{
-		bool is_ok = false;
+	{		
 		try
 		{
 			FaceVacsConfiguration configuration = new FRsdk::Configuration(configuration_filename);
-			is_ok = init(configuration);
+		  init(configuration);
 	  }
-	  catch (const FRsdk::FeatureDisabled& e) { 
-			std::cout << e.what();
-		}
-	  catch (const FRsdk::LicenseSignatureMismatch& e) {
-			std::cout << e.what();
-		}	 
 	  catch (std::exception& e) {
-			std::cout << e.what();
-		}
+			std::cout << e.what();		}
 
-		if (!is_ok)
-			this->~FacialAcquisition();
 	}
 
 	FacialAcquisition::FacialAcquisition(FaceVacsConfiguration configuration)
 	{
-		if (!init(configuration))
-			FacialAcquisition::~FacialAcquisition();
+		init(configuration);			
 	}
 
 	bool FacialAcquisition::init(FaceVacsConfiguration configuration)
