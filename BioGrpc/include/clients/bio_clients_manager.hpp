@@ -3,13 +3,14 @@
 
 #include <memory>
 
-#include "iservice.hpp"
-#include "iservice_manager.hpp"
+#include "services/iservice.hpp"
+#include "services/iservice_manager.hpp"
 
-#include "irecognition_engines_context.hpp"
+#include "engine/irecognition_engines_context.hpp"
 #include "src/cpp/server/dynamic_thread_pool.h"
 
 #include "bio_database_service_client.hpp"
+#include <client/ibio_database_client.hpp>
 
 namespace BioGrpc
 {
@@ -22,9 +23,8 @@ namespace BioGrpc
 		void start(BioContracts::IServiceConfiguration& configuration)
 		{
 
-			database_service_client_ = std::make_shared<BioDatabaseServiceClient>(
-			                         	              new BioDatabaseServiceClient( configuration
-				                                                                  , thread_pool_));
+			database_service_client_ = std::make_shared<BioDatabaseServiceClient>(configuration
+				                                                                  , thread_pool_);
 			database_service_client_->start();
 
 

@@ -4,11 +4,13 @@
 #include "ifacial_engine.hpp"
 namespace BioContracts
 {
+	typedef std::shared_ptr<IFacialEngine> IFacialEnginePtr;
 	class IRecognitionEnginesContext
 	{
 	public:
-		virtual std::shared_ptr<IFacialEngine> facialEngine   () const = 0;
-		virtual bool                           hasFacialEngine() const = 0;
+		virtual ~IRecognitionEnginesContext() {}
+
+		virtual IFacialEnginePtr facial_engine()  = 0;		
 	};
 
 

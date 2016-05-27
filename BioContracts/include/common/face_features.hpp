@@ -1,6 +1,8 @@
 #ifndef FaceFeatures_INCLUDED
 #define FaceFeatures_INCLUDED
 
+#include <memory>
+
 namespace BioContracts
 {
 	class IPosition
@@ -46,7 +48,11 @@ namespace BioContracts
 
 		virtual const IPosition& position() const = 0;
 
-		virtual float confidence() const = 0;
+		virtual float confidence()   const = 0;															   
+		virtual float open()         const = 0;
+		virtual float red()          const = 0;
+		virtual float tinted()       const = 0;
+		virtual float gaze_frontal() const = 0;
 	};
 
 	class IEyes
@@ -54,7 +60,7 @@ namespace BioContracts
 	public:
 		virtual ~IEyes() {}
 
-		virtual const IEye& left() const = 0;
+		virtual const IEye& left()  const = 0;
 		virtual const IEye& right() const = 0;
 	};
 

@@ -52,7 +52,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0603;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\development\FacialService\BioContracts\include;$(LocalDebuggerWorkingDirectory)\include;C:\dependencies\grpc\third_party\protobuf\src;C:\dependencies\grpc\include;C:\dependencies\grpc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\..\BioContracts\include;$(LocalDebuggerWorkingDirectory)\include;C:\grpc\third_party\protobuf\src;C:\grpc\include;C:\grpc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -68,7 +68,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0603;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\development\FacialService\BioContracts\include;$(LocalDebuggerWorkingDirectory)\include;C:\dependencies\grpc\third_party\protobuf\src;C:\dependencies\grpc\include;C:\dependencies\grpc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\..\BioContracts\include;$(LocalDebuggerWorkingDirectory)\include;C:\grpc\third_party\protobuf\src;C:\grpc\include;C:\grpc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

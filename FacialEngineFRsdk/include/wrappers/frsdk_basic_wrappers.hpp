@@ -80,9 +80,34 @@ namespace FRsdkEntities
 	{
 	public:
 		explicit FRsdkEye( const FRsdk::Position& pos, float confidence) 
-		                 : position_(pos), confidence_(confidence) 
+		                 : position_(pos) , confidence_(confidence)
+										 , open_(0.0f)    , red_(0.0f)
+										 , tinted_(0.0f)  , gaze_frontal_(0.0f)
 		{
 			std::cout << "eyes : " << pos.x() << " " << pos.y() << std::endl;
+		}
+
+		explicit FRsdkEye( const FRsdk::Position& pos, float confidence
+			               , float open, float red
+										 , float tinted, float gaze_frontal  )
+										 : position_(pos) , confidence_(confidence)
+										 , open_(open)    , red_(red)
+										 , tinted_(tinted), gaze_frontal_(gaze_frontal)
+		{
+			
+		}
+
+		void set_additional_info( float open = 0.0f, float red = 0.0f
+			                      , float tinted = 0.0f, float gaze_frontal = 0.0f)
+		{
+			open_         = open        ;
+			red_          = red         ;
+			tinted_       = tinted      ;
+			gaze_frontal_ = gaze_frontal;
+		}
+
+		void set_confidence( float confidence )	{
+			confidence_ = confidence;
 		}
 
 		const FRsdkPositionW& position() const	override{
@@ -92,27 +117,49 @@ namespace FRsdkEntities
 		float confidence() const override {
 			return confidence_;
 		}
+
+		float open() const	override{
+			return open_;
+		}
+
+		float red() const	override{
+			return red_;
+		}
+
+		float tinted() const	override{
+			return tinted_;
+		}
+
+		float gaze_frontal() const	override{
+			return gaze_frontal_;
+		}
+
 	private:
 		FRsdkPositionW position_  ;
 		float          confidence_;
-		
+
+		float open_;
+		float red_ ;
+		float tinted_;
+		float gaze_frontal_;		
 	};
 
-
+	class FRsdkFaceCharacteristic;
 	class FRsdkEyesW : public BioContracts::IEyes
 	{
 	public:
+		friend FRsdkFaceCharacteristic;
 		explicit FRsdkEyesW( const FRsdk::Eyes::Location& location)
 			                  : frsdk_eyes_(location)
 			                  , eyes_( FRsdkEye(location.first , location.firstConfidence)
 			                         , FRsdkEye(location.second, location.secondConfidence))
 		{}
 
-		const BioContracts::IEye& left() const override {
+		const FRsdkEye& left() const override {
 			return eyes_.first;
 		}
 
-		const BioContracts::IEye& right() const override{
+		const FRsdkEye& right() const override{
 			return eyes_.second;
 		}
 

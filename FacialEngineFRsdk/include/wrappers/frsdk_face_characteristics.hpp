@@ -9,10 +9,10 @@ namespace FRsdkEntities
 	class FRsdkFaceCharacteristic : public BioContracts::IFaceCharacteristics
 	{
 	public:
-		explicit FRsdkFaceCharacteristic( const FRsdk::Portrait::Characteristics& portrait )
-			                              : portrait_characteristics_(portrait)
-			                              , face_center_(0,0)
-			                              , bounding_box_()
+		explicit FRsdkFaceCharacteristic(const FRsdk::Portrait::Characteristics& portrait)
+			: portrait_characteristics_(portrait)
+			, face_center_(0, 0)
+			, bounding_box_()
 		{}
 
 		virtual ~FRsdkFaceCharacteristic() {}
@@ -41,6 +41,34 @@ namespace FRsdkEntities
 			return portrait_characteristics_.poseAngleRoll();
 		}
 
+		void set_eyes_characteristics(FRsdkEyesW& eyes) const 
+		{
+			set_eye_characteristics(eyes.eyes_.first);
+			set_eye_characteristics(eyes.eyes_.second, false);
+		}
+
+		void set_confidence( float confidence) const	{
+			
+		}
+
+		float confidence() const override {
+			return 0.0f;
+		}
+
+	private:
+		void set_eye_characteristics( FRsdkEye& eye, bool left = true )	const
+		{
+			auto is_open         = left ? portrait_characteristics_.eye0Open() 
+				                          : portrait_characteristics_.eye1Open();
+			auto is_red          = left ? portrait_characteristics_.eye0Red()
+				                          : portrait_characteristics_.eye1Red();
+			auto is_tinted       = left ? portrait_characteristics_.eye0Tinted() 
+				                          : portrait_characteristics_.eye1Tinted();
+			auto is_gaze_frontal = left ? portrait_characteristics_.eye0GazeFrontal() 
+				                          : portrait_characteristics_.eye1GazeFrontal();			
+			eye.set_additional_info(is_open, is_red, is_tinted, is_gaze_frontal);
+		}
+	public:
 		float chin() const override{
 			return portrait_characteristics_.chin();
 		}
@@ -56,6 +84,7 @@ namespace FRsdkEntities
 		float rightEar() const override{
 			return portrait_characteristics_.ear1();
 		}
+
 
 		BioContracts::Ethnicity ethnicity() const	override {
 

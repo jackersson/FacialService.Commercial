@@ -20,14 +20,13 @@ namespace BioGrpc
 
 	FacialServiceImpl::~FacialServiceImpl()
 	{
-		stop();
+		FacialServiceImpl::stop();
 	}
 
 	void FacialServiceImpl::registerService(BioContracts::BioServiceContext& context)
 	{
-		std::shared_ptr<ServerBuilder> builder = context.serverBuilder();
-	  service_ = std::shared_ptr<BioService::BiometricFacialSevice::AsyncService>(
-			            new BioService::BiometricFacialSevice::AsyncService());
+		auto builder = context.serverBuilder();
+		service_ = std::make_shared<BioService::BiometricFacialSevice::AsyncService>();
 		
 		builder->RegisterService(service_.get());
   

@@ -11,6 +11,7 @@ namespace BioGrpc
 {
 	class FacialVerificationHandler
 	{
+		enum RequestStatus { CREATE, PROCESS, CAN_WRITE, START_FINISH, FINISH };
 	public:
 		FacialVerificationHandler(std::shared_ptr<BioService::BiometricFacialSevice::AsyncService> service
 			, grpc::ServerCompletionQueue* completion_queue
@@ -53,16 +54,16 @@ namespace BioGrpc
 			std::string comparison_image_bytestring = request_.comparison_image().bytestring();
 			BioContracts::RawImage comparison_image(comparison_image_bytestring, comparison_image_bytestring.size());
 
-			BioContracts::VerificationResult result =
-				facial_engine_->verify(target_image, comparison_image);
+			//BioContracts::VerificationResult result =
+				//facial_engine_->verify(target_image, comparison_image);
 
 		
-			ResponseConvertor convertor;
-			std::shared_ptr<BioService::VerificationResult>
-				proto_matches(convertor.getProtoVerificationResult(result));
+		//	ResponseConvertor convertor;
+			//std::shared_ptr<BioService::VerificationResult>
+			//	proto_matches(convertor.getProtoVerificationResult(result));
 
-			status_ = FINISH;
-			responder_.Finish(*proto_matches, grpc::Status::OK, this);
+		//	status_ = FINISH;
+			//responder_.Finish(*proto_matches, grpc::Status::OK, this);
 		}
 
 

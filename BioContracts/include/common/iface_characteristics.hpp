@@ -24,6 +24,7 @@ namespace BioContracts
 		virtual float leftEar()           const = 0;
 		virtual float rightEar()          const = 0;			
 		virtual float mouthClosed()       const = 0;	
+		virtual float confidence()        const = 0;
 
 		virtual const IPosition& faceCenter()   const = 0;
 		virtual const IBox&      faceBox()      const = 0;

@@ -9,6 +9,7 @@ namespace BioGrpc
 {
 	class FacialAcquisitionHandler
 	{
+		enum RequestStatus { CREATE, PROCESS, CAN_WRITE, START_FINISH, FINISH };
 	public:
 		FacialAcquisitionHandler(std::shared_ptr<BioService::BiometricFacialSevice::AsyncService> service
 			                      , grpc::ServerCompletionQueue* completion_queue
@@ -57,7 +58,7 @@ namespace BioGrpc
 
 			BioContracts::RawImage image(image_bytestring, image_bytestring.size());
 
-			BioContracts::ImageCharacteristicsConstRef resp =
+			BioContracts::IImageInfoPtr resp =
 				facial_engine_->acquire(image);
 
 			ResponseConvertor convertor;

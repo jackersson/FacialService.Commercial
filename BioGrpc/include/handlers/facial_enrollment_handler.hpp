@@ -5,12 +5,13 @@
 #include "protobufs/bio_service.grpc.pb.h"
 #include <grpc++/grpc++.h>
 
-enum RequestStatus { CREATE, PROCESS, CAN_WRITE, START_FINISH, FINISH };
+
 
 using BioService::EnrollmentFeedback;
 
 class FacialEnrollmentHandler
 {
+	enum RequestStatus { CREATE, PROCESS, CAN_WRITE, START_FINISH, FINISH };
 public:
 	FacialEnrollmentHandler( BioService::BiometricFacialSevice::AsyncService* service
 		                     , grpc::ServerCompletionQueue* completion_queue
