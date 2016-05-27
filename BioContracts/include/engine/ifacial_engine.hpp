@@ -25,8 +25,8 @@ namespace BioContracts
 			enroll(const RawImage& raw_image) = 0;
 
 
-		virtual BioContracts::VerificationResult verify( const RawImage& target_raw_image
-			                                             , const RawImage& comparison_raw_image) = 0;
+		//virtual BioContracts::VerificationResult verify( const RawImage& target_raw_image
+			                                          // , const RawImage& comparison_raw_image) = 0;
 
 	//	virtual void identify(const BioService::AcquiredData& images) = 0;
 	};
