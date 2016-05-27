@@ -65,6 +65,8 @@ namespace BioFacialEngine
 
 
 	};
+
+	typedef std::shared_ptr<BioFacialEngine::FacialEngine> FacialEnginePtr;
 }
 
 #endif

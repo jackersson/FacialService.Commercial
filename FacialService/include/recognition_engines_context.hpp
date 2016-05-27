@@ -8,7 +8,7 @@ namespace BioFacialService
 {
 	class RecognitionEnginesContext : public BioContracts::IRecognitionEnginesContext
 	{
-		typedef std::shared_ptr<BioFacialEngine::FacialEngine> FacialEnginePtr;
+		
 	public:
 
 		RecognitionEnginesContext(){}
@@ -17,7 +17,7 @@ namespace BioFacialService
 		void createFacialEngine(const std::string& configuration_filename)
 		{		
 			facial_engine_.reset();			
-			//facial_engine_ = std::make_shared<BioFacialEngine::FacialEngine>(configuration_filename);
+			facial_engine_ = std::make_shared<BioFacialEngine::FacialEngine>(configuration_filename);
 		}
 
 		BioContracts::IFacialEnginePtr facial_engine() override
@@ -29,7 +29,7 @@ namespace BioFacialService
 		RecognitionEnginesContext(const RecognitionEnginesContext&);
 		RecognitionEnginesContext& operator=(const RecognitionEnginesContext&);
 
-		FacialEnginePtr facial_engine_;
+		BioFacialEngine::FacialEnginePtr facial_engine_;
 	};
 }
 

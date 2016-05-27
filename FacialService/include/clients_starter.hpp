@@ -17,7 +17,7 @@ namespace BioFacialService
 		~ClientsStarter(){}
 		void start()
 		{			
-			//BioContracts::ServiceConfiguration config("127.0.0.1", 50051);
+			//BioContracts::ServiceConfiguration config("127.0.0.1", 49055);
 			//clients_manager_ = std::make_unique<BioGrpc::BioClientsManager>();
 			//clients_manager_->start(config);
 		}

@@ -10,15 +10,16 @@ using namespace FRsdkTypes;
 
 namespace BioFacialEngine
 {
+	
 	std::map<std::string, BioService::ImageFormat> FaceVacsIOUtils::image_formats_ = {
 		  { "jpg", BioService::ImageFormat::JPEG }
 		};
 
 	
-	FaceVacsImage FaceVacsIOUtils::loadFromFile(const std::string& filename)
+  FaceVacsImage FaceVacsIOUtils::loadFromFile(const std::string& filename)
   {
   	if (filename.size() < 1)
-  		return NULL;
+  		return nullptr;
   
   	char period('.');
   	std::string format("");
@@ -61,7 +62,7 @@ namespace BioFacialEngine
   	throw std::invalid_argument("Image format is not supported");
   }
 
-	FaceVacsImage FaceVacsIOUtils::loadFromBytes( const std::string& image_bytestring
+  FaceVacsImage FaceVacsIOUtils::loadFromBytes( const std::string& image_bytestring
 			                                        , const size_t size
 			                                        , BioService::ImageFormat image_format )
   {
@@ -116,7 +117,7 @@ namespace BioFacialEngine
 		else
 			throw std::invalid_argument("Image format is not supported");
 	}
-
+	
 
 
 }

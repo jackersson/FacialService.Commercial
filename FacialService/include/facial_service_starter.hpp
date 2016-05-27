@@ -20,7 +20,7 @@ namespace BioFacialService
 			engines_ = std::make_shared<RecognitionEnginesContext>();
 			engines_->createFacialEngine(cfg_path);
 
-			BioContracts::ServiceConfiguration config("0.0.0.0", 50052);
+			BioContracts::ServiceConfiguration config("0.0.0.0", 49055);
 			service_manager_ = std::make_unique<BioGrpc::BioServiceManager>(*engines_);
 			service_manager_->start(config);
 		}
