@@ -2,7 +2,9 @@
 #define Matches_INCLUDED
 
 #include <iostream>
-#include <vector>
+#include <list>
+#include <map>
+#include <memory>
 
 namespace BioContracts
 {
@@ -10,47 +12,73 @@ namespace BioContracts
 	class Match
 	{
 	public:
-		Match(long first_id, long second_id, float match) : p(first_id, second_id), match_(match) {
-			std::cout << " match find : "<< first_id << " " << second_id << " " << match << std::endl;
+		Match(long face_id, float match) : p(face_id, match) {
+			std::cout << " match find : " << face_id << " " << match << std::endl;
 		}
-		Match(const Match& match) : p(match.p), match_(match.match_) {}
+		Match(const Match& match) : p(match.p) {}
 
-		long targetFaceId()     const {	return p.first; }
-		long comparisonFaceId() const { return p.second; }
-
-		float match() const { return match_; }
+		long face_id()     const {	return p.first; }
+		float match() const { return p.second; }
 	private:
-		std::pair<long, long> p;
-		float match_;
+		std::pair<long, float> p;	
 	};
+
+	typedef std::list<Match> MatchSet;
+	typedef std::shared_ptr<MatchSet> MatchSetPtr;
 
 	class Matches
 	{
 	public:			
-		void Add(const Match& match)
+		void add( long face_id, const Match& match)
 		{
-			Match m(match);
-			matches_.push_back(m);
+			auto it = matches_.find(face_id);
+			if (it != matches_.end())
+				it->second.push_back(match);
+			else
+			{
+				std::list<Match> matches = { match };
+				matches_.insert(std::pair<long, std::list<Match>>(face_id, matches));
+			}			
 		}
 
-		const Match& operator[](size_t index) const
+		void add(long face_id, const std::list<Match>& matches)
+		{
+			auto it = matches_.find(face_id);
+			if (it != matches_.end())
+			{
+				for (auto iter = matches.cbegin(); iter != matches.cend(); ++iter)
+					it->second.push_back(*iter);
+			}
+			else				
+				matches_.insert(std::pair<long, std::list<Match>>(face_id, matches));			
+		}
+
+		void add( long face_id, const Matches& matches)
+		{
+			for (auto it = matches.cbegin(); it != matches.cend(); ++it)			
+				add(face_id, it->second);			
+		}
+
+		const std::list<Match>& operator[](size_t index) const
 		{
 			if (index >= size())
 				throw std::invalid_argument("Index out of range");
 
-			return matches_[index];
+			auto it = matches_.cbegin();
+			std::advance(it, index);
+			return it->second;
 		}
 
-
-
-		std::vector<Match>::const_iterator cbegin() { return matches_.cbegin(); }
-		std::vector<Match>::const_iterator cend  () { return matches_.cend();   }
+		std::map<long, std::list<Match>>::const_iterator cbegin() const { return matches_.cbegin(); }
+		std::map<long, std::list<Match>>::const_iterator cend  () const { return matches_.cend()  ; }
 
 		void clear() { matches_.clear(); }
 		size_t size() const { return matches_.size(); }
 	private:
-		std::vector<Match> matches_;
+		std::map<long, std::list<Match>> matches_;
 	};
+
+	typedef std::shared_ptr<Matches> MatchesPtr;
 
 	
 }

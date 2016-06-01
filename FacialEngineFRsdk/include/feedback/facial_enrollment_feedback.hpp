@@ -3,15 +3,21 @@
 
 #include <frsdk/enroll.h>
 #include "utils/face_vacs_includes.hpp"
+#include <memory>
+#include <agents.h>
+#include <ctime>
+#include <common/identification_record.hpp>
 
 namespace FacialFeedback
 {
-	typedef FRsdk::CountedPtr<FRsdk::FIR> FirPtr;
+	typedef std::shared_ptr<FRsdk::FIR> FirPtr;
+	
+
 	class FacialEnrollmentFeedback : public FRsdk::Enrollment::FeedbackBody
 	{
 	public:
-		FacialEnrollmentFeedback() : success_(false), fir_(nullptr) {}
-		~FacialEnrollmentFeedback() {}
+		FacialEnrollmentFeedback() : fir_(nullptr), success_(false){}
+		virtual ~FacialEnrollmentFeedback() {}
 
 		void start() override {
 			fir_     = nullptr;
@@ -25,8 +31,8 @@ namespace FacialFeedback
 		void eyesNotFound() override {}
 
 		void success(const FRsdk::FIR& fir) override
-		{			
-			fir_     = new FRsdk::FIR(fir);
+		{						
+			fir_ = std::make_shared<FRsdk::FIR>(fir);
 			success_ = true;
 			//std::ostringstream fir_bytestring_stream;
 			//fir_bytestring_stream << fir;
@@ -50,28 +56,23 @@ namespace FacialFeedback
 			success_ = false;
 		}
 
-		const FRsdk::FIR& fir() const {
-			return *fir_;
+		FirPtr fir() const {		
+			return fir_;
 		}
 
 		bool good() const {
 			return success_;
 		}
 
-		const std::string bytestring() const	{
+		 std::string bytestring() const	{
 			std::ostringstream fir_bytestring_stream;
 			fir_bytestring_stream << *fir_;
 			return fir_bytestring_stream.str();
 		}
 		
-	private:
-		FacialEnrollmentFeedback(const FacialEnrollmentFeedback&);
-		void operator=(const FacialEnrollmentFeedback&);
-
-	private:
-		FirPtr fir_;
-		bool success_;
-		
+	private:		
+		FirPtr fir_;		
+		bool success_;	
 	};
 
 	typedef FRsdk::CountedPtr<FacialEnrollmentFeedback> FacialEnrollmentFeedbackPtr;

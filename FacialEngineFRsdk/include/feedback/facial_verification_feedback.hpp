@@ -8,9 +8,7 @@ namespace BioFacialEngine
 	class FacialVerificationFeedback : public FRsdk::Verification::FeedbackBody
 	{
 	public:
-		explicit FacialVerificationFeedback(const BioContracts::Match match) : success_(false)
-			                                                                   , match_(match)
-			                                                                   , score_(0.0f){}
+		FacialVerificationFeedback() : success_(false), score_(0.0f){}
 		virtual ~FacialVerificationFeedback() {}
 
 		void start() override{
@@ -36,16 +34,15 @@ namespace BioFacialEngine
 			success_ = false;
 		}
 
-		BioContracts::Match result() const{
-			return BioContracts::Match(match_.targetFaceId(), match_.comparisonFaceId(), score_);
+		float result() const{
+			return score_;
 		}
 
 	private:
 		FacialVerificationFeedback(const FacialVerificationFeedback&);
 		void operator=(const FacialVerificationFeedback&);
 
-		bool  success_;
-		BioContracts::Match match_;		
+		bool  success_;	
 		float score_;
 
 	};

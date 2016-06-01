@@ -11,8 +11,8 @@ namespace BioContracts
 	public:
 		virtual ~IFacialEngine() {}
 
-	//	virtual IImageInfoPtr
-		//	acquire(const std::string& filename) = 0;
+		virtual IImageInfoPtr
+		acquire(const std::string& filename) = 0;
 
 		virtual IImageInfoPtr
 			acquire(const RawImage& raw_image) = 0;

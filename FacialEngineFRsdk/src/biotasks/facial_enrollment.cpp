@@ -1,5 +1,4 @@
 #include "biotasks/facial_enrollment.hpp"
-#include "../../../FacialService/include/clients_starter.hpp"
 
 using namespace FRsdkTypes;
 
@@ -10,7 +9,7 @@ namespace BioFacialEngine
 	
 		try
 		{
-			FaceVacsConfiguration configuration(new FRsdk::Configuration(configuration_filename));
+			FaceVacsConfiguration configuration(std::make_shared<FRsdk::Configuration>(configuration_filename));
 			init(configuration);
 		}
 		catch (std::exception& e) {

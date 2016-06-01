@@ -95,5 +95,8 @@
     <ClInclude Include="include\common\identification_record.hpp">
       <Filter>include\common</Filter>
     </ClInclude>
+    <ClInclude Include="include\common\identification_result.hpp">
+      <Filter>include\common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

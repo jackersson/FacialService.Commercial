@@ -1,18 +1,13 @@
-
 #include "facial_engine.hpp"
-#include "utils/face_vacs_io_utils.hpp"
 
-#include <Windows.h>
-#include <ppl.h>
-
+using namespace Pipeline;
 namespace BioFacialEngine
 {
 	
-	FacialEngine::FacialEngine( const std::string& frsdk_configuration)
-		                        : acquisition_ ( new FacialAcquisition (frsdk_configuration))
-		                        , enrollment_  ( new FacialEnrollmentProcessor  (frsdk_configuration))
-														, verification_( new FacialVerification(frsdk_configuration))
+	FacialEngine::FacialEngine( const std::string& frsdk_configuration)		                       
 	{
+		processor_ = std::make_shared<FRsdkBiometricProcessor>(frsdk_configuration);
+		pipeline_ = std::make_unique <BiometricPipelineBalanced>(processor_);
 	}
 
 	

@@ -11,11 +11,7 @@ namespace FRsdkEntities
 	class ImageInfo : public BioContracts::IImageInfo
 	{
 	public:
-		explicit ImageInfo(const std::string& filename) : filename_(filename)
-		{
-			BioFacialEngine::FaceVacsIOUtils utils;
-			image_ = utils.loadFromFile(filename);
-		}
+		explicit ImageInfo(FRsdkTypes::FaceVacsImage image) : image_(image){}
 
 		FRsdkTypes::FaceVacsImage image() const {
 			return image_;
@@ -36,10 +32,6 @@ namespace FRsdkEntities
 		{
 			FaceInfoPtr face(new FaceInfo(faceLocation, eyes, image_));
 			faces_.push_back(face);
-		}
-
-		const std::string& filename() const	{
-			return filename_;
 		}
 
 		size_t size() const override	{
@@ -68,11 +60,8 @@ namespace FRsdkEntities
 	private:
 		ImageInfo(const ImageInfo& rhs);
 		ImageInfo const & operator=(ImageInfo const&);
-
-
-		std::string filename_;
+	
 		std::vector<FaceInfoPtr> faces_;
-
 		FRsdkTypes::FaceVacsImage image_;
 	};
 

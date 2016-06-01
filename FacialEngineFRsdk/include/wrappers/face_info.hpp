@@ -74,8 +74,7 @@ namespace FRsdkEntities
   	void set_facial_image(FRsdkTypes::FaceVacsImage token) {
   		extracted_image_ = token;
   	}
-  
-		
+  		
   	FacialFeedback::FacialEnrollmentFeedbackPtr enrollment_data() const {	
   		return fir_;
   	}

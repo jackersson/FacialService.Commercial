@@ -7,6 +7,8 @@
 #include "common\iimage_characteristic.hpp"
 #include <common/matches.hpp>
 
+#include <ppl.h>
+
 namespace BioGrpc
 {
 	class ResponseConvertor 
@@ -54,14 +56,21 @@ namespace BioGrpc
 		void updatePortraitCharacteristics( BioService::PortraitCharacteristic& proto
 			                                , BioContracts::IImageInfoPtr characteristics)
 		{
+			
 			for (size_t i = 0; i < characteristics->size(); ++i)
 			{
 				const BioContracts::IFaceInfo& face = (*characteristics)[i];
 				BioService::FaceCharacteristic* proto_face = proto.add_faces();
-				updateFaceCharacteristicResponse(*proto_face, face.characteristics());
-				update_iso_compliance_info(*proto_face, face.iso_compliance());
-				update_min_face_info      (*proto_face, face.face());
-				update_eyes_info          (*proto_face, face.eyes());
+				auto start = clock();
+				
+				Concurrency::parallel_invoke(
+				  [&](){update_main_face_characteristic      (*proto_face, face.characteristics());	},
+				  [&](){update_additional_face_characteristic(*proto_face, face.characteristics());	},
+				  [&](){update_iso_compliance_info(*proto_face, face.iso_compliance());							},
+				  [&](){update_min_face_info      (*proto_face, face.face());												},
+				  [&](){update_eyes_info          (*proto_face, face.eyes());												}
+				);			
+				
 			}
 		}
 		
@@ -88,35 +97,48 @@ namespace BioGrpc
 		}
 
 		//todo will send to database
-		void updateFaceCharacteristicResponse( BioService::FaceCharacteristic& proto_face
+		void update_main_face_characteristic( BioService::FaceCharacteristic& proto_face
 			                                   , const BioContracts::IFaceCharacteristics& face)
 		{	
-			proto_face.set_allocated_box(toProtoSurroundingBox(face.faceBox()));
-			proto_face.set_eye_distance (face.eyeDistance());
-			proto_face.set_allocated_face_center(toProtoPosition(face.faceCenter()));
-			proto_face.set_glasses(face.glasses());
-			proto_face.set_natural_skin_color(face.naturalSkinColor());
-			proto_face.set_head_width(face.headWidth());
-			proto_face.set_head_length(face.headLength());
-			proto_face.set_pose_angle_roll(face.poseAngleRoll());
-			proto_face.set_chin(face.chin());
-			proto_face.set_crown(face.crown());
-			proto_face.set_left_ear(face.leftEar());
-			proto_face.set_rigth_ear(face.rightEar());
-			proto_face.set_confidence(face.confidence());
-			proto_face.set_mouth_closed(face.mouthClosed());
-			proto_face.set_ethnithity(toProtoEthnithity(face.ethnicity()));
-			proto_face.set_age(face.age());			
-			proto_face.set_gender(toProtoGender(face.isMale()));
+			Concurrency::parallel_invoke(
+			  [&](){proto_face.set_allocated_box(toProtoSurroundingBox(face.faceBox()));				},
+			  [&](){proto_face.set_eye_distance (face.eyeDistance());													},
+			  [&](){proto_face.set_allocated_face_center(toProtoPosition(face.faceCenter()));	},
+			  [&](){proto_face.set_glasses(face.glasses());																		},
+			  [&](){proto_face.set_natural_skin_color(face.naturalSkinColor());								},
+			  [&](){proto_face.set_head_width(face.headWidth());																},
+			  [&](){proto_face.set_head_length(face.headLength());															},
+			  [&](){proto_face.set_pose_angle_roll(face.poseAngleRoll());											},
+			  [&](){proto_face.set_chin(face.chin());																					},
+			  [&](){proto_face.set_crown(face.crown());																				}
+			 
+			);
 				
+		}
+
+		void update_additional_face_characteristic(BioService::FaceCharacteristic& proto_face
+			, const BioContracts::IFaceCharacteristics& face)
+		{
+			Concurrency::parallel_invoke(	
+				[&](){proto_face.set_left_ear(face.leftEar());																		},
+				[&](){proto_face.set_rigth_ear(face.rightEar());																	},
+				[&](){proto_face.set_confidence(face.confidence());															},
+				[&](){proto_face.set_mouth_closed(face.mouthClosed());														}
+		//		[&](){proto_face.set_ethnithity(toProtoEthnithity(face.ethnicity()));						},
+			//	[&](){proto_face.set_age(face.age());																						},
+			//	[&](){proto_face.set_gender(toProtoGender(face.isMale()));												}
+			);
+
 		}
 
 		void update_iso_compliance_info( BioService::FaceCharacteristic& proto_face
 		                         , const BioContracts::IComlianceIsoTemplate& face) const
 		{
-			proto_face.set_compliance_iso(face.isoTemplate()            );
-			proto_face.set_good          (face.isoCompatible()          );
-			proto_face.set_best_practices(face.bestPracticeCompatible() );
+			Concurrency::parallel_invoke(
+			[&](){proto_face.set_compliance_iso(face.isoTemplate()            );	 },
+			[&](){proto_face.set_good          (face.isoCompatible()          );	 },
+			[&](){proto_face.set_best_practices(face.bestPracticeCompatible() );	 }
+			);
 		}
 
 		void update_min_face_info( BioService::FaceCharacteristic& proto_face
@@ -139,9 +161,12 @@ namespace BioGrpc
 
 		BioService::SurroundingBox* toProtoSurroundingBox(const BioContracts::IBox& box)
 		{
+
 			auto proto_box = new BioService::SurroundingBox();
-			proto_box->set_allocated_begin(toProtoPosition(box.origin()));
-			proto_box->set_allocated_end  (toProtoPosition(box.end()));
+			Concurrency::parallel_invoke(
+			[&](){proto_box->set_allocated_begin(toProtoPosition(box.origin()));},
+			[&](){proto_box->set_allocated_end  (toProtoPosition(box.end()));	 }
+			);
 			return proto_box;
 		}
 

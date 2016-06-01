@@ -83,6 +83,7 @@
     <ClInclude Include="include\client\ibio_database_client.hpp" />
     <ClInclude Include="include\common\face_features.hpp" />
     <ClInclude Include="include\common\identification_record.hpp" />
+    <ClInclude Include="include\common\identification_result.hpp" />
     <ClInclude Include="include\common\iface_characteristics.hpp" />
     <ClInclude Include="include\common\iimage_characteristic.hpp" />
     <ClInclude Include="include\common\matches.hpp" />

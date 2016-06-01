@@ -3,7 +3,6 @@
 
 #include "pipeline/ibiometric_processor.hpp"
 #include "utils/face_vacs_includes.hpp"
-#include <ctime>
 
 #include "biotasks/facial_acquisition.hpp"
 #include "biotasks/facial_enrollment.hpp"
@@ -50,6 +49,10 @@ namespace Pipeline
 				  {
 						veryfier_ = std::make_shared<BioFacialEngine::FacialVerification>(configuration);				  		                      
 				  },
+						[&]()
+					{
+						identifyer_ = std::make_shared<BioFacialEngine::FacialIdentification>(configuration);
+					},
 				  	[&]()
 				  {
 						fir_builder_ = std::make_shared<BioFacialEngine::FirBilder>(configuration);				  			                           	
@@ -62,10 +65,11 @@ namespace Pipeline
 			catch (std::exception& e) { std::cout << e.what(); return false; }
 		}
 
+		//TODO
 		FRsdkEntities::ImageInfoPtr load_image(const std::string& filename) override
 		{
-			FRsdkEntities::ImageInfoPtr image(new FRsdkEntities::ImageInfo(filename));
-			return image;
+			//FRsdkEntities::ImageInfoPtr image(new FRsdkEntities::ImageInfo(filename));
+			return nullptr;
 		}
 
 		void face_find(FRsdkEntities::ImageInfoPtr pInfo) override
@@ -114,16 +118,31 @@ namespace Pipeline
 			std::cout << "enrollment stage finnished " << pInfo->id() << " " << clock() << std::endl;
 		}
 
+		BioContracts::VerificationResultPtr
+		verify(BioFacialEngine::VerificationPair  pInfo) override
+		{			
+			auto matches = veryfier_->verify(pInfo);
+			auto vr(std::make_shared<BioContracts::VerificationResult>(matches, pInfo.first, pInfo.second));
 
-		void verify(FRsdkEntities::FaceInfoPtr pInfo) override
-		{
-			//veryfier_->Add(pInfo);
+			return vr;
 		}
+
+		BioContracts::IdentificationResultPtr
+		identify(BioFacialEngine::IdentificationPair  pInfo) override
+		{			
+			auto matches = identifyer_->identify(pInfo);		
+			auto vr(std::make_shared<BioContracts::IdentificationResult>(*matches, pInfo.first));
+			vr->set_identification_images<std::list<FRsdkEntities::ImageInfoPtr>::iterator>(
+				                            pInfo.second.begin(), pInfo.second.end());			
+			return vr;			
+		}
+		
 
 	private:
 		BioFacialEngine::FaceVacsAcquisitionPtr     acquisition_;
 		BioFacialEngine::FacialEnrollmentPtr        enrollment_ ;	
 		BioFacialEngine::FacialVerificationPtr      veryfier_   ;
+		BioFacialEngine::FacialIdentificationPtr    identifyer_ ;
 		BioFacialEngine::FirBuilderRef              fir_builder_;
 
 		const float MIN_EYE_DISTANCE = 0.1f;
