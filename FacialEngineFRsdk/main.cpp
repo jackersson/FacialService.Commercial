@@ -25,9 +25,10 @@ int main(int argc, char** argv)
 
 	long acquire = FaceFind | PortraitAnalysis | FaceImageExtraction | IsoComplianceTest | Enrollment;
 
-	std::string shwarc  = "C:\\Users\\jacke\\Desktop\\3423.jpg";
-	std::string klichko = "C:\\Users\\jacke\\Desktop\\shwarc.jpg";
-	std::string gates  = "C:\\Users\\jacke\\Desktop\\images1ARMIOC1.jpg";
+	std::string shwarc  = "C:\\Users\\jacke\\Desktop\\3423.jpg"          ;
+	std::string klichko2 = "C:\\Users\\jacke\\Desktop\\kl2.jpg";
+	std::string klichko = "C:\\Users\\jacke\\Desktop\\kl3.jpg"        ;
+	std::string gates   = "C:\\Users\\jacke\\Desktop\\images1ARMIOC1.jpg";
 
 	BiometricPipelineBalanced pipeline(task);
 	
@@ -36,6 +37,10 @@ int main(int argc, char** argv)
 	FRsdkEntities::ImageInfoPtr ptr2 = nullptr;
 	FRsdkEntities::ImageInfoPtr ptr3 = nullptr;
 
+	std::vector<std::string> images = { shwarc, klichko2 };
+	IdentificationResultPtr ptr = pipeline.identify_face(klichko, images);
+	//std::cin.get();
+	/*
 	parallel_invoke(
 		[&]() {
 		
@@ -57,7 +62,7 @@ int main(int argc, char** argv)
 	}
 		
 	);
-
+	*/
 	/*
 	for (auto it = ptr1->cbegin(); it != ptr1->cend(); ++it)
 	{

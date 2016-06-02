@@ -216,6 +216,7 @@ namespace BioFacialEngine
 		void enroll(FRsdkTypes::FaceVacsImage image, FRsdk::Enrollment::Feedback& feedback) const
 		{			
 			load_balancer_->enroll(image, feedback);
+			std::cout << " here " << std::endl;
 		}
 
 	private:

@@ -40,6 +40,9 @@
     <Filter Include="src\pipeline">
       <UniqueIdentifier>{2484a703-2a2c-4598-9a04-4ee529fe7ed0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\biotasks\acquisition">
+      <UniqueIdentifier>{d94b83ab-da5a-4e91-9eef-2b0a3b4dfa67}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\biotasks\facial_acquisition.hpp">
@@ -111,6 +114,15 @@
     <ClInclude Include="include\pipeline\biometric_pipeline_load_balanced.hpp">
       <Filter>include\pipeline</Filter>
     </ClInclude>
+    <ClInclude Include="include\wrappers\verification_info.hpp">
+      <Filter>include\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\facial_identification.hpp">
+      <Filter>include\biotasks</Filter>
+    </ClInclude>
+    <ClInclude Include="include\feedback\facial_identification_feedback.hpp">
+      <Filter>include\feedback</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\biotasks\facial_acquisition.cpp">
@@ -139,6 +151,9 @@
     </ClCompile>
     <ClCompile Include="src\pipeline\face_info_awaitable.cpp">
       <Filter>src\pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\facial_identification.cpp">
+      <Filter>src\biotasks</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -2,10 +2,27 @@
 #define BiometricPipelineBalanced_INCLUDED
 
 #include "pipeline/pipeline_agent.hpp"
+#include "common/verification_result.hpp"
+
 #include <queue>
+#include <common/identification_result.hpp>
+
+namespace BioContracts{
+	class RawImage;
+}
 
 namespace Pipeline
 {
+
+	enum BimetricMultiTask
+	{
+		  FACIAL_EXTRACTION      = FaceFind | FaceImageExtraction
+		, FAST_PORTRAIT_ANALYSIS = FaceFind | PortraitAnalysis
+		, ISO_COMPLIANCE_TEST    = FAST_PORTRAIT_ANALYSIS | IsoComplianceTest
+		, FULL_PORTRAIT_ANALYSIS = ISO_COMPLIANCE_TEST | FaceImageExtraction
+		, FAST_ENROLLMENT        = FACIAL_EXTRACTION | Enrollment
+		, FULL_ENROLLMENT        = FULL_PORTRAIT_ANALYSIS | Enrollment
+	};
 
 	struct CompareAwaitableItem
 	{
@@ -15,9 +32,9 @@ namespace Pipeline
 		}
 	};
 
-	class BiometricPipelineBalanced : public BiometricPipelineAgent
+	class BiometricPipelineBalanced : private BiometricPipelineAgent
 	{
-		typedef std::pair<std::string, long> TaskInfo;
+		typedef std::pair<FRsdkTypes::FaceVacsImage, long> TaskInfo;
 
 		typedef std::unique_ptr<Concurrency::call<FaceInfoAwaitablePtr >> FaceInfoAwaitableCallPtr  ;
 		typedef std::unique_ptr<Concurrency::call<ImageInfoAwaitablePtr>> ImageInfoAwaitableCallPtr ;
@@ -49,13 +66,18 @@ namespace Pipeline
 
 
 		FRsdkEntities::ImageInfoPtr acquire(const std::string& object, long configuration = FAST_PORTRAIT_ANALYSIS);
+
+		FRsdkEntities::ImageInfoPtr acquire(const BioContracts::RawImage& raw_image, long task = FAST_PORTRAIT_ANALYSIS);
+	
+
+		BioContracts::VerificationResultPtr verify_face( const std::string& object
+			                                               , const std::string& subject
+			                                               , bool fast = false);
 		
 
-
-		//void verify(const std::string object, const std::string subject, bool fast = false);
-		
-
-		//void identify(const std::string& object, const std::vector<std::string>& subjects);
+		BioContracts::IdentificationResultPtr identify_face( const std::string& object
+			                                                 , const std::vector<std::string>& subjects
+			                                                 , bool fast = false);
 
 		void stop();
 		
@@ -87,14 +109,9 @@ namespace Pipeline
 		static const  unsigned int MAX_PIPELINE_SLOT_COUNT = 25;
 		static const  unsigned int MAX_ENROLMENT_BRANCHES_COUNT = 3;
 
-		static const long FACIAL_EXTRACTION = FaceFind | FaceImageExtraction;
-		static const long FAST_PORTRAIT_ANALYSIS = FaceFind | PortraitAnalysis;
-		static const long ISO_COMPLIANCE_TEST = FAST_PORTRAIT_ANALYSIS | BiometricTask::IsoComplianceTest;
-		static const long FULL_PORTRAIT_ANALYSIS = ISO_COMPLIANCE_TEST | FaceImageExtraction;
-
-		static const long FAST_ENROLLMENT = FACIAL_EXTRACTION | BiometricTask::Enrollment;
-		static const long FULL_ENROLLMENT = FULL_PORTRAIT_ANALYSIS | BiometricTask::Enrollment;
+		
 	};
 
+	
 }
 #endif

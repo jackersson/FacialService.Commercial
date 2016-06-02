@@ -12,7 +12,7 @@
 
 namespace BioFacialEngine
 {
-	typedef FRsdk::CountedPtr<FRsdk::FIR>          FRsdkFir       ;
+	typedef std::shared_ptr<FRsdk::FIR>            FRsdkFir;
 	typedef FRsdk::CountedPtr<FRsdk::FIRBuilder >  FRsdkFirBuilder;
 	class IFirBuilder
 	{

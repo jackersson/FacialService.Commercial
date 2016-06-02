@@ -6,7 +6,7 @@ namespace BioFacialEngine
 	{		
 		try
 		{
-			FaceVacsConfiguration configuration = new FRsdk::Configuration(configuration_filename);
+			auto configuration (std::make_shared<FRsdk::Configuration>(configuration_filename));
 		  init(configuration);
 	  }
 	  catch (std::exception& e) {
@@ -14,12 +14,12 @@ namespace BioFacialEngine
 
 	}
 
-	FacialAcquisition::FacialAcquisition(FaceVacsConfiguration configuration)
+	FacialAcquisition::FacialAcquisition(FRsdkTypes::FaceVacsConfiguration configuration)
 	{
 		init(configuration);			
 	}
 
-	bool FacialAcquisition::init(FaceVacsConfiguration configuration)
+	bool FacialAcquisition::init(FRsdkTypes::FaceVacsConfiguration configuration)
 	{
 		try
 		{

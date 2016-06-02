@@ -3,10 +3,11 @@
 
 #include <frsdk/config.h>
 #include <frsdk/image.h>
+#include <memory>
 
 namespace FRsdkTypes
 {
-	typedef FRsdk::CountedPtr<FRsdk::Configuration>                   FaceVacsConfiguration;
+	typedef std::shared_ptr<FRsdk::Configuration>                   FaceVacsConfiguration;
 	typedef FRsdk::CountedPtr<FRsdk::Image>                           FaceVacsImage        ;	
 }
 #endif

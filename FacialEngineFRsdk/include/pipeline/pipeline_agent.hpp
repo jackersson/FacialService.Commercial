@@ -52,7 +52,7 @@ namespace Pipeline
 				//std::cout << "face_find" << std::endl;
 			}
 			catch (std::exception& e)	{
-				ShutdownOnError(0, pInfo->filename(), e);
+				ShutdownOnError(0, pInfo->image()->name(), e);
 			}
 		}
 
@@ -127,20 +127,37 @@ namespace Pipeline
 			}
 		}
 
-		void verify(FRsdkEntities::FaceInfoPtr pInfo) const
+		BioContracts::VerificationResultPtr verify(BioFacialEngine::VerificationPair pInfo) const
 		{
 			try
 			{
-				if (!IsCancellationPending() && (nullptr != pInfo))
-					pipeline_->verify(pInfo);
+				if (!IsCancellationPending())
+					return pipeline_->verify(pInfo);
 
 				//std::cout << "face_find" << std::endl;
 			}
 			catch (std::exception& e)	{
 				ShutdownOnError(0, "portrait characteristic find", e);
 			}
+
+			return nullptr;
 		}
 
+		BioContracts::IdentificationResultPtr identify(BioFacialEngine::IdentificationPair pInfo) const
+		{
+			try
+			{
+				if (!IsCancellationPending())
+					return pipeline_->identify(pInfo);
+			}
+			catch (std::exception& e)	{
+				ShutdownOnError(0, "portrait characteristic find", e);
+			}
+
+			return nullptr;
+		}
+
+		/*
 		void finish(FRsdkEntities::FaceInfoPtr pInfo) const
 		{
 			try
@@ -151,12 +168,13 @@ namespace Pipeline
 				ShutdownOnError(0, "portrait characteristic find", e);
 			}
 		}
+		*/
 
 
 	private:
 		void ShutdownOnError(long phase, const FRsdkEntities::ImageInfoPtr pInfo, const std::exception& e) const
 		{
-			ShutdownOnError(phase, pInfo->filename(), e);
+			ShutdownOnError(phase, pInfo->image()->name(), e);
 		}
 
 		void ShutdownOnError(long phase, const std::string& filePath, const std::exception& e) const

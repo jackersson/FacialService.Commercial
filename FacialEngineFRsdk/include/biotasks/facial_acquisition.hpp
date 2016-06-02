@@ -13,10 +13,7 @@ namespace BioFacialEngine
 	typedef FRsdk::CountedPtr<FRsdk::Portrait::Analyzer>              FaceVacsPortraitAnalyzer;
 	typedef FRsdk::CountedPtr<FRsdk::ISO_19794_5::FullFrontal::Test>  FaceVacsIso19794Test    ;
 	typedef FRsdk::CountedPtr<FRsdk::Portrait::Feature::Test>         FaceVacsFeatureTest     ;
-	typedef FRsdk::CountedPtr<FRsdk::ISO_19794_5::TokenFace::Creator> FaceVacsTfcreator       ;
-	typedef FRsdk::CountedPtr<FRsdk::Configuration>                   FaceVacsConfiguration   ;
-
-	
+	typedef FRsdk::CountedPtr<FRsdk::ISO_19794_5::TokenFace::Creator> FaceVacsTfcreator       ;	
 	
 	typedef FRsdk::CountedPtr<FRsdk::Portrait::Characteristics>             FaceVacsPortraitCharacteristicsPtr;
 	typedef FRsdk::CountedPtr<FRsdk::ISO_19794_5::FullFrontal::Compliance>  FaceVacsCompliancePtr;	
@@ -25,7 +22,7 @@ namespace BioFacialEngine
 	{
 	public:
 		explicit FacialAcquisition(const std::string& configuration_filename);
-		explicit FacialAcquisition(FaceVacsConfiguration configuration);
+		explicit FacialAcquisition(FRsdkTypes::FaceVacsConfiguration configuration);
 		~FacialAcquisition() {}
 
 		void findFace(FRsdkTypes::FaceVacsImage image, std::vector<FRsdkEntities::FaceVacsFullFace>& faces)
@@ -95,7 +92,7 @@ namespace BioFacialEngine
 		}
 
 	private:
-		bool init(FaceVacsConfiguration configuration);
+		bool init(FRsdkTypes::FaceVacsConfiguration configuration);
 
 	private:
 		FaceVacsFaceFinder        face_finder_       ;

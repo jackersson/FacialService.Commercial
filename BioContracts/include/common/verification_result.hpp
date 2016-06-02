@@ -23,6 +23,8 @@ namespace BioContracts
 		Matches matches_;
 		std::pair<IImageInfoPtr, IImageInfoPtr> p;
 	};
+
+	typedef std::shared_ptr<VerificationResult> VerificationResultPtr;
 }
 
 #endif
