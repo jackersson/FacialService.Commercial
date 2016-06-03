@@ -22,8 +22,7 @@ namespace BioFacialEngine
 		void eyesFound(const FRsdk::Eyes::Location& eyes) override{}
 		void eyesNotFound() override {}
 
-		void matches(const FRsdk::Matches& matches) override	{
-		
+		void matches(const FRsdk::Matches& matches) override	{		
 			for (auto it = matches.begin(); it != matches.end(); ++it)
 			{
 				auto current_match = *it;
@@ -31,11 +30,11 @@ namespace BioFacialEngine
 				BioContracts::Match match(current_face_id, current_match.second);
 				mathces_.push_back(match);
 			}
-
 			success_ = true;
 		}
 		
-		const BioContracts::MatchSet& result() const{
+		const BioContracts::MatchSet& result() const {
+		
 			return mathces_;
 		}
 
@@ -46,9 +45,6 @@ namespace BioFacialEngine
 		bool  success_;
 		std::string face_unique_id_;
 		BioContracts::MatchSet mathces_;
-
-
-
 	};
 }
 #endif

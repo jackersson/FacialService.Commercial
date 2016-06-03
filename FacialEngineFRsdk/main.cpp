@@ -37,7 +37,7 @@ int main(int argc, char** argv)
 	FRsdkEntities::ImageInfoPtr ptr2 = nullptr;
 	FRsdkEntities::ImageInfoPtr ptr3 = nullptr;
 
-	std::vector<std::string> images = { shwarc, klichko2 };
+	std::list<std::string> images = { shwarc, klichko2 };
 	IdentificationResultPtr ptr = pipeline.identify_face(klichko, images);
 	//std::cin.get();
 	/*

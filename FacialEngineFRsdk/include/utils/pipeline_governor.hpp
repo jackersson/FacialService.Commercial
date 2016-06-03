@@ -2,6 +2,7 @@
 #define PipelineGovernor_INCLUDED
 
 #include <agents.h>
+#include <iostream>
 
 namespace Pipeline
 {

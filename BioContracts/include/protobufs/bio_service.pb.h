@@ -57,6 +57,7 @@ class DetailedEyeCharacteristic;
 class EnrollmentFeedback;
 class EyesCharacteristic;
 class FaceCharacteristic;
+class FaceSearchResult;
 class FacialImage;
 class FingerprintAcquiredData;
 class FingerprintCharacteristic;
@@ -68,7 +69,8 @@ class IrisDevice;
 class Location;
 class LocationList;
 class LogRecord;
-class MatchResult;
+class Match;
+class Matches;
 class Person;
 class PersonList;
 class Photo;
@@ -85,7 +87,6 @@ class SocketConfiguration;
 class SurroundingBox;
 class VerificationData;
 class VerificationFeedback;
-class VerificationResult;
 class Visitor;
 class VisitorList;
 
@@ -1742,9 +1743,12 @@ class AccessInfo : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
 
   typedef AccessInfo_AccessType AccessType;
-  static const AccessType None = AccessInfo_AccessType_None;
-  static const AccessType All = AccessInfo_AccessType_All;
-  static const AccessType Custom = AccessInfo_AccessType_Custom;
+  static const AccessType None =
+    AccessInfo_AccessType_None;
+  static const AccessType All =
+    AccessInfo_AccessType_All;
+  static const AccessType Custom =
+    AccessInfo_AccessType_Custom;
   static inline bool AccessType_IsValid(int value) {
     return AccessInfo_AccessType_IsValid(value);
   }
@@ -4673,101 +4677,6 @@ class Response : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class IdentificationData : public ::google::protobuf::Message {
- public:
-  IdentificationData();
-  virtual ~IdentificationData();
-
-  IdentificationData(const IdentificationData& from);
-
-  inline IdentificationData& operator=(const IdentificationData& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const IdentificationData& default_instance();
-
-  void Swap(IdentificationData* other);
-
-  // implements Message ----------------------------------------------
-
-  inline IdentificationData* New() const { return New(NULL); }
-
-  IdentificationData* New(::google::protobuf::Arena* arena) const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const IdentificationData& from);
-  void MergeFrom(const IdentificationData& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  void InternalSwap(IdentificationData* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _internal_metadata_.arena();
-  }
-  inline void* MaybeArenaPtr() const {
-    return _internal_metadata_.raw_arena_ptr();
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // optional .BioService.Photo image = 1;
-  bool has_image() const;
-  void clear_image();
-  static const int kImageFieldNumber = 1;
-  const ::BioService::Photo& image() const;
-  ::BioService::Photo* mutable_image();
-  ::BioService::Photo* release_image();
-  void set_allocated_image(::BioService::Photo* image);
-
-  // repeated int64 population = 2;
-  int population_size() const;
-  void clear_population();
-  static const int kPopulationFieldNumber = 2;
-  ::google::protobuf::int64 population(int index) const;
-  void set_population(int index, ::google::protobuf::int64 value);
-  void add_population(::google::protobuf::int64 value);
-  const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
-      population() const;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
-      mutable_population();
-
-  // @@protoc_insertion_point(class_scope:BioService.IdentificationData)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  bool _is_default_instance_;
-  ::BioService::Photo* image_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > population_;
-  mutable int _population_cached_byte_size_;
-  mutable int _cached_size_;
-  friend void  protobuf_AddDesc_bio_5fservice_2eproto();
-  friend void protobuf_AssignDesc_bio_5fservice_2eproto();
-  friend void protobuf_ShutdownFile_bio_5fservice_2eproto();
-
-  void InitAsDefaultInstance();
-  static IdentificationData* default_instance_;
-};
-// -------------------------------------------------------------------
-
 class VerificationData : public ::google::protobuf::Message {
  public:
   VerificationData();
@@ -4859,32 +4768,32 @@ class VerificationData : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class MatchResult : public ::google::protobuf::Message {
+class IdentificationData : public ::google::protobuf::Message {
  public:
-  MatchResult();
-  virtual ~MatchResult();
+  IdentificationData();
+  virtual ~IdentificationData();
 
-  MatchResult(const MatchResult& from);
+  IdentificationData(const IdentificationData& from);
 
-  inline MatchResult& operator=(const MatchResult& from) {
+  inline IdentificationData& operator=(const IdentificationData& from) {
     CopyFrom(from);
     return *this;
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const MatchResult& default_instance();
+  static const IdentificationData& default_instance();
 
-  void Swap(MatchResult* other);
+  void Swap(IdentificationData* other);
 
   // implements Message ----------------------------------------------
 
-  inline MatchResult* New() const { return New(NULL); }
+  inline IdentificationData* New() const { return New(NULL); }
 
-  MatchResult* New(::google::protobuf::Arena* arena) const;
+  IdentificationData* New(::google::protobuf::Arena* arena) const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const MatchResult& from);
-  void MergeFrom(const MatchResult& from);
+  void CopyFrom(const IdentificationData& from);
+  void MergeFrom(const IdentificationData& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -4899,7 +4808,7 @@ class MatchResult : public ::google::protobuf::Message {
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
-  void InternalSwap(MatchResult* other);
+  void InternalSwap(IdentificationData* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return _internal_metadata_.arena();
@@ -4915,68 +4824,70 @@ class MatchResult : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional int64 target_face_id = 1;
-  void clear_target_face_id();
-  static const int kTargetFaceIdFieldNumber = 1;
-  ::google::protobuf::int64 target_face_id() const;
-  void set_target_face_id(::google::protobuf::int64 value);
+  // optional .BioService.Photo target_image = 1;
+  bool has_target_image() const;
+  void clear_target_image();
+  static const int kTargetImageFieldNumber = 1;
+  const ::BioService::Photo& target_image() const;
+  ::BioService::Photo* mutable_target_image();
+  ::BioService::Photo* release_target_image();
+  void set_allocated_target_image(::BioService::Photo* target_image);
 
-  // optional int64 comparison_face_id = 2;
-  void clear_comparison_face_id();
-  static const int kComparisonFaceIdFieldNumber = 2;
-  ::google::protobuf::int64 comparison_face_id() const;
-  void set_comparison_face_id(::google::protobuf::int64 value);
+  // repeated .BioService.Photo comparison_images = 2;
+  int comparison_images_size() const;
+  void clear_comparison_images();
+  static const int kComparisonImagesFieldNumber = 2;
+  const ::BioService::Photo& comparison_images(int index) const;
+  ::BioService::Photo* mutable_comparison_images(int index);
+  ::BioService::Photo* add_comparison_images();
+  ::google::protobuf::RepeatedPtrField< ::BioService::Photo >*
+      mutable_comparison_images();
+  const ::google::protobuf::RepeatedPtrField< ::BioService::Photo >&
+      comparison_images() const;
 
-  // optional float match = 3;
-  void clear_match();
-  static const int kMatchFieldNumber = 3;
-  float match() const;
-  void set_match(float value);
-
-  // @@protoc_insertion_point(class_scope:BioService.MatchResult)
+  // @@protoc_insertion_point(class_scope:BioService.IdentificationData)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
-  ::google::protobuf::int64 target_face_id_;
-  ::google::protobuf::int64 comparison_face_id_;
-  float match_;
+  ::BioService::Photo* target_image_;
+  ::google::protobuf::RepeatedPtrField< ::BioService::Photo > comparison_images_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
   friend void protobuf_ShutdownFile_bio_5fservice_2eproto();
 
   void InitAsDefaultInstance();
-  static MatchResult* default_instance_;
+  static IdentificationData* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class VerificationResult : public ::google::protobuf::Message {
+class Match : public ::google::protobuf::Message {
  public:
-  VerificationResult();
-  virtual ~VerificationResult();
+  Match();
+  virtual ~Match();
 
-  VerificationResult(const VerificationResult& from);
+  Match(const Match& from);
 
-  inline VerificationResult& operator=(const VerificationResult& from) {
+  inline Match& operator=(const Match& from) {
     CopyFrom(from);
     return *this;
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const VerificationResult& default_instance();
+  static const Match& default_instance();
 
-  void Swap(VerificationResult* other);
+  void Swap(Match* other);
 
   // implements Message ----------------------------------------------
 
-  inline VerificationResult* New() const { return New(NULL); }
+  inline Match* New() const { return New(NULL); }
 
-  VerificationResult* New(::google::protobuf::Arena* arena) const;
+  Match* New(::google::protobuf::Arena* arena) const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const VerificationResult& from);
-  void MergeFrom(const VerificationResult& from);
+  void CopyFrom(const Match& from);
+  void MergeFrom(const Match& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -4991,7 +4902,183 @@ class VerificationResult : public ::google::protobuf::Message {
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
-  void InternalSwap(VerificationResult* other);
+  void InternalSwap(Match* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int64 face_id = 2;
+  void clear_face_id();
+  static const int kFaceIdFieldNumber = 2;
+  ::google::protobuf::int64 face_id() const;
+  void set_face_id(::google::protobuf::int64 value);
+
+  // optional float match = 3;
+  void clear_match();
+  static const int kMatchFieldNumber = 3;
+  float match() const;
+  void set_match(float value);
+
+  // @@protoc_insertion_point(class_scope:BioService.Match)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 face_id_;
+  float match_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_bio_5fservice_2eproto();
+  friend void protobuf_AssignDesc_bio_5fservice_2eproto();
+  friend void protobuf_ShutdownFile_bio_5fservice_2eproto();
+
+  void InitAsDefaultInstance();
+  static Match* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class Matches : public ::google::protobuf::Message {
+ public:
+  Matches();
+  virtual ~Matches();
+
+  Matches(const Matches& from);
+
+  inline Matches& operator=(const Matches& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Matches& default_instance();
+
+  void Swap(Matches* other);
+
+  // implements Message ----------------------------------------------
+
+  inline Matches* New() const { return New(NULL); }
+
+  Matches* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Matches& from);
+  void MergeFrom(const Matches& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(Matches* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int64 face_id = 1;
+  void clear_face_id();
+  static const int kFaceIdFieldNumber = 1;
+  ::google::protobuf::int64 face_id() const;
+  void set_face_id(::google::protobuf::int64 value);
+
+  // repeated .BioService.Match matches = 2;
+  int matches_size() const;
+  void clear_matches();
+  static const int kMatchesFieldNumber = 2;
+  const ::BioService::Match& matches(int index) const;
+  ::BioService::Match* mutable_matches(int index);
+  ::BioService::Match* add_matches();
+  ::google::protobuf::RepeatedPtrField< ::BioService::Match >*
+      mutable_matches();
+  const ::google::protobuf::RepeatedPtrField< ::BioService::Match >&
+      matches() const;
+
+  // @@protoc_insertion_point(class_scope:BioService.Matches)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 face_id_;
+  ::google::protobuf::RepeatedPtrField< ::BioService::Match > matches_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_bio_5fservice_2eproto();
+  friend void protobuf_AssignDesc_bio_5fservice_2eproto();
+  friend void protobuf_ShutdownFile_bio_5fservice_2eproto();
+
+  void InitAsDefaultInstance();
+  static Matches* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class FaceSearchResult : public ::google::protobuf::Message {
+ public:
+  FaceSearchResult();
+  virtual ~FaceSearchResult();
+
+  FaceSearchResult(const FaceSearchResult& from);
+
+  inline FaceSearchResult& operator=(const FaceSearchResult& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const FaceSearchResult& default_instance();
+
+  void Swap(FaceSearchResult* other);
+
+  // implements Message ----------------------------------------------
+
+  inline FaceSearchResult* New() const { return New(NULL); }
+
+  FaceSearchResult* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const FaceSearchResult& from);
+  void MergeFrom(const FaceSearchResult& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(FaceSearchResult* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return _internal_metadata_.arena();
@@ -5019,16 +5106,16 @@ class VerificationResult : public ::google::protobuf::Message {
   const ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic >&
       portraits() const;
 
-  // repeated .BioService.MatchResult matches = 2;
+  // repeated .BioService.Matches matches = 2;
   int matches_size() const;
   void clear_matches();
   static const int kMatchesFieldNumber = 2;
-  const ::BioService::MatchResult& matches(int index) const;
-  ::BioService::MatchResult* mutable_matches(int index);
-  ::BioService::MatchResult* add_matches();
-  ::google::protobuf::RepeatedPtrField< ::BioService::MatchResult >*
+  const ::BioService::Matches& matches(int index) const;
+  ::BioService::Matches* mutable_matches(int index);
+  ::BioService::Matches* add_matches();
+  ::google::protobuf::RepeatedPtrField< ::BioService::Matches >*
       mutable_matches();
-  const ::google::protobuf::RepeatedPtrField< ::BioService::MatchResult >&
+  const ::google::protobuf::RepeatedPtrField< ::BioService::Matches >&
       matches() const;
 
   // optional string message = 3;
@@ -5048,13 +5135,13 @@ class VerificationResult : public ::google::protobuf::Message {
   ::BioService::Result good() const;
   void set_good(::BioService::Result value);
 
-  // @@protoc_insertion_point(class_scope:BioService.VerificationResult)
+  // @@protoc_insertion_point(class_scope:BioService.FaceSearchResult)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic > portraits_;
-  ::google::protobuf::RepeatedPtrField< ::BioService::MatchResult > matches_;
+  ::google::protobuf::RepeatedPtrField< ::BioService::Matches > matches_;
   ::google::protobuf::internal::ArenaStringPtr message_;
   int good_;
   mutable int _cached_size_;
@@ -5063,7 +5150,7 @@ class VerificationResult : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_bio_5fservice_2eproto();
 
   void InitAsDefaultInstance();
-  static VerificationResult* default_instance_;
+  static FaceSearchResult* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -5504,10 +5591,14 @@ class QueryPhoto : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
 
   typedef QueryPhoto_PhotoResultType PhotoResultType;
-  static const PhotoResultType Undefined = QueryPhoto_PhotoResultType_Undefined;
-  static const PhotoResultType Full = QueryPhoto_PhotoResultType_Full;
-  static const PhotoResultType OnlyBytes = QueryPhoto_PhotoResultType_OnlyBytes;
-  static const PhotoResultType NoBytes = QueryPhoto_PhotoResultType_NoBytes;
+  static const PhotoResultType Undefined =
+    QueryPhoto_PhotoResultType_Undefined;
+  static const PhotoResultType Full =
+    QueryPhoto_PhotoResultType_Full;
+  static const PhotoResultType OnlyBytes =
+    QueryPhoto_PhotoResultType_OnlyBytes;
+  static const PhotoResultType NoBytes =
+    QueryPhoto_PhotoResultType_NoBytes;
   static inline bool PhotoResultType_IsValid(int value) {
     return QueryPhoto_PhotoResultType_IsValid(value);
   }
@@ -6150,6 +6241,7 @@ inline ::std::string* Criminal::mutable_description() {
   return description_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Criminal::release_description() {
+  // @@protoc_insertion_point(field_release:BioService.Criminal.description)
   
   return description_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -6193,6 +6285,7 @@ inline ::std::string* Criminal::mutable_alert() {
   return alert_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Criminal::release_alert() {
+  // @@protoc_insertion_point(field_release:BioService.Criminal.alert)
   
   return alert_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -6231,6 +6324,7 @@ inline ::BioService::Visitor* FullVisitorData::mutable_visitor() {
   return visitor_;
 }
 inline ::BioService::Visitor* FullVisitorData::release_visitor() {
+  // @@protoc_insertion_point(field_release:BioService.FullVisitorData.visitor)
   
   ::BioService::Visitor* temp = visitor_;
   visitor_ = NULL;
@@ -6268,6 +6362,7 @@ inline ::BioService::FacialImage* FullVisitorData::mutable_face() {
   return face_;
 }
 inline ::BioService::FacialImage* FullVisitorData::release_face() {
+  // @@protoc_insertion_point(field_release:BioService.FullVisitorData.face)
   
   ::BioService::FacialImage* temp = face_;
   face_ = NULL;
@@ -6305,6 +6400,7 @@ inline ::BioService::FingerprintImage* FullVisitorData::mutable_fingerprint() {
   return fingerprint_;
 }
 inline ::BioService::FingerprintImage* FullVisitorData::release_fingerprint() {
+  // @@protoc_insertion_point(field_release:BioService.FullVisitorData.fingerprint)
   
   ::BioService::FingerprintImage* temp = fingerprint_;
   fingerprint_ = NULL;
@@ -6369,6 +6465,7 @@ inline ::std::string* Person::mutable_firstname() {
   return firstname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Person::release_firstname() {
+  // @@protoc_insertion_point(field_release:BioService.Person.firstname)
   
   return firstname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -6412,6 +6509,7 @@ inline ::std::string* Person::mutable_lastname() {
   return lastname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Person::release_lastname() {
+  // @@protoc_insertion_point(field_release:BioService.Person.lastname)
   
   return lastname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -6483,6 +6581,7 @@ inline ::std::string* Person::mutable_country() {
   return country_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Person::release_country() {
+  // @@protoc_insertion_point(field_release:BioService.Person.country)
   
   return country_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -6526,6 +6625,7 @@ inline ::std::string* Person::mutable_city() {
   return city_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Person::release_city() {
+  // @@protoc_insertion_point(field_release:BioService.Person.city)
   
   return city_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -6569,6 +6669,7 @@ inline ::std::string* Person::mutable_comments() {
   return comments_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Person::release_comments() {
+  // @@protoc_insertion_point(field_release:BioService.Person.comments)
   
   return comments_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -6626,6 +6727,7 @@ inline ::std::string* Person::mutable_email() {
   return email_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Person::release_email() {
+  // @@protoc_insertion_point(field_release:BioService.Person.email)
   
   return email_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -6674,6 +6776,7 @@ inline ::BioService::Criminal* Person::mutable_criminal() {
   return criminal_;
 }
 inline ::BioService::Criminal* Person::release_criminal() {
+  // @@protoc_insertion_point(field_release:BioService.Person.criminal)
   
   ::BioService::Criminal* temp = criminal_;
   criminal_ = NULL;
@@ -6801,6 +6904,7 @@ inline ::BioService::BiometricData* Person::mutable_biometric_data() {
   return biometric_data_;
 }
 inline ::BioService::BiometricData* Person::release_biometric_data() {
+  // @@protoc_insertion_point(field_release:BioService.Person.biometric_data)
   
   ::BioService::BiometricData* temp = biometric_data_;
   biometric_data_ = NULL;
@@ -6875,6 +6979,7 @@ inline ::std::string* Person::mutable_message() {
   return message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Person::release_message() {
+  // @@protoc_insertion_point(field_release:BioService.Person.message)
   
   return message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -6922,6 +7027,7 @@ inline ::std::string* AccessDevice::mutable_portname() {
   return portname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* AccessDevice::release_portname() {
+  // @@protoc_insertion_point(field_release:BioService.AccessDevice.portname)
   
   return portname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -6997,6 +7103,7 @@ inline ::std::string* CaptureDevice::mutable_devicename() {
   return devicename_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* CaptureDevice::release_devicename() {
+  // @@protoc_insertion_point(field_release:BioService.CaptureDevice.devicename)
   
   return devicename_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7072,6 +7179,7 @@ inline ::std::string* FingerprintDevice::mutable_devicename() {
   return devicename_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* FingerprintDevice::release_devicename() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintDevice.devicename)
   
   return devicename_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7115,6 +7223,7 @@ inline ::std::string* FingerprintDevice::mutable_serial_number() {
   return serial_number_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* FingerprintDevice::release_serial_number() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintDevice.serial_number)
   
   return serial_number_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7190,6 +7299,7 @@ inline ::std::string* IrisDevice::mutable_devicename() {
   return devicename_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* IrisDevice::release_devicename() {
+  // @@protoc_insertion_point(field_release:BioService.IrisDevice.devicename)
   
   return devicename_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7233,6 +7343,7 @@ inline ::std::string* IrisDevice::mutable_serial_number() {
   return serial_number_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* IrisDevice::release_serial_number() {
+  // @@protoc_insertion_point(field_release:BioService.IrisDevice.serial_number)
   
   return serial_number_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7336,6 +7447,7 @@ inline ::std::string* Card::mutable_unique_number() {
   return unique_number_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Card::release_unique_number() {
+  // @@protoc_insertion_point(field_release:BioService.Card.unique_number)
   
   return unique_number_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7425,6 +7537,7 @@ inline ::std::string* Location::mutable_location_name() {
   return location_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Location::release_location_name() {
+  // @@protoc_insertion_point(field_release:BioService.Location.location_name)
   
   return location_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7468,6 +7581,7 @@ inline ::std::string* Location::mutable_description() {
   return description_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Location::release_description() {
+  // @@protoc_insertion_point(field_release:BioService.Location.description)
   
   return description_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7511,6 +7625,7 @@ inline ::std::string* Location::mutable_mac_address() {
   return mac_address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Location::release_mac_address() {
+  // @@protoc_insertion_point(field_release:BioService.Location.mac_address)
   
   return mac_address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7545,6 +7660,7 @@ inline ::BioService::CaptureDevice* Location::mutable_capturedevice() {
   return capturedevice_;
 }
 inline ::BioService::CaptureDevice* Location::release_capturedevice() {
+  // @@protoc_insertion_point(field_release:BioService.Location.captureDevice)
   
   ::BioService::CaptureDevice* temp = capturedevice_;
   capturedevice_ = NULL;
@@ -7582,6 +7698,7 @@ inline ::BioService::AccessDevice* Location::mutable_accessdevice() {
   return accessdevice_;
 }
 inline ::BioService::AccessDevice* Location::release_accessdevice() {
+  // @@protoc_insertion_point(field_release:BioService.Location.accessDevice)
   
   ::BioService::AccessDevice* temp = accessdevice_;
   accessdevice_ = NULL;
@@ -7619,6 +7736,7 @@ inline ::BioService::FingerprintDevice* Location::mutable_fingerprintdevice() {
   return fingerprintdevice_;
 }
 inline ::BioService::FingerprintDevice* Location::release_fingerprintdevice() {
+  // @@protoc_insertion_point(field_release:BioService.Location.fingerprintDevice)
   
   ::BioService::FingerprintDevice* temp = fingerprintdevice_;
   fingerprintdevice_ = NULL;
@@ -7656,6 +7774,7 @@ inline ::BioService::IrisDevice* Location::mutable_irisdevice() {
   return irisdevice_;
 }
 inline ::BioService::IrisDevice* Location::release_irisdevice() {
+  // @@protoc_insertion_point(field_release:BioService.Location.irisDevice)
   
   ::BioService::IrisDevice* temp = irisdevice_;
   irisdevice_ = NULL;
@@ -7693,6 +7812,7 @@ inline ::BioService::AccessInfo* Location::mutable_access_info() {
   return access_info_;
 }
 inline ::BioService::AccessInfo* Location::release_access_info() {
+  // @@protoc_insertion_point(field_release:BioService.Location.access_info)
   
   ::BioService::AccessInfo* temp = access_info_;
   access_info_ = NULL;
@@ -7875,6 +7995,7 @@ inline ::std::string* LogRecord::mutable_exception_message() {
   return exception_message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* LogRecord::release_exception_message() {
+  // @@protoc_insertion_point(field_release:BioService.LogRecord.exception_message)
   
   return exception_message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7918,6 +8039,7 @@ inline ::std::string* LogRecord::mutable_class_name() {
   return class_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* LogRecord::release_class_name() {
+  // @@protoc_insertion_point(field_release:BioService.LogRecord.class_name)
   
   return class_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7961,6 +8083,7 @@ inline ::std::string* LogRecord::mutable_function_name() {
   return function_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* LogRecord::release_function_name() {
+  // @@protoc_insertion_point(field_release:BioService.LogRecord.function_name)
   
   return function_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -8018,6 +8141,7 @@ inline ::std::string* LogRecord::mutable_comment() {
   return comment_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* LogRecord::release_comment() {
+  // @@protoc_insertion_point(field_release:BioService.LogRecord.comment)
   
   return comment_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -8144,6 +8268,7 @@ inline ::BioService::DetailedEyeCharacteristic* EyesCharacteristic::mutable_left
   return left_eye_;
 }
 inline ::BioService::DetailedEyeCharacteristic* EyesCharacteristic::release_left_eye() {
+  // @@protoc_insertion_point(field_release:BioService.EyesCharacteristic.left_eye)
   
   ::BioService::DetailedEyeCharacteristic* temp = left_eye_;
   left_eye_ = NULL;
@@ -8181,6 +8306,7 @@ inline ::BioService::DetailedEyeCharacteristic* EyesCharacteristic::mutable_righ
   return right_eye_;
 }
 inline ::BioService::DetailedEyeCharacteristic* EyesCharacteristic::release_right_eye() {
+  // @@protoc_insertion_point(field_release:BioService.EyesCharacteristic.right_eye)
   
   ::BioService::DetailedEyeCharacteristic* temp = right_eye_;
   right_eye_ = NULL;
@@ -8298,6 +8424,7 @@ inline ::BioService::SurroundingBox* FaceCharacteristic::mutable_box() {
   return box_;
 }
 inline ::BioService::SurroundingBox* FaceCharacteristic::release_box() {
+  // @@protoc_insertion_point(field_release:BioService.FaceCharacteristic.box)
   
   ::BioService::SurroundingBox* temp = box_;
   box_ = NULL;
@@ -8349,6 +8476,7 @@ inline ::BioService::Position* FaceCharacteristic::mutable_face_center() {
   return face_center_;
 }
 inline ::BioService::Position* FaceCharacteristic::release_face_center() {
+  // @@protoc_insertion_point(field_release:BioService.FaceCharacteristic.face_center)
   
   ::BioService::Position* temp = face_center_;
   face_center_ = NULL;
@@ -8582,6 +8710,7 @@ inline ::BioService::EyesCharacteristic* FaceCharacteristic::mutable_eyes() {
   return eyes_;
 }
 inline ::BioService::EyesCharacteristic* FaceCharacteristic::release_eyes() {
+  // @@protoc_insertion_point(field_release:BioService.FaceCharacteristic.eyes)
   
   ::BioService::EyesCharacteristic* temp = eyes_;
   eyes_ = NULL;
@@ -8753,6 +8882,7 @@ inline ::BioService::Position* SurroundingBox::mutable_begin() {
   return begin_;
 }
 inline ::BioService::Position* SurroundingBox::release_begin() {
+  // @@protoc_insertion_point(field_release:BioService.SurroundingBox.begin)
   
   ::BioService::Position* temp = begin_;
   begin_ = NULL;
@@ -8790,6 +8920,7 @@ inline ::BioService::Position* SurroundingBox::mutable_end() {
   return end_;
 }
 inline ::BioService::Position* SurroundingBox::release_end() {
+  // @@protoc_insertion_point(field_release:BioService.SurroundingBox.end)
   
   ::BioService::Position* temp = end_;
   end_ = NULL;
@@ -8831,6 +8962,7 @@ inline ::BioService::Position* DetailedEyeCharacteristic::mutable_position() {
   return position_;
 }
 inline ::BioService::Position* DetailedEyeCharacteristic::release_position() {
+  // @@protoc_insertion_point(field_release:BioService.DetailedEyeCharacteristic.position)
   
   ::BioService::Position* temp = position_;
   position_ = NULL;
@@ -9067,6 +9199,7 @@ inline ::std::string* BioIdentificationRecord::mutable_bir_url() {
   return bir_url_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* BioIdentificationRecord::release_bir_url() {
+  // @@protoc_insertion_point(field_release:BioService.BioIdentificationRecord.bir_url)
   
   return bir_url_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -9110,6 +9243,7 @@ inline ::std::string* BioIdentificationRecord::mutable_bir_bytestring() {
   return bir_bytestring_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* BioIdentificationRecord::release_bir_bytestring() {
+  // @@protoc_insertion_point(field_release:BioService.BioIdentificationRecord.bir_bytestring)
   
   return bir_bytestring_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -9148,6 +9282,7 @@ inline ::BioService::FingerprintCharacteristic* BioFingerprintData::mutable_char
   return characteristics_;
 }
 inline ::BioService::FingerprintCharacteristic* BioFingerprintData::release_characteristics() {
+  // @@protoc_insertion_point(field_release:BioService.BioFingerprintData.characteristics)
   
   ::BioService::FingerprintCharacteristic* temp = characteristics_;
   characteristics_ = NULL;
@@ -9185,6 +9320,7 @@ inline ::BioService::BioIdentificationRecord* BioFingerprintData::mutable_biomet
   return biometric_record_;
 }
 inline ::BioService::BioIdentificationRecord* BioFingerprintData::release_biometric_record() {
+  // @@protoc_insertion_point(field_release:BioService.BioFingerprintData.biometric_record)
   
   ::BioService::BioIdentificationRecord* temp = biometric_record_;
   biometric_record_ = NULL;
@@ -9396,6 +9532,7 @@ inline ::BioService::Photo* FacialImage::mutable_image() {
   return image_;
 }
 inline ::BioService::Photo* FacialImage::release_image() {
+  // @@protoc_insertion_point(field_release:BioService.FacialImage.image)
   
   ::BioService::Photo* temp = image_;
   image_ = NULL;
@@ -9442,6 +9579,7 @@ inline ::std::string* FacialImage::mutable_template_() {
   return template__.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* FacialImage::release_template_() {
+  // @@protoc_insertion_point(field_release:BioService.FacialImage.template)
   
   return template__.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -9568,6 +9706,7 @@ inline ::BioService::Photo* DatabaseFacialImageResponse::mutable_image() {
   return image_;
 }
 inline ::BioService::Photo* DatabaseFacialImageResponse::release_image() {
+  // @@protoc_insertion_point(field_release:BioService.DatabaseFacialImageResponse.image)
   
   ::BioService::Photo* temp = image_;
   image_ = NULL;
@@ -9651,6 +9790,7 @@ inline ::BioService::Photo* FingerprintImage::mutable_image() {
   return image_;
 }
 inline ::BioService::Photo* FingerprintImage::release_image() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintImage.image)
   
   ::BioService::Photo* temp = image_;
   image_ = NULL;
@@ -9697,6 +9837,7 @@ inline ::std::string* FingerprintImage::mutable_template_() {
   return template__.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* FingerprintImage::release_template_() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintImage.template)
   
   return template__.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -9731,6 +9872,7 @@ inline ::BioService::FingerprintCharacteristic* FingerprintImage::mutable_finger
   return fingerprint_;
 }
 inline ::BioService::FingerprintCharacteristic* FingerprintImage::release_fingerprint() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintImage.fingerprint)
   
   ::BioService::FingerprintCharacteristic* temp = fingerprint_;
   fingerprint_ = NULL;
@@ -9800,6 +9942,7 @@ inline ::BioService::FingerprintCharacteristic* DatabaseFingerprintImageResponse
   return fingerprint_;
 }
 inline ::BioService::FingerprintCharacteristic* DatabaseFingerprintImageResponse::release_fingerprint() {
+  // @@protoc_insertion_point(field_release:BioService.DatabaseFingerprintImageResponse.fingerprint)
   
   ::BioService::FingerprintCharacteristic* temp = fingerprint_;
   fingerprint_ = NULL;
@@ -9837,6 +9980,7 @@ inline ::BioService::Photo* DatabaseFingerprintImageResponse::mutable_image() {
   return image_;
 }
 inline ::BioService::Photo* DatabaseFingerprintImageResponse::release_image() {
+  // @@protoc_insertion_point(field_release:BioService.DatabaseFingerprintImageResponse.image)
   
   ::BioService::Photo* temp = image_;
   image_ = NULL;
@@ -9943,6 +10087,7 @@ inline ::std::string* Photo::mutable_photo_url() {
   return photo_url_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Photo::release_photo_url() {
+  // @@protoc_insertion_point(field_release:BioService.Photo.photo_url)
   
   return photo_url_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -9986,6 +10131,7 @@ inline ::std::string* Photo::mutable_bytestring() {
   return bytestring_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Photo::release_bytestring() {
+  // @@protoc_insertion_point(field_release:BioService.Photo.bytestring)
   
   return bytestring_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -10173,6 +10319,7 @@ inline ::std::string* Visitor::mutable_card_number() {
   return card_number_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Visitor::release_card_number() {
+  // @@protoc_insertion_point(field_release:BioService.Visitor.card_number)
   
   return card_number_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -10221,6 +10368,7 @@ inline ::BioService::BiometricData* Visitor::mutable_biometricdata() {
   return biometricdata_;
 }
 inline ::BioService::BiometricData* Visitor::release_biometricdata() {
+  // @@protoc_insertion_point(field_release:BioService.Visitor.biometricData)
   
   ::BioService::BiometricData* temp = biometricdata_;
   biometricdata_ = NULL;
@@ -10489,77 +10637,6 @@ inline void Response::set_good(::BioService::Result value) {
 
 // -------------------------------------------------------------------
 
-// IdentificationData
-
-// optional .BioService.Photo image = 1;
-inline bool IdentificationData::has_image() const {
-  return !_is_default_instance_ && image_ != NULL;
-}
-inline void IdentificationData::clear_image() {
-  if (GetArenaNoVirtual() == NULL && image_ != NULL) delete image_;
-  image_ = NULL;
-}
-inline const ::BioService::Photo& IdentificationData::image() const {
-  // @@protoc_insertion_point(field_get:BioService.IdentificationData.image)
-  return image_ != NULL ? *image_ : *default_instance_->image_;
-}
-inline ::BioService::Photo* IdentificationData::mutable_image() {
-  
-  if (image_ == NULL) {
-    image_ = new ::BioService::Photo;
-  }
-  // @@protoc_insertion_point(field_mutable:BioService.IdentificationData.image)
-  return image_;
-}
-inline ::BioService::Photo* IdentificationData::release_image() {
-  
-  ::BioService::Photo* temp = image_;
-  image_ = NULL;
-  return temp;
-}
-inline void IdentificationData::set_allocated_image(::BioService::Photo* image) {
-  delete image_;
-  image_ = image;
-  if (image) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:BioService.IdentificationData.image)
-}
-
-// repeated int64 population = 2;
-inline int IdentificationData::population_size() const {
-  return population_.size();
-}
-inline void IdentificationData::clear_population() {
-  population_.Clear();
-}
-inline ::google::protobuf::int64 IdentificationData::population(int index) const {
-  // @@protoc_insertion_point(field_get:BioService.IdentificationData.population)
-  return population_.Get(index);
-}
-inline void IdentificationData::set_population(int index, ::google::protobuf::int64 value) {
-  population_.Set(index, value);
-  // @@protoc_insertion_point(field_set:BioService.IdentificationData.population)
-}
-inline void IdentificationData::add_population(::google::protobuf::int64 value) {
-  population_.Add(value);
-  // @@protoc_insertion_point(field_add:BioService.IdentificationData.population)
-}
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
-IdentificationData::population() const {
-  // @@protoc_insertion_point(field_list:BioService.IdentificationData.population)
-  return population_;
-}
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
-IdentificationData::mutable_population() {
-  // @@protoc_insertion_point(field_mutable_list:BioService.IdentificationData.population)
-  return &population_;
-}
-
-// -------------------------------------------------------------------
-
 // VerificationData
 
 // optional .BioService.Photo target_image = 1;
@@ -10583,6 +10660,7 @@ inline ::BioService::Photo* VerificationData::mutable_target_image() {
   return target_image_;
 }
 inline ::BioService::Photo* VerificationData::release_target_image() {
+  // @@protoc_insertion_point(field_release:BioService.VerificationData.target_image)
   
   ::BioService::Photo* temp = target_image_;
   target_image_ = NULL;
@@ -10620,6 +10698,7 @@ inline ::BioService::Photo* VerificationData::mutable_comparison_image() {
   return comparison_image_;
 }
 inline ::BioService::Photo* VerificationData::release_comparison_image() {
+  // @@protoc_insertion_point(field_release:BioService.VerificationData.comparison_image)
   
   ::BioService::Photo* temp = comparison_image_;
   comparison_image_ = NULL;
@@ -10638,169 +10717,276 @@ inline void VerificationData::set_allocated_comparison_image(::BioService::Photo
 
 // -------------------------------------------------------------------
 
-// MatchResult
+// IdentificationData
 
-// optional int64 target_face_id = 1;
-inline void MatchResult::clear_target_face_id() {
-  target_face_id_ = GOOGLE_LONGLONG(0);
+// optional .BioService.Photo target_image = 1;
+inline bool IdentificationData::has_target_image() const {
+  return !_is_default_instance_ && target_image_ != NULL;
 }
-inline ::google::protobuf::int64 MatchResult::target_face_id() const {
-  // @@protoc_insertion_point(field_get:BioService.MatchResult.target_face_id)
-  return target_face_id_;
+inline void IdentificationData::clear_target_image() {
+  if (GetArenaNoVirtual() == NULL && target_image_ != NULL) delete target_image_;
+  target_image_ = NULL;
 }
-inline void MatchResult::set_target_face_id(::google::protobuf::int64 value) {
+inline const ::BioService::Photo& IdentificationData::target_image() const {
+  // @@protoc_insertion_point(field_get:BioService.IdentificationData.target_image)
+  return target_image_ != NULL ? *target_image_ : *default_instance_->target_image_;
+}
+inline ::BioService::Photo* IdentificationData::mutable_target_image() {
   
-  target_face_id_ = value;
-  // @@protoc_insertion_point(field_set:BioService.MatchResult.target_face_id)
+  if (target_image_ == NULL) {
+    target_image_ = new ::BioService::Photo;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.IdentificationData.target_image)
+  return target_image_;
+}
+inline ::BioService::Photo* IdentificationData::release_target_image() {
+  // @@protoc_insertion_point(field_release:BioService.IdentificationData.target_image)
+  
+  ::BioService::Photo* temp = target_image_;
+  target_image_ = NULL;
+  return temp;
+}
+inline void IdentificationData::set_allocated_target_image(::BioService::Photo* target_image) {
+  delete target_image_;
+  target_image_ = target_image;
+  if (target_image) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.IdentificationData.target_image)
 }
 
-// optional int64 comparison_face_id = 2;
-inline void MatchResult::clear_comparison_face_id() {
-  comparison_face_id_ = GOOGLE_LONGLONG(0);
+// repeated .BioService.Photo comparison_images = 2;
+inline int IdentificationData::comparison_images_size() const {
+  return comparison_images_.size();
 }
-inline ::google::protobuf::int64 MatchResult::comparison_face_id() const {
-  // @@protoc_insertion_point(field_get:BioService.MatchResult.comparison_face_id)
-  return comparison_face_id_;
+inline void IdentificationData::clear_comparison_images() {
+  comparison_images_.Clear();
 }
-inline void MatchResult::set_comparison_face_id(::google::protobuf::int64 value) {
-  
-  comparison_face_id_ = value;
-  // @@protoc_insertion_point(field_set:BioService.MatchResult.comparison_face_id)
+inline const ::BioService::Photo& IdentificationData::comparison_images(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.IdentificationData.comparison_images)
+  return comparison_images_.Get(index);
 }
-
-// optional float match = 3;
-inline void MatchResult::clear_match() {
-  match_ = 0;
+inline ::BioService::Photo* IdentificationData::mutable_comparison_images(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.IdentificationData.comparison_images)
+  return comparison_images_.Mutable(index);
 }
-inline float MatchResult::match() const {
-  // @@protoc_insertion_point(field_get:BioService.MatchResult.match)
-  return match_;
+inline ::BioService::Photo* IdentificationData::add_comparison_images() {
+  // @@protoc_insertion_point(field_add:BioService.IdentificationData.comparison_images)
+  return comparison_images_.Add();
 }
-inline void MatchResult::set_match(float value) {
-  
-  match_ = value;
-  // @@protoc_insertion_point(field_set:BioService.MatchResult.match)
+inline ::google::protobuf::RepeatedPtrField< ::BioService::Photo >*
+IdentificationData::mutable_comparison_images() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.IdentificationData.comparison_images)
+  return &comparison_images_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::BioService::Photo >&
+IdentificationData::comparison_images() const {
+  // @@protoc_insertion_point(field_list:BioService.IdentificationData.comparison_images)
+  return comparison_images_;
 }
 
 // -------------------------------------------------------------------
 
-// VerificationResult
+// Match
+
+// optional int64 face_id = 2;
+inline void Match::clear_face_id() {
+  face_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Match::face_id() const {
+  // @@protoc_insertion_point(field_get:BioService.Match.face_id)
+  return face_id_;
+}
+inline void Match::set_face_id(::google::protobuf::int64 value) {
+  
+  face_id_ = value;
+  // @@protoc_insertion_point(field_set:BioService.Match.face_id)
+}
+
+// optional float match = 3;
+inline void Match::clear_match() {
+  match_ = 0;
+}
+inline float Match::match() const {
+  // @@protoc_insertion_point(field_get:BioService.Match.match)
+  return match_;
+}
+inline void Match::set_match(float value) {
+  
+  match_ = value;
+  // @@protoc_insertion_point(field_set:BioService.Match.match)
+}
+
+// -------------------------------------------------------------------
+
+// Matches
+
+// optional int64 face_id = 1;
+inline void Matches::clear_face_id() {
+  face_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Matches::face_id() const {
+  // @@protoc_insertion_point(field_get:BioService.Matches.face_id)
+  return face_id_;
+}
+inline void Matches::set_face_id(::google::protobuf::int64 value) {
+  
+  face_id_ = value;
+  // @@protoc_insertion_point(field_set:BioService.Matches.face_id)
+}
+
+// repeated .BioService.Match matches = 2;
+inline int Matches::matches_size() const {
+  return matches_.size();
+}
+inline void Matches::clear_matches() {
+  matches_.Clear();
+}
+inline const ::BioService::Match& Matches::matches(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.Matches.matches)
+  return matches_.Get(index);
+}
+inline ::BioService::Match* Matches::mutable_matches(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.Matches.matches)
+  return matches_.Mutable(index);
+}
+inline ::BioService::Match* Matches::add_matches() {
+  // @@protoc_insertion_point(field_add:BioService.Matches.matches)
+  return matches_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::BioService::Match >*
+Matches::mutable_matches() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.Matches.matches)
+  return &matches_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::BioService::Match >&
+Matches::matches() const {
+  // @@protoc_insertion_point(field_list:BioService.Matches.matches)
+  return matches_;
+}
+
+// -------------------------------------------------------------------
+
+// FaceSearchResult
 
 // repeated .BioService.PortraitCharacteristic portraits = 1;
-inline int VerificationResult::portraits_size() const {
+inline int FaceSearchResult::portraits_size() const {
   return portraits_.size();
 }
-inline void VerificationResult::clear_portraits() {
+inline void FaceSearchResult::clear_portraits() {
   portraits_.Clear();
 }
-inline const ::BioService::PortraitCharacteristic& VerificationResult::portraits(int index) const {
-  // @@protoc_insertion_point(field_get:BioService.VerificationResult.portraits)
+inline const ::BioService::PortraitCharacteristic& FaceSearchResult::portraits(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResult.portraits)
   return portraits_.Get(index);
 }
-inline ::BioService::PortraitCharacteristic* VerificationResult::mutable_portraits(int index) {
-  // @@protoc_insertion_point(field_mutable:BioService.VerificationResult.portraits)
+inline ::BioService::PortraitCharacteristic* FaceSearchResult::mutable_portraits(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResult.portraits)
   return portraits_.Mutable(index);
 }
-inline ::BioService::PortraitCharacteristic* VerificationResult::add_portraits() {
-  // @@protoc_insertion_point(field_add:BioService.VerificationResult.portraits)
+inline ::BioService::PortraitCharacteristic* FaceSearchResult::add_portraits() {
+  // @@protoc_insertion_point(field_add:BioService.FaceSearchResult.portraits)
   return portraits_.Add();
 }
 inline ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic >*
-VerificationResult::mutable_portraits() {
-  // @@protoc_insertion_point(field_mutable_list:BioService.VerificationResult.portraits)
+FaceSearchResult::mutable_portraits() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchResult.portraits)
   return &portraits_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic >&
-VerificationResult::portraits() const {
-  // @@protoc_insertion_point(field_list:BioService.VerificationResult.portraits)
+FaceSearchResult::portraits() const {
+  // @@protoc_insertion_point(field_list:BioService.FaceSearchResult.portraits)
   return portraits_;
 }
 
-// repeated .BioService.MatchResult matches = 2;
-inline int VerificationResult::matches_size() const {
+// repeated .BioService.Matches matches = 2;
+inline int FaceSearchResult::matches_size() const {
   return matches_.size();
 }
-inline void VerificationResult::clear_matches() {
+inline void FaceSearchResult::clear_matches() {
   matches_.Clear();
 }
-inline const ::BioService::MatchResult& VerificationResult::matches(int index) const {
-  // @@protoc_insertion_point(field_get:BioService.VerificationResult.matches)
+inline const ::BioService::Matches& FaceSearchResult::matches(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResult.matches)
   return matches_.Get(index);
 }
-inline ::BioService::MatchResult* VerificationResult::mutable_matches(int index) {
-  // @@protoc_insertion_point(field_mutable:BioService.VerificationResult.matches)
+inline ::BioService::Matches* FaceSearchResult::mutable_matches(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResult.matches)
   return matches_.Mutable(index);
 }
-inline ::BioService::MatchResult* VerificationResult::add_matches() {
-  // @@protoc_insertion_point(field_add:BioService.VerificationResult.matches)
+inline ::BioService::Matches* FaceSearchResult::add_matches() {
+  // @@protoc_insertion_point(field_add:BioService.FaceSearchResult.matches)
   return matches_.Add();
 }
-inline ::google::protobuf::RepeatedPtrField< ::BioService::MatchResult >*
-VerificationResult::mutable_matches() {
-  // @@protoc_insertion_point(field_mutable_list:BioService.VerificationResult.matches)
+inline ::google::protobuf::RepeatedPtrField< ::BioService::Matches >*
+FaceSearchResult::mutable_matches() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchResult.matches)
   return &matches_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::BioService::MatchResult >&
-VerificationResult::matches() const {
-  // @@protoc_insertion_point(field_list:BioService.VerificationResult.matches)
+inline const ::google::protobuf::RepeatedPtrField< ::BioService::Matches >&
+FaceSearchResult::matches() const {
+  // @@protoc_insertion_point(field_list:BioService.FaceSearchResult.matches)
   return matches_;
 }
 
 // optional string message = 3;
-inline void VerificationResult::clear_message() {
+inline void FaceSearchResult::clear_message() {
   message_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& VerificationResult::message() const {
-  // @@protoc_insertion_point(field_get:BioService.VerificationResult.message)
+inline const ::std::string& FaceSearchResult::message() const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResult.message)
   return message_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void VerificationResult::set_message(const ::std::string& value) {
+inline void FaceSearchResult::set_message(const ::std::string& value) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:BioService.VerificationResult.message)
+  // @@protoc_insertion_point(field_set:BioService.FaceSearchResult.message)
 }
-inline void VerificationResult::set_message(const char* value) {
+inline void FaceSearchResult::set_message(const char* value) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:BioService.VerificationResult.message)
+  // @@protoc_insertion_point(field_set_char:BioService.FaceSearchResult.message)
 }
-inline void VerificationResult::set_message(const char* value, size_t size) {
+inline void FaceSearchResult::set_message(const char* value, size_t size) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:BioService.VerificationResult.message)
+  // @@protoc_insertion_point(field_set_pointer:BioService.FaceSearchResult.message)
 }
-inline ::std::string* VerificationResult::mutable_message() {
+inline ::std::string* FaceSearchResult::mutable_message() {
   
-  // @@protoc_insertion_point(field_mutable:BioService.VerificationResult.message)
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResult.message)
   return message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* VerificationResult::release_message() {
+inline ::std::string* FaceSearchResult::release_message() {
+  // @@protoc_insertion_point(field_release:BioService.FaceSearchResult.message)
   
   return message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void VerificationResult::set_allocated_message(::std::string* message) {
+inline void FaceSearchResult::set_allocated_message(::std::string* message) {
   if (message != NULL) {
     
   } else {
     
   }
   message_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), message);
-  // @@protoc_insertion_point(field_set_allocated:BioService.VerificationResult.message)
+  // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchResult.message)
 }
 
 // optional .BioService.Result good = 4;
-inline void VerificationResult::clear_good() {
+inline void FaceSearchResult::clear_good() {
   good_ = 0;
 }
-inline ::BioService::Result VerificationResult::good() const {
-  // @@protoc_insertion_point(field_get:BioService.VerificationResult.good)
+inline ::BioService::Result FaceSearchResult::good() const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResult.good)
   return static_cast< ::BioService::Result >(good_);
 }
-inline void VerificationResult::set_good(::BioService::Result value) {
+inline void FaceSearchResult::set_good(::BioService::Result value) {
   
   good_ = value;
-  // @@protoc_insertion_point(field_set:BioService.VerificationResult.good)
+  // @@protoc_insertion_point(field_set:BioService.FaceSearchResult.good)
 }
 
 // -------------------------------------------------------------------
@@ -10828,6 +11014,7 @@ inline ::BioService::Photo* AcquiredData::mutable_image() {
   return image_;
 }
 inline ::BioService::Photo* AcquiredData::release_image() {
+  // @@protoc_insertion_point(field_release:BioService.AcquiredData.image)
   
   ::BioService::Photo* temp = image_;
   image_ = NULL;
@@ -10883,6 +11070,7 @@ inline ::BioService::AcquiredData* FingerprintAcquiredData::mutable_data() {
   return data_;
 }
 inline ::BioService::AcquiredData* FingerprintAcquiredData::release_data() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintAcquiredData.data)
   
   ::BioService::AcquiredData* temp = data_;
   data_ = NULL;
@@ -11017,6 +11205,7 @@ inline ::std::string* EnrollmentFeedback::mutable_message() {
   return message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* EnrollmentFeedback::release_message() {
+  // @@protoc_insertion_point(field_release:BioService.EnrollmentFeedback.message)
   
   return message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -11055,6 +11244,7 @@ inline ::BioService::EnrollmentFeedback* VerificationFeedback::mutable_enrollmen
   return enrollment_feedback_;
 }
 inline ::BioService::EnrollmentFeedback* VerificationFeedback::release_enrollment_feedback() {
+  // @@protoc_insertion_point(field_release:BioService.VerificationFeedback.enrollment_feedback)
   
   ::BioService::EnrollmentFeedback* temp = enrollment_feedback_;
   enrollment_feedback_ = NULL;
@@ -11246,6 +11436,7 @@ inline void QueryVisitors::set_countries(int index, const char* value, size_t si
   // @@protoc_insertion_point(field_set_pointer:BioService.QueryVisitors.countries)
 }
 inline ::std::string* QueryVisitors::add_countries() {
+  // @@protoc_insertion_point(field_add_mutable:BioService.QueryVisitors.countries)
   return countries_.Add();
 }
 inline void QueryVisitors::add_countries(const ::std::string& value) {
@@ -11407,6 +11598,7 @@ inline ::std::string* SocketConfiguration::mutable_address() {
   return address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* SocketConfiguration::release_address() {
+  // @@protoc_insertion_point(field_release:BioService.SocketConfiguration.address)
   
   return address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -11454,6 +11646,7 @@ inline ::std::string* BioClient::mutable_ip_address() {
   return ip_address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* BioClient::release_ip_address() {
+  // @@protoc_insertion_point(field_release:BioService.BioClient.ip_address)
   
   return ip_address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -11511,6 +11704,7 @@ inline ::std::string* BioClient::mutable_mac_address() {
   return mac_address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* BioClient::release_mac_address() {
+  // @@protoc_insertion_point(field_release:BioService.BioClient.mac_address)
   
   return mac_address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -11525,6 +11719,8 @@ inline void BioClient::set_allocated_mac_address(::std::string* mac_address) {
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

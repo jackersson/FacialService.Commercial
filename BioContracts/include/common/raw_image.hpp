@@ -1,8 +1,6 @@
 #ifndef RawImage_INCLUDED
 #define RawImage_INCLUDED
 
-#include <string>
-
 namespace BioContracts
 {
 	class RawImage

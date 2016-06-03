@@ -6,6 +6,8 @@
 #include "common\iface_characteristics.hpp"
 #include "common\iimage_characteristic.hpp"
 #include <common/matches.hpp>
+#include "common/verification_result.hpp"
+#include "common/identification_result.hpp"
 
 #include <ppl.h>
 
@@ -14,34 +16,71 @@ namespace BioGrpc
 	class ResponseConvertor 
 	{
 	public:
-		/*
-		BioService::VerificationResult* getProtoVerificationResult( BioContracts::VerificationResult& vr)
+	
+		BioService::FaceSearchResult* get_face_search_result( BioContracts::IdentificationResultPtr identification_result)
 		{
-			BioService::VerificationResult* verification_data = new BioService::VerificationResult();
+			BioService::FaceSearchResult* result = new BioService::FaceSearchResult();
+	
+			Concurrency::parallel_invoke(
+			[&]()	{
 
-			BioContracts::Matches matches = vr.matches();
-			for (auto it = matches.cbegin(); it != matches.cend(); ++it)
+				Concurrency::parallel_for_each(identification_result->cbegin(), identification_result->cend(),
+					[&]( BioContracts::IImageInfoPtr image )
+				{
+					BioService::PortraitCharacteristic* pch = result->add_portraits();
+					updatePortraitCharacteristics(*pch, image);
+				});			  
+			 },		
+				 [&](){	update_face_search_result(*result, identification_result->matches());	});
+
+			return result;
+		}
+
+		BioService::FaceSearchResult* get_face_search_result( BioContracts::VerificationResultPtr verification_result)
+		{
+			BioService::FaceSearchResult* result = new BioService::FaceSearchResult();
+
+			Concurrency::parallel_invoke(
+			[&]()	{
+			  BioService::PortraitCharacteristic* pch = result->add_portraits();
+			  updatePortraitCharacteristics(*pch, verification_result->first());
+			 },
+			[&]() {
+			  BioService::PortraitCharacteristic* pch = result->add_portraits();
+			  updatePortraitCharacteristics(*pch, verification_result->second());			
+		  },
+				[&](){	update_face_search_result(*result, verification_result->matches());	});
+
+			return result;
+		}
+
+		void update_face_search_result(BioService::FaceSearchResult& proto, const BioContracts::Matches& mchs)
+		{
+			for (auto it = mchs.cbegin(); it != mchs.cend(); ++it)
 			{
-				BioService::MatchResult* match = verification_data->add_matches();
-				getMatchResult(*match, *it);
+				auto mt = *it;				
+				auto matches(mt.second);
+				if (matches.size() <= 0)
+					continue; 
+					
+				auto face_id(mt.first);
+				update_mathces(*proto.add_matches(), face_id, matches);
 			}
-
-			BioService::PortraitCharacteristic* proto_first = verification_data->add_portraits();			
-			updatePortraitCharacteristics(*proto_first, vr.first());
-		
-			BioService::PortraitCharacteristic* proto_second = verification_data->add_portraits();
-			updatePortraitCharacteristics(*proto_second, vr.second());
-
-			return verification_data;
 		}
 
-		void getMatchResult(BioService::MatchResult& proto_match, const BioContracts::Match& match)
+		void update_mathces(BioService::Matches& proto_match, long face_id, const std::list<BioContracts::Match>& matches)
 		{
-			proto_match.set_comparison_face_id(match.comparisonFaceId());
-			proto_match.set_target_face_id    (match.targetFaceId()    );
-			proto_match.set_match             (match.match()           );
+			proto_match.set_face_id(face_id);
+
+			for (auto m_iter = matches.begin(); m_iter != matches.end(); ++m_iter)						
+				update_match(*proto_match.add_matches(), *m_iter);			
 		}
-		*/
+
+		void update_match(BioService::Match& proto, const BioContracts::Match& match)
+		{
+			proto.set_face_id(match.face_id());
+			proto.set_match  (match.match());
+		}
 
 		BioService::PortraitCharacteristic*
 			getPortraitCharacteristics(BioContracts::IImageInfoPtr characteristics)
@@ -61,7 +100,7 @@ namespace BioGrpc
 			{
 				const BioContracts::IFaceInfo& face = (*characteristics)[i];
 				BioService::FaceCharacteristic* proto_face = proto.add_faces();
-				auto start = clock();
+				//auto start = clock();
 				
 				Concurrency::parallel_invoke(
 				  [&](){update_main_face_characteristic      (*proto_face, face.characteristics());	},
@@ -123,10 +162,10 @@ namespace BioGrpc
 				[&](){proto_face.set_left_ear(face.leftEar());																		},
 				[&](){proto_face.set_rigth_ear(face.rightEar());																	},
 				[&](){proto_face.set_confidence(face.confidence());															},
-				[&](){proto_face.set_mouth_closed(face.mouthClosed());														}
-		//		[&](){proto_face.set_ethnithity(toProtoEthnithity(face.ethnicity()));						},
-			//	[&](){proto_face.set_age(face.age());																						},
-			//	[&](){proto_face.set_gender(toProtoGender(face.isMale()));												}
+				[&](){proto_face.set_mouth_closed(face.mouthClosed());														},
+				[&](){proto_face.set_ethnithity(toProtoEthnithity(face.ethnicity()));						},
+				[&](){proto_face.set_age(face.age());																						},
+				[&](){proto_face.set_gender(toProtoGender(face.isMale()));												}
 			);
 
 		}
@@ -190,7 +229,7 @@ namespace BioGrpc
 			proto_eyes->set_allocated_left_eye(
 				toProtoDetailedEyes(eyes.left()));
 
-			proto_eyes->set_allocated_left_eye(
+			proto_eyes->set_allocated_right_eye(
 				toProtoDetailedEyes(eyes.right()));
 
 			return proto_eyes;

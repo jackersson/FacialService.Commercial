@@ -43,17 +43,29 @@
     <Filter Include="include\biotasks\acquisition">
       <UniqueIdentifier>{d94b83ab-da5a-4e91-9eef-2b0a3b4dfa67}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\biotasks\acquisition">
+      <UniqueIdentifier>{de96e665-43ed-498f-a0f1-8e0adc82df34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\biotasks\enrollment">
+      <UniqueIdentifier>{6ed2e797-1393-4061-8ed1-8b00e490cb6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\biotasks\enrollment">
+      <UniqueIdentifier>{2b9dfe39-7cff-45c1-b760-692d28dbb7f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\biotasks\identification">
+      <UniqueIdentifier>{2f4b4247-7f3f-409b-b011-8433d11cf284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\biotasks\identification">
+      <UniqueIdentifier>{cf9dcb22-1cae-4107-a9de-ccd8de4d5ad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\biotasks\verification">
+      <UniqueIdentifier>{81ad8e72-761e-42d4-9918-9f0da3433ef7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\biotasks\verification">
+      <UniqueIdentifier>{66e83042-f5e4-45b0-8eac-d7b84e3be530}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\biotasks\facial_acquisition.hpp">
-      <Filter>include\biotasks</Filter>
-    </ClInclude>
-    <ClInclude Include="include\biotasks\facial_enrollment.hpp">
-      <Filter>include\biotasks</Filter>
-    </ClInclude>
-    <ClInclude Include="include\biotasks\facial_verification.hpp">
-      <Filter>include\biotasks</Filter>
-    </ClInclude>
     <ClInclude Include="include\feedback\facial_enrollment_feedback.hpp">
       <Filter>include\feedback</Filter>
     </ClInclude>
@@ -117,23 +129,56 @@
     <ClInclude Include="include\wrappers\verification_info.hpp">
       <Filter>include\wrappers</Filter>
     </ClInclude>
-    <ClInclude Include="include\biotasks\facial_identification.hpp">
-      <Filter>include\biotasks</Filter>
-    </ClInclude>
     <ClInclude Include="include\feedback\facial_identification_feedback.hpp">
       <Filter>include\feedback</Filter>
     </ClInclude>
+    <ClInclude Include="include\biotasks\acquisition\facial_acquisition.hpp">
+      <Filter>include\biotasks\acquisition</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\enrollment\facial_enrollment.hpp">
+      <Filter>include\biotasks\enrollment</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\enrollment\frsdk_enrollment_work_unit.hpp">
+      <Filter>include\biotasks\enrollment</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\enrollment\frsdk_enrollment_processor.hpp">
+      <Filter>include\biotasks\enrollment</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\enrollment\enrollment_load_balancer.hpp">
+      <Filter>include\biotasks\enrollment</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\identification\facial_identification.hpp">
+      <Filter>include\biotasks\identification</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\verification\facial_verification.hpp">
+      <Filter>include\biotasks\verification</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\verification\verification_work_unit.hpp">
+      <Filter>include\biotasks\verification</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\verification\facial_verification_processor.hpp">
+      <Filter>include\biotasks\verification</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\verification\verification_load_balancer.hpp">
+      <Filter>include\biotasks\verification</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\verification\verification_item.hpp">
+      <Filter>include\biotasks\verification</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\identification\identification_work_unit.hpp">
+      <Filter>include\biotasks\identification</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\identification\facial_identification_processor.hpp">
+      <Filter>include\biotasks\identification</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\identification\identification_load_balancer.hpp">
+      <Filter>include\biotasks\identification</Filter>
+    </ClInclude>
+    <ClInclude Include="include\biotasks\identification\identification_item.hpp">
+      <Filter>include\biotasks\identification</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\biotasks\facial_acquisition.cpp">
-      <Filter>src\biotasks</Filter>
-    </ClCompile>
-    <ClCompile Include="src\biotasks\facial_enrollment.cpp">
-      <Filter>src\biotasks</Filter>
-    </ClCompile>
-    <ClCompile Include="src\biotasks\facial_verification.cpp">
-      <Filter>src\biotasks</Filter>
-    </ClCompile>
     <ClCompile Include="src\utils\face_vacs_io_utils.cpp">
       <Filter>src\utils</Filter>
     </ClCompile>
@@ -152,8 +197,41 @@
     <ClCompile Include="src\pipeline\face_info_awaitable.cpp">
       <Filter>src\pipeline</Filter>
     </ClCompile>
-    <ClCompile Include="src\biotasks\facial_identification.cpp">
-      <Filter>src\biotasks</Filter>
+    <ClCompile Include="src\biotasks\enrollment\facial_enrollment.cpp">
+      <Filter>src\biotasks\enrollment</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\enrollment\frsdk_enrollment_processor.cpp">
+      <Filter>src\biotasks\enrollment</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\enrollment\enrollment_load_balancer.cpp">
+      <Filter>src\biotasks\enrollment</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\acquisition\facial_acquisition.cpp">
+      <Filter>src\biotasks\acquisition</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\identification\facial_identification.cpp">
+      <Filter>src\biotasks\identification</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\verification\facial_verification.cpp">
+      <Filter>src\biotasks\verification</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\verification\facial_verification_processor.cpp">
+      <Filter>src\biotasks\verification</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\verification\verification_load_balancer.cpp">
+      <Filter>src\biotasks\verification</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\verification\verification_item.cpp">
+      <Filter>src\biotasks\verification</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\identification\facial_identification_processor.cpp">
+      <Filter>src\biotasks\identification</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\identification\identification_load_balancer.cpp">
+      <Filter>src\biotasks\identification</Filter>
+    </ClCompile>
+    <ClCompile Include="src\biotasks\identification\identification_item.cpp">
+      <Filter>src\biotasks\identification</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

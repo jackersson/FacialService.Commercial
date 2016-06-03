@@ -71,7 +71,7 @@ namespace FRsdkEntities
 
 		void setIsoComplianceMain(int& result, const FRsdk::ISO_19794_5::FullFrontal::Compliance& iso_compliance)
 		{
-			return;
+			
 			concurrency::parallel_invoke(
 				[&](){setFlag(result, iso_compliance.onlyOneFaceVisible()      , BioService::OnlyOneFaceVisible);				},
 				[&](){setFlag(result, iso_compliance.goodVerticalFacePosition(), BioService::goodVerticalFacePosition);	},
@@ -89,8 +89,8 @@ namespace FRsdkEntities
 
 		void setIsoComplianceBest(int& result, const FRsdk::ISO_19794_5::FullFrontal::Compliance& iso_compliance)
 		{
-			return;
-			/*
+			
+			
 			concurrency::parallel_invoke(
 
 			[&]() {setFlag(result, iso_compliance.widthOfHeadBestPractice(), BioService::widthOfHeadBestPractice);								 },
@@ -104,12 +104,12 @@ namespace FRsdkEntities
 			[&]() {setFlag(result, iso_compliance.eyesNotRedBestPractice(), BioService::eyesNotRedBestPractice);									 },
 			[&]() {setFlag(result, iso_compliance.mouthClosedBestPractice(), BioService::mouthClosedBestPractice);  					     }
 			);
-			*/
+			
 		}
 
 		void setIsoComplianceAdditional(int& result, const FRsdk::ISO_19794_5::FullFrontal::Compliance& iso_compliance)
 		{			
-			return;
+			
 			concurrency::parallel_invoke(
 				[&]()  {setFlag(result, iso_compliance.isFrontal(), BioService::isFrontal);											},									
 		   	[&]()  {setFlag(result, iso_compliance.isLightingUniform(), BioService::isLightingUniform);			},										

@@ -17,13 +17,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -84,11 +84,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\biotasks\facial_acquisition.hpp" />
-    <ClInclude Include="include\biotasks\facial_enrollment.hpp" />
-    <ClInclude Include="include\biotasks\facial_identification.hpp" />
-    <ClInclude Include="include\biotasks\facial_verification.hpp" />
+    <ClInclude Include="include\biotasks\acquisition\facial_acquisition.hpp" />
+    <ClInclude Include="include\biotasks\enrollment\enrollment_load_balancer.hpp" />
+    <ClInclude Include="include\biotasks\enrollment\facial_enrollment.hpp" />
+    <ClInclude Include="include\biotasks\enrollment\frsdk_enrollment_processor.hpp" />
+    <ClInclude Include="include\biotasks\enrollment\frsdk_enrollment_work_unit.hpp" />
+    <ClInclude Include="include\biotasks\identification\facial_identification.hpp" />
+    <ClInclude Include="include\biotasks\identification\facial_identification_processor.hpp" />
+    <ClInclude Include="include\biotasks\identification\identification_item.hpp" />
+    <ClInclude Include="include\biotasks\identification\identification_load_balancer.hpp" />
+    <ClInclude Include="include\biotasks\identification\identification_work_unit.hpp" />
     <ClInclude Include="include\biotasks\ifir_builder.hpp" />
+    <ClInclude Include="include\biotasks\verification\facial_verification.hpp" />
+    <ClInclude Include="include\biotasks\verification\facial_verification_processor.hpp" />
+    <ClInclude Include="include\biotasks\verification\verification_item.hpp" />
+    <ClInclude Include="include\biotasks\verification\verification_load_balancer.hpp" />
+    <ClInclude Include="include\biotasks\verification\verification_work_unit.hpp" />
     <ClInclude Include="include\facial_engine.hpp" />
     <ClInclude Include="include\feedback\facial_enrollment_feedback.hpp" />
     <ClInclude Include="include\feedback\facial_identification_feedback.hpp" />
@@ -113,10 +124,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\biotasks\facial_acquisition.cpp" />
-    <ClCompile Include="src\biotasks\facial_enrollment.cpp" />
-    <ClCompile Include="src\biotasks\facial_identification.cpp" />
-    <ClCompile Include="src\biotasks\facial_verification.cpp" />
+    <ClCompile Include="src\biotasks\acquisition\facial_acquisition.cpp" />
+    <ClCompile Include="src\biotasks\enrollment\enrollment_load_balancer.cpp" />
+    <ClCompile Include="src\biotasks\enrollment\facial_enrollment.cpp" />
+    <ClCompile Include="src\biotasks\enrollment\frsdk_enrollment_processor.cpp" />
+    <ClCompile Include="src\biotasks\identification\facial_identification.cpp" />
+    <ClCompile Include="src\biotasks\identification\facial_identification_processor.cpp" />
+    <ClCompile Include="src\biotasks\identification\identification_item.cpp" />
+    <ClCompile Include="src\biotasks\identification\identification_load_balancer.cpp" />
+    <ClCompile Include="src\biotasks\verification\facial_verification.cpp" />
+    <ClCompile Include="src\biotasks\verification\facial_verification_processor.cpp" />
+    <ClCompile Include="src\biotasks\verification\verification_item.cpp" />
+    <ClCompile Include="src\biotasks\verification\verification_load_balancer.cpp" />
     <ClCompile Include="src\facial_engine.cpp" />
     <ClCompile Include="src\pipeline\biometric_pipeline_balanced.cpp" />
     <ClCompile Include="src\pipeline\face_info_awaitable.cpp" />

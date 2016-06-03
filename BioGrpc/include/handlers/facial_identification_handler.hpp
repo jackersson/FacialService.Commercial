@@ -1,27 +1,27 @@
-#ifndef FacialVerificationHandler__INCLUDED
-#define FacialVerificationHandler__INCLUDED
+#ifndef FacialIdentificationHandler__INCLUDED
+#define FacialIdentificationHandler__INCLUDED
 
 #include "engine/ifacial_engine.hpp"
 #include "protobufs/bio_service.grpc.pb.h"
 #include "common\matches.hpp"
 #include "utils\response_convertor.hpp"
-#include <common/verification_result.hpp>
+#include <common/identification_result.hpp>
 
 using BioService::FaceSearchResult;
 namespace BioGrpc
 {
-	class FacialVerificationHandler
+	class FacialIdentificationHandler
 	{
 		enum RequestStatus { CREATE, PROCESS, CAN_WRITE, START_FINISH, FINISH };
 	public:
-		FacialVerificationHandler( std::shared_ptr<BioService::BiometricFacialSevice::AsyncService> service
-			                       , grpc::ServerCompletionQueue* completion_queue
-			                       , std::shared_ptr<BioContracts::IFacialEngine> facial_engine)
-			                       : service_(service)
-			                       , server_completion_queue_(completion_queue)
-			                       , responder_(&server_context_)
-			                       , status_(CREATE)
-			                       , facial_engine_(facial_engine)
+		FacialIdentificationHandler(std::shared_ptr<BioService::BiometricFacialSevice::AsyncService> service
+			, grpc::ServerCompletionQueue* completion_queue
+			, std::shared_ptr<BioContracts::IFacialEngine> facial_engine)
+			: service_(service)
+			, server_completion_queue_(completion_queue)
+			, responder_(&server_context_)
+			, status_(CREATE)
+			, facial_engine_(facial_engine)
 		{
 			Proceed();
 		}
@@ -31,13 +31,13 @@ namespace BioGrpc
 			if (status_ == CREATE)
 			{
 				status_ = PROCESS;
-				service_->RequestVerifyFace(&server_context_, &request_
+				service_->RequestIdentifyFace(&server_context_, &request_
 					, &responder_, server_completion_queue_
 					, server_completion_queue_, this);
 			}
 			else if (status_ == PROCESS)
 			{
-				new FacialVerificationHandler(service_, server_completion_queue_, facial_engine_);
+				new FacialIdentificationHandler(service_, server_completion_queue_, facial_engine_);
 				processRequest();
 			}
 			else
@@ -52,15 +52,21 @@ namespace BioGrpc
 			std::string target_image_bytestring = request_.target_image().bytestring();
 			BioContracts::RawImage target_image(target_image_bytestring, target_image_bytestring.size());
 
-			std::string comparison_image_bytestring = request_.comparison_image().bytestring();
-			BioContracts::RawImage comparison_image(comparison_image_bytestring, comparison_image_bytestring.size());
-
-			BioContracts::VerificationResultPtr result =
-				facial_engine_->verify(target_image, comparison_image);
+			std::list<BioContracts::RawImage> comparison_images;
+			for (auto proto_it = request_.comparison_images().begin();
+				proto_it != request_.comparison_images().end(); ++proto_it)
+			{
+				std::string comparison_image_bytestring = (*proto_it).bytestring();
+				BioContracts::RawImage comparison_image(comparison_image_bytestring, comparison_image_bytestring.size());
+				comparison_images.push_back(comparison_image);
+      }
+			
+			BioContracts::IdentificationResultPtr result =
+				facial_engine_->identify(target_image, comparison_images);
 
 			std::shared_ptr<FaceSearchResult>	proto_matches;
 			if (result == nullptr)
-				proto_matches = std::make_shared<FaceSearchResult>();			
+				proto_matches = std::make_shared<FaceSearchResult>();
 			else
 			{
 				ResponseConvertor convertor;
@@ -79,7 +85,7 @@ namespace BioGrpc
 
 		std::shared_ptr<BioContracts::IFacialEngine> facial_engine_;
 
-		BioService::VerificationData                             request_;
+		BioService::IdentificationData                        request_;
 		grpc::ServerAsyncResponseWriter<FaceSearchResult>     responder_;
 
 		RequestStatus status_;
