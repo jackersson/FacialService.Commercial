@@ -5,6 +5,7 @@
 #include "utils/face_vacs_includes.hpp"
 #include "wrappers/frsdk_face_characteristics.hpp"
 #include "common/iimage_characteristic.hpp"
+#include <ctime>
 
 namespace FRsdkEntities
 {
@@ -22,10 +23,10 @@ namespace FRsdkEntities
   					, portrait_characteristics_(nullptr)
   					, iso_compliance_(nullptr)
   	{		
-  		id_ = static_cast<int>(faceLocation.pos.x() +  faceLocation.pos.y());
+  		id_ = static_cast<long>(faceLocation.pos.x() +  faceLocation.pos.y()) + clock();
   	}
   
-  	int id() const { return id_; }
+  	long id() const override { return id_; }
   
   	std::string image_id() const	{
   		return parent_image_->name();
@@ -91,7 +92,7 @@ namespace FRsdkEntities
   	FaceInfo(const FaceInfo& rhs);
   	FaceInfo const & operator=(FaceInfo const&);	
   
-  	int id_;
+		long id_;
   
   	FRsdkFaceW          face_ ;
   	mutable FRsdkEyesW  eyes_ ;

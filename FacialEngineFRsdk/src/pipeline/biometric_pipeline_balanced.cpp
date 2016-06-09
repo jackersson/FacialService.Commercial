@@ -122,7 +122,7 @@ namespace Pipeline
 
 	ImageInfoPtr BiometricPipelineBalanced::push_task(TaskInfo task_info)
 	{
-		auto image_info = std::make_shared<ImageInfo>(task_info.first);
+		auto image_info = std::make_shared<ImageInfo>(task_info.first, task_info.id);
 
 		if (nullptr == image_info)
 			return nullptr;
@@ -156,7 +156,7 @@ namespace Pipeline
 	{
 		BioFacialEngine::FaceVacsIOUtils utils;
 		auto image = utils.loadFromFile(filename);
-		auto result = process_task(image, task);
+		auto result = process_task(image, task, clock());
 
 		return result;
 	}
@@ -164,13 +164,13 @@ namespace Pipeline
 	ImageInfoPtr BiometricPipelineBalanced::push_image(const BioContracts::RawImage& raw_image, long task)
 	{
 		BioFacialEngine::FaceVacsIOUtils utils;
-		auto image = utils.loadFromBytes(raw_image.bytes(), raw_image.size());
-		auto result = process_task(image, task);
+		auto image = utils.loadFromBytes(raw_image.bytes(), raw_image.size());		
+		auto result = process_task(image, task, raw_image.id());
 
 		return result;
 	}
 
-	ImageInfoPtr BiometricPipelineBalanced::process_task(FRsdkTypes::FaceVacsImage image, long task)
+	ImageInfoPtr BiometricPipelineBalanced::process_task(FRsdkTypes::FaceVacsImage image, long task, long id)
 	{
 		if (image == nullptr)
 		{
@@ -178,7 +178,10 @@ namespace Pipeline
 			return nullptr;
 		}
 
-		TaskInfo workItem(image, task);
+		TaskInfo workItem;
+		workItem.first = image;
+		workItem.second = task;
+		workItem.id = id;
 		return push_task(workItem);
 	}
 

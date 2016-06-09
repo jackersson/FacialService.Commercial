@@ -12,6 +12,8 @@ namespace BioContracts
 	public:
 		virtual ~IFaceInfo() {}
 
+		virtual long id() const = 0;
+
 		virtual const IFaceCharacteristics& characteristics() const = 0;
 		virtual const IComlianceIsoTemplate& iso_compliance() const = 0;
 
@@ -25,7 +27,7 @@ namespace BioContracts
 	{
 	public:
 		virtual ~IImageInfo() {}
-
+		virtual long id() const = 0;
 		virtual size_t size() const = 0;
 		virtual const IFaceInfo& operator[](size_t index) const = 0;	
 	};

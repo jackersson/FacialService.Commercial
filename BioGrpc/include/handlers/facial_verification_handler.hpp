@@ -50,10 +50,10 @@ namespace BioGrpc
 		void processRequest()
 		{
 			std::string target_image_bytestring = request_.target_image().bytestring();
-			BioContracts::RawImage target_image(target_image_bytestring, target_image_bytestring.size());
+			BioContracts::RawImage target_image(target_image_bytestring, request_.target_image().id());
 
 			std::string comparison_image_bytestring = request_.comparison_image().bytestring();
-			BioContracts::RawImage comparison_image(comparison_image_bytestring, comparison_image_bytestring.size());
+			BioContracts::RawImage comparison_image(comparison_image_bytestring, request_.comparison_image().id());
 
 			BioContracts::VerificationResultPtr result =
 				facial_engine_->verify(target_image, comparison_image);
@@ -66,7 +66,7 @@ namespace BioGrpc
 				ResponseConvertor convertor;
 				proto_matches = std::make_shared<FaceSearchResult>(*convertor.get_face_search_result(result));
 			}
-
+			std::cout << "verification done size = " << result->matches().size() << std::endl;
 			status_ = FINISH;
 			responder_.Finish(*proto_matches, grpc::Status::OK, this);
 		}

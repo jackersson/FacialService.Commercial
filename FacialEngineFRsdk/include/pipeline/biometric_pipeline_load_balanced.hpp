@@ -31,7 +31,14 @@ namespace Pipeline
 
 	class BiometricPipelineBalanced : BiometricPipelineAgent
 	{
-		typedef std::pair<FRsdkTypes::FaceVacsImage, long> TaskInfo;
+		struct TaskInfo
+		{
+
+			FRsdkTypes::FaceVacsImage first;
+			long second;
+			long id;
+		};
+		//typedef std::pair<FRsdkTypes::FaceVacsImage, long> TaskInfo;
 
 		typedef std::unique_ptr<Concurrency::call<FaceInfoAwaitablePtr >> FaceInfoAwaitableCallPtr  ;
 		typedef std::unique_ptr<Concurrency::call<ImageInfoAwaitablePtr>> ImageInfoAwaitableCallPtr ;
@@ -78,7 +85,7 @@ namespace Pipeline
 	
 		FRsdkEntities::ImageInfoPtr push_image_file(const std::string& filename, long task);
 		FRsdkEntities::ImageInfoPtr push_image     (const BioContracts::RawImage& raw_image, long task);
-		FRsdkEntities::ImageInfoPtr process_task   (FRsdkTypes::FaceVacsImage image, long task);
+		FRsdkEntities::ImageInfoPtr process_task   (FRsdkTypes::FaceVacsImage image, long task, long id);
 		FRsdkEntities::ImageInfoPtr push_task      (TaskInfo work_item);
 
 

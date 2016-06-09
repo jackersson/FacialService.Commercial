@@ -43,7 +43,7 @@ namespace BioFacialEngine
 			return;
 		}
 
-		parallel_for(0, MAX_PROCESSORS_COUNT, count,
+		parallel_for(0, MAX_PROCESSORS_COUNT, 1,
 			[&](int i)
 		{
 			FacialVerificationProcessorPtr ptr(new FacialVerificationProcessor(configuration_));
@@ -53,5 +53,6 @@ namespace BioFacialEngine
 				processors_.push_back(ptr);
 			}
 		});
+		PipelineGovernor::resize(processors_.size());
 	}	
 }

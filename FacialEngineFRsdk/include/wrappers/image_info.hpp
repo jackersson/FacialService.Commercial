@@ -11,7 +11,11 @@ namespace FRsdkEntities
 	class ImageInfo : public BioContracts::IImageInfo
 	{
 	public:
-		explicit ImageInfo(FRsdkTypes::FaceVacsImage image) : image_(image){}
+		explicit ImageInfo(FRsdkTypes::FaceVacsImage image, long id) : image_(image), id_(id){}
+
+		long id() const override {
+			return id_;
+		}
 
 		FRsdkTypes::FaceVacsImage image() const {
 			return image_;
@@ -63,6 +67,8 @@ namespace FRsdkEntities
 	
 		std::vector<FaceInfoPtr> faces_;
 		FRsdkTypes::FaceVacsImage image_;
+
+		long id_;
 	};
 
 	typedef std::shared_ptr<ImageInfo>    ImageInfoPtr;

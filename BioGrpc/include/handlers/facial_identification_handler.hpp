@@ -73,6 +73,7 @@ namespace BioGrpc
 				proto_matches = std::make_shared<FaceSearchResult>(*convertor.get_face_search_result(result));
 			}
 
+			std::cout << "identification done size = " << result->matches().size() << std::endl;
 			status_ = FINISH;
 			responder_.Finish(*proto_matches, grpc::Status::OK, this);
 		}

@@ -56,7 +56,7 @@ namespace BioGrpc
 		{			
 			std::string image_bytestring = request_.bytestring();
 
-			BioContracts::RawImage image(image_bytestring, image_bytestring.size());
+			BioContracts::RawImage image(image_bytestring, request_.id());
 
 			auto start = clock();
 			

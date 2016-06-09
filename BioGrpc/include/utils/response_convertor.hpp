@@ -101,7 +101,8 @@ namespace BioGrpc
 				const BioContracts::IFaceInfo& face = (*characteristics)[i];
 				BioService::FaceCharacteristic* proto_face = proto.add_faces();
 				//auto start = clock();
-				
+				proto_face->set_id(face.id());
+				proto_face->set_photoid(characteristics->id());
 				Concurrency::parallel_invoke(
 				  [&](){update_main_face_characteristic      (*proto_face, face.characteristics());	},
 				  [&](){update_additional_face_characteristic(*proto_face, face.characteristics());	},
@@ -138,7 +139,7 @@ namespace BioGrpc
 		//todo will send to database
 		void update_main_face_characteristic( BioService::FaceCharacteristic& proto_face
 			                                   , const BioContracts::IFaceCharacteristics& face)
-		{	
+		{				
 			Concurrency::parallel_invoke(
 			  [&](){proto_face.set_allocated_box(toProtoSurroundingBox(face.faceBox()));				},
 			  [&](){proto_face.set_eye_distance (face.eyeDistance());													},
