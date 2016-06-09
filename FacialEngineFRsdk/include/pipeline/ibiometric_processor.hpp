@@ -2,10 +2,11 @@
 #define IBiometricProcessor_INCLUDED
 
 #include <wrappers/image_info.hpp>
-#include <biotasks/facial_verification.hpp>
+#include <biotasks/verification/facial_verification.hpp>
 
 #include <common/identification_result.hpp>
-#include <biotasks/facial_identification.hpp>
+#include <biotasks/identification/facial_identification.hpp>
+#include <common/verification_result.hpp>
 
 namespace Pipeline
 {

@@ -3,7 +3,6 @@
 
 #include "wrappers/face_info.hpp"
 #include "wrappers/frsdk_face_characteristics.hpp"
-#include <utils/face_vacs_io_utils.hpp>
 #include <common/iimage_characteristic.hpp>
 
 namespace FRsdkEntities

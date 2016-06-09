@@ -4,9 +4,9 @@
 #include "pipeline/ibiometric_processor.hpp"
 #include "utils/face_vacs_includes.hpp"
 
-#include "biotasks/facial_acquisition.hpp"
-#include "biotasks/facial_enrollment.hpp"
-#include "biotasks/facial_verification.hpp"
+#include "biotasks/acquisition/facial_acquisition.hpp"
+#include "biotasks/enrollment/facial_enrollment.hpp"
+#include "biotasks/verification/facial_verification.hpp"
 
 namespace Pipeline
 {
@@ -43,7 +43,7 @@ namespace Pipeline
 				  },
 				  [&]()
 				  {
-				  	enrollment_ = std::make_shared<BioFacialEngine::FacialEnrollmentProcessor>(configuration);				  			  
+				  	enrollment_ = std::make_shared<BioFacialEngine::FacialEnrollment>(configuration);				  			  
 				  },
 				  [&]() 
 				  {
@@ -77,7 +77,7 @@ namespace Pipeline
 			auto image = pInfo->image();
 
 			std::vector<FRsdkEntities::FaceVacsFullFace> faces;
-			acquisition_->findFace(image, faces);
+			acquisition_->find_face(image, faces);
 
 			pInfo->addRange(faces);
 		}
@@ -91,7 +91,7 @@ namespace Pipeline
 
 		void extract_facial_image(FRsdkEntities::FaceInfoPtr pInfo) override
 		{
-			auto result = acquisition_->extractFace(pInfo->annotated_image());
+			auto result = acquisition_->extract_face(pInfo->annotated_image());
 			pInfo->set_facial_image(result);
 
 			//std::cout << "extraction stage " << clock() << std::endl;
@@ -100,7 +100,7 @@ namespace Pipeline
 
 		void iso_compliance_test(FRsdkEntities::FaceInfoPtr pInfo) override {
 			auto portrait = pInfo->characteristics().portraitCharacteristics();
-			auto result = acquisition_->isoComplianceTest(portrait);
+			auto result = acquisition_->iso_compliance_test(portrait);
 
 			FRsdkEntities::FRsdkIsoCompliancePtr iso(new FRsdkEntities::FRsdkIsoCompliance(*result));
 			pInfo->set_iso_compliance(iso);
@@ -131,7 +131,7 @@ namespace Pipeline
 		identify(BioFacialEngine::IdentificationPair  pInfo) override
 		{			
 			auto matches = identifyer_->identify(pInfo);		
-			auto vr(std::make_shared<BioContracts::IdentificationResult>(*matches, pInfo.first));
+			auto vr(std::make_shared<BioContracts::IdentificationResult>(matches, pInfo.first));
 			vr->set_identification_images<std::list<FRsdkEntities::ImageInfoPtr>::iterator>(
 				                            pInfo.second.begin(), pInfo.second.end());			
 			return vr;			

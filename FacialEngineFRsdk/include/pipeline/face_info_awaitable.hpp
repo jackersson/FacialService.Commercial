@@ -4,7 +4,6 @@
 #include <wrappers/image_info.hpp>
 #include "pipeline/pipeline_item_holders.hpp"
 #include <mutex>
-//#include "image_info_awaitable.hpp"
 
 namespace Pipeline
 {

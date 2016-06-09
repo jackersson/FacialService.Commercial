@@ -56,7 +56,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0603;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\FVSDK_8_9_5\include;$(SolutionDir)\packages\gtest.1.7.0\build\native\include;$(SolutionDir)\packages\gflags.2.1.2.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\include;$(LocalDebuggerWorkingDirectory)\include;$(SolutionDir)\..\FacialEngineFRsdk\include;$(SolutionDir)\..\BioGrpc\include;$(SolutionDir)\..\BioContracts\include;C:\grpc\third_party\protobuf\src;C:\grpc;C:\grpc\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\FVSDK_9_1_1\include;$(SolutionDir)\packages\gtest.1.7.0\build\native\include;$(SolutionDir)\packages\gflags.2.1.2.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\include;$(LocalDebuggerWorkingDirectory)\include;$(SolutionDir)\..\FacialEngineFRsdk\include;$(SolutionDir)\..\BioGrpc\include;$(SolutionDir)\..\BioContracts\include;C:\grpc\third_party\protobuf\src;C:\grpc;C:\grpc\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -74,17 +76,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0603;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\FVSDK_8_9_5\include;$(SolutionDir)\packages\gtest.1.7.0\build\native\include;$(SolutionDir)\packages\gflags.2.1.2.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\include;$(LocalDebuggerWorkingDirectory)\include;$(SolutionDir)\..\FacialEngineFRsdk\include;$(SolutionDir)\..\BioGrpc\include;$(SolutionDir)\..\BioContracts\include;C:\grpc\third_party\protobuf\src;C:\grpc;C:\grpc\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\FVSDK_9_1_1\include;$(SolutionDir)\packages\gtest.1.7.0\build\native\include;$(SolutionDir)\packages\gflags.2.1.2.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\include;$(LocalDebuggerWorkingDirectory)\include;$(SolutionDir)\..\FacialEngineFRsdk\include;$(SolutionDir)\..\BioGrpc\include;$(SolutionDir)\..\BioContracts\include;C:\grpc\third_party\protobuf\src;C:\grpc;C:\grpc\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static\cdecl;$(SolutionDir)\packages\gtest.1.7.0\build\native\lib\$(Configuration);$(SolutionDir)\packages\gflags.2.1.2.1\build\native\$(Platform)\$(PlatformToolset)\static\Lib;C:\FVSDK_8_9_5\lib\x86_32\msc_12.0-ipp_crtdll;C:\grpc\third_party\protobuf\cmake\$(Configuration);C:\grpc\vsprojects\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;gflags.lib;gtest.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;libfrsdk-8.9.5.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static\cdecl;$(SolutionDir)\packages\gtest.1.7.0\build\native\lib\$(Configuration);$(SolutionDir)\packages\gflags.2.1.2.1\build\native\$(Platform)\$(PlatformToolset)\static\Lib;C:\FVSDK_9_1_1\lib\x86_32\msc_12.0-sse2_crtdll;C:\grpc\third_party\protobuf\cmake\$(Configuration);C:\grpc\vsprojects\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;gflags.lib;gtest.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;frsdk-9.1.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -1,30 +1,14 @@
-#include "biotasks/facial_verification.hpp"
-
+#include "biotasks/verification/facial_verification.hpp"
 
 using namespace FRsdkTypes;
 
 namespace BioFacialEngine
-{	
-	/*
-	bool FacialVerificationProcessor::init(FaceVacsConfiguration configuration)
-	{
-		try
-		{
-			processor_      = new FRsdk::Verification::Processor(*configuration);
-			/score_mappings_ = new FRsdk::ScoreMappings(*configuration);
-
-			fir_builder_ = std::make_shared<FirBilder>(configuration);
-			return true;
-		}
-		catch (std::exception& e) { std::cout << e.what(); return false; }
-	}
-	*/
-
+{		
 	FacialVerification::FacialVerification(const std::string& configuration_filename)
 	{
 		try
 		{
-			FaceVacsConfiguration configuration(new FRsdk::Configuration(configuration_filename));
+			auto configuration(std::make_shared<FRsdk::Configuration>(configuration_filename));
 			init(configuration);
 		}
 		catch (std::exception& e) {
@@ -46,6 +30,18 @@ namespace BioFacialEngine
 			return true;
 		}
 		catch (std::exception& e) { std::cout << e.what(); return false; }
+	}
+
+	BioContracts::Matches FacialVerification::verify(VerificationPair pair)
+	{
+		auto ptr = create_verification_item(pair.first);
+		ptr->verify(pair.second);
+		return ptr->matches();
+	}
+
+	VerificationItemPtr FacialVerification::create_verification_item(FRsdkEntities::ImageInfoPtr image)
+	{
+		return VerificationItemPtr(std::make_shared<VerificationItem>(image, load_balancer_));
 	}
 	
 }

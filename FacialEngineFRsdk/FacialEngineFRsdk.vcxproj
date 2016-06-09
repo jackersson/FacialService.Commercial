@@ -17,13 +17,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -53,12 +53,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0603;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\grpc\include;C:\grpc\third_party\protobuf\src;C:\grpc;C:\FVSDK_9_1_1\include;$(SolutionDir)\..\BioContracts\include;$(LocalDebuggerWorkingDirectory)\include</AdditionalIncludeDirectories>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static\cdecl;C:\grpc\third_party\protobuf\cmake\$(Configuration);$(SolutionDir)\packages\gtest.1.7.0\build\native\lib\$(Configuration);$(SolutionDir)\packages\gflags.2.1.2.1\build\native\$(Platform)\$(PlatformToolset)\static\Lib;C:\grpc\vsprojects\$(Configuration);C:\FVSDK_9_1_1\lib\x86_32\msc_12.0-sse2_crtdll_g;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;gflagsd.lib;gtestd.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;frsdkd-9.1.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static\cdecl;C:\grpc\third_party\protobuf\cmake\$(Configuration);$(SolutionDir)\packages\gtest.1.7.0\build\native\lib\$(Configuration);$(SolutionDir)\packages\gflags.2.1.2.1\build\native\$(Platform)\$(PlatformToolset)\static\Lib;C:\grpc\vsprojects\$(Configuration);C:\FVSDK_8_9_5\lib\x86_32\msc_12.0-ipp_crtdll_g;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;gflagsd.lib;gtestd.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;libfrsdk-8.9.5d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -70,9 +72,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0603;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\grpc\include;C:\grpc\third_party\protobuf\src;C:\grpc;C:\FVSDK_8_9_5\include;$(SolutionDir)\..\BioContracts\include;$(LocalDebuggerWorkingDirectory)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\grpc\include;C:\grpc\third_party\protobuf\src;C:\grpc;C:\FVSDK_9_1_1\include;$(SolutionDir)\..\BioContracts\include;$(LocalDebuggerWorkingDirectory)\include</AdditionalIncludeDirectories>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -84,11 +86,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\biotasks\facial_acquisition.hpp" />
-    <ClInclude Include="include\biotasks\facial_enrollment.hpp" />
-    <ClInclude Include="include\biotasks\facial_identification.hpp" />
-    <ClInclude Include="include\biotasks\facial_verification.hpp" />
+    <ClInclude Include="include\biotasks\acquisition\facial_acquisition.hpp" />
+    <ClInclude Include="include\biotasks\enrollment\enrollment_load_balancer.hpp" />
+    <ClInclude Include="include\biotasks\enrollment\facial_enrollment.hpp" />
+    <ClInclude Include="include\biotasks\enrollment\frsdk_enrollment_processor.hpp" />
+    <ClInclude Include="include\biotasks\enrollment\frsdk_enrollment_work_unit.hpp" />
+    <ClInclude Include="include\biotasks\identification\facial_identification.hpp" />
+    <ClInclude Include="include\biotasks\identification\facial_identification_processor.hpp" />
+    <ClInclude Include="include\biotasks\identification\identification_item.hpp" />
+    <ClInclude Include="include\biotasks\identification\identification_load_balancer.hpp" />
+    <ClInclude Include="include\biotasks\identification\identification_work_unit.hpp" />
     <ClInclude Include="include\biotasks\ifir_builder.hpp" />
+    <ClInclude Include="include\biotasks\verification\facial_verification.hpp" />
+    <ClInclude Include="include\biotasks\verification\facial_verification_processor.hpp" />
+    <ClInclude Include="include\biotasks\verification\verification_item.hpp" />
+    <ClInclude Include="include\biotasks\verification\verification_load_balancer.hpp" />
+    <ClInclude Include="include\biotasks\verification\verification_work_unit.hpp" />
     <ClInclude Include="include\facial_engine.hpp" />
     <ClInclude Include="include\feedback\facial_enrollment_feedback.hpp" />
     <ClInclude Include="include\feedback\facial_identification_feedback.hpp" />
@@ -113,10 +126,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\biotasks\facial_acquisition.cpp" />
-    <ClCompile Include="src\biotasks\facial_enrollment.cpp" />
-    <ClCompile Include="src\biotasks\facial_identification.cpp" />
-    <ClCompile Include="src\biotasks\facial_verification.cpp" />
+    <ClCompile Include="src\biotasks\acquisition\facial_acquisition.cpp" />
+    <ClCompile Include="src\biotasks\enrollment\enrollment_load_balancer.cpp" />
+    <ClCompile Include="src\biotasks\enrollment\facial_enrollment.cpp" />
+    <ClCompile Include="src\biotasks\enrollment\frsdk_enrollment_processor.cpp" />
+    <ClCompile Include="src\biotasks\identification\facial_identification.cpp" />
+    <ClCompile Include="src\biotasks\identification\facial_identification_processor.cpp" />
+    <ClCompile Include="src\biotasks\identification\identification_item.cpp" />
+    <ClCompile Include="src\biotasks\identification\identification_load_balancer.cpp" />
+    <ClCompile Include="src\biotasks\verification\facial_verification.cpp" />
+    <ClCompile Include="src\biotasks\verification\facial_verification_processor.cpp" />
+    <ClCompile Include="src\biotasks\verification\verification_item.cpp" />
+    <ClCompile Include="src\biotasks\verification\verification_load_balancer.cpp" />
     <ClCompile Include="src\facial_engine.cpp" />
     <ClCompile Include="src\pipeline\biometric_pipeline_balanced.cpp" />
     <ClCompile Include="src\pipeline\face_info_awaitable.cpp" />

@@ -17,6 +17,7 @@
 
 namespace grpc {
 class CompletionQueue;
+class Channel;
 class RpcService;
 class ServerCompletionQueue;
 class ServerContext;
@@ -45,16 +46,21 @@ class BiometricFacialSevice GRPC_FINAL {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationFeedback>> AsyncVerify(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationFeedback>>(AsyncVerifyRaw(context, request, cq));
     }
-    virtual ::grpc::Status VerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::BioService::VerificationResult* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationResult>> AsyncVerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationResult>>(AsyncVerifyFaceRaw(context, request, cq));
+    virtual ::grpc::Status VerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::BioService::FaceSearchResult* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::FaceSearchResult>> AsyncVerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::FaceSearchResult>>(AsyncVerifyFaceRaw(context, request, cq));
+    }
+    virtual ::grpc::Status IdentifyFace(::grpc::ClientContext* context, const ::BioService::IdentificationData& request, ::BioService::FaceSearchResult* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::FaceSearchResult>> AsyncIdentifyFace(::grpc::ClientContext* context, const ::BioService::IdentificationData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::BioService::FaceSearchResult>>(AsyncIdentifyFaceRaw(context, request, cq));
     }
   private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::Response>* AsyncAddSocketRaw(::grpc::ClientContext* context, const ::BioService::SocketConfiguration& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::PortraitCharacteristic>* AsyncAcquireRaw(::grpc::ClientContext* context, const ::BioService::Photo& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::EnrollmentFeedback>* AsyncEnrollRaw(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationFeedback>* AsyncVerifyRaw(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::VerificationResult>* AsyncVerifyFaceRaw(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::FaceSearchResult>* AsyncVerifyFaceRaw(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::BioService::FaceSearchResult>* AsyncIdentifyFaceRaw(::grpc::ClientContext* context, const ::BioService::IdentificationData& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub GRPC_FINAL : public StubInterface {
    public:
@@ -75,9 +81,13 @@ class BiometricFacialSevice GRPC_FINAL {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::VerificationFeedback>> AsyncVerify(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::VerificationFeedback>>(AsyncVerifyRaw(context, request, cq));
     }
-    ::grpc::Status VerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::BioService::VerificationResult* response) GRPC_OVERRIDE;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::VerificationResult>> AsyncVerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::VerificationResult>>(AsyncVerifyFaceRaw(context, request, cq));
+    ::grpc::Status VerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::BioService::FaceSearchResult* response) GRPC_OVERRIDE;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResult>> AsyncVerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResult>>(AsyncVerifyFaceRaw(context, request, cq));
+    }
+    ::grpc::Status IdentifyFace(::grpc::ClientContext* context, const ::BioService::IdentificationData& request, ::BioService::FaceSearchResult* response) GRPC_OVERRIDE;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResult>> AsyncIdentifyFace(::grpc::ClientContext* context, const ::BioService::IdentificationData& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResult>>(AsyncIdentifyFaceRaw(context, request, cq));
     }
 
    private:
@@ -86,12 +96,14 @@ class BiometricFacialSevice GRPC_FINAL {
     ::grpc::ClientAsyncResponseReader< ::BioService::PortraitCharacteristic>* AsyncAcquireRaw(::grpc::ClientContext* context, const ::BioService::Photo& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
     ::grpc::ClientAsyncResponseReader< ::BioService::EnrollmentFeedback>* AsyncEnrollRaw(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
     ::grpc::ClientAsyncResponseReader< ::BioService::VerificationFeedback>* AsyncVerifyRaw(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
-    ::grpc::ClientAsyncResponseReader< ::BioService::VerificationResult>* AsyncVerifyFaceRaw(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
+    ::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResult>* AsyncVerifyFaceRaw(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
+    ::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResult>* AsyncIdentifyFaceRaw(::grpc::ClientContext* context, const ::BioService::IdentificationData& request, ::grpc::CompletionQueue* cq) GRPC_OVERRIDE;
     const ::grpc::RpcMethod rpcmethod_AddSocket_;
     const ::grpc::RpcMethod rpcmethod_Acquire_;
     const ::grpc::RpcMethod rpcmethod_Enroll_;
     const ::grpc::RpcMethod rpcmethod_Verify_;
     const ::grpc::RpcMethod rpcmethod_VerifyFace_;
+    const ::grpc::RpcMethod rpcmethod_IdentifyFace_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -103,12 +115,13 @@ class BiometricFacialSevice GRPC_FINAL {
     virtual ::grpc::Status Acquire(::grpc::ServerContext* context, const ::BioService::Photo* request, ::BioService::PortraitCharacteristic* response);
     virtual ::grpc::Status Enroll(::grpc::ServerContext* context, const ::BioService::AcquiredData* request, ::BioService::EnrollmentFeedback* response);
     virtual ::grpc::Status Verify(::grpc::ServerContext* context, const ::BioService::AcquiredData* request, ::BioService::VerificationFeedback* response);
-    virtual ::grpc::Status VerifyFace(::grpc::ServerContext* context, const ::BioService::VerificationData* request, ::BioService::VerificationResult* response);
+    virtual ::grpc::Status VerifyFace(::grpc::ServerContext* context, const ::BioService::VerificationData* request, ::BioService::FaceSearchResult* response);
+    virtual ::grpc::Status IdentifyFace(::grpc::ServerContext* context, const ::BioService::IdentificationData* request, ::BioService::FaceSearchResult* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_AddSocket : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AddSocket() {
       ::grpc::Service::MarkMethodAsync(0);
@@ -128,7 +141,7 @@ class BiometricFacialSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_Acquire : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_Acquire() {
       ::grpc::Service::MarkMethodAsync(1);
@@ -148,7 +161,7 @@ class BiometricFacialSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_Enroll : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_Enroll() {
       ::grpc::Service::MarkMethodAsync(2);
@@ -168,7 +181,7 @@ class BiometricFacialSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_Verify : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_Verify() {
       ::grpc::Service::MarkMethodAsync(3);
@@ -188,7 +201,7 @@ class BiometricFacialSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_VerifyFace : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_VerifyFace() {
       ::grpc::Service::MarkMethodAsync(4);
@@ -197,19 +210,39 @@ class BiometricFacialSevice GRPC_FINAL {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status VerifyFace(::grpc::ServerContext* context, const ::BioService::VerificationData* request, ::BioService::VerificationResult* response) GRPC_FINAL GRPC_OVERRIDE {
+    ::grpc::Status VerifyFace(::grpc::ServerContext* context, const ::BioService::VerificationData* request, ::BioService::FaceSearchResult* response) GRPC_FINAL GRPC_OVERRIDE {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestVerifyFace(::grpc::ServerContext* context, ::BioService::VerificationData* request, ::grpc::ServerAsyncResponseWriter< ::BioService::VerificationResult>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestVerifyFace(::grpc::ServerContext* context, ::BioService::VerificationData* request, ::grpc::ServerAsyncResponseWriter< ::BioService::FaceSearchResult>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_AddSocket<WithAsyncMethod_Acquire<WithAsyncMethod_Enroll<WithAsyncMethod_Verify<WithAsyncMethod_VerifyFace<Service > > > > > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_IdentifyFace : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_IdentifyFace() {
+      ::grpc::Service::MarkMethodAsync(5);
+    }
+    ~WithAsyncMethod_IdentifyFace() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status IdentifyFace(::grpc::ServerContext* context, const ::BioService::IdentificationData* request, ::BioService::FaceSearchResult* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestIdentifyFace(::grpc::ServerContext* context, ::BioService::IdentificationData* request, ::grpc::ServerAsyncResponseWriter< ::BioService::FaceSearchResult>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_AddSocket<WithAsyncMethod_Acquire<WithAsyncMethod_Enroll<WithAsyncMethod_Verify<WithAsyncMethod_VerifyFace<WithAsyncMethod_IdentifyFace<Service > > > > > > AsyncService;
   template <class BaseClass>
   class WithGenericMethod_AddSocket : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AddSocket() {
       ::grpc::Service::MarkMethodGeneric(0);
@@ -226,7 +259,7 @@ class BiometricFacialSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_Acquire : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_Acquire() {
       ::grpc::Service::MarkMethodGeneric(1);
@@ -243,7 +276,7 @@ class BiometricFacialSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_Enroll : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_Enroll() {
       ::grpc::Service::MarkMethodGeneric(2);
@@ -260,7 +293,7 @@ class BiometricFacialSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_Verify : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_Verify() {
       ::grpc::Service::MarkMethodGeneric(3);
@@ -277,7 +310,7 @@ class BiometricFacialSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_VerifyFace : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_VerifyFace() {
       ::grpc::Service::MarkMethodGeneric(4);
@@ -286,7 +319,24 @@ class BiometricFacialSevice GRPC_FINAL {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status VerifyFace(::grpc::ServerContext* context, const ::BioService::VerificationData* request, ::BioService::VerificationResult* response) GRPC_FINAL GRPC_OVERRIDE {
+    ::grpc::Status VerifyFace(::grpc::ServerContext* context, const ::BioService::VerificationData* request, ::BioService::FaceSearchResult* response) GRPC_FINAL GRPC_OVERRIDE {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_IdentifyFace : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_IdentifyFace() {
+      ::grpc::Service::MarkMethodGeneric(5);
+    }
+    ~WithGenericMethod_IdentifyFace() GRPC_OVERRIDE {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status IdentifyFace(::grpc::ServerContext* context, const ::BioService::IdentificationData* request, ::BioService::FaceSearchResult* response) GRPC_FINAL GRPC_OVERRIDE {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -341,7 +391,7 @@ class BiometricFingerprintSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_EnrollFingerprint : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_EnrollFingerprint() {
       ::grpc::Service::MarkMethodAsync(0);
@@ -361,7 +411,7 @@ class BiometricFingerprintSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_VerifyFingerprint : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_VerifyFingerprint() {
       ::grpc::Service::MarkMethodAsync(1);
@@ -382,7 +432,7 @@ class BiometricFingerprintSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_EnrollFingerprint : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_EnrollFingerprint() {
       ::grpc::Service::MarkMethodGeneric(0);
@@ -399,7 +449,7 @@ class BiometricFingerprintSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_VerifyFingerprint : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_VerifyFingerprint() {
       ::grpc::Service::MarkMethodGeneric(1);
@@ -463,7 +513,7 @@ class BiometricDatabaseService GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_AddFacialImage : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AddFacialImage() {
       ::grpc::Service::MarkMethodAsync(0);
@@ -483,7 +533,7 @@ class BiometricDatabaseService GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_AddFingerprintImage : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AddFingerprintImage() {
       ::grpc::Service::MarkMethodAsync(1);
@@ -504,7 +554,7 @@ class BiometricDatabaseService GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_AddFacialImage : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AddFacialImage() {
       ::grpc::Service::MarkMethodGeneric(0);
@@ -521,7 +571,7 @@ class BiometricDatabaseService GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_AddFingerprintImage : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AddFingerprintImage() {
       ::grpc::Service::MarkMethodGeneric(1);
@@ -849,7 +899,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_PersonSelect : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_PersonSelect() {
       ::grpc::Service::MarkMethodAsync(0);
@@ -869,7 +919,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_AddPerson : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AddPerson() {
       ::grpc::Service::MarkMethodAsync(1);
@@ -889,7 +939,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_UpdatePerson : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_UpdatePerson() {
       ::grpc::Service::MarkMethodAsync(2);
@@ -909,7 +959,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_RemovePerson : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_RemovePerson() {
       ::grpc::Service::MarkMethodAsync(3);
@@ -929,7 +979,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_SetThumbnail : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_SetThumbnail() {
       ::grpc::Service::MarkMethodAsync(4);
@@ -949,7 +999,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_AddCard : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AddCard() {
       ::grpc::Service::MarkMethodAsync(5);
@@ -969,7 +1019,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_RemoveCards : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_RemoveCards() {
       ::grpc::Service::MarkMethodAsync(6);
@@ -989,7 +1039,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_RemoveCard : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_RemoveCard() {
       ::grpc::Service::MarkMethodAsync(7);
@@ -1009,7 +1059,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_SelectPhotos : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_SelectPhotos() {
       ::grpc::Service::MarkMethodAsync(8);
@@ -1029,7 +1079,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_AddPhoto : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AddPhoto() {
       ::grpc::Service::MarkMethodAsync(9);
@@ -1049,7 +1099,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_RemovePhotos : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_RemovePhotos() {
       ::grpc::Service::MarkMethodAsync(10);
@@ -1069,7 +1119,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_SelectVisitors : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_SelectVisitors() {
       ::grpc::Service::MarkMethodAsync(11);
@@ -1089,7 +1139,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_AttachVisitorToPerson : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AttachVisitorToPerson() {
       ::grpc::Service::MarkMethodAsync(12);
@@ -1109,7 +1159,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_RemoveVisitors : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_RemoveVisitors() {
       ::grpc::Service::MarkMethodAsync(13);
@@ -1129,7 +1179,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_AddVisitor : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AddVisitor() {
       ::grpc::Service::MarkMethodAsync(14);
@@ -1149,7 +1199,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_SelectLocations : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_SelectLocations() {
       ::grpc::Service::MarkMethodAsync(15);
@@ -1169,7 +1219,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_AddLocation : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AddLocation() {
       ::grpc::Service::MarkMethodAsync(16);
@@ -1189,7 +1239,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_UpdateLocation : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_UpdateLocation() {
       ::grpc::Service::MarkMethodAsync(17);
@@ -1209,7 +1259,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_RemoveLocation : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_RemoveLocation() {
       ::grpc::Service::MarkMethodAsync(18);
@@ -1229,7 +1279,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_AddFingerprint : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AddFingerprint() {
       ::grpc::Service::MarkMethodAsync(19);
@@ -1249,7 +1299,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_RemoveFingerprint : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_RemoveFingerprint() {
       ::grpc::Service::MarkMethodAsync(20);
@@ -1269,7 +1319,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_UpdateFingerprint : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_UpdateFingerprint() {
       ::grpc::Service::MarkMethodAsync(21);
@@ -1289,7 +1339,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_AddClient : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_AddClient() {
       ::grpc::Service::MarkMethodAsync(22);
@@ -1309,7 +1359,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithAsyncMethod_RemoveClient : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithAsyncMethod_RemoveClient() {
       ::grpc::Service::MarkMethodAsync(23);
@@ -1330,7 +1380,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_PersonSelect : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_PersonSelect() {
       ::grpc::Service::MarkMethodGeneric(0);
@@ -1347,7 +1397,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_AddPerson : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AddPerson() {
       ::grpc::Service::MarkMethodGeneric(1);
@@ -1364,7 +1414,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_UpdatePerson : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_UpdatePerson() {
       ::grpc::Service::MarkMethodGeneric(2);
@@ -1381,7 +1431,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_RemovePerson : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_RemovePerson() {
       ::grpc::Service::MarkMethodGeneric(3);
@@ -1398,7 +1448,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_SetThumbnail : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_SetThumbnail() {
       ::grpc::Service::MarkMethodGeneric(4);
@@ -1415,7 +1465,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_AddCard : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AddCard() {
       ::grpc::Service::MarkMethodGeneric(5);
@@ -1432,7 +1482,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_RemoveCards : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_RemoveCards() {
       ::grpc::Service::MarkMethodGeneric(6);
@@ -1449,7 +1499,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_RemoveCard : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_RemoveCard() {
       ::grpc::Service::MarkMethodGeneric(7);
@@ -1466,7 +1516,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_SelectPhotos : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_SelectPhotos() {
       ::grpc::Service::MarkMethodGeneric(8);
@@ -1483,7 +1533,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_AddPhoto : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AddPhoto() {
       ::grpc::Service::MarkMethodGeneric(9);
@@ -1500,7 +1550,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_RemovePhotos : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_RemovePhotos() {
       ::grpc::Service::MarkMethodGeneric(10);
@@ -1517,7 +1567,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_SelectVisitors : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_SelectVisitors() {
       ::grpc::Service::MarkMethodGeneric(11);
@@ -1534,7 +1584,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_AttachVisitorToPerson : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AttachVisitorToPerson() {
       ::grpc::Service::MarkMethodGeneric(12);
@@ -1551,7 +1601,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_RemoveVisitors : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_RemoveVisitors() {
       ::grpc::Service::MarkMethodGeneric(13);
@@ -1568,7 +1618,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_AddVisitor : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AddVisitor() {
       ::grpc::Service::MarkMethodGeneric(14);
@@ -1585,7 +1635,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_SelectLocations : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_SelectLocations() {
       ::grpc::Service::MarkMethodGeneric(15);
@@ -1602,7 +1652,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_AddLocation : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AddLocation() {
       ::grpc::Service::MarkMethodGeneric(16);
@@ -1619,7 +1669,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_UpdateLocation : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_UpdateLocation() {
       ::grpc::Service::MarkMethodGeneric(17);
@@ -1636,7 +1686,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_RemoveLocation : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_RemoveLocation() {
       ::grpc::Service::MarkMethodGeneric(18);
@@ -1653,7 +1703,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_AddFingerprint : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AddFingerprint() {
       ::grpc::Service::MarkMethodGeneric(19);
@@ -1670,7 +1720,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_RemoveFingerprint : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_RemoveFingerprint() {
       ::grpc::Service::MarkMethodGeneric(20);
@@ -1687,7 +1737,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_UpdateFingerprint : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_UpdateFingerprint() {
       ::grpc::Service::MarkMethodGeneric(21);
@@ -1704,7 +1754,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_AddClient : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_AddClient() {
       ::grpc::Service::MarkMethodGeneric(22);
@@ -1721,7 +1771,7 @@ class DatabaseSevice GRPC_FINAL {
   template <class BaseClass>
   class WithGenericMethod_RemoveClient : public BaseClass {
    private:
-    void BaseClassMustBeDerivedFromService(Service *service) {}
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
    public:
     WithGenericMethod_RemoveClient() {
       ::grpc::Service::MarkMethodGeneric(23);

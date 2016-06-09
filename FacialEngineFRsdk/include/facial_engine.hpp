@@ -20,19 +20,43 @@ namespace BioFacialEngine
 		acquire(const std::string& filename) override
 		{
 			auto acquire = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;
-			std::string shwarc = "C:\\Users\\jacke\\Desktop\\3423.jpg";
-			return pipeline_->acquire(shwarc, acquire);
+			return pipeline_->acquire(filename, acquire);
 		} 
 
 		BioContracts::IImageInfoPtr
 		acquire(const BioContracts::RawImage& raw_image) override
 		{
 			auto acquire = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;
-
-			//clock_t start = clock();
-			auto ptr = pipeline_->acquire(raw_image, acquire);
-			//std::cout << "elapsed ticks" << clock() - start << std::endl;
+			auto ptr = pipeline_->acquire(raw_image, acquire);		
 			return ptr;
+		}
+
+		BioContracts::VerificationResultPtr
+		verify(const std::string& object, const std::string& subject) override
+		{
+			auto verify = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;		
+			return pipeline_->verify_face(object, subject);
+		}
+
+		BioContracts::VerificationResultPtr
+		verify(const BioContracts::RawImage& object, const BioContracts::RawImage& subject) override
+		{
+			auto verify = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;
+			return pipeline_->verify_face(object, subject);
+		}
+
+		BioContracts::IdentificationResultPtr
+		identify(const std::string& object, const std::list<std::string>& subject) override
+		{
+			auto verify = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;		
+			return pipeline_->identify_face(object, subject);
+		}
+
+		BioContracts::IdentificationResultPtr
+		identify(const BioContracts::RawImage& object, const std::list<BioContracts::RawImage>& subject) override
+		{
+			auto verify = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;
+			return pipeline_->identify_face(object, subject);
 		}
 		
 		/*

@@ -66,6 +66,9 @@
     <ClInclude Include="include\handlers\facial_verification_handler.hpp">
       <Filter>include\handlers</Filter>
     </ClInclude>
+    <ClInclude Include="include\handlers\facial_identification_handler.hpp">
+      <Filter>include\handlers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\handlers\facial_acquisition_handler.cpp">

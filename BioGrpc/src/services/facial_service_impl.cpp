@@ -8,6 +8,7 @@
 #include "src/cpp/server/dynamic_thread_pool.h"
 
 #include <grpc++/grpc++.h>
+#include <handlers/facial_identification_handler.hpp>
 using grpc::ServerBuilder;
 
 namespace BioGrpc
@@ -32,12 +33,11 @@ namespace BioGrpc
   
 		addRpcHandler<FacialAcquisitionHandler> (*thread_pool_, builder);
 		addRpcHandler<FacialVerificationHandler>(*thread_pool_, builder);
+		addRpcHandler<FacialIdentificationHandler>(*thread_pool_, builder);
 	}
 
 	void FacialServiceImpl::start()
-	{
-		//addRpcHandler<FacialAcquisitionHandler>(context.threadPool(), builder);
-		//addRpcHandler<FacialEnrollmentHandler >(context.threadPool(), builder);
+	{	
 		for (auto it = handlers_.begin(); it != handlers_.end(); ++it)
 			thread_pool_->Add(it->second);
 	}

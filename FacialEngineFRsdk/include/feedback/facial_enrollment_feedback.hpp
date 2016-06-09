@@ -4,9 +4,6 @@
 #include <frsdk/enroll.h>
 #include "utils/face_vacs_includes.hpp"
 #include <memory>
-#include <agents.h>
-#include <ctime>
-#include <common/identification_record.hpp>
 
 namespace FacialFeedback
 {
@@ -33,23 +30,7 @@ namespace FacialFeedback
 		void success(const FRsdk::FIR& fir) override
 		{						
 			fir_ = std::make_shared<FRsdk::FIR>(fir);
-			success_ = true;
-			//std::ostringstream fir_bytestring_stream;
-			//fir_bytestring_stream << fir;
-			//fir_->copyFrom(fir_bytestring_stream.str());// = new BioContracts::Testable(fir.size());
-			//std::ostringstream fir_bytestring_stream;
-			//fir_bytestring_stream << fir;
-			//fir_bytestring_ = fir_bytestring_stream.str();	
-			//fir_bytestring_ = std::make_shared<unsigned char>(new unsigned char[fir.size()]);
-			//fir.serialize(fir_bytestring_.get());
-
-			//std::string cfg_path = "C:\\FVSDK_8_9_5\\etc\\frsdk.cfg";
-			//FRsdk::Configuration config(cfg_path);
-			//FRsdk::FIRBuilder fb(config);
-			//std::istringstream istr(fir_bytestring_);
-			//fb.build(istr);
-
-			//std::cout << "test "  << std::endl;
+			success_ = true;		
 		}
 
 		void failure() override {
@@ -64,7 +45,8 @@ namespace FacialFeedback
 			return success_;
 		}
 
-		 std::string bytestring() const	{
+		std::string bytestring() const	
+		{
 			std::ostringstream fir_bytestring_stream;
 			fir_bytestring_stream << *fir_;
 			return fir_bytestring_stream.str();

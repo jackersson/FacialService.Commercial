@@ -5,22 +5,23 @@
 #include "protobufs/bio_service.grpc.pb.h"
 #include "common\matches.hpp"
 #include "utils\response_convertor.hpp"
+#include <common/verification_result.hpp>
 
-using BioService::VerificationResult;
+using BioService::FaceSearchResult;
 namespace BioGrpc
 {
 	class FacialVerificationHandler
 	{
 		enum RequestStatus { CREATE, PROCESS, CAN_WRITE, START_FINISH, FINISH };
 	public:
-		FacialVerificationHandler(std::shared_ptr<BioService::BiometricFacialSevice::AsyncService> service
-			, grpc::ServerCompletionQueue* completion_queue
-			, std::shared_ptr<BioContracts::IFacialEngine> facial_engine)
-			: service_(service)
-			, server_completion_queue_(completion_queue)
-			, responder_(&server_context_)
-			, status_(CREATE)
-			, facial_engine_(facial_engine)
+		FacialVerificationHandler( std::shared_ptr<BioService::BiometricFacialSevice::AsyncService> service
+			                       , grpc::ServerCompletionQueue* completion_queue
+			                       , std::shared_ptr<BioContracts::IFacialEngine> facial_engine)
+			                       : service_(service)
+			                       , server_completion_queue_(completion_queue)
+			                       , responder_(&server_context_)
+			                       , status_(CREATE)
+			                       , facial_engine_(facial_engine)
 		{
 			Proceed();
 		}
@@ -49,21 +50,25 @@ namespace BioGrpc
 		void processRequest()
 		{
 			std::string target_image_bytestring = request_.target_image().bytestring();
-			BioContracts::RawImage target_image(target_image_bytestring, target_image_bytestring.size());
+			BioContracts::RawImage target_image(target_image_bytestring, request_.target_image().id());
 
 			std::string comparison_image_bytestring = request_.comparison_image().bytestring();
-			BioContracts::RawImage comparison_image(comparison_image_bytestring, comparison_image_bytestring.size());
+			BioContracts::RawImage comparison_image(comparison_image_bytestring, request_.comparison_image().id());
 
-			//BioContracts::VerificationResult result =
-				//facial_engine_->verify(target_image, comparison_image);
+			BioContracts::VerificationResultPtr result =
+				facial_engine_->verify(target_image, comparison_image);
 
-		
-		//	ResponseConvertor convertor;
-			//std::shared_ptr<BioService::VerificationResult>
-			//	proto_matches(convertor.getProtoVerificationResult(result));
-
-		//	status_ = FINISH;
-			//responder_.Finish(*proto_matches, grpc::Status::OK, this);
+			std::shared_ptr<FaceSearchResult>	proto_matches;
+			if (result == nullptr)
+				proto_matches = std::make_shared<FaceSearchResult>();			
+			else
+			{
+				ResponseConvertor convertor;
+				proto_matches = std::make_shared<FaceSearchResult>(*convertor.get_face_search_result(result));
+			}
+			std::cout << "verification done size = " << result->matches().size() << std::endl;
+			status_ = FINISH;
+			responder_.Finish(*proto_matches, grpc::Status::OK, this);
 		}
 
 
@@ -75,7 +80,7 @@ namespace BioGrpc
 		std::shared_ptr<BioContracts::IFacialEngine> facial_engine_;
 
 		BioService::VerificationData                             request_;
-		grpc::ServerAsyncResponseWriter<VerificationResult>     responder_;
+		grpc::ServerAsyncResponseWriter<FaceSearchResult>     responder_;
 
 		RequestStatus status_;
 	};

@@ -3,13 +3,10 @@
 
 #include "pipeline/pipeline_agent.hpp"
 #include "common/verification_result.hpp"
+#include "common/raw_image.hpp"
 
 #include <queue>
 #include <common/identification_result.hpp>
-
-namespace BioContracts{
-	class RawImage;
-}
 
 namespace Pipeline
 {
@@ -32,9 +29,16 @@ namespace Pipeline
 		}
 	};
 
-	class BiometricPipelineBalanced : private BiometricPipelineAgent
+	class BiometricPipelineBalanced : BiometricPipelineAgent
 	{
-		typedef std::pair<FRsdkTypes::FaceVacsImage, long> TaskInfo;
+		struct TaskInfo
+		{
+
+			FRsdkTypes::FaceVacsImage first;
+			long second;
+			long id;
+		};
+		//typedef std::pair<FRsdkTypes::FaceVacsImage, long> TaskInfo;
 
 		typedef std::unique_ptr<Concurrency::call<FaceInfoAwaitablePtr >> FaceInfoAwaitableCallPtr  ;
 		typedef std::unique_ptr<Concurrency::call<ImageInfoAwaitablePtr>> ImageInfoAwaitableCallPtr ;
@@ -42,49 +46,49 @@ namespace Pipeline
 
 	
 	public:
-		explicit BiometricPipelineBalanced( IBiometricProcessorPtr pipeline) 
-			                                : BiometricPipelineAgent(pipeline)
-			                                , governor_(MAX_PIPELINE_SLOT_COUNT)
-			                                , face_finder_(nullptr)
-			                                , facial_image_extractor_(nullptr)
-			                                , face_analyzer_(nullptr)
-			                                , iso_compliance_test_(nullptr)			                               
-			                                , finish_stage_(nullptr)
-			                                , enrollment_next_filter_id_(0)
-		{
-			queue_sizes.resize(5, 0);
-			enrollment_processors_.resize(MAX_ENROLMENT_BRANCHES_COUNT);
-
-			initialize();
-		}
+		explicit BiometricPipelineBalanced(IBiometricProcessorPtr pipeline);			                                
 
 		void initialize();
 		
 		void run() override {}
 
-		FRsdkEntities::ImageInfoPtr push(TaskInfo work_item);
+		FRsdkEntities::ImageInfoPtr acquire( const std::string& object
+			                                 , long configuration = FAST_PORTRAIT_ANALYSIS);
 
-
-		FRsdkEntities::ImageInfoPtr acquire(const std::string& object, long configuration = FAST_PORTRAIT_ANALYSIS);
-
-		FRsdkEntities::ImageInfoPtr acquire(const BioContracts::RawImage& raw_image, long task = FAST_PORTRAIT_ANALYSIS);
+		FRsdkEntities::ImageInfoPtr acquire( const BioContracts::RawImage& raw_image
+			                                 , long task = FAST_PORTRAIT_ANALYSIS);
 	
 
 		BioContracts::VerificationResultPtr verify_face( const std::string& object
-			                                               , const std::string& subject
-			                                               , bool fast = false);
+			                                             , const std::string& subject
+			                                             , bool fast = false);
+
+		BioContracts::VerificationResultPtr verify_face( const BioContracts::RawImage& object
+			                                             , const BioContracts::RawImage& subject
+			                                             , bool fast = false);
 		
 
 		BioContracts::IdentificationResultPtr identify_face( const std::string& object
-			                                                 , const std::vector<std::string>& subjects
+			                                                 , const std::list<std::string>& subjects
 			                                                 , bool fast = false);
 
-		void stop();
-		
+		BioContracts::IdentificationResultPtr
+    identify_face( const BioContracts::RawImage& object
+		             , const std::list<BioContracts::RawImage>& subjects
+							   , bool  fast = false );
+
+		void stop();		
 
 		int GetQueueSize(int queue) const { return queue_sizes[queue]; }
 
 	private:
+	
+		FRsdkEntities::ImageInfoPtr push_image_file(const std::string& filename, long task);
+		FRsdkEntities::ImageInfoPtr push_image     (const BioContracts::RawImage& raw_image, long task);
+		FRsdkEntities::ImageInfoPtr process_task   (FRsdkTypes::FaceVacsImage image, long task, long id);
+		FRsdkEntities::ImageInfoPtr push_task      (TaskInfo work_item);
+
+
 		PipelineGovernor governor_;
 
 		ImageInfoAwaitableCallPtr face_finder_;
@@ -98,9 +102,10 @@ namespace Pipeline
 		FaceInfoAwaitableCallPtr  finish_stage_;
 
 		FaceInfoAwaitableCallPtr enrollment_multiplexer_;
-		std::priority_queue<FaceInfoAwaitableCallPtr
-			, std::vector<FaceInfoAwaitablePtr>
-			, CompareAwaitableItem> enrollment_multiplex_queue_;
+
+		std::priority_queue< FaceInfoAwaitableCallPtr, std::vector<FaceInfoAwaitablePtr>
+			                 , CompareAwaitableItem> enrollment_multiplex_queue_;
+
 		FaceInfoAwaitableBuffer enrollment_multiplex_buffer_;
 		
 		int enrollment_next_filter_id_;

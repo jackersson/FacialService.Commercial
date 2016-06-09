@@ -133,18 +133,21 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* Response_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Response_reflection_ = NULL;
-const ::google::protobuf::Descriptor* IdentificationData_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  IdentificationData_reflection_ = NULL;
 const ::google::protobuf::Descriptor* VerificationData_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   VerificationData_reflection_ = NULL;
-const ::google::protobuf::Descriptor* MatchResult_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* IdentificationData_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  MatchResult_reflection_ = NULL;
-const ::google::protobuf::Descriptor* VerificationResult_descriptor_ = NULL;
+  IdentificationData_reflection_ = NULL;
+const ::google::protobuf::Descriptor* Match_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  VerificationResult_reflection_ = NULL;
+  Match_reflection_ = NULL;
+const ::google::protobuf::Descriptor* Matches_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  Matches_reflection_ = NULL;
+const ::google::protobuf::Descriptor* FaceSearchResult_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  FaceSearchResult_reflection_ = NULL;
 const ::google::protobuf::Descriptor* AcquiredData_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   AcquiredData_reflection_ = NULL;
@@ -895,23 +898,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(Response),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Response, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Response, _is_default_instance_));
-  IdentificationData_descriptor_ = file->message_type(37);
-  static const int IdentificationData_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IdentificationData, image_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IdentificationData, population_),
-  };
-  IdentificationData_reflection_ =
-    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      IdentificationData_descriptor_,
-      IdentificationData::default_instance_,
-      IdentificationData_offsets_,
-      -1,
-      -1,
-      -1,
-      sizeof(IdentificationData),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IdentificationData, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IdentificationData, _is_default_instance_));
-  VerificationData_descriptor_ = file->message_type(38);
+  VerificationData_descriptor_ = file->message_type(37);
   static const int VerificationData_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationData, target_image_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationData, comparison_image_),
@@ -927,42 +914,73 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(VerificationData),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationData, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationData, _is_default_instance_));
-  MatchResult_descriptor_ = file->message_type(39);
-  static const int MatchResult_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MatchResult, target_face_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MatchResult, comparison_face_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MatchResult, match_),
+  IdentificationData_descriptor_ = file->message_type(38);
+  static const int IdentificationData_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IdentificationData, target_image_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IdentificationData, comparison_images_),
   };
-  MatchResult_reflection_ =
+  IdentificationData_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      MatchResult_descriptor_,
-      MatchResult::default_instance_,
-      MatchResult_offsets_,
+      IdentificationData_descriptor_,
+      IdentificationData::default_instance_,
+      IdentificationData_offsets_,
       -1,
       -1,
       -1,
-      sizeof(MatchResult),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MatchResult, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MatchResult, _is_default_instance_));
-  VerificationResult_descriptor_ = file->message_type(40);
-  static const int VerificationResult_offsets_[4] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationResult, portraits_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationResult, matches_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationResult, message_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationResult, good_),
+      sizeof(IdentificationData),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IdentificationData, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IdentificationData, _is_default_instance_));
+  Match_descriptor_ = file->message_type(39);
+  static const int Match_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Match, face_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Match, match_),
   };
-  VerificationResult_reflection_ =
+  Match_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      VerificationResult_descriptor_,
-      VerificationResult::default_instance_,
-      VerificationResult_offsets_,
+      Match_descriptor_,
+      Match::default_instance_,
+      Match_offsets_,
       -1,
       -1,
       -1,
-      sizeof(VerificationResult),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationResult, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationResult, _is_default_instance_));
-  AcquiredData_descriptor_ = file->message_type(41);
+      sizeof(Match),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Match, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Match, _is_default_instance_));
+  Matches_descriptor_ = file->message_type(40);
+  static const int Matches_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Matches, face_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Matches, matches_),
+  };
+  Matches_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      Matches_descriptor_,
+      Matches::default_instance_,
+      Matches_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(Matches),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Matches, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Matches, _is_default_instance_));
+  FaceSearchResult_descriptor_ = file->message_type(41);
+  static const int FaceSearchResult_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchResult, portraits_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchResult, matches_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchResult, message_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchResult, good_),
+  };
+  FaceSearchResult_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      FaceSearchResult_descriptor_,
+      FaceSearchResult::default_instance_,
+      FaceSearchResult_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(FaceSearchResult),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchResult, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchResult, _is_default_instance_));
+  AcquiredData_descriptor_ = file->message_type(42);
   static const int AcquiredData_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcquiredData, image_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcquiredData, owner_id_),
@@ -978,7 +996,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(AcquiredData),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcquiredData, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcquiredData, _is_default_instance_));
-  FingerprintAcquiredData_descriptor_ = file->message_type(42);
+  FingerprintAcquiredData_descriptor_ = file->message_type(43);
   static const int FingerprintAcquiredData_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintAcquiredData, data_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintAcquiredData, position_),
@@ -994,7 +1012,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(FingerprintAcquiredData),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintAcquiredData, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintAcquiredData, _is_default_instance_));
-  EnrollmentFeedback_descriptor_ = file->message_type(43);
+  EnrollmentFeedback_descriptor_ = file->message_type(44);
   static const int EnrollmentFeedback_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EnrollmentFeedback, characteristic_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EnrollmentFeedback, photo_id_),
@@ -1014,7 +1032,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(EnrollmentFeedback),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EnrollmentFeedback, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EnrollmentFeedback, _is_default_instance_));
-  VerificationFeedback_descriptor_ = file->message_type(44);
+  VerificationFeedback_descriptor_ = file->message_type(45);
   static const int VerificationFeedback_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationFeedback, enrollment_feedback_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationFeedback, match_),
@@ -1030,7 +1048,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(VerificationFeedback),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationFeedback, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationFeedback, _is_default_instance_));
-  QueryPhoto_descriptor_ = file->message_type(45);
+  QueryPhoto_descriptor_ = file->message_type(46);
   static const int QueryPhoto_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPhoto, with_bytes_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPhoto, persons_),
@@ -1049,7 +1067,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPhoto, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPhoto, _is_default_instance_));
   QueryPhoto_PhotoResultType_descriptor_ = QueryPhoto_descriptor_->enum_type(0);
-  QueryPersons_descriptor_ = file->message_type(46);
+  QueryPersons_descriptor_ = file->message_type(47);
   static const int QueryPersons_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPersons, count_),
   };
@@ -1064,7 +1082,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(QueryPersons),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPersons, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPersons, _is_default_instance_));
-  QueryLocations_descriptor_ = file->message_type(47);
+  QueryLocations_descriptor_ = file->message_type(48);
   static const int QueryLocations_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryLocations, count_),
   };
@@ -1079,7 +1097,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(QueryLocations),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryLocations, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryLocations, _is_default_instance_));
-  QueryVisitors_descriptor_ = file->message_type(48);
+  QueryVisitors_descriptor_ = file->message_type(49);
   static const int QueryVisitors_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryVisitors, countries_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryVisitors, locations_),
@@ -1099,7 +1117,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(QueryVisitors),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryVisitors, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryVisitors, _is_default_instance_));
-  SocketConfiguration_descriptor_ = file->message_type(49);
+  SocketConfiguration_descriptor_ = file->message_type(50);
   static const int SocketConfiguration_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SocketConfiguration, address_),
   };
@@ -1114,7 +1132,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(SocketConfiguration),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SocketConfiguration, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SocketConfiguration, _is_default_instance_));
-  BioClient_descriptor_ = file->message_type(50);
+  BioClient_descriptor_ = file->message_type(51);
   static const int BioClient_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioClient, ip_address_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioClient, port_number_),
@@ -1230,13 +1248,15 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       Response_descriptor_, &Response::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      IdentificationData_descriptor_, &IdentificationData::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       VerificationData_descriptor_, &VerificationData::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      MatchResult_descriptor_, &MatchResult::default_instance());
+      IdentificationData_descriptor_, &IdentificationData::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      VerificationResult_descriptor_, &VerificationResult::default_instance());
+      Match_descriptor_, &Match::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      Matches_descriptor_, &Matches::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      FaceSearchResult_descriptor_, &FaceSearchResult::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       AcquiredData_descriptor_, &AcquiredData::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -1336,14 +1356,16 @@ void protobuf_ShutdownFile_bio_5fservice_2eproto() {
   delete BiometricDataList_reflection_;
   delete Response::default_instance_;
   delete Response_reflection_;
-  delete IdentificationData::default_instance_;
-  delete IdentificationData_reflection_;
   delete VerificationData::default_instance_;
   delete VerificationData_reflection_;
-  delete MatchResult::default_instance_;
-  delete MatchResult_reflection_;
-  delete VerificationResult::default_instance_;
-  delete VerificationResult_reflection_;
+  delete IdentificationData::default_instance_;
+  delete IdentificationData_reflection_;
+  delete Match::default_instance_;
+  delete Match_reflection_;
+  delete Matches::default_instance_;
+  delete Matches_reflection_;
+  delete FaceSearchResult::default_instance_;
+  delete FaceSearchResult_reflection_;
   delete AcquiredData::default_instance_;
   delete AcquiredData_reflection_;
   delete FingerprintAcquiredData::default_instance_;
@@ -1531,136 +1553,139 @@ void protobuf_AddDesc_bio_5fservice_2eproto() {
     " \003(\0132\020.BioService.Card\"<\n\021BiometricDataL"
     "ist\022\'\n\004data\030\001 \003(\0132\031.BioService.Biometric"
     "Data\",\n\010Response\022 \n\004good\030\001 \001(\0162\022.BioServ"
-    "ice.Result\"J\n\022IdentificationData\022 \n\005imag"
-    "e\030\001 \001(\0132\021.BioService.Photo\022\022\n\npopulation"
-    "\030\002 \003(\003\"h\n\020VerificationData\022\'\n\014target_ima"
-    "ge\030\001 \001(\0132\021.BioService.Photo\022+\n\020compariso"
-    "n_image\030\002 \001(\0132\021.BioService.Photo\"P\n\013Matc"
-    "hResult\022\026\n\016target_face_id\030\001 \001(\003\022\032\n\022compa"
-    "rison_face_id\030\002 \001(\003\022\r\n\005match\030\003 \001(\002\"\250\001\n\022V"
-    "erificationResult\0225\n\tportraits\030\001 \003(\0132\".B"
-    "ioService.PortraitCharacteristic\022(\n\007matc"
-    "hes\030\002 \003(\0132\027.BioService.MatchResult\022\017\n\007me"
-    "ssage\030\003 \001(\t\022 \n\004good\030\004 \001(\0162\022.BioService.R"
-    "esult\"B\n\014AcquiredData\022 \n\005image\030\001 \001(\0132\021.B"
-    "ioService.Photo\022\020\n\010owner_id\030\002 \001(\003\"g\n\027Fin"
-    "gerprintAcquiredData\022&\n\004data\030\001 \001(\0132\030.Bio"
-    "Service.AcquiredData\022$\n\010position\030\002 \001(\0162\022"
-    ".BioService.Finger\"\231\001\n\022EnrollmentFeedbac"
-    "k\022\031\n\021characteristic_id\030\001 \001(\003\022\020\n\010photo_id"
-    "\030\002 \001(\003\022\017\n\007quality\030\003 \001(\017\022\"\n\006result\030\004 \001(\0162"
-    "\022.BioService.Result\022\020\n\010progress\030\005 \001(\017\022\017\n"
-    "\007message\030\006 \001(\t\"b\n\024VerificationFeedback\022;"
-    "\n\023enrollment_feedback\030\001 \001(\0132\036.BioService"
-    ".EnrollmentFeedback\022\r\n\005match\030\002 \001(\002\"\311\001\n\nQ"
-    "ueryPhoto\022:\n\nwith_bytes\030\001 \001(\0162&.BioServi"
-    "ce.QueryPhoto.PhotoResultType\022\017\n\007persons"
-    "\030\002 \003(\003\022\016\n\006photos\030\003 \003(\003\022\026\n\016items_per_page"
-    "\030\004 \001(\003\"F\n\017PhotoResultType\022\r\n\tUndefined\020\000"
-    "\022\010\n\004Full\020\001\022\r\n\tOnlyBytes\020\002\022\013\n\007NoBytes\020\003\"\035"
-    "\n\014QueryPersons\022\r\n\005count\030\001 \001(\003\"\037\n\016QueryLo"
-    "cations\022\r\n\005count\030\001 \001(\003\"\212\001\n\rQueryVisitors"
-    "\022\021\n\tcountries\030\002 \003(\t\022\021\n\tlocations\030\003 \003(\003\022\017"
-    "\n\007persons\030\004 \003(\003\022\025\n\rdatetime_from\030\005 \001(\003\022\023"
-    "\n\013datetime_to\030\006 \001(\003\022\026\n\016items_per_page\030\007 "
-    "\001(\003\"&\n\023SocketConfiguration\022\017\n\007address\030\001 "
-    "\001(\t\"I\n\tBioClient\022\022\n\nip_address\030\001 \001(\t\022\023\n\013"
-    "port_number\030\002 \001(\003\022\023\n\013mac_address\030\003 \001(\t*T"
-    "\n\013ImageFormat\022\010\n\004JPEG\020\000\022\014\n\010JPEG2000\020\001\022\007\n"
-    "\003PNG\020\002\022\007\n\003BMP\020\003\022\007\n\003PGM\020\004\022\022\n\016GRAYSCALE_8B"
-    "IT\020\005*B\n\013EntityState\022\r\n\tUnchanged\020\000\022\t\n\005Ad"
-    "ded\020\001\022\014\n\010Modified\020\002\022\013\n\007Deleted\020\003*\256\001\n\006Fin"
-    "ger\022\007\n\003Any\020\000\022\016\n\nRightThumb\020\001\022\r\n\tLeftThum"
-    "b\020\002\022\016\n\nRightIndex\020\003\022\r\n\tLeftIndex\020\004\022\017\n\013Ri"
-    "ghtMiddle\020\005\022\016\n\nLeftMiddle\020\006\022\r\n\tRightRing"
-    "\020\007\022\014\n\010LeftRing\020\010\022\017\n\013RightLittle\020\t\022\016\n\nLef"
-    "tLittle\020\n*5\n\007EyeType\022\013\n\007NoneEye\020\000\022\010\n\004Lef"
-    "t\020\001\022\t\n\005Right\020\002\022\010\n\004Both\020\003*!\n\006Result\022\013\n\007Su"
-    "ccess\020\000\022\n\n\006Failed\020\001*(\n\006Gender\022\010\n\004None\020\000\022"
-    "\010\n\004Male\020\001\022\n\n\006Female\020\002*\?\n\006Rights\022\n\n\006Custo"
-    "m\020\000\022\014\n\010Operator\020\001\022\013\n\007Manager\020\002\022\016\n\nSuperv"
-    "isor\020\003*6\n\013MessageType\022\017\n\013Information\020\000\022\t"
-    "\n\005Error\020\001\022\013\n\007Warning\020\002*%\n\rPhotoSizeType\022"
-    "\010\n\004Full\020\000\022\n\n\006Croped\020\001*<\n\017PhotoOriginType"
-    "\022\014\n\010Enrolled\020\000\022\014\n\010Verified\020\001\022\r\n\tThumbnai"
-    "l\020\002*\370\004\n\025IsoComplianceTemplate\022\013\n\007Npthing"
-    "\020\000\022\026\n\022OnlyOneFaceVisible\020\001\022\034\n\030goodVertic"
-    "alFacePosition\020\002\022\034\n\030horizontallyCentered"
-    "Face\020\003\022\017\n\013widthOfHead\020\004\022\020\n\014lengthOfHead\020"
-    "\005\022\033\n\027widthOfHeadBestPractice\020\006\022\034\n\030length"
-    "OfHeadBestPractice\020\007\022\016\n\nresolution\020\010\022\032\n\026"
-    "resolutionBestPractice\020\t\022\"\n\036imageWidthTo"
-    "HeightBestPractice\020\n\022\020\n\014goodExposure\020\013\022\030"
-    "\n\024goodGrayScaleProfile\020\014\022\030\n\024hasNaturalSk"
-    "inColour\020\r\022\016\n\nnoHotSpots\020\016\022#\n\037isBackgrou"
-    "ndUniformBestPractice\020\017\022\r\n\tisFrontal\020\020\022\031"
-    "\n\025isFrontalBestPractice\020\021\022\025\n\021isLightingU"
-    "niform\020\022\022\030\n\024eyesOpenBestPractice\020\023\022\037\n\033ey"
-    "esGazeFrontalBestPractice\020\024\022\032\n\026eyesNotRe"
-    "dBestPractice\020\025\022\023\n\017noTintedGlasses\020\026\022\013\n\007"
-    "isSharp\020\027\022\033\n\027mouthClosedBestPractice\020\030*\?"
-    "\n\tEthnicity\022\021\n\rUnpredictable\020\000\022\t\n\005White\020"
-    "\001\022\t\n\005Black\020\002\022\t\n\005Asian\020\0032\375\002\n\025BiometricFac"
-    "ialSevice\022D\n\tAddSocket\022\037.BioService.Sock"
-    "etConfiguration\032\024.BioService.Response\"\000\022"
-    "B\n\007Acquire\022\021.BioService.Photo\032\".BioServi"
-    "ce.PortraitCharacteristic\"\000\022D\n\006Enroll\022\030."
-    "BioService.AcquiredData\032\036.BioService.Enr"
-    "ollmentFeedback\"\000\022F\n\006Verify\022\030.BioService"
-    ".AcquiredData\032 .BioService.VerificationF"
-    "eedback\"\000\022L\n\nVerifyFace\022\034.BioService.Ver"
-    "ificationData\032\036.BioService.VerificationR"
-    "esult\"\0002\313\001\n\032BiometricFingerprintSevice\022Z"
-    "\n\021EnrollFingerprint\022#.BioService.Fingerp"
-    "rintAcquiredData\032\036.BioService.Enrollment"
-    "Feedback\"\000\022Q\n\021VerifyFingerprint\022\030.BioSer"
-    "vice.AcquiredData\032 .BioService.Verificat"
-    "ionFeedback\"\0002\325\001\n\030BiometricDatabaseServi"
-    "ce\022T\n\016AddFacialImage\022\027.BioService.Facial"
-    "Image\032\'.BioService.DatabaseFacialImageRe"
-    "sponse\"\000\022c\n\023AddFingerprintImage\022\034.BioSer"
-    "vice.FingerprintImage\032,.BioService.Datab"
-    "aseFingerprintImageResponse\"\0002\240\014\n\016Databa"
-    "seSevice\022B\n\014PersonSelect\022\030.BioService.Qu"
-    "eryPersons\032\026.BioService.PersonList\"\000\0225\n\t"
-    "AddPerson\022\022.BioService.Person\032\022.BioServi"
-    "ce.Person\"\000\0228\n\014UpdatePerson\022\022.BioService"
-    ".Person\032\022.BioService.Person\"\000\0228\n\014RemoveP"
-    "erson\022\022.BioService.Person\032\022.BioService.P"
-    "erson\"\000\0229\n\014SetThumbnail\022\021.BioService.Pho"
-    "to\032\024.BioService.Response\"\000\022/\n\007AddCard\022\020."
-    "BioService.Card\032\020.BioService.Card\"\000\022;\n\013R"
-    "emoveCards\022\024.BioService.CardList\032\024.BioSe"
-    "rvice.CardList\"\000\0222\n\nRemoveCard\022\020.BioServ"
-    "ice.Card\032\020.BioService.Card\"\000\022\?\n\014SelectPh"
-    "otos\022\026.BioService.QueryPhoto\032\025.BioServic"
-    "e.PhotoList\"\000\0222\n\010AddPhoto\022\021.BioService.P"
-    "hoto\032\021.BioService.Photo\"\000\022@\n\014RemovePhoto"
-    "s\022\026.BioService.RawIndexes\032\026.BioService.R"
-    "awIndexes\"\000\022F\n\016SelectVisitors\022\031.BioServi"
-    "ce.QueryVisitors\032\027.BioService.VisitorLis"
-    "t\"\000\022D\n\025AttachVisitorToPerson\022\023.BioServic"
-    "e.Visitor\032\024.BioService.Response\"\000\022B\n\016Rem"
-    "oveVisitors\022\026.BioService.RawIndexes\032\026.Bi"
-    "oService.RawIndexes\"\000\022@\n\nAddVisitor\022\033.Bi"
-    "oService.FullVisitorData\032\023.BioService.Vi"
-    "sitor\"\000\022I\n\017SelectLocations\022\032.BioService."
-    "QueryLocations\032\030.BioService.LocationList"
-    "\"\000\022;\n\013AddLocation\022\024.BioService.Location\032"
-    "\024.BioService.Location\"\000\022>\n\016UpdateLocatio"
-    "n\022\024.BioService.Location\032\024.BioService.Loc"
-    "ation\"\000\022>\n\016RemoveLocation\022\024.BioService.L"
-    "ocation\032\024.BioService.Location\"\000\022N\n\016AddFi"
-    "ngerprint\022\034.BioService.FingerprintImage\032"
-    "\034.BioService.FingerprintImage\"\000\022Q\n\021Remov"
-    "eFingerprint\022\034.BioService.FingerprintIma"
-    "ge\032\034.BioService.FingerprintImage\"\000\022Q\n\021Up"
-    "dateFingerprint\022\034.BioService.Fingerprint"
-    "Image\032\034.BioService.FingerprintImage\"\000\022:\n"
-    "\tAddClient\022\025.BioService.BioClient\032\024.BioS"
-    "ervice.Response\"\000\022=\n\014RemoveClient\022\025.BioS"
-    "ervice.BioClient\032\024.BioService.Response\"\000"
-    "B\017\n\007ex.grpc\242\002\003RTGb\006proto3", 11505);
+    "ice.Result\"h\n\020VerificationData\022\'\n\014target"
+    "_image\030\001 \001(\0132\021.BioService.Photo\022+\n\020compa"
+    "rison_image\030\002 \001(\0132\021.BioService.Photo\"k\n\022"
+    "IdentificationData\022\'\n\014target_image\030\001 \001(\013"
+    "2\021.BioService.Photo\022,\n\021comparison_images"
+    "\030\002 \003(\0132\021.BioService.Photo\"\'\n\005Match\022\017\n\007fa"
+    "ce_id\030\002 \001(\003\022\r\n\005match\030\003 \001(\002\">\n\007Matches\022\017\n"
+    "\007face_id\030\001 \001(\003\022\"\n\007matches\030\002 \003(\0132\021.BioSer"
+    "vice.Match\"\242\001\n\020FaceSearchResult\0225\n\tportr"
+    "aits\030\001 \003(\0132\".BioService.PortraitCharacte"
+    "ristic\022$\n\007matches\030\002 \003(\0132\023.BioService.Mat"
+    "ches\022\017\n\007message\030\003 \001(\t\022 \n\004good\030\004 \001(\0162\022.Bi"
+    "oService.Result\"B\n\014AcquiredData\022 \n\005image"
+    "\030\001 \001(\0132\021.BioService.Photo\022\020\n\010owner_id\030\002 "
+    "\001(\003\"g\n\027FingerprintAcquiredData\022&\n\004data\030\001"
+    " \001(\0132\030.BioService.AcquiredData\022$\n\010positi"
+    "on\030\002 \001(\0162\022.BioService.Finger\"\231\001\n\022Enrollm"
+    "entFeedback\022\031\n\021characteristic_id\030\001 \001(\003\022\020"
+    "\n\010photo_id\030\002 \001(\003\022\017\n\007quality\030\003 \001(\017\022\"\n\006res"
+    "ult\030\004 \001(\0162\022.BioService.Result\022\020\n\010progres"
+    "s\030\005 \001(\017\022\017\n\007message\030\006 \001(\t\"b\n\024Verification"
+    "Feedback\022;\n\023enrollment_feedback\030\001 \001(\0132\036."
+    "BioService.EnrollmentFeedback\022\r\n\005match\030\002"
+    " \001(\002\"\311\001\n\nQueryPhoto\022:\n\nwith_bytes\030\001 \001(\0162"
+    "&.BioService.QueryPhoto.PhotoResultType\022"
+    "\017\n\007persons\030\002 \003(\003\022\016\n\006photos\030\003 \003(\003\022\026\n\016item"
+    "s_per_page\030\004 \001(\003\"F\n\017PhotoResultType\022\r\n\tU"
+    "ndefined\020\000\022\010\n\004Full\020\001\022\r\n\tOnlyBytes\020\002\022\013\n\007N"
+    "oBytes\020\003\"\035\n\014QueryPersons\022\r\n\005count\030\001 \001(\003\""
+    "\037\n\016QueryLocations\022\r\n\005count\030\001 \001(\003\"\212\001\n\rQue"
+    "ryVisitors\022\021\n\tcountries\030\002 \003(\t\022\021\n\tlocatio"
+    "ns\030\003 \003(\003\022\017\n\007persons\030\004 \003(\003\022\025\n\rdatetime_fr"
+    "om\030\005 \001(\003\022\023\n\013datetime_to\030\006 \001(\003\022\026\n\016items_p"
+    "er_page\030\007 \001(\003\"&\n\023SocketConfiguration\022\017\n\007"
+    "address\030\001 \001(\t\"I\n\tBioClient\022\022\n\nip_address"
+    "\030\001 \001(\t\022\023\n\013port_number\030\002 \001(\003\022\023\n\013mac_addre"
+    "ss\030\003 \001(\t*T\n\013ImageFormat\022\010\n\004JPEG\020\000\022\014\n\010JPE"
+    "G2000\020\001\022\007\n\003PNG\020\002\022\007\n\003BMP\020\003\022\007\n\003PGM\020\004\022\022\n\016GR"
+    "AYSCALE_8BIT\020\005*B\n\013EntityState\022\r\n\tUnchang"
+    "ed\020\000\022\t\n\005Added\020\001\022\014\n\010Modified\020\002\022\013\n\007Deleted"
+    "\020\003*\256\001\n\006Finger\022\007\n\003Any\020\000\022\016\n\nRightThumb\020\001\022\r"
+    "\n\tLeftThumb\020\002\022\016\n\nRightIndex\020\003\022\r\n\tLeftInd"
+    "ex\020\004\022\017\n\013RightMiddle\020\005\022\016\n\nLeftMiddle\020\006\022\r\n"
+    "\tRightRing\020\007\022\014\n\010LeftRing\020\010\022\017\n\013RightLittl"
+    "e\020\t\022\016\n\nLeftLittle\020\n*5\n\007EyeType\022\013\n\007NoneEy"
+    "e\020\000\022\010\n\004Left\020\001\022\t\n\005Right\020\002\022\010\n\004Both\020\003*!\n\006Re"
+    "sult\022\013\n\007Success\020\000\022\n\n\006Failed\020\001*(\n\006Gender\022"
+    "\010\n\004None\020\000\022\010\n\004Male\020\001\022\n\n\006Female\020\002*\?\n\006Right"
+    "s\022\n\n\006Custom\020\000\022\014\n\010Operator\020\001\022\013\n\007Manager\020\002"
+    "\022\016\n\nSupervisor\020\003*6\n\013MessageType\022\017\n\013Infor"
+    "mation\020\000\022\t\n\005Error\020\001\022\013\n\007Warning\020\002*%\n\rPhot"
+    "oSizeType\022\010\n\004Full\020\000\022\n\n\006Croped\020\001*<\n\017Photo"
+    "OriginType\022\014\n\010Enrolled\020\000\022\014\n\010Verified\020\001\022\r"
+    "\n\tThumbnail\020\002*\370\004\n\025IsoComplianceTemplate\022"
+    "\013\n\007Npthing\020\000\022\026\n\022OnlyOneFaceVisible\020\001\022\034\n\030"
+    "goodVerticalFacePosition\020\002\022\034\n\030horizontal"
+    "lyCenteredFace\020\003\022\017\n\013widthOfHead\020\004\022\020\n\014len"
+    "gthOfHead\020\005\022\033\n\027widthOfHeadBestPractice\020\006"
+    "\022\034\n\030lengthOfHeadBestPractice\020\007\022\016\n\nresolu"
+    "tion\020\010\022\032\n\026resolutionBestPractice\020\t\022\"\n\036im"
+    "ageWidthToHeightBestPractice\020\n\022\020\n\014goodEx"
+    "posure\020\013\022\030\n\024goodGrayScaleProfile\020\014\022\030\n\024ha"
+    "sNaturalSkinColour\020\r\022\016\n\nnoHotSpots\020\016\022#\n\037"
+    "isBackgroundUniformBestPractice\020\017\022\r\n\tisF"
+    "rontal\020\020\022\031\n\025isFrontalBestPractice\020\021\022\025\n\021i"
+    "sLightingUniform\020\022\022\030\n\024eyesOpenBestPracti"
+    "ce\020\023\022\037\n\033eyesGazeFrontalBestPractice\020\024\022\032\n"
+    "\026eyesNotRedBestPractice\020\025\022\023\n\017noTintedGla"
+    "sses\020\026\022\013\n\007isSharp\020\027\022\033\n\027mouthClosedBestPr"
+    "actice\020\030*\?\n\tEthnicity\022\021\n\rUnpredictable\020\000"
+    "\022\t\n\005White\020\001\022\t\n\005Black\020\002\022\t\n\005Asian\020\0032\313\003\n\025Bi"
+    "ometricFacialSevice\022D\n\tAddSocket\022\037.BioSe"
+    "rvice.SocketConfiguration\032\024.BioService.R"
+    "esponse\"\000\022B\n\007Acquire\022\021.BioService.Photo\032"
+    "\".BioService.PortraitCharacteristic\"\000\022D\n"
+    "\006Enroll\022\030.BioService.AcquiredData\032\036.BioS"
+    "ervice.EnrollmentFeedback\"\000\022F\n\006Verify\022\030."
+    "BioService.AcquiredData\032 .BioService.Ver"
+    "ificationFeedback\"\000\022J\n\nVerifyFace\022\034.BioS"
+    "ervice.VerificationData\032\034.BioService.Fac"
+    "eSearchResult\"\000\022N\n\014IdentifyFace\022\036.BioSer"
+    "vice.IdentificationData\032\034.BioService.Fac"
+    "eSearchResult\"\0002\313\001\n\032BiometricFingerprint"
+    "Sevice\022Z\n\021EnrollFingerprint\022#.BioService"
+    ".FingerprintAcquiredData\032\036.BioService.En"
+    "rollmentFeedback\"\000\022Q\n\021VerifyFingerprint\022"
+    "\030.BioService.AcquiredData\032 .BioService.V"
+    "erificationFeedback\"\0002\325\001\n\030BiometricDatab"
+    "aseService\022T\n\016AddFacialImage\022\027.BioServic"
+    "e.FacialImage\032\'.BioService.DatabaseFacia"
+    "lImageResponse\"\000\022c\n\023AddFingerprintImage\022"
+    "\034.BioService.FingerprintImage\032,.BioServi"
+    "ce.DatabaseFingerprintImageResponse\"\0002\240\014"
+    "\n\016DatabaseSevice\022B\n\014PersonSelect\022\030.BioSe"
+    "rvice.QueryPersons\032\026.BioService.PersonLi"
+    "st\"\000\0225\n\tAddPerson\022\022.BioService.Person\032\022."
+    "BioService.Person\"\000\0228\n\014UpdatePerson\022\022.Bi"
+    "oService.Person\032\022.BioService.Person\"\000\0228\n"
+    "\014RemovePerson\022\022.BioService.Person\032\022.BioS"
+    "ervice.Person\"\000\0229\n\014SetThumbnail\022\021.BioSer"
+    "vice.Photo\032\024.BioService.Response\"\000\022/\n\007Ad"
+    "dCard\022\020.BioService.Card\032\020.BioService.Car"
+    "d\"\000\022;\n\013RemoveCards\022\024.BioService.CardList"
+    "\032\024.BioService.CardList\"\000\0222\n\nRemoveCard\022\020"
+    ".BioService.Card\032\020.BioService.Card\"\000\022\?\n\014"
+    "SelectPhotos\022\026.BioService.QueryPhoto\032\025.B"
+    "ioService.PhotoList\"\000\0222\n\010AddPhoto\022\021.BioS"
+    "ervice.Photo\032\021.BioService.Photo\"\000\022@\n\014Rem"
+    "ovePhotos\022\026.BioService.RawIndexes\032\026.BioS"
+    "ervice.RawIndexes\"\000\022F\n\016SelectVisitors\022\031."
+    "BioService.QueryVisitors\032\027.BioService.Vi"
+    "sitorList\"\000\022D\n\025AttachVisitorToPerson\022\023.B"
+    "ioService.Visitor\032\024.BioService.Response\""
+    "\000\022B\n\016RemoveVisitors\022\026.BioService.RawInde"
+    "xes\032\026.BioService.RawIndexes\"\000\022@\n\nAddVisi"
+    "tor\022\033.BioService.FullVisitorData\032\023.BioSe"
+    "rvice.Visitor\"\000\022I\n\017SelectLocations\022\032.Bio"
+    "Service.QueryLocations\032\030.BioService.Loca"
+    "tionList\"\000\022;\n\013AddLocation\022\024.BioService.L"
+    "ocation\032\024.BioService.Location\"\000\022>\n\016Updat"
+    "eLocation\022\024.BioService.Location\032\024.BioSer"
+    "vice.Location\"\000\022>\n\016RemoveLocation\022\024.BioS"
+    "ervice.Location\032\024.BioService.Location\"\000\022"
+    "N\n\016AddFingerprint\022\034.BioService.Fingerpri"
+    "ntImage\032\034.BioService.FingerprintImage\"\000\022"
+    "Q\n\021RemoveFingerprint\022\034.BioService.Finger"
+    "printImage\032\034.BioService.FingerprintImage"
+    "\"\000\022Q\n\021UpdateFingerprint\022\034.BioService.Fin"
+    "gerprintImage\032\034.BioService.FingerprintIm"
+    "age\"\000\022:\n\tAddClient\022\025.BioService.BioClien"
+    "t\032\024.BioService.Response\"\000\022=\n\014RemoveClien"
+    "t\022\025.BioService.BioClient\032\024.BioService.Re"
+    "sponse\"\000B\017\n\007ex.grpc\242\002\003RTGb\006proto3", 11633);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "bio_service.proto", &protobuf_RegisterTypes);
   RawIndexes::default_instance_ = new RawIndexes();
@@ -1700,10 +1725,11 @@ void protobuf_AddDesc_bio_5fservice_2eproto() {
   CardList::default_instance_ = new CardList();
   BiometricDataList::default_instance_ = new BiometricDataList();
   Response::default_instance_ = new Response();
-  IdentificationData::default_instance_ = new IdentificationData();
   VerificationData::default_instance_ = new VerificationData();
-  MatchResult::default_instance_ = new MatchResult();
-  VerificationResult::default_instance_ = new VerificationResult();
+  IdentificationData::default_instance_ = new IdentificationData();
+  Match::default_instance_ = new Match();
+  Matches::default_instance_ = new Matches();
+  FaceSearchResult::default_instance_ = new FaceSearchResult();
   AcquiredData::default_instance_ = new AcquiredData();
   FingerprintAcquiredData::default_instance_ = new FingerprintAcquiredData();
   EnrollmentFeedback::default_instance_ = new EnrollmentFeedback();
@@ -1751,10 +1777,11 @@ void protobuf_AddDesc_bio_5fservice_2eproto() {
   CardList::default_instance_->InitAsDefaultInstance();
   BiometricDataList::default_instance_->InitAsDefaultInstance();
   Response::default_instance_->InitAsDefaultInstance();
-  IdentificationData::default_instance_->InitAsDefaultInstance();
   VerificationData::default_instance_->InitAsDefaultInstance();
-  MatchResult::default_instance_->InitAsDefaultInstance();
-  VerificationResult::default_instance_->InitAsDefaultInstance();
+  IdentificationData::default_instance_->InitAsDefaultInstance();
+  Match::default_instance_->InitAsDefaultInstance();
+  Matches::default_instance_->InitAsDefaultInstance();
+  FaceSearchResult::default_instance_->InitAsDefaultInstance();
   AcquiredData::default_instance_->InitAsDefaultInstance();
   FingerprintAcquiredData::default_instance_->InitAsDefaultInstance();
   EnrollmentFeedback::default_instance_->InitAsDefaultInstance();
@@ -2065,12 +2092,13 @@ RawIndexes* RawIndexes::New(::google::protobuf::Arena* arena) const {
 }
 
 void RawIndexes::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.RawIndexes)
   indexes_.Clear();
 }
 
 bool RawIndexes::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.RawIndexes)
   for (;;) {
@@ -2154,6 +2182,7 @@ void RawIndexes::SerializeWithCachedSizes(
 }
 
 int RawIndexes::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.RawIndexes)
   int total_size = 0;
 
   // repeated int64 indexes = 1;
@@ -2180,29 +2209,35 @@ int RawIndexes::ByteSize() const {
 }
 
 void RawIndexes::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.RawIndexes)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const RawIndexes* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const RawIndexes>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.RawIndexes)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.RawIndexes)
     MergeFrom(*source);
   }
 }
 
 void RawIndexes::MergeFrom(const RawIndexes& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.RawIndexes)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   indexes_.MergeFrom(from.indexes_);
 }
 
 void RawIndexes::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.RawIndexes)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void RawIndexes::CopyFrom(const RawIndexes& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.RawIndexes)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -2339,6 +2374,7 @@ Criminal* Criminal::New(::google::protobuf::Arena* arena) const {
 }
 
 void Criminal::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.Criminal)
   id_ = GOOGLE_LONGLONG(0);
   description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   alert_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -2346,7 +2382,7 @@ void Criminal::Clear() {
 
 bool Criminal::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.Criminal)
   for (;;) {
@@ -2489,6 +2525,7 @@ void Criminal::SerializeWithCachedSizes(
 }
 
 int Criminal::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.Criminal)
   int total_size = 0;
 
   // optional int64 id = 1;
@@ -2519,18 +2556,22 @@ int Criminal::ByteSize() const {
 }
 
 void Criminal::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.Criminal)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const Criminal* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const Criminal>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.Criminal)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.Criminal)
     MergeFrom(*source);
   }
 }
 
 void Criminal::MergeFrom(const Criminal& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.Criminal)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.id() != 0) {
     set_id(from.id());
@@ -2546,12 +2587,14 @@ void Criminal::MergeFrom(const Criminal& from) {
 }
 
 void Criminal::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.Criminal)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Criminal::CopyFrom(const Criminal& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.Criminal)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -2629,6 +2672,7 @@ void Criminal::clear_description() {
   return description_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Criminal::release_description() {
+  // @@protoc_insertion_point(field_release:BioService.Criminal.description)
   
   return description_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -2672,6 +2716,7 @@ void Criminal::clear_alert() {
   return alert_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Criminal::release_alert() {
+  // @@protoc_insertion_point(field_release:BioService.Criminal.alert)
   
   return alert_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -2763,6 +2808,7 @@ FullVisitorData* FullVisitorData::New(::google::protobuf::Arena* arena) const {
 }
 
 void FullVisitorData::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.FullVisitorData)
   if (GetArenaNoVirtual() == NULL && visitor_ != NULL) delete visitor_;
   visitor_ = NULL;
   if (GetArenaNoVirtual() == NULL && face_ != NULL) delete face_;
@@ -2773,7 +2819,7 @@ void FullVisitorData::Clear() {
 
 bool FullVisitorData::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.FullVisitorData)
   for (;;) {
@@ -2893,6 +2939,7 @@ void FullVisitorData::SerializeWithCachedSizes(
 }
 
 int FullVisitorData::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.FullVisitorData)
   int total_size = 0;
 
   // optional .BioService.Visitor visitor = 1;
@@ -2923,18 +2970,22 @@ int FullVisitorData::ByteSize() const {
 }
 
 void FullVisitorData::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.FullVisitorData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const FullVisitorData* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const FullVisitorData>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.FullVisitorData)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.FullVisitorData)
     MergeFrom(*source);
   }
 }
 
 void FullVisitorData::MergeFrom(const FullVisitorData& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.FullVisitorData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.has_visitor()) {
     mutable_visitor()->::BioService::Visitor::MergeFrom(from.visitor());
@@ -2948,12 +2999,14 @@ void FullVisitorData::MergeFrom(const FullVisitorData& from) {
 }
 
 void FullVisitorData::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.FullVisitorData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void FullVisitorData::CopyFrom(const FullVisitorData& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.FullVisitorData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -3008,6 +3061,7 @@ const ::BioService::Visitor& FullVisitorData::visitor() const {
   return visitor_;
 }
 ::BioService::Visitor* FullVisitorData::release_visitor() {
+  // @@protoc_insertion_point(field_release:BioService.FullVisitorData.visitor)
   
   ::BioService::Visitor* temp = visitor_;
   visitor_ = NULL;
@@ -3045,6 +3099,7 @@ const ::BioService::FacialImage& FullVisitorData::face() const {
   return face_;
 }
 ::BioService::FacialImage* FullVisitorData::release_face() {
+  // @@protoc_insertion_point(field_release:BioService.FullVisitorData.face)
   
   ::BioService::FacialImage* temp = face_;
   face_ = NULL;
@@ -3082,6 +3137,7 @@ const ::BioService::FingerprintImage& FullVisitorData::fingerprint() const {
   return fingerprint_;
 }
 ::BioService::FingerprintImage* FullVisitorData::release_fingerprint() {
+  // @@protoc_insertion_point(field_release:BioService.FullVisitorData.fingerprint)
   
   ::BioService::FingerprintImage* temp = fingerprint_;
   fingerprint_ = NULL;
@@ -3211,8 +3267,17 @@ Person* Person::New(::google::protobuf::Arena* arena) const {
 }
 
 void Person::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.Person)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(Person, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<Person*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -3247,7 +3312,7 @@ void Person::Clear() {
 
 bool Person::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.Person)
   for (;;) {
@@ -3882,6 +3947,7 @@ void Person::SerializeWithCachedSizes(
 }
 
 int Person::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.Person)
   int total_size = 0;
 
   // optional int64 id = 1;
@@ -4023,18 +4089,22 @@ int Person::ByteSize() const {
 }
 
 void Person::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.Person)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const Person* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const Person>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.Person)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.Person)
     MergeFrom(*source);
   }
 }
 
 void Person::MergeFrom(const Person& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.Person)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   fingerprints_.MergeFrom(from.fingerprints_);
   cards_.MergeFrom(from.cards_);
@@ -4097,12 +4167,14 @@ void Person::MergeFrom(const Person& from) {
 }
 
 void Person::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.Person)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Person::CopyFrom(const Person& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.Person)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -4196,6 +4268,7 @@ void Person::clear_firstname() {
   return firstname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Person::release_firstname() {
+  // @@protoc_insertion_point(field_release:BioService.Person.firstname)
   
   return firstname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -4239,6 +4312,7 @@ void Person::clear_lastname() {
   return lastname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Person::release_lastname() {
+  // @@protoc_insertion_point(field_release:BioService.Person.lastname)
   
   return lastname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -4310,6 +4384,7 @@ void Person::clear_country() {
   return country_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Person::release_country() {
+  // @@protoc_insertion_point(field_release:BioService.Person.country)
   
   return country_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -4353,6 +4428,7 @@ void Person::clear_city() {
   return city_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Person::release_city() {
+  // @@protoc_insertion_point(field_release:BioService.Person.city)
   
   return city_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -4396,6 +4472,7 @@ void Person::clear_comments() {
   return comments_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Person::release_comments() {
+  // @@protoc_insertion_point(field_release:BioService.Person.comments)
   
   return comments_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -4453,6 +4530,7 @@ void Person::clear_email() {
   return email_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Person::release_email() {
+  // @@protoc_insertion_point(field_release:BioService.Person.email)
   
   return email_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -4501,6 +4579,7 @@ const ::BioService::Criminal& Person::criminal() const {
   return criminal_;
 }
 ::BioService::Criminal* Person::release_criminal() {
+  // @@protoc_insertion_point(field_release:BioService.Person.criminal)
   
   ::BioService::Criminal* temp = criminal_;
   criminal_ = NULL;
@@ -4628,6 +4707,7 @@ const ::BioService::BiometricData& Person::biometric_data() const {
   return biometric_data_;
 }
 ::BioService::BiometricData* Person::release_biometric_data() {
+  // @@protoc_insertion_point(field_release:BioService.Person.biometric_data)
   
   ::BioService::BiometricData* temp = biometric_data_;
   biometric_data_ = NULL;
@@ -4702,6 +4782,7 @@ void Person::clear_message() {
   return message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Person::release_message() {
+  // @@protoc_insertion_point(field_release:BioService.Person.message)
   
   return message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -4789,8 +4870,17 @@ AccessDevice* AccessDevice::New(::google::protobuf::Arena* arena) const {
 }
 
 void AccessDevice::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.AccessDevice)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(AccessDevice, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<AccessDevice*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -4807,7 +4897,7 @@ void AccessDevice::Clear() {
 
 bool AccessDevice::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.AccessDevice)
   for (;;) {
@@ -4943,6 +5033,7 @@ void AccessDevice::SerializeWithCachedSizes(
 }
 
 int AccessDevice::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.AccessDevice)
   int total_size = 0;
 
   // optional string portname = 1;
@@ -4971,18 +5062,22 @@ int AccessDevice::ByteSize() const {
 }
 
 void AccessDevice::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.AccessDevice)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const AccessDevice* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const AccessDevice>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.AccessDevice)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.AccessDevice)
     MergeFrom(*source);
   }
 }
 
 void AccessDevice::MergeFrom(const AccessDevice& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.AccessDevice)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.portname().size() > 0) {
 
@@ -4997,12 +5092,14 @@ void AccessDevice::MergeFrom(const AccessDevice& from) {
 }
 
 void AccessDevice::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.AccessDevice)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void AccessDevice::CopyFrom(const AccessDevice& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.AccessDevice)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -5066,6 +5163,7 @@ void AccessDevice::clear_portname() {
   return portname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* AccessDevice::release_portname() {
+  // @@protoc_insertion_point(field_release:BioService.AccessDevice.portname)
   
   return portname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -5181,8 +5279,17 @@ CaptureDevice* CaptureDevice::New(::google::protobuf::Arena* arena) const {
 }
 
 void CaptureDevice::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.CaptureDevice)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(CaptureDevice, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<CaptureDevice*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -5199,7 +5306,7 @@ void CaptureDevice::Clear() {
 
 bool CaptureDevice::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.CaptureDevice)
   for (;;) {
@@ -5335,6 +5442,7 @@ void CaptureDevice::SerializeWithCachedSizes(
 }
 
 int CaptureDevice::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.CaptureDevice)
   int total_size = 0;
 
   // optional string devicename = 1;
@@ -5363,18 +5471,22 @@ int CaptureDevice::ByteSize() const {
 }
 
 void CaptureDevice::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.CaptureDevice)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const CaptureDevice* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const CaptureDevice>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.CaptureDevice)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.CaptureDevice)
     MergeFrom(*source);
   }
 }
 
 void CaptureDevice::MergeFrom(const CaptureDevice& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.CaptureDevice)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.devicename().size() > 0) {
 
@@ -5389,12 +5501,14 @@ void CaptureDevice::MergeFrom(const CaptureDevice& from) {
 }
 
 void CaptureDevice::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.CaptureDevice)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void CaptureDevice::CopyFrom(const CaptureDevice& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.CaptureDevice)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -5458,6 +5572,7 @@ void CaptureDevice::clear_devicename() {
   return devicename_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* CaptureDevice::release_devicename() {
+  // @@protoc_insertion_point(field_release:BioService.CaptureDevice.devicename)
   
   return devicename_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -5576,8 +5691,17 @@ FingerprintDevice* FingerprintDevice::New(::google::protobuf::Arena* arena) cons
 }
 
 void FingerprintDevice::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.FingerprintDevice)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(FingerprintDevice, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<FingerprintDevice*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -5595,7 +5719,7 @@ void FingerprintDevice::Clear() {
 
 bool FingerprintDevice::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.FingerprintDevice)
   for (;;) {
@@ -5769,6 +5893,7 @@ void FingerprintDevice::SerializeWithCachedSizes(
 }
 
 int FingerprintDevice::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.FingerprintDevice)
   int total_size = 0;
 
   // optional string devicename = 1;
@@ -5804,18 +5929,22 @@ int FingerprintDevice::ByteSize() const {
 }
 
 void FingerprintDevice::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.FingerprintDevice)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const FingerprintDevice* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const FingerprintDevice>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.FingerprintDevice)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.FingerprintDevice)
     MergeFrom(*source);
   }
 }
 
 void FingerprintDevice::MergeFrom(const FingerprintDevice& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.FingerprintDevice)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.devicename().size() > 0) {
 
@@ -5834,12 +5963,14 @@ void FingerprintDevice::MergeFrom(const FingerprintDevice& from) {
 }
 
 void FingerprintDevice::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.FingerprintDevice)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void FingerprintDevice::CopyFrom(const FingerprintDevice& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.FingerprintDevice)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -5904,6 +6035,7 @@ void FingerprintDevice::clear_devicename() {
   return devicename_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* FingerprintDevice::release_devicename() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintDevice.devicename)
   
   return devicename_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -5947,6 +6079,7 @@ void FingerprintDevice::clear_serial_number() {
   return serial_number_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* FingerprintDevice::release_serial_number() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintDevice.serial_number)
   
   return serial_number_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -6065,8 +6198,17 @@ IrisDevice* IrisDevice::New(::google::protobuf::Arena* arena) const {
 }
 
 void IrisDevice::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.IrisDevice)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(IrisDevice, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<IrisDevice*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -6084,7 +6226,7 @@ void IrisDevice::Clear() {
 
 bool IrisDevice::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.IrisDevice)
   for (;;) {
@@ -6258,6 +6400,7 @@ void IrisDevice::SerializeWithCachedSizes(
 }
 
 int IrisDevice::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.IrisDevice)
   int total_size = 0;
 
   // optional string devicename = 1;
@@ -6293,18 +6436,22 @@ int IrisDevice::ByteSize() const {
 }
 
 void IrisDevice::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.IrisDevice)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const IrisDevice* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const IrisDevice>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.IrisDevice)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.IrisDevice)
     MergeFrom(*source);
   }
 }
 
 void IrisDevice::MergeFrom(const IrisDevice& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.IrisDevice)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.devicename().size() > 0) {
 
@@ -6323,12 +6470,14 @@ void IrisDevice::MergeFrom(const IrisDevice& from) {
 }
 
 void IrisDevice::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.IrisDevice)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void IrisDevice::CopyFrom(const IrisDevice& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.IrisDevice)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -6393,6 +6542,7 @@ void IrisDevice::clear_devicename() {
   return devicename_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* IrisDevice::release_devicename() {
+  // @@protoc_insertion_point(field_release:BioService.IrisDevice.devicename)
   
   return devicename_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -6436,6 +6586,7 @@ void IrisDevice::clear_serial_number() {
   return serial_number_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* IrisDevice::release_serial_number() {
+  // @@protoc_insertion_point(field_release:BioService.IrisDevice.serial_number)
   
   return serial_number_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -6555,8 +6706,17 @@ Card* Card::New(::google::protobuf::Arena* arena) const {
 }
 
 void Card::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.Card)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(Card, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<Card*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -6574,7 +6734,7 @@ void Card::Clear() {
 
 bool Card::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.Card)
   for (;;) {
@@ -6760,6 +6920,7 @@ void Card::SerializeWithCachedSizes(
 }
 
 int Card::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.Card)
   int total_size = 0;
 
   // optional int64 id = 1;
@@ -6802,18 +6963,22 @@ int Card::ByteSize() const {
 }
 
 void Card::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.Card)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const Card* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const Card>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.Card)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.Card)
     MergeFrom(*source);
   }
 }
 
 void Card::MergeFrom(const Card& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.Card)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.id() != 0) {
     set_id(from.id());
@@ -6834,12 +6999,14 @@ void Card::MergeFrom(const Card& from) {
 }
 
 void Card::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.Card)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Card::CopyFrom(const Card& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.Card)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -6933,6 +7100,7 @@ void Card::clear_unique_number() {
   return unique_number_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Card::release_unique_number() {
+  // @@protoc_insertion_point(field_release:BioService.Card.unique_number)
   
   return unique_number_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7076,8 +7244,17 @@ Location* Location::New(::google::protobuf::Arena* arena) const {
 }
 
 void Location::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.Location)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(Location, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<Location*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -7107,7 +7284,7 @@ void Location::Clear() {
 
 bool Location::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.Location)
   for (;;) {
@@ -7474,6 +7651,7 @@ void Location::SerializeWithCachedSizes(
 }
 
 int Location::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.Location)
   int total_size = 0;
 
   // optional int64 id = 1;
@@ -7558,18 +7736,22 @@ int Location::ByteSize() const {
 }
 
 void Location::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.Location)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const Location* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const Location>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.Location)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.Location)
     MergeFrom(*source);
   }
 }
 
 void Location::MergeFrom(const Location& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.Location)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.id() != 0) {
     set_id(from.id());
@@ -7610,12 +7792,14 @@ void Location::MergeFrom(const Location& from) {
 }
 
 void Location::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.Location)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Location::CopyFrom(const Location& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.Location)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -7701,6 +7885,7 @@ void Location::clear_location_name() {
   return location_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Location::release_location_name() {
+  // @@protoc_insertion_point(field_release:BioService.Location.location_name)
   
   return location_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7744,6 +7929,7 @@ void Location::clear_description() {
   return description_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Location::release_description() {
+  // @@protoc_insertion_point(field_release:BioService.Location.description)
   
   return description_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7787,6 +7973,7 @@ void Location::clear_mac_address() {
   return mac_address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Location::release_mac_address() {
+  // @@protoc_insertion_point(field_release:BioService.Location.mac_address)
   
   return mac_address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -7821,6 +8008,7 @@ const ::BioService::CaptureDevice& Location::capturedevice() const {
   return capturedevice_;
 }
 ::BioService::CaptureDevice* Location::release_capturedevice() {
+  // @@protoc_insertion_point(field_release:BioService.Location.captureDevice)
   
   ::BioService::CaptureDevice* temp = capturedevice_;
   capturedevice_ = NULL;
@@ -7858,6 +8046,7 @@ const ::BioService::AccessDevice& Location::accessdevice() const {
   return accessdevice_;
 }
 ::BioService::AccessDevice* Location::release_accessdevice() {
+  // @@protoc_insertion_point(field_release:BioService.Location.accessDevice)
   
   ::BioService::AccessDevice* temp = accessdevice_;
   accessdevice_ = NULL;
@@ -7895,6 +8084,7 @@ const ::BioService::FingerprintDevice& Location::fingerprintdevice() const {
   return fingerprintdevice_;
 }
 ::BioService::FingerprintDevice* Location::release_fingerprintdevice() {
+  // @@protoc_insertion_point(field_release:BioService.Location.fingerprintDevice)
   
   ::BioService::FingerprintDevice* temp = fingerprintdevice_;
   fingerprintdevice_ = NULL;
@@ -7932,6 +8122,7 @@ const ::BioService::IrisDevice& Location::irisdevice() const {
   return irisdevice_;
 }
 ::BioService::IrisDevice* Location::release_irisdevice() {
+  // @@protoc_insertion_point(field_release:BioService.Location.irisDevice)
   
   ::BioService::IrisDevice* temp = irisdevice_;
   irisdevice_ = NULL;
@@ -7969,6 +8160,7 @@ const ::BioService::AccessInfo& Location::access_info() const {
   return access_info_;
 }
 ::BioService::AccessInfo* Location::release_access_info() {
+  // @@protoc_insertion_point(field_release:BioService.Location.access_info)
   
   ::BioService::AccessInfo* temp = access_info_;
   access_info_ = NULL;
@@ -8109,8 +8301,17 @@ AccessInfo* AccessInfo::New(::google::protobuf::Arena* arena) const {
 }
 
 void AccessInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.AccessInfo)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(AccessInfo, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<AccessInfo*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -8127,7 +8328,7 @@ void AccessInfo::Clear() {
 
 bool AccessInfo::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.AccessInfo)
   for (;;) {
@@ -8283,6 +8484,7 @@ void AccessInfo::SerializeWithCachedSizes(
 }
 
 int AccessInfo::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.AccessInfo)
   int total_size = 0;
 
   // optional .BioService.AccessInfo.AccessType access_type = 1;
@@ -8318,18 +8520,22 @@ int AccessInfo::ByteSize() const {
 }
 
 void AccessInfo::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.AccessInfo)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const AccessInfo* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const AccessInfo>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.AccessInfo)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.AccessInfo)
     MergeFrom(*source);
   }
 }
 
 void AccessInfo::MergeFrom(const AccessInfo& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.AccessInfo)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   persons_.MergeFrom(from.persons_);
   if (from.access_type() != 0) {
@@ -8344,12 +8550,14 @@ void AccessInfo::MergeFrom(const AccessInfo& from) {
 }
 
 void AccessInfo::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.AccessInfo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void AccessInfo::CopyFrom(const AccessInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.AccessInfo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -8541,6 +8749,7 @@ LogRecord* LogRecord::New(::google::protobuf::Arena* arena) const {
 }
 
 void LogRecord::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.LogRecord)
   message_type_ = 0;
   detected_time_ = GOOGLE_LONGLONG(0);
   exception_message_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -8552,7 +8761,7 @@ void LogRecord::Clear() {
 
 bool LogRecord::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.LogRecord)
   for (;;) {
@@ -8824,6 +9033,7 @@ void LogRecord::SerializeWithCachedSizes(
 }
 
 int LogRecord::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.LogRecord)
   int total_size = 0;
 
   // optional .BioService.MessageType message_type = 1;
@@ -8881,18 +9091,22 @@ int LogRecord::ByteSize() const {
 }
 
 void LogRecord::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.LogRecord)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const LogRecord* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const LogRecord>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.LogRecord)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.LogRecord)
     MergeFrom(*source);
   }
 }
 
 void LogRecord::MergeFrom(const LogRecord& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.LogRecord)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.message_type() != 0) {
     set_message_type(from.message_type());
@@ -8922,12 +9136,14 @@ void LogRecord::MergeFrom(const LogRecord& from) {
 }
 
 void LogRecord::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.LogRecord)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void LogRecord::CopyFrom(const LogRecord& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.LogRecord)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -9023,6 +9239,7 @@ void LogRecord::clear_exception_message() {
   return exception_message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* LogRecord::release_exception_message() {
+  // @@protoc_insertion_point(field_release:BioService.LogRecord.exception_message)
   
   return exception_message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -9066,6 +9283,7 @@ void LogRecord::clear_class_name() {
   return class_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* LogRecord::release_class_name() {
+  // @@protoc_insertion_point(field_release:BioService.LogRecord.class_name)
   
   return class_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -9109,6 +9327,7 @@ void LogRecord::clear_function_name() {
   return function_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* LogRecord::release_function_name() {
+  // @@protoc_insertion_point(field_release:BioService.LogRecord.function_name)
   
   return function_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -9166,6 +9385,7 @@ void LogRecord::clear_comment() {
   return comment_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* LogRecord::release_comment() {
+  // @@protoc_insertion_point(field_release:BioService.LogRecord.comment)
   
   return comment_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -9255,8 +9475,17 @@ ConfidentPosition* ConfidentPosition::New(::google::protobuf::Arena* arena) cons
 }
 
 void ConfidentPosition::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.ConfidentPosition)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(ConfidentPosition, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<ConfidentPosition*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -9272,7 +9501,7 @@ void ConfidentPosition::Clear() {
 
 bool ConfidentPosition::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.ConfidentPosition)
   for (;;) {
@@ -9445,6 +9674,7 @@ void ConfidentPosition::SerializeWithCachedSizes(
 }
 
 int ConfidentPosition::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.ConfidentPosition)
   int total_size = 0;
 
   // optional float xpos = 1;
@@ -9481,18 +9711,22 @@ int ConfidentPosition::ByteSize() const {
 }
 
 void ConfidentPosition::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.ConfidentPosition)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const ConfidentPosition* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const ConfidentPosition>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.ConfidentPosition)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.ConfidentPosition)
     MergeFrom(*source);
   }
 }
 
 void ConfidentPosition::MergeFrom(const ConfidentPosition& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.ConfidentPosition)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.xpos() != 0) {
     set_xpos(from.xpos());
@@ -9512,12 +9746,14 @@ void ConfidentPosition::MergeFrom(const ConfidentPosition& from) {
 }
 
 void ConfidentPosition::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.ConfidentPosition)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void ConfidentPosition::CopyFrom(const ConfidentPosition& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.ConfidentPosition)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -9703,8 +9939,17 @@ EyesCharacteristic* EyesCharacteristic::New(::google::protobuf::Arena* arena) co
 }
 
 void EyesCharacteristic::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.EyesCharacteristic)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(EyesCharacteristic, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<EyesCharacteristic*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -9725,7 +9970,7 @@ void EyesCharacteristic::Clear() {
 
 bool EyesCharacteristic::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.EyesCharacteristic)
   for (;;) {
@@ -9900,6 +10145,7 @@ void EyesCharacteristic::SerializeWithCachedSizes(
 }
 
 int EyesCharacteristic::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.EyesCharacteristic)
   int total_size = 0;
 
   // optional int64 id = 1;
@@ -9942,18 +10188,22 @@ int EyesCharacteristic::ByteSize() const {
 }
 
 void EyesCharacteristic::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.EyesCharacteristic)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const EyesCharacteristic* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const EyesCharacteristic>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.EyesCharacteristic)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.EyesCharacteristic)
     MergeFrom(*source);
   }
 }
 
 void EyesCharacteristic::MergeFrom(const EyesCharacteristic& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.EyesCharacteristic)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.id() != 0) {
     set_id(from.id());
@@ -9973,12 +10223,14 @@ void EyesCharacteristic::MergeFrom(const EyesCharacteristic& from) {
 }
 
 void EyesCharacteristic::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.EyesCharacteristic)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void EyesCharacteristic::CopyFrom(const EyesCharacteristic& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.EyesCharacteristic)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -10049,6 +10301,7 @@ const ::BioService::DetailedEyeCharacteristic& EyesCharacteristic::left_eye() co
   return left_eye_;
 }
 ::BioService::DetailedEyeCharacteristic* EyesCharacteristic::release_left_eye() {
+  // @@protoc_insertion_point(field_release:BioService.EyesCharacteristic.left_eye)
   
   ::BioService::DetailedEyeCharacteristic* temp = left_eye_;
   left_eye_ = NULL;
@@ -10086,6 +10339,7 @@ const ::BioService::DetailedEyeCharacteristic& EyesCharacteristic::right_eye() c
   return right_eye_;
 }
 ::BioService::DetailedEyeCharacteristic* EyesCharacteristic::release_right_eye() {
+  // @@protoc_insertion_point(field_release:BioService.EyesCharacteristic.right_eye)
   
   ::BioService::DetailedEyeCharacteristic* temp = right_eye_;
   right_eye_ = NULL;
@@ -10197,12 +10451,13 @@ PortraitCharacteristic* PortraitCharacteristic::New(::google::protobuf::Arena* a
 }
 
 void PortraitCharacteristic::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.PortraitCharacteristic)
   faces_.Clear();
 }
 
 bool PortraitCharacteristic::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.PortraitCharacteristic)
   for (;;) {
@@ -10274,6 +10529,7 @@ void PortraitCharacteristic::SerializeWithCachedSizes(
 }
 
 int PortraitCharacteristic::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.PortraitCharacteristic)
   int total_size = 0;
 
   // repeated .BioService.FaceCharacteristic faces = 1;
@@ -10291,29 +10547,35 @@ int PortraitCharacteristic::ByteSize() const {
 }
 
 void PortraitCharacteristic::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.PortraitCharacteristic)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const PortraitCharacteristic* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const PortraitCharacteristic>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.PortraitCharacteristic)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.PortraitCharacteristic)
     MergeFrom(*source);
   }
 }
 
 void PortraitCharacteristic::MergeFrom(const PortraitCharacteristic& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.PortraitCharacteristic)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   faces_.MergeFrom(from.faces_);
 }
 
 void PortraitCharacteristic::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.PortraitCharacteristic)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void PortraitCharacteristic::CopyFrom(const PortraitCharacteristic& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.PortraitCharacteristic)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -10499,8 +10761,17 @@ FaceCharacteristic* FaceCharacteristic::New(::google::protobuf::Arena* arena) co
 }
 
 void FaceCharacteristic::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.FaceCharacteristic)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(FaceCharacteristic, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<FaceCharacteristic*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -10529,7 +10800,7 @@ void FaceCharacteristic::Clear() {
 
 bool FaceCharacteristic::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.FaceCharacteristic)
   for (;;) {
@@ -11236,6 +11507,7 @@ void FaceCharacteristic::SerializeWithCachedSizes(
 }
 
 int FaceCharacteristic::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.FaceCharacteristic)
   int total_size = 0;
 
   // optional int64 id = 1;
@@ -11393,18 +11665,22 @@ int FaceCharacteristic::ByteSize() const {
 }
 
 void FaceCharacteristic::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.FaceCharacteristic)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const FaceCharacteristic* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const FaceCharacteristic>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.FaceCharacteristic)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.FaceCharacteristic)
     MergeFrom(*source);
   }
 }
 
 void FaceCharacteristic::MergeFrom(const FaceCharacteristic& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.FaceCharacteristic)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.id() != 0) {
     set_id(from.id());
@@ -11487,12 +11763,14 @@ void FaceCharacteristic::MergeFrom(const FaceCharacteristic& from) {
 }
 
 void FaceCharacteristic::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.FaceCharacteristic)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void FaceCharacteristic::CopyFrom(const FaceCharacteristic& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.FaceCharacteristic)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -11584,6 +11862,7 @@ const ::BioService::SurroundingBox& FaceCharacteristic::box() const {
   return box_;
 }
 ::BioService::SurroundingBox* FaceCharacteristic::release_box() {
+  // @@protoc_insertion_point(field_release:BioService.FaceCharacteristic.box)
   
   ::BioService::SurroundingBox* temp = box_;
   box_ = NULL;
@@ -11635,6 +11914,7 @@ const ::BioService::Position& FaceCharacteristic::face_center() const {
   return face_center_;
 }
 ::BioService::Position* FaceCharacteristic::release_face_center() {
+  // @@protoc_insertion_point(field_release:BioService.FaceCharacteristic.face_center)
   
   ::BioService::Position* temp = face_center_;
   face_center_ = NULL;
@@ -11868,6 +12148,7 @@ const ::BioService::EyesCharacteristic& FaceCharacteristic::eyes() const {
   return eyes_;
 }
 ::BioService::EyesCharacteristic* FaceCharacteristic::release_eyes() {
+  // @@protoc_insertion_point(field_release:BioService.FaceCharacteristic.eyes)
   
   ::BioService::EyesCharacteristic* temp = eyes_;
   eyes_ = NULL;
@@ -12052,8 +12333,17 @@ Position* Position::New(::google::protobuf::Arena* arena) const {
 }
 
 void Position::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.Position)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(Position, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<Position*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -12069,7 +12359,7 @@ void Position::Clear() {
 
 bool Position::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.Position)
   for (;;) {
@@ -12161,6 +12451,7 @@ void Position::SerializeWithCachedSizes(
 }
 
 int Position::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.Position)
   int total_size = 0;
 
   // optional float x = 1;
@@ -12180,18 +12471,22 @@ int Position::ByteSize() const {
 }
 
 void Position::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.Position)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const Position* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const Position>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.Position)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.Position)
     MergeFrom(*source);
   }
 }
 
 void Position::MergeFrom(const Position& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.Position)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.x() != 0) {
     set_x(from.x());
@@ -12202,12 +12497,14 @@ void Position::MergeFrom(const Position& from) {
 }
 
 void Position::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.Position)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Position::CopyFrom(const Position& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.Position)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -12342,6 +12639,7 @@ SurroundingBox* SurroundingBox::New(::google::protobuf::Arena* arena) const {
 }
 
 void SurroundingBox::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.SurroundingBox)
   if (GetArenaNoVirtual() == NULL && begin_ != NULL) delete begin_;
   begin_ = NULL;
   if (GetArenaNoVirtual() == NULL && end_ != NULL) delete end_;
@@ -12350,7 +12648,7 @@ void SurroundingBox::Clear() {
 
 bool SurroundingBox::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.SurroundingBox)
   for (;;) {
@@ -12444,6 +12742,7 @@ void SurroundingBox::SerializeWithCachedSizes(
 }
 
 int SurroundingBox::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.SurroundingBox)
   int total_size = 0;
 
   // optional .BioService.Position begin = 1;
@@ -12467,18 +12766,22 @@ int SurroundingBox::ByteSize() const {
 }
 
 void SurroundingBox::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.SurroundingBox)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const SurroundingBox* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const SurroundingBox>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.SurroundingBox)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.SurroundingBox)
     MergeFrom(*source);
   }
 }
 
 void SurroundingBox::MergeFrom(const SurroundingBox& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.SurroundingBox)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.has_begin()) {
     mutable_begin()->::BioService::Position::MergeFrom(from.begin());
@@ -12489,12 +12792,14 @@ void SurroundingBox::MergeFrom(const SurroundingBox& from) {
 }
 
 void SurroundingBox::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.SurroundingBox)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void SurroundingBox::CopyFrom(const SurroundingBox& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.SurroundingBox)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -12548,6 +12853,7 @@ const ::BioService::Position& SurroundingBox::begin() const {
   return begin_;
 }
 ::BioService::Position* SurroundingBox::release_begin() {
+  // @@protoc_insertion_point(field_release:BioService.SurroundingBox.begin)
   
   ::BioService::Position* temp = begin_;
   begin_ = NULL;
@@ -12585,6 +12891,7 @@ const ::BioService::Position& SurroundingBox::end() const {
   return end_;
 }
 ::BioService::Position* SurroundingBox::release_end() {
+  // @@protoc_insertion_point(field_release:BioService.SurroundingBox.end)
   
   ::BioService::Position* temp = end_;
   end_ = NULL;
@@ -12681,8 +12988,17 @@ DetailedEyeCharacteristic* DetailedEyeCharacteristic::New(::google::protobuf::Ar
 }
 
 void DetailedEyeCharacteristic::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.DetailedEyeCharacteristic)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(DetailedEyeCharacteristic, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<DetailedEyeCharacteristic*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -12700,7 +13016,7 @@ void DetailedEyeCharacteristic::Clear() {
 
 bool DetailedEyeCharacteristic::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.DetailedEyeCharacteristic)
   for (;;) {
@@ -12893,6 +13209,7 @@ void DetailedEyeCharacteristic::SerializeWithCachedSizes(
 }
 
 int DetailedEyeCharacteristic::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.DetailedEyeCharacteristic)
   int total_size = 0;
 
   // optional .BioService.Position position = 1;
@@ -12934,18 +13251,22 @@ int DetailedEyeCharacteristic::ByteSize() const {
 }
 
 void DetailedEyeCharacteristic::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.DetailedEyeCharacteristic)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const DetailedEyeCharacteristic* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const DetailedEyeCharacteristic>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.DetailedEyeCharacteristic)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.DetailedEyeCharacteristic)
     MergeFrom(*source);
   }
 }
 
 void DetailedEyeCharacteristic::MergeFrom(const DetailedEyeCharacteristic& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.DetailedEyeCharacteristic)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.has_position()) {
     mutable_position()->::BioService::Position::MergeFrom(from.position());
@@ -12968,12 +13289,14 @@ void DetailedEyeCharacteristic::MergeFrom(const DetailedEyeCharacteristic& from)
 }
 
 void DetailedEyeCharacteristic::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.DetailedEyeCharacteristic)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void DetailedEyeCharacteristic::CopyFrom(const DetailedEyeCharacteristic& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.DetailedEyeCharacteristic)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -13031,6 +13354,7 @@ const ::BioService::Position& DetailedEyeCharacteristic::position() const {
   return position_;
 }
 ::BioService::Position* DetailedEyeCharacteristic::release_position() {
+  // @@protoc_insertion_point(field_release:BioService.DetailedEyeCharacteristic.position)
   
   ::BioService::Position* temp = position_;
   position_ = NULL;
@@ -13199,8 +13523,17 @@ FingerprintCharacteristic* FingerprintCharacteristic::New(::google::protobuf::Ar
 }
 
 void FingerprintCharacteristic::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.FingerprintCharacteristic)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(FingerprintCharacteristic, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<FingerprintCharacteristic*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -13216,7 +13549,7 @@ void FingerprintCharacteristic::Clear() {
 
 bool FingerprintCharacteristic::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.FingerprintCharacteristic)
   for (;;) {
@@ -13470,6 +13803,7 @@ void FingerprintCharacteristic::SerializeWithCachedSizes(
 }
 
 int FingerprintCharacteristic::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.FingerprintCharacteristic)
   int total_size = 0;
 
   // optional int64 id = 1;
@@ -13529,18 +13863,22 @@ int FingerprintCharacteristic::ByteSize() const {
 }
 
 void FingerprintCharacteristic::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.FingerprintCharacteristic)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const FingerprintCharacteristic* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const FingerprintCharacteristic>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.FingerprintCharacteristic)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.FingerprintCharacteristic)
     MergeFrom(*source);
   }
 }
 
 void FingerprintCharacteristic::MergeFrom(const FingerprintCharacteristic& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.FingerprintCharacteristic)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.id() != 0) {
     set_id(from.id());
@@ -13569,12 +13907,14 @@ void FingerprintCharacteristic::MergeFrom(const FingerprintCharacteristic& from)
 }
 
 void FingerprintCharacteristic::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.FingerprintCharacteristic)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void FingerprintCharacteristic::CopyFrom(const FingerprintCharacteristic& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.FingerprintCharacteristic)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -13798,13 +14138,14 @@ BioIdentificationRecord* BioIdentificationRecord::New(::google::protobuf::Arena*
 }
 
 void BioIdentificationRecord::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.BioIdentificationRecord)
   bir_url_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   bir_bytestring_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 bool BioIdentificationRecord::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.BioIdentificationRecord)
   for (;;) {
@@ -13910,6 +14251,7 @@ void BioIdentificationRecord::SerializeWithCachedSizes(
 }
 
 int BioIdentificationRecord::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.BioIdentificationRecord)
   int total_size = 0;
 
   // optional string bir_url = 1;
@@ -13933,18 +14275,22 @@ int BioIdentificationRecord::ByteSize() const {
 }
 
 void BioIdentificationRecord::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.BioIdentificationRecord)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const BioIdentificationRecord* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const BioIdentificationRecord>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.BioIdentificationRecord)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.BioIdentificationRecord)
     MergeFrom(*source);
   }
 }
 
 void BioIdentificationRecord::MergeFrom(const BioIdentificationRecord& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.BioIdentificationRecord)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.bir_url().size() > 0) {
 
@@ -13957,12 +14303,14 @@ void BioIdentificationRecord::MergeFrom(const BioIdentificationRecord& from) {
 }
 
 void BioIdentificationRecord::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.BioIdentificationRecord)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void BioIdentificationRecord::CopyFrom(const BioIdentificationRecord& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.BioIdentificationRecord)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -14025,6 +14373,7 @@ void BioIdentificationRecord::clear_bir_url() {
   return bir_url_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* BioIdentificationRecord::release_bir_url() {
+  // @@protoc_insertion_point(field_release:BioService.BioIdentificationRecord.bir_url)
   
   return bir_url_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -14068,6 +14417,7 @@ void BioIdentificationRecord::clear_bir_bytestring() {
   return bir_bytestring_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* BioIdentificationRecord::release_bir_bytestring() {
+  // @@protoc_insertion_point(field_release:BioService.BioIdentificationRecord.bir_bytestring)
   
   return bir_bytestring_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -14155,6 +14505,7 @@ BioFingerprintData* BioFingerprintData::New(::google::protobuf::Arena* arena) co
 }
 
 void BioFingerprintData::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.BioFingerprintData)
   if (GetArenaNoVirtual() == NULL && characteristics_ != NULL) delete characteristics_;
   characteristics_ = NULL;
   if (GetArenaNoVirtual() == NULL && biometric_record_ != NULL) delete biometric_record_;
@@ -14163,7 +14514,7 @@ void BioFingerprintData::Clear() {
 
 bool BioFingerprintData::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.BioFingerprintData)
   for (;;) {
@@ -14257,6 +14608,7 @@ void BioFingerprintData::SerializeWithCachedSizes(
 }
 
 int BioFingerprintData::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.BioFingerprintData)
   int total_size = 0;
 
   // optional .BioService.FingerprintCharacteristic characteristics = 1;
@@ -14280,18 +14632,22 @@ int BioFingerprintData::ByteSize() const {
 }
 
 void BioFingerprintData::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.BioFingerprintData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const BioFingerprintData* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const BioFingerprintData>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.BioFingerprintData)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.BioFingerprintData)
     MergeFrom(*source);
   }
 }
 
 void BioFingerprintData::MergeFrom(const BioFingerprintData& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.BioFingerprintData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.has_characteristics()) {
     mutable_characteristics()->::BioService::FingerprintCharacteristic::MergeFrom(from.characteristics());
@@ -14302,12 +14658,14 @@ void BioFingerprintData::MergeFrom(const BioFingerprintData& from) {
 }
 
 void BioFingerprintData::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.BioFingerprintData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void BioFingerprintData::CopyFrom(const BioFingerprintData& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.BioFingerprintData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -14361,6 +14719,7 @@ const ::BioService::FingerprintCharacteristic& BioFingerprintData::characteristi
   return characteristics_;
 }
 ::BioService::FingerprintCharacteristic* BioFingerprintData::release_characteristics() {
+  // @@protoc_insertion_point(field_release:BioService.BioFingerprintData.characteristics)
   
   ::BioService::FingerprintCharacteristic* temp = characteristics_;
   characteristics_ = NULL;
@@ -14398,6 +14757,7 @@ const ::BioService::BioIdentificationRecord& BioFingerprintData::biometric_recor
   return biometric_record_;
 }
 ::BioService::BioIdentificationRecord* BioFingerprintData::release_biometric_record() {
+  // @@protoc_insertion_point(field_release:BioService.BioFingerprintData.biometric_record)
   
   ::BioService::BioIdentificationRecord* temp = biometric_record_;
   biometric_record_ = NULL;
@@ -14484,6 +14844,7 @@ BioPersonData* BioPersonData::New(::google::protobuf::Arena* arena) const {
 }
 
 void BioPersonData::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.BioPersonData)
   person_id_ = GOOGLE_LONGLONG(0);
   faces_.Clear();
   fingerprints_.Clear();
@@ -14491,7 +14852,7 @@ void BioPersonData::Clear() {
 
 bool BioPersonData::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.BioPersonData)
   for (;;) {
@@ -14617,6 +14978,7 @@ void BioPersonData::SerializeWithCachedSizes(
 }
 
 int BioPersonData::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.BioPersonData)
   int total_size = 0;
 
   // optional int64 person_id = 1;
@@ -14649,18 +15011,22 @@ int BioPersonData::ByteSize() const {
 }
 
 void BioPersonData::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.BioPersonData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const BioPersonData* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const BioPersonData>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.BioPersonData)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.BioPersonData)
     MergeFrom(*source);
   }
 }
 
 void BioPersonData::MergeFrom(const BioPersonData& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.BioPersonData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   faces_.MergeFrom(from.faces_);
   fingerprints_.MergeFrom(from.fingerprints_);
@@ -14670,12 +15036,14 @@ void BioPersonData::MergeFrom(const BioPersonData& from) {
 }
 
 void BioPersonData::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.BioPersonData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void BioPersonData::CopyFrom(const BioPersonData& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.BioPersonData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -14853,6 +15221,7 @@ BiometricData* BiometricData::New(::google::protobuf::Arena* arena) const {
 }
 
 void BiometricData::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.BiometricData)
   id_ = GOOGLE_LONGLONG(0);
   faces_.Clear();
   fingerprints_.Clear();
@@ -14860,7 +15229,7 @@ void BiometricData::Clear() {
 
 bool BiometricData::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.BiometricData)
   for (;;) {
@@ -14986,6 +15355,7 @@ void BiometricData::SerializeWithCachedSizes(
 }
 
 int BiometricData::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.BiometricData)
   int total_size = 0;
 
   // optional int64 id = 1;
@@ -15018,18 +15388,22 @@ int BiometricData::ByteSize() const {
 }
 
 void BiometricData::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.BiometricData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const BiometricData* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const BiometricData>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.BiometricData)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.BiometricData)
     MergeFrom(*source);
   }
 }
 
 void BiometricData::MergeFrom(const BiometricData& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.BiometricData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   faces_.MergeFrom(from.faces_);
   fingerprints_.MergeFrom(from.fingerprints_);
@@ -15039,12 +15413,14 @@ void BiometricData::MergeFrom(const BiometricData& from) {
 }
 
 void BiometricData::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.BiometricData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void BiometricData::CopyFrom(const BiometricData& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.BiometricData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -15233,8 +15609,17 @@ FacialImage* FacialImage::New(::google::protobuf::Arena* arena) const {
 }
 
 void FacialImage::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.FacialImage)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(FacialImage, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<FacialImage*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -15255,7 +15640,7 @@ void FacialImage::Clear() {
 
 bool FacialImage::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.FacialImage)
   for (;;) {
@@ -15460,6 +15845,7 @@ void FacialImage::SerializeWithCachedSizes(
 }
 
 int FacialImage::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.FacialImage)
   int total_size = 0;
 
   // optional int64 owner_id = 1;
@@ -15510,18 +15896,22 @@ int FacialImage::ByteSize() const {
 }
 
 void FacialImage::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.FacialImage)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const FacialImage* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const FacialImage>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.FacialImage)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.FacialImage)
     MergeFrom(*source);
   }
 }
 
 void FacialImage::MergeFrom(const FacialImage& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.FacialImage)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   faces_.MergeFrom(from.faces_);
   if (from.owner_id() != 0) {
@@ -15543,12 +15933,14 @@ void FacialImage::MergeFrom(const FacialImage& from) {
 }
 
 void FacialImage::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.FacialImage)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void FacialImage::CopyFrom(const FacialImage& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.FacialImage)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -15620,6 +16012,7 @@ const ::BioService::Photo& FacialImage::image() const {
   return image_;
 }
 ::BioService::Photo* FacialImage::release_image() {
+  // @@protoc_insertion_point(field_release:BioService.FacialImage.image)
   
   ::BioService::Photo* temp = image_;
   image_ = NULL;
@@ -15666,6 +16059,7 @@ void FacialImage::clear_template_() {
   return template__.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* FacialImage::release_template_() {
+  // @@protoc_insertion_point(field_release:BioService.FacialImage.template)
   
   return template__.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -15812,8 +16206,17 @@ DatabaseFacialImageResponse* DatabaseFacialImageResponse::New(::google::protobuf
 }
 
 void DatabaseFacialImageResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.DatabaseFacialImageResponse)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(DatabaseFacialImageResponse, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<DatabaseFacialImageResponse*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -15832,7 +16235,7 @@ void DatabaseFacialImageResponse::Clear() {
 
 bool DatabaseFacialImageResponse::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.DatabaseFacialImageResponse)
   for (;;) {
@@ -15986,6 +16389,7 @@ void DatabaseFacialImageResponse::SerializeWithCachedSizes(
 }
 
 int DatabaseFacialImageResponse::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.DatabaseFacialImageResponse)
   int total_size = 0;
 
   // optional .BioService.Photo image = 2;
@@ -16022,18 +16426,22 @@ int DatabaseFacialImageResponse::ByteSize() const {
 }
 
 void DatabaseFacialImageResponse::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.DatabaseFacialImageResponse)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const DatabaseFacialImageResponse* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const DatabaseFacialImageResponse>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.DatabaseFacialImageResponse)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.DatabaseFacialImageResponse)
     MergeFrom(*source);
   }
 }
 
 void DatabaseFacialImageResponse::MergeFrom(const DatabaseFacialImageResponse& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.DatabaseFacialImageResponse)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   faces_.MergeFrom(from.faces_);
   if (from.has_image()) {
@@ -16048,12 +16456,14 @@ void DatabaseFacialImageResponse::MergeFrom(const DatabaseFacialImageResponse& f
 }
 
 void DatabaseFacialImageResponse::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.DatabaseFacialImageResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void DatabaseFacialImageResponse::CopyFrom(const DatabaseFacialImageResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.DatabaseFacialImageResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -16139,6 +16549,7 @@ const ::BioService::Photo& DatabaseFacialImageResponse::image() const {
   return image_;
 }
 ::BioService::Photo* DatabaseFacialImageResponse::release_image() {
+  // @@protoc_insertion_point(field_release:BioService.DatabaseFacialImageResponse.image)
   
   ::BioService::Photo* temp = image_;
   image_ = NULL;
@@ -16267,8 +16678,17 @@ FingerprintImage* FingerprintImage::New(::google::protobuf::Arena* arena) const 
 }
 
 void FingerprintImage::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.FingerprintImage)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(FingerprintImage, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<FingerprintImage*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -16290,7 +16710,7 @@ void FingerprintImage::Clear() {
 
 bool FingerprintImage::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.FingerprintImage)
   for (;;) {
@@ -16491,6 +16911,7 @@ void FingerprintImage::SerializeWithCachedSizes(
 }
 
 int FingerprintImage::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.FingerprintImage)
   int total_size = 0;
 
   // optional int64 owner_id = 1;
@@ -16540,18 +16961,22 @@ int FingerprintImage::ByteSize() const {
 }
 
 void FingerprintImage::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.FingerprintImage)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const FingerprintImage* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const FingerprintImage>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.FingerprintImage)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.FingerprintImage)
     MergeFrom(*source);
   }
 }
 
 void FingerprintImage::MergeFrom(const FingerprintImage& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.FingerprintImage)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.owner_id() != 0) {
     set_owner_id(from.owner_id());
@@ -16575,12 +17000,14 @@ void FingerprintImage::MergeFrom(const FingerprintImage& from) {
 }
 
 void FingerprintImage::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.FingerprintImage)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void FingerprintImage::CopyFrom(const FingerprintImage& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.FingerprintImage)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -16652,6 +17079,7 @@ const ::BioService::Photo& FingerprintImage::image() const {
   return image_;
 }
 ::BioService::Photo* FingerprintImage::release_image() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintImage.image)
   
   ::BioService::Photo* temp = image_;
   image_ = NULL;
@@ -16698,6 +17126,7 @@ void FingerprintImage::clear_template_() {
   return template__.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* FingerprintImage::release_template_() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintImage.template)
   
   return template__.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -16732,6 +17161,7 @@ const ::BioService::FingerprintCharacteristic& FingerprintImage::fingerprint() c
   return fingerprint_;
 }
 ::BioService::FingerprintCharacteristic* FingerprintImage::release_fingerprint() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintImage.fingerprint)
   
   ::BioService::FingerprintCharacteristic* temp = fingerprint_;
   fingerprint_ = NULL;
@@ -16854,8 +17284,17 @@ DatabaseFingerprintImageResponse* DatabaseFingerprintImageResponse::New(::google
 }
 
 void DatabaseFingerprintImageResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.DatabaseFingerprintImageResponse)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(DatabaseFingerprintImageResponse, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<DatabaseFingerprintImageResponse*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -16875,7 +17314,7 @@ void DatabaseFingerprintImageResponse::Clear() {
 
 bool DatabaseFingerprintImageResponse::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.DatabaseFingerprintImageResponse)
   for (;;) {
@@ -17025,6 +17464,7 @@ void DatabaseFingerprintImageResponse::SerializeWithCachedSizes(
 }
 
 int DatabaseFingerprintImageResponse::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.DatabaseFingerprintImageResponse)
   int total_size = 0;
 
   // optional .BioService.FingerprintCharacteristic fingerprint = 1;
@@ -17060,18 +17500,22 @@ int DatabaseFingerprintImageResponse::ByteSize() const {
 }
 
 void DatabaseFingerprintImageResponse::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.DatabaseFingerprintImageResponse)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const DatabaseFingerprintImageResponse* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const DatabaseFingerprintImageResponse>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.DatabaseFingerprintImageResponse)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.DatabaseFingerprintImageResponse)
     MergeFrom(*source);
   }
 }
 
 void DatabaseFingerprintImageResponse::MergeFrom(const DatabaseFingerprintImageResponse& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.DatabaseFingerprintImageResponse)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.has_fingerprint()) {
     mutable_fingerprint()->::BioService::FingerprintCharacteristic::MergeFrom(from.fingerprint());
@@ -17088,12 +17532,14 @@ void DatabaseFingerprintImageResponse::MergeFrom(const DatabaseFingerprintImageR
 }
 
 void DatabaseFingerprintImageResponse::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.DatabaseFingerprintImageResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void DatabaseFingerprintImageResponse::CopyFrom(const DatabaseFingerprintImageResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.DatabaseFingerprintImageResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -17149,6 +17595,7 @@ const ::BioService::FingerprintCharacteristic& DatabaseFingerprintImageResponse:
   return fingerprint_;
 }
 ::BioService::FingerprintCharacteristic* DatabaseFingerprintImageResponse::release_fingerprint() {
+  // @@protoc_insertion_point(field_release:BioService.DatabaseFingerprintImageResponse.fingerprint)
   
   ::BioService::FingerprintCharacteristic* temp = fingerprint_;
   fingerprint_ = NULL;
@@ -17186,6 +17633,7 @@ const ::BioService::Photo& DatabaseFingerprintImageResponse::image() const {
   return image_;
 }
 ::BioService::Photo* DatabaseFingerprintImageResponse::release_image() {
+  // @@protoc_insertion_point(field_release:BioService.DatabaseFingerprintImageResponse.image)
   
   ::BioService::Photo* temp = image_;
   image_ = NULL;
@@ -17319,8 +17767,17 @@ Photo* Photo::New(::google::protobuf::Arena* arena) const {
 }
 
 void Photo::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.Photo)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(Photo, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<Photo*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -17340,7 +17797,7 @@ void Photo::Clear() {
 
 bool Photo::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.Photo)
   for (;;) {
@@ -17655,6 +18112,7 @@ void Photo::SerializeWithCachedSizes(
 }
 
 int Photo::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.Photo)
   int total_size = 0;
 
   // optional int64 id = 1;
@@ -17731,18 +18189,22 @@ int Photo::ByteSize() const {
 }
 
 void Photo::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.Photo)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const Photo* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const Photo>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.Photo)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.Photo)
     MergeFrom(*source);
   }
 }
 
 void Photo::MergeFrom(const Photo& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.Photo)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.id() != 0) {
     set_id(from.id());
@@ -17779,12 +18241,14 @@ void Photo::MergeFrom(const Photo& from) {
 }
 
 void Photo::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.Photo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Photo::CopyFrom(const Photo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.Photo)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -17883,6 +18347,7 @@ void Photo::clear_photo_url() {
   return photo_url_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Photo::release_photo_url() {
+  // @@protoc_insertion_point(field_release:BioService.Photo.photo_url)
   
   return photo_url_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -17926,6 +18391,7 @@ void Photo::clear_bytestring() {
   return bytestring_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Photo::release_bytestring() {
+  // @@protoc_insertion_point(field_release:BioService.Photo.bytestring)
   
   return bytestring_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -18111,8 +18577,17 @@ Visitor* Visitor::New(::google::protobuf::Arena* arena) const {
 }
 
 void Visitor::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.Visitor)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(Visitor, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<Visitor*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -18133,7 +18608,7 @@ void Visitor::Clear() {
 
 bool Visitor::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.Visitor)
   for (;;) {
@@ -18423,6 +18898,7 @@ void Visitor::SerializeWithCachedSizes(
 }
 
 int Visitor::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.Visitor)
   int total_size = 0;
 
   // optional int64 id = 1;
@@ -18492,18 +18968,22 @@ int Visitor::ByteSize() const {
 }
 
 void Visitor::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.Visitor)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const Visitor* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const Visitor>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.Visitor)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.Visitor)
     MergeFrom(*source);
   }
 }
 
 void Visitor::MergeFrom(const Visitor& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.Visitor)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.id() != 0) {
     set_id(from.id());
@@ -18536,12 +19016,14 @@ void Visitor::MergeFrom(const Visitor& from) {
 }
 
 void Visitor::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.Visitor)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Visitor::CopyFrom(const Visitor& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.Visitor)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -18667,6 +19149,7 @@ void Visitor::clear_card_number() {
   return card_number_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Visitor::release_card_number() {
+  // @@protoc_insertion_point(field_release:BioService.Visitor.card_number)
   
   return card_number_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -18715,6 +19198,7 @@ const ::BioService::BiometricData& Visitor::biometricdata() const {
   return biometricdata_;
 }
 ::BioService::BiometricData* Visitor::release_biometricdata() {
+  // @@protoc_insertion_point(field_release:BioService.Visitor.biometricData)
   
   ::BioService::BiometricData* temp = biometricdata_;
   biometricdata_ = NULL;
@@ -18826,12 +19310,13 @@ VisitorList* VisitorList::New(::google::protobuf::Arena* arena) const {
 }
 
 void VisitorList::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.VisitorList)
   visitors_.Clear();
 }
 
 bool VisitorList::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.VisitorList)
   for (;;) {
@@ -18903,6 +19388,7 @@ void VisitorList::SerializeWithCachedSizes(
 }
 
 int VisitorList::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.VisitorList)
   int total_size = 0;
 
   // repeated .BioService.Visitor visitors = 1;
@@ -18920,29 +19406,35 @@ int VisitorList::ByteSize() const {
 }
 
 void VisitorList::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.VisitorList)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const VisitorList* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const VisitorList>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.VisitorList)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.VisitorList)
     MergeFrom(*source);
   }
 }
 
 void VisitorList::MergeFrom(const VisitorList& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.VisitorList)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   visitors_.MergeFrom(from.visitors_);
 }
 
 void VisitorList::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.VisitorList)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void VisitorList::CopyFrom(const VisitorList& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.VisitorList)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -19071,12 +19563,13 @@ LocationList* LocationList::New(::google::protobuf::Arena* arena) const {
 }
 
 void LocationList::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.LocationList)
   locations_.Clear();
 }
 
 bool LocationList::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.LocationList)
   for (;;) {
@@ -19148,6 +19641,7 @@ void LocationList::SerializeWithCachedSizes(
 }
 
 int LocationList::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.LocationList)
   int total_size = 0;
 
   // repeated .BioService.Location locations = 1;
@@ -19165,29 +19659,35 @@ int LocationList::ByteSize() const {
 }
 
 void LocationList::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.LocationList)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const LocationList* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const LocationList>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.LocationList)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.LocationList)
     MergeFrom(*source);
   }
 }
 
 void LocationList::MergeFrom(const LocationList& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.LocationList)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   locations_.MergeFrom(from.locations_);
 }
 
 void LocationList::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.LocationList)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void LocationList::CopyFrom(const LocationList& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.LocationList)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -19316,12 +19816,13 @@ PersonList* PersonList::New(::google::protobuf::Arena* arena) const {
 }
 
 void PersonList::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.PersonList)
   persons_.Clear();
 }
 
 bool PersonList::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.PersonList)
   for (;;) {
@@ -19393,6 +19894,7 @@ void PersonList::SerializeWithCachedSizes(
 }
 
 int PersonList::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.PersonList)
   int total_size = 0;
 
   // repeated .BioService.Person persons = 1;
@@ -19410,29 +19912,35 @@ int PersonList::ByteSize() const {
 }
 
 void PersonList::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.PersonList)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const PersonList* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const PersonList>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.PersonList)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.PersonList)
     MergeFrom(*source);
   }
 }
 
 void PersonList::MergeFrom(const PersonList& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.PersonList)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   persons_.MergeFrom(from.persons_);
 }
 
 void PersonList::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.PersonList)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void PersonList::CopyFrom(const PersonList& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.PersonList)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -19561,12 +20069,13 @@ PhotoList* PhotoList::New(::google::protobuf::Arena* arena) const {
 }
 
 void PhotoList::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.PhotoList)
   photos_.Clear();
 }
 
 bool PhotoList::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.PhotoList)
   for (;;) {
@@ -19638,6 +20147,7 @@ void PhotoList::SerializeWithCachedSizes(
 }
 
 int PhotoList::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.PhotoList)
   int total_size = 0;
 
   // repeated .BioService.Photo photos = 1;
@@ -19655,29 +20165,35 @@ int PhotoList::ByteSize() const {
 }
 
 void PhotoList::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.PhotoList)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const PhotoList* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const PhotoList>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.PhotoList)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.PhotoList)
     MergeFrom(*source);
   }
 }
 
 void PhotoList::MergeFrom(const PhotoList& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.PhotoList)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   photos_.MergeFrom(from.photos_);
 }
 
 void PhotoList::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.PhotoList)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void PhotoList::CopyFrom(const PhotoList& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.PhotoList)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -19806,12 +20322,13 @@ CardList* CardList::New(::google::protobuf::Arena* arena) const {
 }
 
 void CardList::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.CardList)
   cards_.Clear();
 }
 
 bool CardList::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.CardList)
   for (;;) {
@@ -19883,6 +20400,7 @@ void CardList::SerializeWithCachedSizes(
 }
 
 int CardList::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.CardList)
   int total_size = 0;
 
   // repeated .BioService.Card cards = 1;
@@ -19900,29 +20418,35 @@ int CardList::ByteSize() const {
 }
 
 void CardList::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.CardList)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const CardList* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const CardList>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.CardList)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.CardList)
     MergeFrom(*source);
   }
 }
 
 void CardList::MergeFrom(const CardList& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.CardList)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   cards_.MergeFrom(from.cards_);
 }
 
 void CardList::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.CardList)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void CardList::CopyFrom(const CardList& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.CardList)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -20051,12 +20575,13 @@ BiometricDataList* BiometricDataList::New(::google::protobuf::Arena* arena) cons
 }
 
 void BiometricDataList::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.BiometricDataList)
   data_.Clear();
 }
 
 bool BiometricDataList::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.BiometricDataList)
   for (;;) {
@@ -20128,6 +20653,7 @@ void BiometricDataList::SerializeWithCachedSizes(
 }
 
 int BiometricDataList::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.BiometricDataList)
   int total_size = 0;
 
   // repeated .BioService.BiometricData data = 1;
@@ -20145,29 +20671,35 @@ int BiometricDataList::ByteSize() const {
 }
 
 void BiometricDataList::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.BiometricDataList)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const BiometricDataList* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const BiometricDataList>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.BiometricDataList)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.BiometricDataList)
     MergeFrom(*source);
   }
 }
 
 void BiometricDataList::MergeFrom(const BiometricDataList& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.BiometricDataList)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   data_.MergeFrom(from.data_);
 }
 
 void BiometricDataList::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.BiometricDataList)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void BiometricDataList::CopyFrom(const BiometricDataList& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.BiometricDataList)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -20297,12 +20829,13 @@ Response* Response::New(::google::protobuf::Arena* arena) const {
 }
 
 void Response::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.Response)
   good_ = 0;
 }
 
 bool Response::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.Response)
   for (;;) {
@@ -20372,6 +20905,7 @@ void Response::SerializeWithCachedSizes(
 }
 
 int Response::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.Response)
   int total_size = 0;
 
   // optional .BioService.Result good = 1;
@@ -20387,18 +20921,22 @@ int Response::ByteSize() const {
 }
 
 void Response::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.Response)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const Response* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const Response>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.Response)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.Response)
     MergeFrom(*source);
   }
 }
 
 void Response::MergeFrom(const Response& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.Response)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.good() != 0) {
     set_good(from.good());
@@ -20406,12 +20944,14 @@ void Response::MergeFrom(const Response& from) {
 }
 
 void Response::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.Response)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void Response::CopyFrom(const Response& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.Response)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -20455,352 +20995,6 @@ void Response::clear_good() {
   
   good_ = value;
   // @@protoc_insertion_point(field_set:BioService.Response.good)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
-
-// ===================================================================
-
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int IdentificationData::kImageFieldNumber;
-const int IdentificationData::kPopulationFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-IdentificationData::IdentificationData()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:BioService.IdentificationData)
-}
-
-void IdentificationData::InitAsDefaultInstance() {
-  _is_default_instance_ = true;
-  image_ = const_cast< ::BioService::Photo*>(&::BioService::Photo::default_instance());
-}
-
-IdentificationData::IdentificationData(const IdentificationData& from)
-  : ::google::protobuf::Message(),
-    _internal_metadata_(NULL) {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:BioService.IdentificationData)
-}
-
-void IdentificationData::SharedCtor() {
-    _is_default_instance_ = false;
-  _cached_size_ = 0;
-  image_ = NULL;
-}
-
-IdentificationData::~IdentificationData() {
-  // @@protoc_insertion_point(destructor:BioService.IdentificationData)
-  SharedDtor();
-}
-
-void IdentificationData::SharedDtor() {
-  if (this != default_instance_) {
-    delete image_;
-  }
-}
-
-void IdentificationData::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* IdentificationData::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return IdentificationData_descriptor_;
-}
-
-const IdentificationData& IdentificationData::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_bio_5fservice_2eproto();
-  return *default_instance_;
-}
-
-IdentificationData* IdentificationData::default_instance_ = NULL;
-
-IdentificationData* IdentificationData::New(::google::protobuf::Arena* arena) const {
-  IdentificationData* n = new IdentificationData;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void IdentificationData::Clear() {
-  if (GetArenaNoVirtual() == NULL && image_ != NULL) delete image_;
-  image_ = NULL;
-  population_.Clear();
-}
-
-bool IdentificationData::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:BioService.IdentificationData)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .BioService.Photo image = 1;
-      case 1: {
-        if (tag == 10) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_image()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(18)) goto parse_population;
-        break;
-      }
-
-      // repeated int64 population = 2;
-      case 2: {
-        if (tag == 18) {
-         parse_population:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, this->mutable_population())));
-        } else if (tag == 16) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 1, 18, input, this->mutable_population())));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:BioService.IdentificationData)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:BioService.IdentificationData)
-  return false;
-#undef DO_
-}
-
-void IdentificationData::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:BioService.IdentificationData)
-  // optional .BioService.Photo image = 1;
-  if (this->has_image()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *this->image_, output);
-  }
-
-  // repeated int64 population = 2;
-  if (this->population_size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteTag(2, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
-    output->WriteVarint32(_population_cached_byte_size_);
-  }
-  for (int i = 0; i < this->population_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64NoTag(
-      this->population(i), output);
-  }
-
-  // @@protoc_insertion_point(serialize_end:BioService.IdentificationData)
-}
-
-::google::protobuf::uint8* IdentificationData::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:BioService.IdentificationData)
-  // optional .BioService.Photo image = 1;
-  if (this->has_image()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        1, *this->image_, target);
-  }
-
-  // repeated int64 population = 2;
-  if (this->population_size() > 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
-      2,
-      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
-      target);
-    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
-      _population_cached_byte_size_, target);
-  }
-  for (int i = 0; i < this->population_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteInt64NoTagToArray(this->population(i), target);
-  }
-
-  // @@protoc_insertion_point(serialize_to_array_end:BioService.IdentificationData)
-  return target;
-}
-
-int IdentificationData::ByteSize() const {
-  int total_size = 0;
-
-  // optional .BioService.Photo image = 1;
-  if (this->has_image()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->image_);
-  }
-
-  // repeated int64 population = 2;
-  {
-    int data_size = 0;
-    for (int i = 0; i < this->population_size(); i++) {
-      data_size += ::google::protobuf::internal::WireFormatLite::
-        Int64Size(this->population(i));
-    }
-    if (data_size > 0) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(data_size);
-    }
-    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-    _population_cached_byte_size_ = data_size;
-    GOOGLE_SAFE_CONCURRENT_WRITES_END();
-    total_size += data_size;
-  }
-
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void IdentificationData::MergeFrom(const ::google::protobuf::Message& from) {
-  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  const IdentificationData* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const IdentificationData>(
-          &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void IdentificationData::MergeFrom(const IdentificationData& from) {
-  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  population_.MergeFrom(from.population_);
-  if (from.has_image()) {
-    mutable_image()->::BioService::Photo::MergeFrom(from.image());
-  }
-}
-
-void IdentificationData::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void IdentificationData::CopyFrom(const IdentificationData& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool IdentificationData::IsInitialized() const {
-
-  return true;
-}
-
-void IdentificationData::Swap(IdentificationData* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void IdentificationData::InternalSwap(IdentificationData* other) {
-  std::swap(image_, other->image_);
-  population_.UnsafeArenaSwap(&other->population_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata IdentificationData::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = IdentificationData_descriptor_;
-  metadata.reflection = IdentificationData_reflection_;
-  return metadata;
-}
-
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// IdentificationData
-
-// optional .BioService.Photo image = 1;
-bool IdentificationData::has_image() const {
-  return !_is_default_instance_ && image_ != NULL;
-}
-void IdentificationData::clear_image() {
-  if (GetArenaNoVirtual() == NULL && image_ != NULL) delete image_;
-  image_ = NULL;
-}
-const ::BioService::Photo& IdentificationData::image() const {
-  // @@protoc_insertion_point(field_get:BioService.IdentificationData.image)
-  return image_ != NULL ? *image_ : *default_instance_->image_;
-}
-::BioService::Photo* IdentificationData::mutable_image() {
-  
-  if (image_ == NULL) {
-    image_ = new ::BioService::Photo;
-  }
-  // @@protoc_insertion_point(field_mutable:BioService.IdentificationData.image)
-  return image_;
-}
-::BioService::Photo* IdentificationData::release_image() {
-  
-  ::BioService::Photo* temp = image_;
-  image_ = NULL;
-  return temp;
-}
-void IdentificationData::set_allocated_image(::BioService::Photo* image) {
-  delete image_;
-  image_ = image;
-  if (image) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:BioService.IdentificationData.image)
-}
-
-// repeated int64 population = 2;
-int IdentificationData::population_size() const {
-  return population_.size();
-}
-void IdentificationData::clear_population() {
-  population_.Clear();
-}
- ::google::protobuf::int64 IdentificationData::population(int index) const {
-  // @@protoc_insertion_point(field_get:BioService.IdentificationData.population)
-  return population_.Get(index);
-}
- void IdentificationData::set_population(int index, ::google::protobuf::int64 value) {
-  population_.Set(index, value);
-  // @@protoc_insertion_point(field_set:BioService.IdentificationData.population)
-}
- void IdentificationData::add_population(::google::protobuf::int64 value) {
-  population_.Add(value);
-  // @@protoc_insertion_point(field_add:BioService.IdentificationData.population)
-}
- const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
-IdentificationData::population() const {
-  // @@protoc_insertion_point(field_list:BioService.IdentificationData.population)
-  return population_;
-}
- ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
-IdentificationData::mutable_population() {
-  // @@protoc_insertion_point(field_mutable_list:BioService.IdentificationData.population)
-  return &population_;
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -20877,6 +21071,7 @@ VerificationData* VerificationData::New(::google::protobuf::Arena* arena) const 
 }
 
 void VerificationData::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.VerificationData)
   if (GetArenaNoVirtual() == NULL && target_image_ != NULL) delete target_image_;
   target_image_ = NULL;
   if (GetArenaNoVirtual() == NULL && comparison_image_ != NULL) delete comparison_image_;
@@ -20885,7 +21080,7 @@ void VerificationData::Clear() {
 
 bool VerificationData::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.VerificationData)
   for (;;) {
@@ -20979,6 +21174,7 @@ void VerificationData::SerializeWithCachedSizes(
 }
 
 int VerificationData::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.VerificationData)
   int total_size = 0;
 
   // optional .BioService.Photo target_image = 1;
@@ -21002,18 +21198,22 @@ int VerificationData::ByteSize() const {
 }
 
 void VerificationData::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.VerificationData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const VerificationData* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const VerificationData>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.VerificationData)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.VerificationData)
     MergeFrom(*source);
   }
 }
 
 void VerificationData::MergeFrom(const VerificationData& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.VerificationData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.has_target_image()) {
     mutable_target_image()->::BioService::Photo::MergeFrom(from.target_image());
@@ -21024,12 +21224,14 @@ void VerificationData::MergeFrom(const VerificationData& from) {
 }
 
 void VerificationData::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.VerificationData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void VerificationData::CopyFrom(const VerificationData& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.VerificationData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -21083,6 +21285,7 @@ const ::BioService::Photo& VerificationData::target_image() const {
   return target_image_;
 }
 ::BioService::Photo* VerificationData::release_target_image() {
+  // @@protoc_insertion_point(field_release:BioService.VerificationData.target_image)
   
   ::BioService::Photo* temp = target_image_;
   target_image_ = NULL;
@@ -21120,6 +21323,7 @@ const ::BioService::Photo& VerificationData::comparison_image() const {
   return comparison_image_;
 }
 ::BioService::Photo* VerificationData::release_comparison_image() {
+  // @@protoc_insertion_point(field_release:BioService.VerificationData.comparison_image)
   
   ::BioService::Photo* temp = comparison_image_;
   comparison_image_ = NULL;
@@ -21141,119 +21345,445 @@ void VerificationData::set_allocated_comparison_image(::BioService::Photo* compa
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int MatchResult::kTargetFaceIdFieldNumber;
-const int MatchResult::kComparisonFaceIdFieldNumber;
-const int MatchResult::kMatchFieldNumber;
+const int IdentificationData::kTargetImageFieldNumber;
+const int IdentificationData::kComparisonImagesFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-MatchResult::MatchResult()
+IdentificationData::IdentificationData()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:BioService.MatchResult)
+  // @@protoc_insertion_point(constructor:BioService.IdentificationData)
 }
 
-void MatchResult::InitAsDefaultInstance() {
+void IdentificationData::InitAsDefaultInstance() {
   _is_default_instance_ = true;
+  target_image_ = const_cast< ::BioService::Photo*>(&::BioService::Photo::default_instance());
 }
 
-MatchResult::MatchResult(const MatchResult& from)
+IdentificationData::IdentificationData(const IdentificationData& from)
   : ::google::protobuf::Message(),
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:BioService.MatchResult)
+  // @@protoc_insertion_point(copy_constructor:BioService.IdentificationData)
 }
 
-void MatchResult::SharedCtor() {
+void IdentificationData::SharedCtor() {
     _is_default_instance_ = false;
   _cached_size_ = 0;
-  target_face_id_ = GOOGLE_LONGLONG(0);
-  comparison_face_id_ = GOOGLE_LONGLONG(0);
-  match_ = 0;
+  target_image_ = NULL;
 }
 
-MatchResult::~MatchResult() {
-  // @@protoc_insertion_point(destructor:BioService.MatchResult)
+IdentificationData::~IdentificationData() {
+  // @@protoc_insertion_point(destructor:BioService.IdentificationData)
   SharedDtor();
 }
 
-void MatchResult::SharedDtor() {
+void IdentificationData::SharedDtor() {
   if (this != default_instance_) {
+    delete target_image_;
   }
 }
 
-void MatchResult::SetCachedSize(int size) const {
+void IdentificationData::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* MatchResult::descriptor() {
+const ::google::protobuf::Descriptor* IdentificationData::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return MatchResult_descriptor_;
+  return IdentificationData_descriptor_;
 }
 
-const MatchResult& MatchResult::default_instance() {
+const IdentificationData& IdentificationData::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_bio_5fservice_2eproto();
   return *default_instance_;
 }
 
-MatchResult* MatchResult::default_instance_ = NULL;
+IdentificationData* IdentificationData::default_instance_ = NULL;
 
-MatchResult* MatchResult::New(::google::protobuf::Arena* arena) const {
-  MatchResult* n = new MatchResult;
+IdentificationData* IdentificationData::New(::google::protobuf::Arena* arena) const {
+  IdentificationData* n = new IdentificationData;
   if (arena != NULL) {
     arena->Own(n);
   }
   return n;
 }
 
-void MatchResult::Clear() {
+void IdentificationData::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.IdentificationData)
+  if (GetArenaNoVirtual() == NULL && target_image_ != NULL) delete target_image_;
+  target_image_ = NULL;
+  comparison_images_.Clear();
+}
+
+bool IdentificationData::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:BioService.IdentificationData)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .BioService.Photo target_image = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_target_image()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_comparison_images;
+        break;
+      }
+
+      // repeated .BioService.Photo comparison_images = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_comparison_images:
+          DO_(input->IncrementRecursionDepth());
+         parse_loop_comparison_images:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
+                input, add_comparison_images()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_loop_comparison_images;
+        input->UnsafeDecrementRecursionDepth();
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:BioService.IdentificationData)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:BioService.IdentificationData)
+  return false;
+#undef DO_
+}
+
+void IdentificationData::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:BioService.IdentificationData)
+  // optional .BioService.Photo target_image = 1;
+  if (this->has_target_image()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, *this->target_image_, output);
+  }
+
+  // repeated .BioService.Photo comparison_images = 2;
+  for (unsigned int i = 0, n = this->comparison_images_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->comparison_images(i), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:BioService.IdentificationData)
+}
+
+::google::protobuf::uint8* IdentificationData::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:BioService.IdentificationData)
+  // optional .BioService.Photo target_image = 1;
+  if (this->has_target_image()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, *this->target_image_, target);
+  }
+
+  // repeated .BioService.Photo comparison_images = 2;
+  for (unsigned int i = 0, n = this->comparison_images_size(); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->comparison_images(i), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:BioService.IdentificationData)
+  return target;
+}
+
+int IdentificationData::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.IdentificationData)
+  int total_size = 0;
+
+  // optional .BioService.Photo target_image = 1;
+  if (this->has_target_image()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->target_image_);
+  }
+
+  // repeated .BioService.Photo comparison_images = 2;
+  total_size += 1 * this->comparison_images_size();
+  for (int i = 0; i < this->comparison_images_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->comparison_images(i));
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void IdentificationData::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.IdentificationData)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const IdentificationData* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const IdentificationData>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.IdentificationData)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.IdentificationData)
+    MergeFrom(*source);
+  }
+}
+
+void IdentificationData::MergeFrom(const IdentificationData& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.IdentificationData)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  comparison_images_.MergeFrom(from.comparison_images_);
+  if (from.has_target_image()) {
+    mutable_target_image()->::BioService::Photo::MergeFrom(from.target_image());
+  }
+}
+
+void IdentificationData::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.IdentificationData)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void IdentificationData::CopyFrom(const IdentificationData& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.IdentificationData)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool IdentificationData::IsInitialized() const {
+
+  return true;
+}
+
+void IdentificationData::Swap(IdentificationData* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void IdentificationData::InternalSwap(IdentificationData* other) {
+  std::swap(target_image_, other->target_image_);
+  comparison_images_.UnsafeArenaSwap(&other->comparison_images_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata IdentificationData::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = IdentificationData_descriptor_;
+  metadata.reflection = IdentificationData_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// IdentificationData
+
+// optional .BioService.Photo target_image = 1;
+bool IdentificationData::has_target_image() const {
+  return !_is_default_instance_ && target_image_ != NULL;
+}
+void IdentificationData::clear_target_image() {
+  if (GetArenaNoVirtual() == NULL && target_image_ != NULL) delete target_image_;
+  target_image_ = NULL;
+}
+const ::BioService::Photo& IdentificationData::target_image() const {
+  // @@protoc_insertion_point(field_get:BioService.IdentificationData.target_image)
+  return target_image_ != NULL ? *target_image_ : *default_instance_->target_image_;
+}
+::BioService::Photo* IdentificationData::mutable_target_image() {
+  
+  if (target_image_ == NULL) {
+    target_image_ = new ::BioService::Photo;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.IdentificationData.target_image)
+  return target_image_;
+}
+::BioService::Photo* IdentificationData::release_target_image() {
+  // @@protoc_insertion_point(field_release:BioService.IdentificationData.target_image)
+  
+  ::BioService::Photo* temp = target_image_;
+  target_image_ = NULL;
+  return temp;
+}
+void IdentificationData::set_allocated_target_image(::BioService::Photo* target_image) {
+  delete target_image_;
+  target_image_ = target_image;
+  if (target_image) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.IdentificationData.target_image)
+}
+
+// repeated .BioService.Photo comparison_images = 2;
+int IdentificationData::comparison_images_size() const {
+  return comparison_images_.size();
+}
+void IdentificationData::clear_comparison_images() {
+  comparison_images_.Clear();
+}
+const ::BioService::Photo& IdentificationData::comparison_images(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.IdentificationData.comparison_images)
+  return comparison_images_.Get(index);
+}
+::BioService::Photo* IdentificationData::mutable_comparison_images(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.IdentificationData.comparison_images)
+  return comparison_images_.Mutable(index);
+}
+::BioService::Photo* IdentificationData::add_comparison_images() {
+  // @@protoc_insertion_point(field_add:BioService.IdentificationData.comparison_images)
+  return comparison_images_.Add();
+}
+::google::protobuf::RepeatedPtrField< ::BioService::Photo >*
+IdentificationData::mutable_comparison_images() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.IdentificationData.comparison_images)
+  return &comparison_images_;
+}
+const ::google::protobuf::RepeatedPtrField< ::BioService::Photo >&
+IdentificationData::comparison_images() const {
+  // @@protoc_insertion_point(field_list:BioService.IdentificationData.comparison_images)
+  return comparison_images_;
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int Match::kFaceIdFieldNumber;
+const int Match::kMatchFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+Match::Match()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:BioService.Match)
+}
+
+void Match::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+Match::Match(const Match& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:BioService.Match)
+}
+
+void Match::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  face_id_ = GOOGLE_LONGLONG(0);
+  match_ = 0;
+}
+
+Match::~Match() {
+  // @@protoc_insertion_point(destructor:BioService.Match)
+  SharedDtor();
+}
+
+void Match::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void Match::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* Match::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Match_descriptor_;
+}
+
+const Match& Match::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_bio_5fservice_2eproto();
+  return *default_instance_;
+}
+
+Match* Match::default_instance_ = NULL;
+
+Match* Match::New(::google::protobuf::Arena* arena) const {
+  Match* n = new Match;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void Match::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.Match)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(Match, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
-  &reinterpret_cast<MatchResult*>(16)->f)
+  &reinterpret_cast<Match*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  ZR_(target_face_id_, match_);
+  ZR_(face_id_, match_);
 
 #undef ZR_HELPER_
 #undef ZR_
 
 }
 
-bool MatchResult::MergePartialFromCodedStream(
+bool Match::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:BioService.MatchResult)
+  // @@protoc_insertion_point(parse_start:BioService.Match)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int64 target_face_id = 1;
-      case 1: {
-        if (tag == 8) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &target_face_id_)));
-
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(16)) goto parse_comparison_face_id;
-        break;
-      }
-
-      // optional int64 comparison_face_id = 2;
+      // optional int64 face_id = 2;
       case 2: {
         if (tag == 16) {
-         parse_comparison_face_id:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &comparison_face_id_)));
+                 input, &face_id_)));
 
         } else {
           goto handle_unusual;
@@ -21290,25 +21820,20 @@ bool MatchResult::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:BioService.MatchResult)
+  // @@protoc_insertion_point(parse_success:BioService.Match)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:BioService.MatchResult)
+  // @@protoc_insertion_point(parse_failure:BioService.Match)
   return false;
 #undef DO_
 }
 
-void MatchResult::SerializeWithCachedSizes(
+void Match::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:BioService.MatchResult)
-  // optional int64 target_face_id = 1;
-  if (this->target_face_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->target_face_id(), output);
-  }
-
-  // optional int64 comparison_face_id = 2;
-  if (this->comparison_face_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->comparison_face_id(), output);
+  // @@protoc_insertion_point(serialize_start:BioService.Match)
+  // optional int64 face_id = 2;
+  if (this->face_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->face_id(), output);
   }
 
   // optional float match = 3;
@@ -21316,20 +21841,15 @@ void MatchResult::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->match(), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:BioService.MatchResult)
+  // @@protoc_insertion_point(serialize_end:BioService.Match)
 }
 
-::google::protobuf::uint8* MatchResult::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* Match::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:BioService.MatchResult)
-  // optional int64 target_face_id = 1;
-  if (this->target_face_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->target_face_id(), target);
-  }
-
-  // optional int64 comparison_face_id = 2;
-  if (this->comparison_face_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->comparison_face_id(), target);
+  // @@protoc_insertion_point(serialize_to_array_start:BioService.Match)
+  // optional int64 face_id = 2;
+  if (this->face_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->face_id(), target);
   }
 
   // optional float match = 3;
@@ -21337,25 +21857,19 @@ void MatchResult::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->match(), target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:BioService.MatchResult)
+  // @@protoc_insertion_point(serialize_to_array_end:BioService.Match)
   return target;
 }
 
-int MatchResult::ByteSize() const {
+int Match::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.Match)
   int total_size = 0;
 
-  // optional int64 target_face_id = 1;
-  if (this->target_face_id() != 0) {
+  // optional int64 face_id = 2;
+  if (this->face_id() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->target_face_id());
-  }
-
-  // optional int64 comparison_face_id = 2;
-  if (this->comparison_face_id() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->comparison_face_id());
+        this->face_id());
   }
 
   // optional float match = 3;
@@ -21369,111 +21883,99 @@ int MatchResult::ByteSize() const {
   return total_size;
 }
 
-void MatchResult::MergeFrom(const ::google::protobuf::Message& from) {
+void Match::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.Match)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  const MatchResult* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const MatchResult>(
+  const Match* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const Match>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.Match)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.Match)
     MergeFrom(*source);
   }
 }
 
-void MatchResult::MergeFrom(const MatchResult& from) {
+void Match::MergeFrom(const Match& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.Match)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  if (from.target_face_id() != 0) {
-    set_target_face_id(from.target_face_id());
-  }
-  if (from.comparison_face_id() != 0) {
-    set_comparison_face_id(from.comparison_face_id());
+  if (from.face_id() != 0) {
+    set_face_id(from.face_id());
   }
   if (from.match() != 0) {
     set_match(from.match());
   }
 }
 
-void MatchResult::CopyFrom(const ::google::protobuf::Message& from) {
+void Match::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.Match)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void MatchResult::CopyFrom(const MatchResult& from) {
+void Match::CopyFrom(const Match& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.Match)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool MatchResult::IsInitialized() const {
+bool Match::IsInitialized() const {
 
   return true;
 }
 
-void MatchResult::Swap(MatchResult* other) {
+void Match::Swap(Match* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void MatchResult::InternalSwap(MatchResult* other) {
-  std::swap(target_face_id_, other->target_face_id_);
-  std::swap(comparison_face_id_, other->comparison_face_id_);
+void Match::InternalSwap(Match* other) {
+  std::swap(face_id_, other->face_id_);
   std::swap(match_, other->match_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
-::google::protobuf::Metadata MatchResult::GetMetadata() const {
+::google::protobuf::Metadata Match::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = MatchResult_descriptor_;
-  metadata.reflection = MatchResult_reflection_;
+  metadata.descriptor = Match_descriptor_;
+  metadata.reflection = Match_reflection_;
   return metadata;
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// MatchResult
+// Match
 
-// optional int64 target_face_id = 1;
-void MatchResult::clear_target_face_id() {
-  target_face_id_ = GOOGLE_LONGLONG(0);
+// optional int64 face_id = 2;
+void Match::clear_face_id() {
+  face_id_ = GOOGLE_LONGLONG(0);
 }
- ::google::protobuf::int64 MatchResult::target_face_id() const {
-  // @@protoc_insertion_point(field_get:BioService.MatchResult.target_face_id)
-  return target_face_id_;
+ ::google::protobuf::int64 Match::face_id() const {
+  // @@protoc_insertion_point(field_get:BioService.Match.face_id)
+  return face_id_;
 }
- void MatchResult::set_target_face_id(::google::protobuf::int64 value) {
+ void Match::set_face_id(::google::protobuf::int64 value) {
   
-  target_face_id_ = value;
-  // @@protoc_insertion_point(field_set:BioService.MatchResult.target_face_id)
-}
-
-// optional int64 comparison_face_id = 2;
-void MatchResult::clear_comparison_face_id() {
-  comparison_face_id_ = GOOGLE_LONGLONG(0);
-}
- ::google::protobuf::int64 MatchResult::comparison_face_id() const {
-  // @@protoc_insertion_point(field_get:BioService.MatchResult.comparison_face_id)
-  return comparison_face_id_;
-}
- void MatchResult::set_comparison_face_id(::google::protobuf::int64 value) {
-  
-  comparison_face_id_ = value;
-  // @@protoc_insertion_point(field_set:BioService.MatchResult.comparison_face_id)
+  face_id_ = value;
+  // @@protoc_insertion_point(field_set:BioService.Match.face_id)
 }
 
 // optional float match = 3;
-void MatchResult::clear_match() {
+void Match::clear_match() {
   match_ = 0;
 }
- float MatchResult::match() const {
-  // @@protoc_insertion_point(field_get:BioService.MatchResult.match)
+ float Match::match() const {
+  // @@protoc_insertion_point(field_get:BioService.Match.match)
   return match_;
 }
- void MatchResult::set_match(float value) {
+ void Match::set_match(float value) {
   
   match_ = value;
-  // @@protoc_insertion_point(field_set:BioService.MatchResult.match)
+  // @@protoc_insertion_point(field_set:BioService.Match.match)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -21481,31 +21983,337 @@ void MatchResult::clear_match() {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int VerificationResult::kPortraitsFieldNumber;
-const int VerificationResult::kMatchesFieldNumber;
-const int VerificationResult::kMessageFieldNumber;
-const int VerificationResult::kGoodFieldNumber;
+const int Matches::kFaceIdFieldNumber;
+const int Matches::kMatchesFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-VerificationResult::VerificationResult()
+Matches::Matches()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:BioService.VerificationResult)
+  // @@protoc_insertion_point(constructor:BioService.Matches)
 }
 
-void VerificationResult::InitAsDefaultInstance() {
+void Matches::InitAsDefaultInstance() {
   _is_default_instance_ = true;
 }
 
-VerificationResult::VerificationResult(const VerificationResult& from)
+Matches::Matches(const Matches& from)
   : ::google::protobuf::Message(),
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:BioService.VerificationResult)
+  // @@protoc_insertion_point(copy_constructor:BioService.Matches)
 }
 
-void VerificationResult::SharedCtor() {
+void Matches::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  face_id_ = GOOGLE_LONGLONG(0);
+}
+
+Matches::~Matches() {
+  // @@protoc_insertion_point(destructor:BioService.Matches)
+  SharedDtor();
+}
+
+void Matches::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void Matches::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* Matches::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Matches_descriptor_;
+}
+
+const Matches& Matches::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_bio_5fservice_2eproto();
+  return *default_instance_;
+}
+
+Matches* Matches::default_instance_ = NULL;
+
+Matches* Matches::New(::google::protobuf::Arena* arena) const {
+  Matches* n = new Matches;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void Matches::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.Matches)
+  face_id_ = GOOGLE_LONGLONG(0);
+  matches_.Clear();
+}
+
+bool Matches::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:BioService.Matches)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int64 face_id = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &face_id_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_matches;
+        break;
+      }
+
+      // repeated .BioService.Match matches = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_matches:
+          DO_(input->IncrementRecursionDepth());
+         parse_loop_matches:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
+                input, add_matches()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_loop_matches;
+        input->UnsafeDecrementRecursionDepth();
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:BioService.Matches)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:BioService.Matches)
+  return false;
+#undef DO_
+}
+
+void Matches::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:BioService.Matches)
+  // optional int64 face_id = 1;
+  if (this->face_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->face_id(), output);
+  }
+
+  // repeated .BioService.Match matches = 2;
+  for (unsigned int i = 0, n = this->matches_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->matches(i), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:BioService.Matches)
+}
+
+::google::protobuf::uint8* Matches::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:BioService.Matches)
+  // optional int64 face_id = 1;
+  if (this->face_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->face_id(), target);
+  }
+
+  // repeated .BioService.Match matches = 2;
+  for (unsigned int i = 0, n = this->matches_size(); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->matches(i), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:BioService.Matches)
+  return target;
+}
+
+int Matches::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.Matches)
+  int total_size = 0;
+
+  // optional int64 face_id = 1;
+  if (this->face_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->face_id());
+  }
+
+  // repeated .BioService.Match matches = 2;
+  total_size += 1 * this->matches_size();
+  for (int i = 0; i < this->matches_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->matches(i));
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void Matches::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.Matches)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const Matches* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const Matches>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.Matches)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.Matches)
+    MergeFrom(*source);
+  }
+}
+
+void Matches::MergeFrom(const Matches& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.Matches)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  matches_.MergeFrom(from.matches_);
+  if (from.face_id() != 0) {
+    set_face_id(from.face_id());
+  }
+}
+
+void Matches::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.Matches)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Matches::CopyFrom(const Matches& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.Matches)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Matches::IsInitialized() const {
+
+  return true;
+}
+
+void Matches::Swap(Matches* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void Matches::InternalSwap(Matches* other) {
+  std::swap(face_id_, other->face_id_);
+  matches_.UnsafeArenaSwap(&other->matches_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata Matches::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = Matches_descriptor_;
+  metadata.reflection = Matches_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// Matches
+
+// optional int64 face_id = 1;
+void Matches::clear_face_id() {
+  face_id_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 Matches::face_id() const {
+  // @@protoc_insertion_point(field_get:BioService.Matches.face_id)
+  return face_id_;
+}
+ void Matches::set_face_id(::google::protobuf::int64 value) {
+  
+  face_id_ = value;
+  // @@protoc_insertion_point(field_set:BioService.Matches.face_id)
+}
+
+// repeated .BioService.Match matches = 2;
+int Matches::matches_size() const {
+  return matches_.size();
+}
+void Matches::clear_matches() {
+  matches_.Clear();
+}
+const ::BioService::Match& Matches::matches(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.Matches.matches)
+  return matches_.Get(index);
+}
+::BioService::Match* Matches::mutable_matches(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.Matches.matches)
+  return matches_.Mutable(index);
+}
+::BioService::Match* Matches::add_matches() {
+  // @@protoc_insertion_point(field_add:BioService.Matches.matches)
+  return matches_.Add();
+}
+::google::protobuf::RepeatedPtrField< ::BioService::Match >*
+Matches::mutable_matches() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.Matches.matches)
+  return &matches_;
+}
+const ::google::protobuf::RepeatedPtrField< ::BioService::Match >&
+Matches::matches() const {
+  // @@protoc_insertion_point(field_list:BioService.Matches.matches)
+  return matches_;
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int FaceSearchResult::kPortraitsFieldNumber;
+const int FaceSearchResult::kMatchesFieldNumber;
+const int FaceSearchResult::kMessageFieldNumber;
+const int FaceSearchResult::kGoodFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+FaceSearchResult::FaceSearchResult()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:BioService.FaceSearchResult)
+}
+
+void FaceSearchResult::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+FaceSearchResult::FaceSearchResult(const FaceSearchResult& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:BioService.FaceSearchResult)
+}
+
+void FaceSearchResult::SharedCtor() {
     _is_default_instance_ = false;
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
@@ -21513,54 +22321,55 @@ void VerificationResult::SharedCtor() {
   good_ = 0;
 }
 
-VerificationResult::~VerificationResult() {
-  // @@protoc_insertion_point(destructor:BioService.VerificationResult)
+FaceSearchResult::~FaceSearchResult() {
+  // @@protoc_insertion_point(destructor:BioService.FaceSearchResult)
   SharedDtor();
 }
 
-void VerificationResult::SharedDtor() {
+void FaceSearchResult::SharedDtor() {
   message_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
 
-void VerificationResult::SetCachedSize(int size) const {
+void FaceSearchResult::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* VerificationResult::descriptor() {
+const ::google::protobuf::Descriptor* FaceSearchResult::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return VerificationResult_descriptor_;
+  return FaceSearchResult_descriptor_;
 }
 
-const VerificationResult& VerificationResult::default_instance() {
+const FaceSearchResult& FaceSearchResult::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_bio_5fservice_2eproto();
   return *default_instance_;
 }
 
-VerificationResult* VerificationResult::default_instance_ = NULL;
+FaceSearchResult* FaceSearchResult::default_instance_ = NULL;
 
-VerificationResult* VerificationResult::New(::google::protobuf::Arena* arena) const {
-  VerificationResult* n = new VerificationResult;
+FaceSearchResult* FaceSearchResult::New(::google::protobuf::Arena* arena) const {
+  FaceSearchResult* n = new FaceSearchResult;
   if (arena != NULL) {
     arena->Own(n);
   }
   return n;
 }
 
-void VerificationResult::Clear() {
+void FaceSearchResult::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.FaceSearchResult)
   message_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   good_ = 0;
   portraits_.Clear();
   matches_.Clear();
 }
 
-bool VerificationResult::MergePartialFromCodedStream(
+bool FaceSearchResult::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:BioService.VerificationResult)
+  // @@protoc_insertion_point(parse_start:BioService.FaceSearchResult)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -21582,7 +22391,7 @@ bool VerificationResult::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .BioService.MatchResult matches = 2;
+      // repeated .BioService.Matches matches = 2;
       case 2: {
         if (tag == 18) {
           DO_(input->IncrementRecursionDepth());
@@ -21607,7 +22416,7 @@ bool VerificationResult::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->message().data(), this->message().length(),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "BioService.VerificationResult.message"));
+            "BioService.FaceSearchResult.message"));
         } else {
           goto handle_unusual;
         }
@@ -21644,24 +22453,24 @@ bool VerificationResult::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:BioService.VerificationResult)
+  // @@protoc_insertion_point(parse_success:BioService.FaceSearchResult)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:BioService.VerificationResult)
+  // @@protoc_insertion_point(parse_failure:BioService.FaceSearchResult)
   return false;
 #undef DO_
 }
 
-void VerificationResult::SerializeWithCachedSizes(
+void FaceSearchResult::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:BioService.VerificationResult)
+  // @@protoc_insertion_point(serialize_start:BioService.FaceSearchResult)
   // repeated .BioService.PortraitCharacteristic portraits = 1;
   for (unsigned int i = 0, n = this->portraits_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->portraits(i), output);
   }
 
-  // repeated .BioService.MatchResult matches = 2;
+  // repeated .BioService.Matches matches = 2;
   for (unsigned int i = 0, n = this->matches_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->matches(i), output);
@@ -21672,7 +22481,7 @@ void VerificationResult::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->message().data(), this->message().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "BioService.VerificationResult.message");
+      "BioService.FaceSearchResult.message");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->message(), output);
   }
@@ -21683,12 +22492,12 @@ void VerificationResult::SerializeWithCachedSizes(
       4, this->good(), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:BioService.VerificationResult)
+  // @@protoc_insertion_point(serialize_end:BioService.FaceSearchResult)
 }
 
-::google::protobuf::uint8* VerificationResult::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* FaceSearchResult::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:BioService.VerificationResult)
+  // @@protoc_insertion_point(serialize_to_array_start:BioService.FaceSearchResult)
   // repeated .BioService.PortraitCharacteristic portraits = 1;
   for (unsigned int i = 0, n = this->portraits_size(); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
@@ -21696,7 +22505,7 @@ void VerificationResult::SerializeWithCachedSizes(
         1, this->portraits(i), target);
   }
 
-  // repeated .BioService.MatchResult matches = 2;
+  // repeated .BioService.Matches matches = 2;
   for (unsigned int i = 0, n = this->matches_size(); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -21708,7 +22517,7 @@ void VerificationResult::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->message().data(), this->message().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "BioService.VerificationResult.message");
+      "BioService.FaceSearchResult.message");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->message(), target);
@@ -21720,11 +22529,12 @@ void VerificationResult::SerializeWithCachedSizes(
       4, this->good(), target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:BioService.VerificationResult)
+  // @@protoc_insertion_point(serialize_to_array_end:BioService.FaceSearchResult)
   return target;
 }
 
-int VerificationResult::ByteSize() const {
+int FaceSearchResult::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.FaceSearchResult)
   int total_size = 0;
 
   // optional string message = 3;
@@ -21748,7 +22558,7 @@ int VerificationResult::ByteSize() const {
         this->portraits(i));
   }
 
-  // repeated .BioService.MatchResult matches = 2;
+  // repeated .BioService.Matches matches = 2;
   total_size += 1 * this->matches_size();
   for (int i = 0; i < this->matches_size(); i++) {
     total_size +=
@@ -21762,19 +22572,23 @@ int VerificationResult::ByteSize() const {
   return total_size;
 }
 
-void VerificationResult::MergeFrom(const ::google::protobuf::Message& from) {
+void FaceSearchResult::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.FaceSearchResult)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  const VerificationResult* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const VerificationResult>(
+  const FaceSearchResult* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const FaceSearchResult>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.FaceSearchResult)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.FaceSearchResult)
     MergeFrom(*source);
   }
 }
 
-void VerificationResult::MergeFrom(const VerificationResult& from) {
+void FaceSearchResult::MergeFrom(const FaceSearchResult& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.FaceSearchResult)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   portraits_.MergeFrom(from.portraits_);
   matches_.MergeFrom(from.matches_);
@@ -21787,28 +22601,30 @@ void VerificationResult::MergeFrom(const VerificationResult& from) {
   }
 }
 
-void VerificationResult::CopyFrom(const ::google::protobuf::Message& from) {
+void FaceSearchResult::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.FaceSearchResult)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void VerificationResult::CopyFrom(const VerificationResult& from) {
+void FaceSearchResult::CopyFrom(const FaceSearchResult& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.FaceSearchResult)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool VerificationResult::IsInitialized() const {
+bool FaceSearchResult::IsInitialized() const {
 
   return true;
 }
 
-void VerificationResult::Swap(VerificationResult* other) {
+void FaceSearchResult::Swap(FaceSearchResult* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void VerificationResult::InternalSwap(VerificationResult* other) {
+void FaceSearchResult::InternalSwap(FaceSearchResult* other) {
   portraits_.UnsafeArenaSwap(&other->portraits_);
   matches_.UnsafeArenaSwap(&other->matches_);
   message_.Swap(&other->message_);
@@ -21817,132 +22633,133 @@ void VerificationResult::InternalSwap(VerificationResult* other) {
   std::swap(_cached_size_, other->_cached_size_);
 }
 
-::google::protobuf::Metadata VerificationResult::GetMetadata() const {
+::google::protobuf::Metadata FaceSearchResult::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = VerificationResult_descriptor_;
-  metadata.reflection = VerificationResult_reflection_;
+  metadata.descriptor = FaceSearchResult_descriptor_;
+  metadata.reflection = FaceSearchResult_reflection_;
   return metadata;
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// VerificationResult
+// FaceSearchResult
 
 // repeated .BioService.PortraitCharacteristic portraits = 1;
-int VerificationResult::portraits_size() const {
+int FaceSearchResult::portraits_size() const {
   return portraits_.size();
 }
-void VerificationResult::clear_portraits() {
+void FaceSearchResult::clear_portraits() {
   portraits_.Clear();
 }
-const ::BioService::PortraitCharacteristic& VerificationResult::portraits(int index) const {
-  // @@protoc_insertion_point(field_get:BioService.VerificationResult.portraits)
+const ::BioService::PortraitCharacteristic& FaceSearchResult::portraits(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResult.portraits)
   return portraits_.Get(index);
 }
-::BioService::PortraitCharacteristic* VerificationResult::mutable_portraits(int index) {
-  // @@protoc_insertion_point(field_mutable:BioService.VerificationResult.portraits)
+::BioService::PortraitCharacteristic* FaceSearchResult::mutable_portraits(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResult.portraits)
   return portraits_.Mutable(index);
 }
-::BioService::PortraitCharacteristic* VerificationResult::add_portraits() {
-  // @@protoc_insertion_point(field_add:BioService.VerificationResult.portraits)
+::BioService::PortraitCharacteristic* FaceSearchResult::add_portraits() {
+  // @@protoc_insertion_point(field_add:BioService.FaceSearchResult.portraits)
   return portraits_.Add();
 }
 ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic >*
-VerificationResult::mutable_portraits() {
-  // @@protoc_insertion_point(field_mutable_list:BioService.VerificationResult.portraits)
+FaceSearchResult::mutable_portraits() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchResult.portraits)
   return &portraits_;
 }
 const ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic >&
-VerificationResult::portraits() const {
-  // @@protoc_insertion_point(field_list:BioService.VerificationResult.portraits)
+FaceSearchResult::portraits() const {
+  // @@protoc_insertion_point(field_list:BioService.FaceSearchResult.portraits)
   return portraits_;
 }
 
-// repeated .BioService.MatchResult matches = 2;
-int VerificationResult::matches_size() const {
+// repeated .BioService.Matches matches = 2;
+int FaceSearchResult::matches_size() const {
   return matches_.size();
 }
-void VerificationResult::clear_matches() {
+void FaceSearchResult::clear_matches() {
   matches_.Clear();
 }
-const ::BioService::MatchResult& VerificationResult::matches(int index) const {
-  // @@protoc_insertion_point(field_get:BioService.VerificationResult.matches)
+const ::BioService::Matches& FaceSearchResult::matches(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResult.matches)
   return matches_.Get(index);
 }
-::BioService::MatchResult* VerificationResult::mutable_matches(int index) {
-  // @@protoc_insertion_point(field_mutable:BioService.VerificationResult.matches)
+::BioService::Matches* FaceSearchResult::mutable_matches(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResult.matches)
   return matches_.Mutable(index);
 }
-::BioService::MatchResult* VerificationResult::add_matches() {
-  // @@protoc_insertion_point(field_add:BioService.VerificationResult.matches)
+::BioService::Matches* FaceSearchResult::add_matches() {
+  // @@protoc_insertion_point(field_add:BioService.FaceSearchResult.matches)
   return matches_.Add();
 }
-::google::protobuf::RepeatedPtrField< ::BioService::MatchResult >*
-VerificationResult::mutable_matches() {
-  // @@protoc_insertion_point(field_mutable_list:BioService.VerificationResult.matches)
+::google::protobuf::RepeatedPtrField< ::BioService::Matches >*
+FaceSearchResult::mutable_matches() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchResult.matches)
   return &matches_;
 }
-const ::google::protobuf::RepeatedPtrField< ::BioService::MatchResult >&
-VerificationResult::matches() const {
-  // @@protoc_insertion_point(field_list:BioService.VerificationResult.matches)
+const ::google::protobuf::RepeatedPtrField< ::BioService::Matches >&
+FaceSearchResult::matches() const {
+  // @@protoc_insertion_point(field_list:BioService.FaceSearchResult.matches)
   return matches_;
 }
 
 // optional string message = 3;
-void VerificationResult::clear_message() {
+void FaceSearchResult::clear_message() {
   message_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- const ::std::string& VerificationResult::message() const {
-  // @@protoc_insertion_point(field_get:BioService.VerificationResult.message)
+ const ::std::string& FaceSearchResult::message() const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResult.message)
   return message_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void VerificationResult::set_message(const ::std::string& value) {
+ void FaceSearchResult::set_message(const ::std::string& value) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:BioService.VerificationResult.message)
+  // @@protoc_insertion_point(field_set:BioService.FaceSearchResult.message)
 }
- void VerificationResult::set_message(const char* value) {
+ void FaceSearchResult::set_message(const char* value) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:BioService.VerificationResult.message)
+  // @@protoc_insertion_point(field_set_char:BioService.FaceSearchResult.message)
 }
- void VerificationResult::set_message(const char* value, size_t size) {
+ void FaceSearchResult::set_message(const char* value, size_t size) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:BioService.VerificationResult.message)
+  // @@protoc_insertion_point(field_set_pointer:BioService.FaceSearchResult.message)
 }
- ::std::string* VerificationResult::mutable_message() {
+ ::std::string* FaceSearchResult::mutable_message() {
   
-  // @@protoc_insertion_point(field_mutable:BioService.VerificationResult.message)
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResult.message)
   return message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- ::std::string* VerificationResult::release_message() {
+ ::std::string* FaceSearchResult::release_message() {
+  // @@protoc_insertion_point(field_release:BioService.FaceSearchResult.message)
   
   return message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void VerificationResult::set_allocated_message(::std::string* message) {
+ void FaceSearchResult::set_allocated_message(::std::string* message) {
   if (message != NULL) {
     
   } else {
     
   }
   message_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), message);
-  // @@protoc_insertion_point(field_set_allocated:BioService.VerificationResult.message)
+  // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchResult.message)
 }
 
 // optional .BioService.Result good = 4;
-void VerificationResult::clear_good() {
+void FaceSearchResult::clear_good() {
   good_ = 0;
 }
- ::BioService::Result VerificationResult::good() const {
-  // @@protoc_insertion_point(field_get:BioService.VerificationResult.good)
+ ::BioService::Result FaceSearchResult::good() const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResult.good)
   return static_cast< ::BioService::Result >(good_);
 }
- void VerificationResult::set_good(::BioService::Result value) {
+ void FaceSearchResult::set_good(::BioService::Result value) {
   
   good_ = value;
-  // @@protoc_insertion_point(field_set:BioService.VerificationResult.good)
+  // @@protoc_insertion_point(field_set:BioService.FaceSearchResult.good)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -22017,6 +22834,7 @@ AcquiredData* AcquiredData::New(::google::protobuf::Arena* arena) const {
 }
 
 void AcquiredData::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.AcquiredData)
   if (GetArenaNoVirtual() == NULL && image_ != NULL) delete image_;
   image_ = NULL;
   owner_id_ = GOOGLE_LONGLONG(0);
@@ -22024,7 +22842,7 @@ void AcquiredData::Clear() {
 
 bool AcquiredData::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.AcquiredData)
   for (;;) {
@@ -22117,6 +22935,7 @@ void AcquiredData::SerializeWithCachedSizes(
 }
 
 int AcquiredData::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.AcquiredData)
   int total_size = 0;
 
   // optional .BioService.Photo image = 1;
@@ -22140,18 +22959,22 @@ int AcquiredData::ByteSize() const {
 }
 
 void AcquiredData::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.AcquiredData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const AcquiredData* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const AcquiredData>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.AcquiredData)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.AcquiredData)
     MergeFrom(*source);
   }
 }
 
 void AcquiredData::MergeFrom(const AcquiredData& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.AcquiredData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.has_image()) {
     mutable_image()->::BioService::Photo::MergeFrom(from.image());
@@ -22162,12 +22985,14 @@ void AcquiredData::MergeFrom(const AcquiredData& from) {
 }
 
 void AcquiredData::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.AcquiredData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void AcquiredData::CopyFrom(const AcquiredData& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.AcquiredData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -22221,6 +23046,7 @@ const ::BioService::Photo& AcquiredData::image() const {
   return image_;
 }
 ::BioService::Photo* AcquiredData::release_image() {
+  // @@protoc_insertion_point(field_release:BioService.AcquiredData.image)
   
   ::BioService::Photo* temp = image_;
   image_ = NULL;
@@ -22323,6 +23149,7 @@ FingerprintAcquiredData* FingerprintAcquiredData::New(::google::protobuf::Arena*
 }
 
 void FingerprintAcquiredData::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.FingerprintAcquiredData)
   if (GetArenaNoVirtual() == NULL && data_ != NULL) delete data_;
   data_ = NULL;
   position_ = 0;
@@ -22330,7 +23157,7 @@ void FingerprintAcquiredData::Clear() {
 
 bool FingerprintAcquiredData::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.FingerprintAcquiredData)
   for (;;) {
@@ -22426,6 +23253,7 @@ void FingerprintAcquiredData::SerializeWithCachedSizes(
 }
 
 int FingerprintAcquiredData::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.FingerprintAcquiredData)
   int total_size = 0;
 
   // optional .BioService.AcquiredData data = 1;
@@ -22448,18 +23276,22 @@ int FingerprintAcquiredData::ByteSize() const {
 }
 
 void FingerprintAcquiredData::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.FingerprintAcquiredData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const FingerprintAcquiredData* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const FingerprintAcquiredData>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.FingerprintAcquiredData)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.FingerprintAcquiredData)
     MergeFrom(*source);
   }
 }
 
 void FingerprintAcquiredData::MergeFrom(const FingerprintAcquiredData& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.FingerprintAcquiredData)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.has_data()) {
     mutable_data()->::BioService::AcquiredData::MergeFrom(from.data());
@@ -22470,12 +23302,14 @@ void FingerprintAcquiredData::MergeFrom(const FingerprintAcquiredData& from) {
 }
 
 void FingerprintAcquiredData::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.FingerprintAcquiredData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void FingerprintAcquiredData::CopyFrom(const FingerprintAcquiredData& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.FingerprintAcquiredData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -22529,6 +23363,7 @@ const ::BioService::AcquiredData& FingerprintAcquiredData::data() const {
   return data_;
 }
 ::BioService::AcquiredData* FingerprintAcquiredData::release_data() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintAcquiredData.data)
   
   ::BioService::AcquiredData* temp = data_;
   data_ = NULL;
@@ -22639,8 +23474,17 @@ EnrollmentFeedback* EnrollmentFeedback::New(::google::protobuf::Arena* arena) co
 }
 
 void EnrollmentFeedback::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.EnrollmentFeedback)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(EnrollmentFeedback, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<EnrollmentFeedback*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -22658,7 +23502,7 @@ void EnrollmentFeedback::Clear() {
 
 bool EnrollmentFeedback::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.EnrollmentFeedback)
   for (;;) {
@@ -22866,6 +23710,7 @@ void EnrollmentFeedback::SerializeWithCachedSizes(
 }
 
 int EnrollmentFeedback::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.EnrollmentFeedback)
   int total_size = 0;
 
   // optional int64 characteristic_id = 1;
@@ -22912,18 +23757,22 @@ int EnrollmentFeedback::ByteSize() const {
 }
 
 void EnrollmentFeedback::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.EnrollmentFeedback)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const EnrollmentFeedback* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const EnrollmentFeedback>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.EnrollmentFeedback)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.EnrollmentFeedback)
     MergeFrom(*source);
   }
 }
 
 void EnrollmentFeedback::MergeFrom(const EnrollmentFeedback& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.EnrollmentFeedback)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.characteristic_id() != 0) {
     set_characteristic_id(from.characteristic_id());
@@ -22947,12 +23796,14 @@ void EnrollmentFeedback::MergeFrom(const EnrollmentFeedback& from) {
 }
 
 void EnrollmentFeedback::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.EnrollmentFeedback)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void EnrollmentFeedback::CopyFrom(const EnrollmentFeedback& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.EnrollmentFeedback)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -23089,6 +23940,7 @@ void EnrollmentFeedback::clear_message() {
   return message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* EnrollmentFeedback::release_message() {
+  // @@protoc_insertion_point(field_release:BioService.EnrollmentFeedback.message)
   
   return message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -23174,6 +24026,7 @@ VerificationFeedback* VerificationFeedback::New(::google::protobuf::Arena* arena
 }
 
 void VerificationFeedback::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.VerificationFeedback)
   if (GetArenaNoVirtual() == NULL && enrollment_feedback_ != NULL) delete enrollment_feedback_;
   enrollment_feedback_ = NULL;
   match_ = 0;
@@ -23181,7 +24034,7 @@ void VerificationFeedback::Clear() {
 
 bool VerificationFeedback::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.VerificationFeedback)
   for (;;) {
@@ -23274,6 +24127,7 @@ void VerificationFeedback::SerializeWithCachedSizes(
 }
 
 int VerificationFeedback::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.VerificationFeedback)
   int total_size = 0;
 
   // optional .BioService.EnrollmentFeedback enrollment_feedback = 1;
@@ -23295,18 +24149,22 @@ int VerificationFeedback::ByteSize() const {
 }
 
 void VerificationFeedback::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.VerificationFeedback)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const VerificationFeedback* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const VerificationFeedback>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.VerificationFeedback)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.VerificationFeedback)
     MergeFrom(*source);
   }
 }
 
 void VerificationFeedback::MergeFrom(const VerificationFeedback& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.VerificationFeedback)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.has_enrollment_feedback()) {
     mutable_enrollment_feedback()->::BioService::EnrollmentFeedback::MergeFrom(from.enrollment_feedback());
@@ -23317,12 +24175,14 @@ void VerificationFeedback::MergeFrom(const VerificationFeedback& from) {
 }
 
 void VerificationFeedback::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.VerificationFeedback)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void VerificationFeedback::CopyFrom(const VerificationFeedback& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.VerificationFeedback)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -23376,6 +24236,7 @@ const ::BioService::EnrollmentFeedback& VerificationFeedback::enrollment_feedbac
   return enrollment_feedback_;
 }
 ::BioService::EnrollmentFeedback* VerificationFeedback::release_enrollment_feedback() {
+  // @@protoc_insertion_point(field_release:BioService.VerificationFeedback.enrollment_feedback)
   
   ::BioService::EnrollmentFeedback* temp = enrollment_feedback_;
   enrollment_feedback_ = NULL;
@@ -23503,8 +24364,17 @@ QueryPhoto* QueryPhoto::New(::google::protobuf::Arena* arena) const {
 }
 
 void QueryPhoto::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.QueryPhoto)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(QueryPhoto, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<QueryPhoto*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -23522,7 +24392,7 @@ void QueryPhoto::Clear() {
 
 bool QueryPhoto::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.QueryPhoto)
   for (;;) {
@@ -23701,6 +24571,7 @@ void QueryPhoto::SerializeWithCachedSizes(
 }
 
 int QueryPhoto::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.QueryPhoto)
   int total_size = 0;
 
   // optional .BioService.QueryPhoto.PhotoResultType with_bytes = 1;
@@ -23757,18 +24628,22 @@ int QueryPhoto::ByteSize() const {
 }
 
 void QueryPhoto::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.QueryPhoto)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const QueryPhoto* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const QueryPhoto>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.QueryPhoto)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.QueryPhoto)
     MergeFrom(*source);
   }
 }
 
 void QueryPhoto::MergeFrom(const QueryPhoto& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.QueryPhoto)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   persons_.MergeFrom(from.persons_);
   photos_.MergeFrom(from.photos_);
@@ -23781,12 +24656,14 @@ void QueryPhoto::MergeFrom(const QueryPhoto& from) {
 }
 
 void QueryPhoto::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.QueryPhoto)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void QueryPhoto::CopyFrom(const QueryPhoto& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.QueryPhoto)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -23977,12 +24854,13 @@ QueryPersons* QueryPersons::New(::google::protobuf::Arena* arena) const {
 }
 
 void QueryPersons::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.QueryPersons)
   count_ = GOOGLE_LONGLONG(0);
 }
 
 bool QueryPersons::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.QueryPersons)
   for (;;) {
@@ -24049,6 +24927,7 @@ void QueryPersons::SerializeWithCachedSizes(
 }
 
 int QueryPersons::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.QueryPersons)
   int total_size = 0;
 
   // optional int64 count = 1;
@@ -24065,18 +24944,22 @@ int QueryPersons::ByteSize() const {
 }
 
 void QueryPersons::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.QueryPersons)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const QueryPersons* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const QueryPersons>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.QueryPersons)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.QueryPersons)
     MergeFrom(*source);
   }
 }
 
 void QueryPersons::MergeFrom(const QueryPersons& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.QueryPersons)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.count() != 0) {
     set_count(from.count());
@@ -24084,12 +24967,14 @@ void QueryPersons::MergeFrom(const QueryPersons& from) {
 }
 
 void QueryPersons::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.QueryPersons)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void QueryPersons::CopyFrom(const QueryPersons& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.QueryPersons)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -24203,12 +25088,13 @@ QueryLocations* QueryLocations::New(::google::protobuf::Arena* arena) const {
 }
 
 void QueryLocations::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.QueryLocations)
   count_ = GOOGLE_LONGLONG(0);
 }
 
 bool QueryLocations::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.QueryLocations)
   for (;;) {
@@ -24275,6 +25161,7 @@ void QueryLocations::SerializeWithCachedSizes(
 }
 
 int QueryLocations::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.QueryLocations)
   int total_size = 0;
 
   // optional int64 count = 1;
@@ -24291,18 +25178,22 @@ int QueryLocations::ByteSize() const {
 }
 
 void QueryLocations::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.QueryLocations)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const QueryLocations* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const QueryLocations>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.QueryLocations)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.QueryLocations)
     MergeFrom(*source);
   }
 }
 
 void QueryLocations::MergeFrom(const QueryLocations& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.QueryLocations)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.count() != 0) {
     set_count(from.count());
@@ -24310,12 +25201,14 @@ void QueryLocations::MergeFrom(const QueryLocations& from) {
 }
 
 void QueryLocations::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.QueryLocations)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void QueryLocations::CopyFrom(const QueryLocations& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.QueryLocations)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -24437,8 +25330,17 @@ QueryVisitors* QueryVisitors::New(::google::protobuf::Arena* arena) const {
 }
 
 void QueryVisitors::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.QueryVisitors)
+#if defined(__clang__)
+#define ZR_HELPER_(f) \
+  _Pragma("clang diagnostic push") \
+  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
+  __builtin_offsetof(QueryVisitors, f) \
+  _Pragma("clang diagnostic pop")
+#else
 #define ZR_HELPER_(f) reinterpret_cast<char*>(\
   &reinterpret_cast<QueryVisitors*>(16)->f)
+#endif
 
 #define ZR_(first, last) do {\
   ::memset(&first, 0,\
@@ -24457,7 +25359,7 @@ void QueryVisitors::Clear() {
 
 bool QueryVisitors::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.QueryVisitors)
   for (;;) {
@@ -24698,6 +25600,7 @@ void QueryVisitors::SerializeWithCachedSizes(
 }
 
 int QueryVisitors::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.QueryVisitors)
   int total_size = 0;
 
   // optional int64 datetime_from = 5;
@@ -24769,18 +25672,22 @@ int QueryVisitors::ByteSize() const {
 }
 
 void QueryVisitors::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.QueryVisitors)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const QueryVisitors* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const QueryVisitors>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.QueryVisitors)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.QueryVisitors)
     MergeFrom(*source);
   }
 }
 
 void QueryVisitors::MergeFrom(const QueryVisitors& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.QueryVisitors)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   countries_.MergeFrom(from.countries_);
   locations_.MergeFrom(from.locations_);
@@ -24797,12 +25704,14 @@ void QueryVisitors::MergeFrom(const QueryVisitors& from) {
 }
 
 void QueryVisitors::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.QueryVisitors)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void QueryVisitors::CopyFrom(const QueryVisitors& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.QueryVisitors)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -24868,6 +25777,7 @@ void QueryVisitors::clear_countries() {
   // @@protoc_insertion_point(field_set_pointer:BioService.QueryVisitors.countries)
 }
  ::std::string* QueryVisitors::add_countries() {
+  // @@protoc_insertion_point(field_add_mutable:BioService.QueryVisitors.countries)
   return countries_.Add();
 }
  void QueryVisitors::add_countries(const ::std::string& value) {
@@ -25065,12 +25975,13 @@ SocketConfiguration* SocketConfiguration::New(::google::protobuf::Arena* arena) 
 }
 
 void SocketConfiguration::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.SocketConfiguration)
   address_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 bool SocketConfiguration::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.SocketConfiguration)
   for (;;) {
@@ -25150,6 +26061,7 @@ void SocketConfiguration::SerializeWithCachedSizes(
 }
 
 int SocketConfiguration::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.SocketConfiguration)
   int total_size = 0;
 
   // optional string address = 1;
@@ -25166,18 +26078,22 @@ int SocketConfiguration::ByteSize() const {
 }
 
 void SocketConfiguration::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.SocketConfiguration)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const SocketConfiguration* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const SocketConfiguration>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.SocketConfiguration)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.SocketConfiguration)
     MergeFrom(*source);
   }
 }
 
 void SocketConfiguration::MergeFrom(const SocketConfiguration& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.SocketConfiguration)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.address().size() > 0) {
 
@@ -25186,12 +26102,14 @@ void SocketConfiguration::MergeFrom(const SocketConfiguration& from) {
 }
 
 void SocketConfiguration::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.SocketConfiguration)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void SocketConfiguration::CopyFrom(const SocketConfiguration& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.SocketConfiguration)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -25253,6 +26171,7 @@ void SocketConfiguration::clear_address() {
   return address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* SocketConfiguration::release_address() {
+  // @@protoc_insertion_point(field_release:BioService.SocketConfiguration.address)
   
   return address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -25341,6 +26260,7 @@ BioClient* BioClient::New(::google::protobuf::Arena* arena) const {
 }
 
 void BioClient::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.BioClient)
   ip_address_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   port_number_ = GOOGLE_LONGLONG(0);
   mac_address_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -25348,7 +26268,7 @@ void BioClient::Clear() {
 
 bool BioClient::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:BioService.BioClient)
   for (;;) {
@@ -25491,6 +26411,7 @@ void BioClient::SerializeWithCachedSizes(
 }
 
 int BioClient::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.BioClient)
   int total_size = 0;
 
   // optional string ip_address = 1;
@@ -25521,18 +26442,22 @@ int BioClient::ByteSize() const {
 }
 
 void BioClient::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.BioClient)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const BioClient* source = 
       ::google::protobuf::internal::DynamicCastToGenerated<const BioClient>(
           &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.BioClient)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.BioClient)
     MergeFrom(*source);
   }
 }
 
 void BioClient::MergeFrom(const BioClient& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.BioClient)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.ip_address().size() > 0) {
 
@@ -25548,12 +26473,14 @@ void BioClient::MergeFrom(const BioClient& from) {
 }
 
 void BioClient::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.BioClient)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void BioClient::CopyFrom(const BioClient& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.BioClient)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -25617,6 +26544,7 @@ void BioClient::clear_ip_address() {
   return ip_address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* BioClient::release_ip_address() {
+  // @@protoc_insertion_point(field_release:BioService.BioClient.ip_address)
   
   return ip_address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -25674,6 +26602,7 @@ void BioClient::clear_mac_address() {
   return mac_address_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* BioClient::release_mac_address() {
+  // @@protoc_insertion_point(field_release:BioService.BioClient.mac_address)
   
   return mac_address_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
