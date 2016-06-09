@@ -11,14 +11,14 @@ namespace BioGrpc
 	{
 		enum RequestStatus { CREATE, PROCESS, CAN_WRITE, START_FINISH, FINISH };
 	public:
-		FacialAcquisitionHandler(std::shared_ptr<BioService::BiometricFacialSevice::AsyncService> service
-			                      , grpc::ServerCompletionQueue* completion_queue
-			                      , std::shared_ptr<BioContracts::IFacialEngine> facial_engine)
-			                      : service_(service)
-			                      , server_completion_queue_(completion_queue)
-			                      , responder_(&server_context_)
-			                      , status_(CREATE)
-			                      , facial_engine_(facial_engine)
+		FacialAcquisitionHandler( std::shared_ptr<BioService::BiometricFacialSevice::AsyncService> service
+			                    , grpc::ServerCompletionQueue* completion_queue
+			                    , std::shared_ptr<BioContracts::IFacialEngine> facial_engine)
+			                    : service_(service)
+			                    , server_completion_queue_(completion_queue)
+			                    , responder_(&server_context_)
+			                    , status_(CREATE)
+			                    , facial_engine_(facial_engine)
 		{
 			Proceed();
 		}
@@ -31,8 +31,8 @@ namespace BioGrpc
 				try
 				{
 					service_->RequestAcquire(  &server_context_, &request_
-						                       , &responder_, server_completion_queue_
-						                       , server_completion_queue_, this);
+						                      , &responder_, server_completion_queue_
+						                      , server_completion_queue_, this);
 				}
 				catch (std::exception& ex)
 				{
