@@ -3,8 +3,8 @@
 
 #include "wrappers/face_info.hpp"
 #include "wrappers/frsdk_face_characteristics.hpp"
-#include <utils/face_vacs_io_utils.hpp>
 #include <common/iimage_characteristic.hpp>
+#include <utils/prng_engine.hpp>
 
 namespace FRsdkEntities
 {
@@ -23,18 +23,14 @@ namespace FRsdkEntities
 
 		void addRange(const std::vector<FaceVacsFullFace>& faces)
 		{
-			Concurrency::parallel_for_each(faces.begin(), faces.end(),
-				[&](const FaceVacsFullFace& face) 
-			  {
-			  	addFace(face.first, face.second);
-			  }
-			);
+			for (auto it = faces.begin(); it != faces.end(); ++it)			
+				addFace(it->first, it->second);	
 		}
 
 		void addFace( const FRsdk::Face::Location& faceLocation
 			          , const FRsdk::Eyes::Location& eyes)
 		{
-			FaceInfoPtr face(new FaceInfo(faceLocation, eyes, image_));
+			FaceInfoPtr face(new FaceInfo(faceLocation, eyes, image_, randomizer_()));
 			faces_.push_back(face);
 		}
 
@@ -67,6 +63,8 @@ namespace FRsdkEntities
 	
 		std::vector<FaceInfoPtr> faces_;
 		FRsdkTypes::FaceVacsImage image_;
+
+		static sitmo::prng_engine randomizer_;
 
 		long id_;
 	};

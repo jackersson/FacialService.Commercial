@@ -14,7 +14,8 @@ namespace FRsdkEntities
   public:
   	FaceInfo( const FRsdk::Face::Location& faceLocation
   		      , const FRsdk::Eyes::Location& eyes
-  					, const FRsdkTypes::FaceVacsImage image)
+  					, const FRsdkTypes::FaceVacsImage image
+						, long  face_id )
   					:	face_ (faceLocation)
   					, eyes_ (eyes )
   					, parent_image_(image)
@@ -23,7 +24,8 @@ namespace FRsdkEntities
   					, portrait_characteristics_(nullptr)
   					, iso_compliance_(nullptr)
   	{		
-  		id_ = static_cast<long>(faceLocation.pos.x() +  faceLocation.pos.y()) + clock();
+			id_ = std::abs(face_id);
+			std::cout << "face id " << id_  << "confidence  = " << face_.confidence() << std::endl;
   	}
   
   	long id() const override { return id_; }
@@ -39,6 +41,14 @@ namespace FRsdkEntities
   	bool has_extracted_image() const {
   		return (extracted_image_ != nullptr);
   	}
+
+		bool has_face_characteristics() const {
+			return (portrait_characteristics_ != nullptr);
+		}
+
+		bool has_iso_compliance() const {
+			return (iso_compliance_ != nullptr);
+		}
   		
   	FRsdk::AnnotatedImage annotated_image() const	{
   		return FRsdk::AnnotatedImage(*parent_image_, eyes_.instance());

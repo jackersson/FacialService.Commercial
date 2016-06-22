@@ -44,7 +44,7 @@ namespace BioFacialEngine
 		}
 	
 		auto ident_item(std::make_shared<IdentificationItem>(pair.second, configuration_));
-		//items_.push_back(ident_item);
+		items_.push_back(ident_item);
 
 		auto matches = ident_item->identify(pair.first);
 		

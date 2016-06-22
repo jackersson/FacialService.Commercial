@@ -39,7 +39,7 @@ namespace Pipeline
 				(
 				  [&]() 
 				  {
-						acquisition_ = std::make_shared<BioFacialEngine::FacialAcquisition>(configuration);				  		      ;		         
+						acquisition_ = std::make_shared<BioFacialEngine::FacialAcquisition>(configuration);				  		      		         
 				  },
 				  [&]()
 				  {
@@ -73,13 +73,13 @@ namespace Pipeline
 		}
 
 		void face_find(FRsdkEntities::ImageInfoPtr pInfo) override
-		{
+		{		
 			auto image = pInfo->image();
 
 			std::vector<FRsdkEntities::FaceVacsFullFace> faces;
-			acquisition_->find_face(image, faces);
+  		acquisition_->find_face(image, faces);
 
-			pInfo->addRange(faces);
+			pInfo->addRange(faces);			
 		}
 
 		void portrait_analyze(FRsdkEntities::FaceInfoPtr pInfo) override
@@ -100,8 +100,10 @@ namespace Pipeline
 
 		void iso_compliance_test(FRsdkEntities::FaceInfoPtr pInfo) override {
 			auto portrait = pInfo->characteristics().portraitCharacteristics();
+			auto start = clock();
+			std::cout << " iso_compliance_test start " << clock() - start << std::endl;
 			auto result = acquisition_->iso_compliance_test(portrait);
-
+			std::cout << " iso_compliance_test " << clock() - start << std::endl;
 			FRsdkEntities::FRsdkIsoCompliancePtr iso(new FRsdkEntities::FRsdkIsoCompliance(*result));
 			pInfo->set_iso_compliance(iso);
 		}

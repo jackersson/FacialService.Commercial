@@ -9,7 +9,9 @@ namespace Pipeline
 	class PipelineGovernor
 	{	
 	public:
-		explicit PipelineGovernor(int capacity) : capacity_(capacity), working_units_(0) {}
+		explicit PipelineGovernor(int capacity) : capacity_(capacity), working_units_(0) {
+			std::cout << "governor size = " << capacity_ << std::endl;
+		}
 
 		virtual ~PipelineGovernor() {}
 

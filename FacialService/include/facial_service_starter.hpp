@@ -15,7 +15,7 @@ namespace BioFacialService
 		~FacialServiceStarter(){}
 		void start()
 		{
-			std::string cfg_path = "C:\\FVSDK_8_9_5\\etc\\frsdk.cfg";
+			std::string cfg_path = "C:\\FVSDK_9_1_1\\etc\\frsdk.cfg";
 
 			engines_ = std::make_shared<RecognitionEnginesContext>();
 			engines_->createFacialEngine(cfg_path);

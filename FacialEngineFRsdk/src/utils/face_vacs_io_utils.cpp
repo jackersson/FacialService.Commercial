@@ -18,6 +18,8 @@ namespace BioFacialEngine
 	
   FaceVacsImage FaceVacsIOUtils::loadFromFile(const std::string& filename)
   {
+		std::cout << "loading " << filename << std::endl;
+
   	if (filename.size() < 1)
   		return nullptr;
   

@@ -28,13 +28,15 @@ namespace Pipeline
 		void init()
 		{
 			auto this_ptr(shared_from_this());
-			Concurrency::parallel_for_each(item_->cbegin(), item_->cend(),
-				[&](FRsdkEntities::FaceInfoPtr ptr)
+			//Concurrency::parallel_for_each(item_->cbegin(), item_->cend(),
+				//[&](FRsdkEntities::FaceInfoPtr ptr)
+			for (auto it = item_->cbegin(); it != item_->cend(); ++it)
 			  {				
-			  	FaceInfoAwaitablePtr face_awaitable(new FaceInfoAwaitable(this_ptr, ptr, task_));
+					this_ptr->wait_available_working_unit();
+			  	FaceInfoAwaitablePtr face_awaitable(new FaceInfoAwaitable(this_ptr, *it, task_));
 			  	awaitables_.push_back(face_awaitable);
 			  }
-			);
+			//);
 		}
 
 	private:	

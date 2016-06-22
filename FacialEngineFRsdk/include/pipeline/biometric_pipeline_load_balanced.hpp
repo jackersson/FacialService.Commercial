@@ -16,7 +16,7 @@ namespace Pipeline
 		  FACIAL_EXTRACTION      = FaceFind | FaceImageExtraction
 		, FAST_PORTRAIT_ANALYSIS = FaceFind | PortraitAnalysis
 		, ISO_COMPLIANCE_TEST    = FAST_PORTRAIT_ANALYSIS | IsoComplianceTest
-		, FULL_PORTRAIT_ANALYSIS = ISO_COMPLIANCE_TEST | FaceImageExtraction
+		, FULL_PORTRAIT_ANALYSIS = FAST_PORTRAIT_ANALYSIS/*ISO_COMPLIANCE_TEST*/ |  FaceImageExtraction
 		, FAST_ENROLLMENT        = FACIAL_EXTRACTION | Enrollment
 		, FULL_ENROLLMENT        = FULL_PORTRAIT_ANALYSIS | Enrollment
 	};

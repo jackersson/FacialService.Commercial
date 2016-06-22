@@ -26,6 +26,7 @@ namespace BioFacialEngine
 		~FacialAcquisition() {}
 
 		void find_face(FRsdkTypes::FaceVacsImage image, std::vector<FRsdkEntities::FaceVacsFullFace>& faces);
+				
 
 		FaceVacsPortraitCharacteristicsPtr analyze            (const FRsdk::AnnotatedImage& image) const;
 		FaceVacsCompliancePtr              iso_compliance_test(const FRsdk::Portrait::Characteristics& pch) const;
@@ -42,7 +43,7 @@ namespace BioFacialEngine
 		FaceVacsFeatureTest       feature_test_      ;
 		FaceVacsTfcreator         token_face_creator_;
 
-		const float MIN_EYE_DISTANCE = 0.1f;
+		const float MIN_EYE_DISTANCE = 0.05f;
 		const float MAX_EYE_DISTANCE = 0.4f;
 	};
 

@@ -2,6 +2,7 @@
 #include <pipeline/image_info_awaitable.hpp>
 #include <common/raw_image.hpp>
 #include <biotasks/identification/facial_identification.hpp>
+#include <utils/face_vacs_io_utils.hpp>
 
 using namespace Concurrency;
 using namespace FRsdkEntities;
@@ -96,8 +97,13 @@ namespace Pipeline
 		finish_stage_ = std::make_unique<FaceCall>(
 			[this](FaceInfoAwaitablePtr pInfo)
 		  {
-		  	if (pInfo->done())
-		  		governor_.free_unit();
+				if (pInfo->done())
+				{
+					governor_.free_unit();
+					std::cout << "done " << pInfo->item()->id() << std::endl;
+				}
+				else
+					std::cout << "not done" << std::endl;
 		  });
 	}
 
@@ -135,17 +141,18 @@ namespace Pipeline
 		auto task = task_info.second;
 		auto image_awaitable = std::make_shared<ImageInfoAwaitable>(image_info, task);
 		image_awaitable->init();
-		parallel_for_each(image_awaitable->cbegin(), image_awaitable->cend(),
-	    [&](FaceInfoAwaitablePtr face)
+		for( auto it = image_awaitable->cbegin(); it != image_awaitable->cend(); ++it)
+	   // [&](FaceInfoAwaitablePtr face)
 		  {		  	
+				FaceInfoAwaitablePtr face = *it;
 		  	governor_.wait_available_working_unit();
 		  	if (face->has_task(PortraitAnalysis))
 		  		asend(*face_analyzer_, face);
 		  
 		  	if (face->has_task(FaceImageExtraction))
 		  		asend(*facial_image_extractor_, face);
-		  }
-		);
+		 }
+		//);
 
 		image_awaitable->wait_until_empty();
 

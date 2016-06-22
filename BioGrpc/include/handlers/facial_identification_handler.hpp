@@ -50,20 +50,20 @@ namespace BioGrpc
 		void processRequest()
 		{
 			std::string target_image_bytestring = request_.target_image().bytestring();
-			BioContracts::RawImage target_image(target_image_bytestring, target_image_bytestring.size());
+			BioContracts::RawImage target_image(target_image_bytestring, request_.target_image().id());
 
 			std::list<BioContracts::RawImage> comparison_images;
 			for (auto proto_it = request_.comparison_images().begin();
 				proto_it != request_.comparison_images().end(); ++proto_it)
 			{
 				std::string comparison_image_bytestring = (*proto_it).bytestring();
-				BioContracts::RawImage comparison_image(comparison_image_bytestring, comparison_image_bytestring.size());
+				BioContracts::RawImage comparison_image(comparison_image_bytestring, proto_it->id());
 				comparison_images.push_back(comparison_image);
       }
 			
 			BioContracts::IdentificationResultPtr result =
 				facial_engine_->identify(target_image, comparison_images);
-
+			std::cout << "facial_engine_->identify" << std::endl;
 			std::shared_ptr<FaceSearchResult>	proto_matches;
 			if (result == nullptr)
 				proto_matches = std::make_shared<FaceSearchResult>();

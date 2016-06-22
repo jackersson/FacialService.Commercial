@@ -20,25 +20,32 @@ using namespace Pipeline;
 int main(int argc, char** argv)
 {	
 
-	std::string cfg_path = "C:\\FVSDK_8_9_5\\etc\\frsdk.cfg";
+	std::string cfg_path = "C:\\FVSDK_9_1_1\\etc\\frsdk.cfg";
 	std::shared_ptr<FRsdkBiometricProcessor> task(new FRsdkBiometricProcessor(cfg_path));
 
-	long acquire = FaceFind | PortraitAnalysis | FaceImageExtraction | IsoComplianceTest | Enrollment;
+	long acquire = FaceFind | PortraitAnalysis | FaceImageExtraction | IsoComplianceTest;// | Enrollment;
 
-	std::string shwarc  = "C:\\Users\\jacke\\Desktop\\3423.jpg"          ;
-	std::string klichko2 = "C:\\Users\\jacke\\Desktop\\kl2.jpg";
-	std::string klichko = "C:\\Users\\jacke\\Desktop\\kl3.jpg"        ;
-	std::string gates   = "C:\\Users\\jacke\\Desktop\\images1ARMIOC1.jpg";
+	std::string shwarc   = "C:\\Users\\User\\Desktop\\2.jpg";
+	std::string klichko2 = "C:\\Users\\User\\Desktop\\33.jpg";
+	//std::string klichko  = "C:\\Users\\User\\Desktop\\3.jpg";
+  //std::string gates    = "C:\\Users\\User\\Desktop\\fd.jpg";
 
 	BiometricPipelineBalanced pipeline(task);
 	
 	unsigned int start = clock();
-	FRsdkEntities::ImageInfoPtr ptr1 = nullptr;
-	FRsdkEntities::ImageInfoPtr ptr2 = nullptr;
-	FRsdkEntities::ImageInfoPtr ptr3 = nullptr;
+	//FRsdkEntities::ImageInfoPtr ptr1 = nullptr;
+	//FRsdkEntities::ImageInfoPtr ptr2 = nullptr;
+	//FRsdkEntities::ImageInfoPtr ptr3 = nullptr;
 
-	std::list<std::string> images = { shwarc, klichko2 };
-	IdentificationResultPtr ptr = pipeline.identify_face(klichko, images);
+	//std::list<std::string> images = { klichko2, klichko2 };
+	//IdentificationResultPtr ptr = pipeline.identify_face(klichko2, images);
+
+	//IImageInfoPtr ptr = pipeline.acquire(shwarc, acquire);
+	//if (ptr != nullptr)
+	//  (*ptr)[0].characteristics().faceBox();
+	//IImageInfoPtr ptr1 = pipeline.acquire(klichko2);
+	//IImageInfoPtr ptr2 = pipeline.acquire(klichko);
+	//IImageInfoPtr ptr3 = pipeline.acquire(gates);
 	//std::cin.get();
 	/*
 	parallel_invoke(

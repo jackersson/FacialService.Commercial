@@ -12,6 +12,9 @@ namespace BioContracts
 	public:
 		virtual ~IFaceInfo() {}
 
+		virtual bool has_face_characteristics() const = 0;
+		virtual bool has_iso_compliance()       const = 0;
+
 		virtual long id() const = 0;
 
 		virtual const IFaceCharacteristics& characteristics() const = 0;

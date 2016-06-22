@@ -13,7 +13,7 @@ namespace Pipeline
 			                                , start_time_(clock())
 		{
 			set_done(FaceFind);
-			parent->wait_available_working_unit();
+			//parent->wait_available_working_unit();
 		}
 
 

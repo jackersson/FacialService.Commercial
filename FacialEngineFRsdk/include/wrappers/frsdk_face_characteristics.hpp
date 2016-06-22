@@ -109,6 +109,10 @@ namespace FRsdkEntities
 
 		const BioContracts::IBox& faceBox() const	override{
 			bounding_box_.copyFrom(FRsdk::Portrait::earToEarChinCrownSurroundingBox(portrait_characteristics_));
+			FRsdk::Box box = FRsdk::Portrait::earToEarChinCrownSurroundingBox(portrait_characteristics_);
+			std::cout << bounding_box_.origin().x() << " " << bounding_box_.origin().y() << std::endl;
+				
+			std::cout << bounding_box_.end().x() << " " << bounding_box_.end().y() << std::endl;
 			return bounding_box_;
 		}
 
@@ -121,7 +125,7 @@ namespace FRsdkEntities
 		}
 
 		bool isMale() const	override{
-			return (portrait_characteristics_.isMale() > 0.5f);
+			return (portrait_characteristics_.isMale() > 0);
 		}
 
 		const FRsdk::Portrait::Characteristics& portraitCharacteristics() const	{

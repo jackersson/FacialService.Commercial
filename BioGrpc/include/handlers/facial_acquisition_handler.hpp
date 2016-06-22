@@ -59,11 +59,11 @@ namespace BioGrpc
 			BioContracts::RawImage image(image_bytestring, request_.id());
 
 			auto start = clock();
-			
+			std::cout << " acquisition start time : " << start << std::endl;
 			BioContracts::IImageInfoPtr resp =
 				facial_engine_->acquire(image);
 
-			std::cout << "out ticks time : " << clock() - start << std::endl;
+			std::cout << " acquisition done time : " << clock() - start << std::endl;
 			start = clock();
 			std::shared_ptr<BioService::PortraitCharacteristic>	portrait_characteristics;
 			if (resp == nullptr)			
@@ -75,9 +75,11 @@ namespace BioGrpc
 				                                          	(*convertor.getPortraitCharacteristics(resp));
 			}			
 			
-			std::cout << " converts time " << clock() - start << std::endl;
+			
 			status_ = FINISH;
 			responder_.Finish(*portrait_characteristics, grpc::Status::OK, this);			
+
+			std::cout << " finnish " << clock() - start << std::endl;
 		}		
 
 	private:

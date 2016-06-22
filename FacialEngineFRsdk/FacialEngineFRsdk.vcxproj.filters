@@ -132,18 +132,6 @@
     <ClInclude Include="include\feedback\facial_identification_feedback.hpp">
       <Filter>include\feedback</Filter>
     </ClInclude>
-    <ClInclude Include="include\biotasks\facial_acquisition.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\biotasks\facial_enrollment.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\biotasks\facial_identification.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\biotasks\facial_verification.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\biotasks\acquisition\facial_acquisition.hpp">
       <Filter>include</Filter>
     </ClInclude>
@@ -189,7 +177,7 @@
     <ClInclude Include="include\biotasks\verification\verification_work_unit.hpp">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\feedback\facial_acquisiton_feedback.hpp">
+    <ClInclude Include="include\utils\prng_engine.hpp">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -211,18 +199,6 @@
     </ClCompile>
     <ClCompile Include="src\pipeline\face_info_awaitable.cpp">
       <Filter>src\pipeline</Filter>
-    </ClCompile>
-    <ClCompile Include="src\biotasks\facial_acquisition.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\biotasks\facial_enrollment.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\biotasks\facial_identification.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\biotasks\facial_verification.cpp">
-      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\biotasks\acquisition\facial_acquisition.cpp">
       <Filter>src</Filter>

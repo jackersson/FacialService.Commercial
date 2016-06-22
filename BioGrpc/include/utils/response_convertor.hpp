@@ -24,12 +24,13 @@ namespace BioGrpc
 			Concurrency::parallel_invoke(
 			[&]()	{
 
-				Concurrency::parallel_for_each(identification_result->cbegin(), identification_result->cend(),
-					[&]( BioContracts::IImageInfoPtr image )
+				//Concurrency::parallel_for_each(identification_result->cbegin(), identification_result->cend(),
+					//[&](BioContracts::IImageInfoPtr image)
+				for (auto it = identification_result->cbegin(); it != identification_result->cend(); ++it)
 				{
 					BioService::PortraitCharacteristic* pch = result->add_portraits();
-					updatePortraitCharacteristics(*pch, image);
-				});			  
+					updatePortraitCharacteristics(*pch, *it);
+				}//);			  
 			 },		
 				 [&](){	update_face_search_result(*result, identification_result->matches());	});
 
@@ -39,15 +40,14 @@ namespace BioGrpc
 		BioService::FaceSearchResult* get_face_search_result( BioContracts::VerificationResultPtr verification_result)
 		{
 			BioService::FaceSearchResult* result = new BioService::FaceSearchResult();
-
+			BioService::PortraitCharacteristic* target = result->add_portraits();
+			BioService::PortraitCharacteristic* compare = result->add_portraits();
 			Concurrency::parallel_invoke(
 			[&]()	{
-			  BioService::PortraitCharacteristic* pch = result->add_portraits();
-			  updatePortraitCharacteristics(*pch, verification_result->first());
+				updatePortraitCharacteristics(*target, verification_result->first());
 			 },
-			[&]() {
-			  BioService::PortraitCharacteristic* pch = result->add_portraits();
-			  updatePortraitCharacteristics(*pch, verification_result->second());			
+			[&]() {				
+				updatePortraitCharacteristics(*compare, verification_result->second());
 		  },
 				[&](){	update_face_search_result(*result, verification_result->matches());	});
 
@@ -95,7 +95,7 @@ namespace BioGrpc
 		void updatePortraitCharacteristics( BioService::PortraitCharacteristic& proto
 			                                , BioContracts::IImageInfoPtr characteristics)
 		{
-			
+			std::cout << "faces" << characteristics->size() << std::endl;
 			for (size_t i = 0; i < characteristics->size(); ++i)
 			{
 				const BioContracts::IFaceInfo& face = (*characteristics)[i];
@@ -104,9 +104,18 @@ namespace BioGrpc
 				proto_face->set_id(face.id());
 				proto_face->set_photoid(characteristics->id());
 				Concurrency::parallel_invoke(
-				  [&](){update_main_face_characteristic      (*proto_face, face.characteristics());	},
-				  [&](){update_additional_face_characteristic(*proto_face, face.characteristics());	},
-				  [&](){update_iso_compliance_info(*proto_face, face.iso_compliance());							},
+				  [&](){
+					if (face.has_face_characteristics())
+					  update_main_face_characteristic      (*proto_face, face.characteristics());	
+				},
+				  [&](){
+					if (face.has_face_characteristics())
+					  update_additional_face_characteristic(*proto_face, face.characteristics());	
+				},
+				  [&](){
+					 if (face.has_iso_compliance())
+				  	 update_iso_compliance_info(*proto_face, face.iso_compliance());			
+				},
 				  [&](){update_min_face_info      (*proto_face, face.face());												},
 				  [&](){update_eyes_info          (*proto_face, face.eyes());												}
 				);			
@@ -139,7 +148,10 @@ namespace BioGrpc
 		//todo will send to database
 		void update_main_face_characteristic( BioService::FaceCharacteristic& proto_face
 			                                   , const BioContracts::IFaceCharacteristics& face)
-		{				
+		{	
+			//if (face == NULL)
+			//	return;
+
 			Concurrency::parallel_invoke(
 			  [&](){proto_face.set_allocated_box(toProtoSurroundingBox(face.faceBox()));				},
 			  [&](){proto_face.set_eye_distance (face.eyeDistance());													},
@@ -161,8 +173,7 @@ namespace BioGrpc
 		{
 			Concurrency::parallel_invoke(	
 				[&](){proto_face.set_left_ear(face.leftEar());																		},
-				[&](){proto_face.set_rigth_ear(face.rightEar());																	},
-				[&](){proto_face.set_confidence(face.confidence());															},
+				[&](){proto_face.set_rigth_ear(face.rightEar());																	},		
 				[&](){proto_face.set_mouth_closed(face.mouthClosed());														},
 				[&](){proto_face.set_ethnithity(toProtoEthnithity(face.ethnicity()));						},
 				[&](){proto_face.set_age(face.age());																						},

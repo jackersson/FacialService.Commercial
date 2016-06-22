@@ -41,34 +41,39 @@ namespace BioFacialEngine
 		catch (const FRsdk::LicenseSignatureMismatch& e) { std::cout << e.what(); return false; }
 		catch (std::exception& e) { std::cout << e.what(); return false; }
 	}
-
+	
 	void FacialAcquisition::find_face(FaceVacsImage image, std::vector<FRsdkEntities::FaceVacsFullFace>& faces)
 	{
 		try
-		{
+		{			
 			auto faceLocations =
 				face_finder_->find(*image, MIN_EYE_DISTANCE, MAX_EYE_DISTANCE);
 
 			if (faceLocations.size() < 1)
 			{
-				std::cout << "any face not found";
+				std::cout << "any face not found" << std::endl;
 				return;
 			}
 
+		
 			parallel_for_each(faceLocations.cbegin(), faceLocations.cend(),
 				[&](FRsdk::Face::Location face)
 			{
 				auto eyesLocations = eyes_finder_->find(*image, face);
 				if (eyesLocations.size() > 0)
-					faces.push_back(FRsdkEntities::FaceVacsFullFace(face, eyesLocations.front()));
+				{
+					FRsdkEntities::FaceVacsFullFace fullface(face, eyesLocations.front());
+					faces.push_back(fullface);			
+				}
 			});
+			
 		}
 		catch (std::exception& ex)
 		{
 			std::cout << ex.what() << std::endl;
 		}
 	}
-
+	
 	FaceVacsPortraitCharacteristicsPtr FacialAcquisition::analyze(const FRsdk::AnnotatedImage& image) const
 	{
 		try	{

@@ -57,8 +57,8 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0603;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\FVSDK_9_1_1\include;$(SolutionDir)\packages\gtest.1.7.0\build\native\include;$(SolutionDir)\packages\gflags.2.1.2.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\include;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\include;$(LocalDebuggerWorkingDirectory)\include;$(SolutionDir)\..\FacialEngineFRsdk\include;$(SolutionDir)\..\BioGrpc\include;$(SolutionDir)\..\BioContracts\include;C:\grpc\third_party\protobuf\src;C:\grpc;C:\grpc\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

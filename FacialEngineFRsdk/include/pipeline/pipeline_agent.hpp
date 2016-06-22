@@ -46,8 +46,9 @@ namespace Pipeline
 		{
 			try
 			{
-				if (!IsCancellationPending() && (nullptr != pInfo))
-					pipeline_->face_find(pInfo);
+				if (!IsCancellationPending() && (nullptr != pInfo))										
+					pipeline_->face_find(pInfo);					
+				
 
 				//std::cout << "face_find" << std::endl;
 			}
@@ -65,6 +66,7 @@ namespace Pipeline
 				{
 					pipeline_->iso_compliance_test(face);
 					pInfo->set_done(IsoComplianceTest);
+					std::cout << "IsoComplianceTest done" << face->id() << std::endl;
 				}
 
 				//std::cout << "iso_compliance_test" << std::endl;
@@ -84,9 +86,10 @@ namespace Pipeline
 				{
 					pipeline_->portrait_analyze(face);
 					pInfo->set_done(BiometricTask::PortraitAnalysis);
+					std::cout << "portrait_analyze done" << face->id() << std::endl;
+
 				}
 
-				//std::cout << "portrait_analyze" << std::endl;
 			}
 			catch (std::exception& e)	{
 				ShutdownOnError(0, "portrait characteristic find", e);
@@ -102,6 +105,7 @@ namespace Pipeline
 				{
 					pipeline_->extract_facial_image(face);
 					pInfo->set_done(FaceImageExtraction);
+					std::cout << "image extraction done" << face->id() << std::endl;
 				}
 				//std::cout << "extract_facial_image" << std::endl;
 			}
@@ -119,6 +123,7 @@ namespace Pipeline
 				{
 					pipeline_->enroll(face);
 					pInfo->set_done(Enrollment);
+					std::cout << "enrollment done" << face->id() << std::endl;
 				}
 				//std::cout << "enroll" << std::endl;
 			}
