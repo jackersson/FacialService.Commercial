@@ -1,6 +1,6 @@
 #include "biotasks/enrollment/enrollment_load_balancer.hpp"
 
-#include <ppltasks.h>
+#include <ppl.h>
 
 using namespace concurrency;
 using namespace FRsdkTypes ;
@@ -51,8 +51,7 @@ namespace BioFacialEngine
 				ptr->link_to<FRsdkEnrollmentWorkUnitPtr>(inputs_);
 				processors_.push_back(ptr);
 			}
-		}
-		);
+		}		);
 		PipelineGovernor::resize(processors_.size());
 	}		
 }

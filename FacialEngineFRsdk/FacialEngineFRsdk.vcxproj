@@ -14,18 +14,19 @@
     <ProjectGuid>{38726227-1ED7-42DD-BC79-22AB98173C95}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>FacialEngineFRsdk</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -59,8 +60,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static\cdecl;C:\grpc\third_party\protobuf\cmake\$(Configuration);$(SolutionDir)\packages\gtest.1.7.0\build\native\lib\$(Configuration);$(SolutionDir)\packages\gflags.2.1.2.1\build\native\$(Platform)\$(PlatformToolset)\static\Lib;C:\grpc\vsprojects\$(Configuration);C:\FVSDK_9_1_1\lib\x86_32\msc_12.0-sse2_crtdll_g;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;gflagsd.lib;gtestd.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;frsdkd-9.1.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\grpc\third_party\googletest\bin\$(PlatformToolset)\$(Configuration);$(SolutionDir)\packages\grpc.dependencies.openssl.1.0.204.1\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static;$(SolutionDir)\packages\grpc.dependencies.zlib.1.2.8.10\build\native\lib\$(PlatformToolset)\$(Platform)\$(Configuration)\static\cdecl;C:\grpc\third_party\protobuf\cmake\$(Configuration);$(SolutionDir)\packages\gflags.2.1.2.1\build\native\$(Platform)\$(PlatformToolset)\static\Lib;C:\grpc\vsprojects\$(Configuration);C:\FVSDK_9_1_1\lib\x86_32\msc_14.0-sse2_crtdll_g;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libeay32.lib;ssleay32.lib;zlib.lib;gflagsd.lib;gtest.lib;libprotobuf.lib;ws2_32.lib;grpc.lib;gpr.lib;grpc++.lib;frsdkd-9.1.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
