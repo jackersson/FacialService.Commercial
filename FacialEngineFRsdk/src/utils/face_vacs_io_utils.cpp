@@ -6,13 +6,17 @@
 #include <frsdk/png.h>
 #include <frsdk/pgm.h>
 
+#include <sstream>
+
 using namespace FRsdkTypes;
 
 namespace BioFacialEngine
 {
 	
 	std::map<std::string, BioService::ImageFormat> FaceVacsIOUtils::image_formats_ = {
-		  { "jpg", BioService::ImageFormat::JPEG }
+		    { "jpg", BioService::ImageFormat::JPEG }
+	    , { "png", BioService::ImageFormat::PNG  }
+		  , { "bmp", BioService::ImageFormat::BMP  }
 		};
 
 	
@@ -72,6 +76,11 @@ namespace BioFacialEngine
   	{
   	case BioService::ImageFormat::JPEG:
   		return loadJpeg(image_bytestring, size);
+		case BioService::ImageFormat::PNG:
+			return loadPng(image_bytestring, size);	
+		case BioService::ImageFormat::BMP:
+			return loadPng(image_bytestring, size);
+	
   	}
   
   	throw std::invalid_argument("Image format is not supported");
@@ -105,6 +114,66 @@ namespace BioFacialEngine
   
   	return NULL;
   }
+
+	FaceVacsImage FaceVacsIOUtils::loadPng(const std::string& filename)
+	{
+		try
+		{
+			FaceVacsImage img(new FRsdk::Image(FRsdk::Png::load(std::string(filename))));
+			return img;
+		}
+		catch (std::exception& e) {
+			std::cout << e.what() << std::endl;
+		}
+
+		return NULL;
+	}
+
+	FaceVacsImage FaceVacsIOUtils::loadPng(const std::string& image_bytestring, const size_t size)
+	{
+		try
+		{
+			std::stringstream png_stream;
+			png_stream << image_bytestring;
+			FaceVacsImage img(new FRsdk::Image(FRsdk::Png::load(png_stream)));
+			return img;
+		}
+		catch (std::exception& e) {
+			std::cout << e.what() << std::endl;
+		}
+
+		return NULL;
+	}
+
+	FaceVacsImage FaceVacsIOUtils::loadBmp(const std::string& filename)
+	{
+		try
+		{
+			FaceVacsImage img(new FRsdk::Image(FRsdk::Bmp::load(std::string(filename))));
+			return img;
+		}
+		catch (std::exception& e) {
+			std::cout << e.what() << std::endl;
+		}
+
+		return NULL;
+	}
+
+	FaceVacsImage FaceVacsIOUtils::loadBmp(const std::string& image_bytestring, const size_t size)
+	{
+		try
+		{
+			std::stringstream png_stream;
+			png_stream << image_bytestring;
+			FaceVacsImage img(new FRsdk::Image(FRsdk::Bmp::load(png_stream)));
+			return img;
+		}
+		catch (std::exception& e) {
+			std::cout << e.what() << std::endl;
+		}
+
+		return NULL;
+	}
 
 		//FaceVacsImage loadJpeg2000(const std::string& filename){}
 		//FaceVacsImage loadBmp     (const std::string& filename){}

@@ -17,19 +17,22 @@ namespace BioFacialEngine
 			, const size_t size
 			, BioService::ImageFormat image_format = BioService::ImageFormat::JPEG);
 		
+		BioService::ImageFormat getFormat(const std::string& format);
+
 	private:
 	
 		FRsdkTypes::FaceVacsImage loadJpeg(const std::string& filename);
-
 		FRsdkTypes::FaceVacsImage loadJpeg(const std::string& image_bytestring, const size_t size);
 		
 
-		//FaceVacsImage loadJpeg2000(const std::string& filename){}
-		//FaceVacsImage loadBmp     (const std::string& filename){}
-		//FaceVacsImage loadPgm     (const std::string& filename){}
-		//FaceVacsImage loadPng     (const std::string& filename){}
+		//FRsdkTypes::FaceVacsImage loadJpeg2000(const std::string& filename);
+		FRsdkTypes::FaceVacsImage loadBmp(const std::string& filename);
+		FRsdkTypes::FaceVacsImage loadBmp(const std::string& image_bytestring, const size_t size);
+		//FRsdkTypes::FaceVacsImage loadPgm     (const std::string& filename);
+		FRsdkTypes::FaceVacsImage loadPng(const std::string& filename);
+		FRsdkTypes::FaceVacsImage loadPng(const std::string& image_bytestring, const size_t size);
 
-	   BioService::ImageFormat getFormat(const std::string& format);
+
 
 	private:
 		static std::map<std::string, BioService::ImageFormat> image_formats_;

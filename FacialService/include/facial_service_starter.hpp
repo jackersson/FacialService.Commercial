@@ -16,13 +16,16 @@ namespace BioFacialService
 		void start()
 		{
 			std::string cfg_path = "C:\\FVSDK_9_1_1\\etc\\frsdk.cfg";
-
+			
 			engines_ = std::make_shared<RecognitionEnginesContext>();
 			engines_->createFacialEngine(cfg_path);
-
+			
 			BioContracts::ServiceConfiguration config("0.0.0.0", 49065);
+			std::cout << "begin working" << std::endl;
 			service_manager_ = std::make_unique<BioGrpc::BioServiceManager>(*engines_);
+			std::cout << "begin working" << std::endl;
 			service_manager_->start(config);
+			//std::cout << "start working" << std::endl;
 		}
 
 		void stop()

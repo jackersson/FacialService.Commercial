@@ -14,8 +14,11 @@ namespace BioGrpc
 	{
   	//if (context.hasFacialEngine())
 		//const 
-		services_.push_back(std::make_shared<FacialServiceImpl>(context.facial_engine()));
-
+		std::cout << "here" << std::endl;
+		std::shared_ptr<FacialServiceImpl> ptr = std::make_shared<FacialServiceImpl>(context.facial_engine());
+		std::cout << "here 1" << std::endl;
+		services_.push_back(ptr);
+		std::cout << "here 2" << std::endl;
 		//thread_pool_ = std::shared_ptr<grpc::ThreadPoolInterface>(
 			         //                new grpc::DynamicThreadPool(MAX_THREAD_POOL_CAPACITY));
 	}

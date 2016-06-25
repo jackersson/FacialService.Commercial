@@ -171,10 +171,22 @@ namespace Pipeline
 	ImageInfoPtr BiometricPipelineBalanced::push_image(const BioContracts::RawImage& raw_image, long task)
 	{
 		BioFacialEngine::FaceVacsIOUtils utils;
-		auto image = utils.loadFromBytes(raw_image.bytes(), raw_image.size());		
-		auto result = process_task(image, task, raw_image.id());
+		std::string pixel_format = raw_image.pixel_format();
 
-		return result;
+		try
+		{
+			auto image = utils.loadFromBytes(raw_image.bytes(), raw_image.size(), utils.getFormat(pixel_format));
+			auto result = process_task(image, task, raw_image.id());
+			return result;
+
+		}
+		catch ( std::exception& ex)	{
+			std::cout << "exception on file format" << std::endl;
+			return nullptr;
+		}
+
+		
+
 	}
 
 	ImageInfoPtr BiometricPipelineBalanced::process_task(FRsdkTypes::FaceVacsImage image, long task, long id)

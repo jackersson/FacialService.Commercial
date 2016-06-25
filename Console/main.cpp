@@ -11,9 +11,11 @@ struct Vertex  {
 	double z;
 };
 
+/*
 int main()
 {
 
+	
 	string filename("F:\\Work\\RGBD dataset\\boy\\007_1_d.dat");
 	string filenamevx("F:\\Work\\RGBD dataset\\boy\\007_1_d.vx");
 
@@ -49,7 +51,7 @@ int main()
 	cin.get();
 	return 0;
 }
-
+*/
 
 /*
 

@@ -15,8 +15,11 @@ namespace BioGrpc
 {
 	FacialServiceImpl::FacialServiceImpl( std::shared_ptr<BioContracts::IFacialEngine> facial_engine) 
 	                                   	: facial_engine_(facial_engine)
-																			, thread_pool_(new grpc::DynamicThreadPool(MAX_THREAD_POOL_CAPACITY))
+																			
 	{	
+		std::cout << "here 3" << std::endl;
+		thread_pool_ = std::make_shared<grpc::DynamicThreadPool>(MAX_THREAD_POOL_CAPACITY);
+		std::cout << "here 4" << std::endl;
 	}
 
 	FacialServiceImpl::~FacialServiceImpl()
