@@ -82,7 +82,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="vibe-background-sequential.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vibe-background-sequential.h" />
