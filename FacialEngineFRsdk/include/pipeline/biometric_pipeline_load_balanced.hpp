@@ -83,8 +83,9 @@ namespace Pipeline
 
 	private:
 	
-		FRsdkEntities::ImageInfoPtr push_image_file(const std::string& filename, long task);
+		FRsdkEntities::ImageInfoPtr push_image     (const std::string& filename, long task);
 		FRsdkEntities::ImageInfoPtr push_image     (const BioContracts::RawImage& raw_image, long task);
+
 		FRsdkEntities::ImageInfoPtr process_task   (FRsdkTypes::FaceVacsImage image, long task, long id);
 		FRsdkEntities::ImageInfoPtr push_task      (TaskInfo work_item);
 

@@ -55,9 +55,10 @@ class DatabaseFacialImageResponse;
 class DatabaseFingerprintImageResponse;
 class DetailedEyeCharacteristic;
 class EnrollmentFeedback;
+class Exception;
 class EyesCharacteristic;
 class FaceCharacteristic;
-class FaceSearchResult;
+class FaceSearchException;
 class FacialImage;
 class FingerprintAcquiredData;
 class FingerprintCharacteristic;
@@ -71,6 +72,7 @@ class LocationList;
 class LogRecord;
 class Match;
 class Matches;
+class ObjectResponse;
 class Person;
 class PersonList;
 class Photo;
@@ -112,28 +114,28 @@ inline bool AccessInfo_AccessType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<AccessInfo_AccessType>(
     AccessInfo_AccessType_descriptor(), name, value);
 }
-enum QueryPhoto_PhotoResultType {
-  QueryPhoto_PhotoResultType_Undefined = 0,
-  QueryPhoto_PhotoResultType_Full = 1,
-  QueryPhoto_PhotoResultType_OnlyBytes = 2,
-  QueryPhoto_PhotoResultType_NoBytes = 3,
-  QueryPhoto_PhotoResultType_QueryPhoto_PhotoResultType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  QueryPhoto_PhotoResultType_QueryPhoto_PhotoResultType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+enum QueryPhoto_PhotoResponseType {
+  QueryPhoto_PhotoResponseType_Undefined = 0,
+  QueryPhoto_PhotoResponseType_Full = 1,
+  QueryPhoto_PhotoResponseType_OnlyBytes = 2,
+  QueryPhoto_PhotoResponseType_NoBytes = 3,
+  QueryPhoto_PhotoResponseType_QueryPhoto_PhotoResponseType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  QueryPhoto_PhotoResponseType_QueryPhoto_PhotoResponseType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-bool QueryPhoto_PhotoResultType_IsValid(int value);
-const QueryPhoto_PhotoResultType QueryPhoto_PhotoResultType_PhotoResultType_MIN = QueryPhoto_PhotoResultType_Undefined;
-const QueryPhoto_PhotoResultType QueryPhoto_PhotoResultType_PhotoResultType_MAX = QueryPhoto_PhotoResultType_NoBytes;
-const int QueryPhoto_PhotoResultType_PhotoResultType_ARRAYSIZE = QueryPhoto_PhotoResultType_PhotoResultType_MAX + 1;
+bool QueryPhoto_PhotoResponseType_IsValid(int value);
+const QueryPhoto_PhotoResponseType QueryPhoto_PhotoResponseType_PhotoResponseType_MIN = QueryPhoto_PhotoResponseType_Undefined;
+const QueryPhoto_PhotoResponseType QueryPhoto_PhotoResponseType_PhotoResponseType_MAX = QueryPhoto_PhotoResponseType_NoBytes;
+const int QueryPhoto_PhotoResponseType_PhotoResponseType_ARRAYSIZE = QueryPhoto_PhotoResponseType_PhotoResponseType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* QueryPhoto_PhotoResultType_descriptor();
-inline const ::std::string& QueryPhoto_PhotoResultType_Name(QueryPhoto_PhotoResultType value) {
+const ::google::protobuf::EnumDescriptor* QueryPhoto_PhotoResponseType_descriptor();
+inline const ::std::string& QueryPhoto_PhotoResponseType_Name(QueryPhoto_PhotoResponseType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    QueryPhoto_PhotoResultType_descriptor(), value);
+    QueryPhoto_PhotoResponseType_descriptor(), value);
 }
-inline bool QueryPhoto_PhotoResultType_Parse(
-    const ::std::string& name, QueryPhoto_PhotoResultType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<QueryPhoto_PhotoResultType>(
-    QueryPhoto_PhotoResultType_descriptor(), name, value);
+inline bool QueryPhoto_PhotoResponseType_Parse(
+    const ::std::string& name, QueryPhoto_PhotoResponseType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<QueryPhoto_PhotoResponseType>(
+    QueryPhoto_PhotoResponseType_descriptor(), name, value);
 }
 enum ImageFormat {
   JPEG = 0,
@@ -235,27 +237,6 @@ inline bool EyeType_Parse(
     const ::std::string& name, EyeType* value) {
   return ::google::protobuf::internal::ParseNamedEnum<EyeType>(
     EyeType_descriptor(), name, value);
-}
-enum Result {
-  Success = 0,
-  Failed = 1,
-  Result_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  Result_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
-};
-bool Result_IsValid(int value);
-const Result Result_MIN = Success;
-const Result Result_MAX = Failed;
-const int Result_ARRAYSIZE = Result_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* Result_descriptor();
-inline const ::std::string& Result_Name(Result value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    Result_descriptor(), value);
-}
-inline bool Result_Parse(
-    const ::std::string& name, Result* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Result>(
-    Result_descriptor(), name, value);
 }
 enum Gender {
   None = 0,
@@ -435,6 +416,191 @@ inline bool Ethnicity_Parse(
     Ethnicity_descriptor(), name, value);
 }
 // ===================================================================
+
+class Exception : public ::google::protobuf::Message {
+ public:
+  Exception();
+  virtual ~Exception();
+
+  Exception(const Exception& from);
+
+  inline Exception& operator=(const Exception& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Exception& default_instance();
+
+  void Swap(Exception* other);
+
+  // implements Message ----------------------------------------------
+
+  inline Exception* New() const { return New(NULL); }
+
+  Exception* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Exception& from);
+  void MergeFrom(const Exception& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(Exception* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional bool is_ok = 1;
+  void clear_is_ok();
+  static const int kIsOkFieldNumber = 1;
+  bool is_ok() const;
+  void set_is_ok(bool value);
+
+  // optional int64 error_id = 2;
+  void clear_error_id();
+  static const int kErrorIdFieldNumber = 2;
+  ::google::protobuf::int64 error_id() const;
+  void set_error_id(::google::protobuf::int64 value);
+
+  // optional string message = 3;
+  void clear_message();
+  static const int kMessageFieldNumber = 3;
+  const ::std::string& message() const;
+  void set_message(const ::std::string& value);
+  void set_message(const char* value);
+  void set_message(const char* value, size_t size);
+  ::std::string* mutable_message();
+  ::std::string* release_message();
+  void set_allocated_message(::std::string* message);
+
+  // @@protoc_insertion_point(class_scope:BioService.Exception)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 error_id_;
+  ::google::protobuf::internal::ArenaStringPtr message_;
+  bool is_ok_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_bio_5fservice_2eproto();
+  friend void protobuf_AssignDesc_bio_5fservice_2eproto();
+  friend void protobuf_ShutdownFile_bio_5fservice_2eproto();
+
+  void InitAsDefaultInstance();
+  static Exception* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ObjectResponse : public ::google::protobuf::Message {
+ public:
+  ObjectResponse();
+  virtual ~ObjectResponse();
+
+  ObjectResponse(const ObjectResponse& from);
+
+  inline ObjectResponse& operator=(const ObjectResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ObjectResponse& default_instance();
+
+  void Swap(ObjectResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  inline ObjectResponse* New() const { return New(NULL); }
+
+  ObjectResponse* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ObjectResponse& from);
+  void MergeFrom(const ObjectResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(ObjectResponse* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int64 id = 1;
+  void clear_id();
+  static const int kIdFieldNumber = 1;
+  ::google::protobuf::int64 id() const;
+  void set_id(::google::protobuf::int64 value);
+
+  // optional .BioService.Exception exception = 2;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 2;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
+
+  // @@protoc_insertion_point(class_scope:BioService.ObjectResponse)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::int64 id_;
+  ::BioService::Exception* exception_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_bio_5fservice_2eproto();
+  friend void protobuf_AssignDesc_bio_5fservice_2eproto();
+  friend void protobuf_ShutdownFile_bio_5fservice_2eproto();
+
+  void InitAsDefaultInstance();
+  static ObjectResponse* default_instance_;
+};
+// -------------------------------------------------------------------
 
 class RawIndexes : public ::google::protobuf::Message {
  public:
@@ -936,11 +1102,14 @@ class Person : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 18;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 18;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 18;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 18;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // optional string message = 19;
   void clear_message();
@@ -974,9 +1143,9 @@ class Person : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedPtrField< ::BioService::Card > cards_;
   ::google::protobuf::RepeatedPtrField< ::BioService::Photo > photos_;
   ::BioService::BiometricData* biometric_data_;
-  int entity_state_;
-  int dbresult_;
+  ::BioService::Exception* exception_;
   ::google::protobuf::internal::ArenaStringPtr message_;
+  int entity_state_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -1054,11 +1223,14 @@ class AccessDevice : public ::google::protobuf::Message {
   ::std::string* release_portname();
   void set_allocated_portname(::std::string* portname);
 
-  // optional .BioService.Result dbresult = 2;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 2;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 2;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 2;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // optional .BioService.EntityState entity_state = 3;
   void clear_entity_state();
@@ -1072,7 +1244,7 @@ class AccessDevice : public ::google::protobuf::Message {
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr portname_;
-  int dbresult_;
+  ::BioService::Exception* exception_;
   int entity_state_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
@@ -1151,11 +1323,14 @@ class CaptureDevice : public ::google::protobuf::Message {
   ::std::string* release_devicename();
   void set_allocated_devicename(::std::string* devicename);
 
-  // optional .BioService.Result dbresult = 2;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 2;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 2;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 2;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // optional .BioService.EntityState entity_state = 3;
   void clear_entity_state();
@@ -1169,7 +1344,7 @@ class CaptureDevice : public ::google::protobuf::Message {
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr devicename_;
-  int dbresult_;
+  ::BioService::Exception* exception_;
   int entity_state_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
@@ -1259,11 +1434,14 @@ class FingerprintDevice : public ::google::protobuf::Message {
   ::std::string* release_serial_number();
   void set_allocated_serial_number(::std::string* serial_number);
 
-  // optional .BioService.Result dbresult = 3;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 3;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 3;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 3;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // optional .BioService.EntityState entity_state = 4;
   void clear_entity_state();
@@ -1278,7 +1456,7 @@ class FingerprintDevice : public ::google::protobuf::Message {
   bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr devicename_;
   ::google::protobuf::internal::ArenaStringPtr serial_number_;
-  int dbresult_;
+  ::BioService::Exception* exception_;
   int entity_state_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
@@ -1368,11 +1546,14 @@ class IrisDevice : public ::google::protobuf::Message {
   ::std::string* release_serial_number();
   void set_allocated_serial_number(::std::string* serial_number);
 
-  // optional .BioService.Result dbresult = 3;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 3;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 3;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 3;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // optional .BioService.EntityState entity_state = 4;
   void clear_entity_state();
@@ -1387,7 +1568,7 @@ class IrisDevice : public ::google::protobuf::Message {
   bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr devicename_;
   ::google::protobuf::internal::ArenaStringPtr serial_number_;
-  int dbresult_;
+  ::BioService::Exception* exception_;
   int entity_state_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
@@ -1484,11 +1665,14 @@ class Card : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 5;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 5;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 5;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 5;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // @@protoc_insertion_point(class_scope:BioService.Card)
  private:
@@ -1498,8 +1682,8 @@ class Card : public ::google::protobuf::Message {
   ::google::protobuf::int64 id_;
   ::google::protobuf::int64 personid_;
   ::google::protobuf::internal::ArenaStringPtr unique_number_;
+  ::BioService::Exception* exception_;
   int entity_state_;
-  int dbresult_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -1656,11 +1840,14 @@ class Location : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 11;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 11;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 11;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 11;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // @@protoc_insertion_point(class_scope:BioService.Location)
  private:
@@ -1676,8 +1863,8 @@ class Location : public ::google::protobuf::Message {
   ::BioService::FingerprintDevice* fingerprintdevice_;
   ::BioService::IrisDevice* irisdevice_;
   ::BioService::AccessInfo* access_info_;
+  ::BioService::Exception* exception_;
   int entity_state_;
-  int dbresult_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -1796,11 +1983,14 @@ class AccessInfo : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 4;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 4;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 4;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 4;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // @@protoc_insertion_point(class_scope:BioService.AccessInfo)
  private:
@@ -1810,7 +2000,7 @@ class AccessInfo : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedPtrField< ::BioService::Person > persons_;
   int access_type_;
   int entity_state_;
-  int dbresult_;
+  ::BioService::Exception* exception_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -2041,11 +2231,14 @@ class ConfidentPosition : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 5;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 5;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 5;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 5;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // @@protoc_insertion_point(class_scope:BioService.ConfidentPosition)
  private:
@@ -2056,7 +2249,7 @@ class ConfidentPosition : public ::google::protobuf::Message {
   float ypos_;
   float confidence_;
   int entity_state_;
-  int dbresult_;
+  ::BioService::Exception* exception_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -2153,11 +2346,14 @@ class EyesCharacteristic : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 5;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 5;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 5;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 5;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // @@protoc_insertion_point(class_scope:BioService.EyesCharacteristic)
  private:
@@ -2167,8 +2363,8 @@ class EyesCharacteristic : public ::google::protobuf::Message {
   ::google::protobuf::int64 id_;
   ::BioService::DetailedEyeCharacteristic* left_eye_;
   ::BioService::DetailedEyeCharacteristic* right_eye_;
+  ::BioService::Exception* exception_;
   int entity_state_;
-  int dbresult_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -2478,11 +2674,14 @@ class FaceCharacteristic : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 26;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 26;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 26;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 26;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // @@protoc_insertion_point(class_scope:BioService.FaceCharacteristic)
  private:
@@ -2514,7 +2713,7 @@ class FaceCharacteristic : public ::google::protobuf::Message {
   int entity_state_;
   ::google::protobuf::int64 personid_;
   ::google::protobuf::int64 photoid_;
-  int dbresult_;
+  ::BioService::Exception* exception_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -2915,11 +3114,14 @@ class FingerprintCharacteristic : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 8;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 8;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 8;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 8;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // @@protoc_insertion_point(class_scope:BioService.FingerprintCharacteristic)
  private:
@@ -2933,7 +3135,7 @@ class FingerprintCharacteristic : public ::google::protobuf::Message {
   ::google::protobuf::int64 photoid_;
   int origin_;
   int entity_state_;
-  int dbresult_;
+  ::BioService::Exception* exception_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -3438,11 +3640,14 @@ class FacialImage : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 6;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 6;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 6;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 6;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // @@protoc_insertion_point(class_scope:BioService.FacialImage)
  private:
@@ -3453,8 +3658,8 @@ class FacialImage : public ::google::protobuf::Message {
   ::BioService::Photo* image_;
   ::google::protobuf::internal::ArenaStringPtr template__;
   ::google::protobuf::RepeatedPtrField< ::BioService::FaceCharacteristic > faces_;
+  ::BioService::Exception* exception_;
   int entity_state_;
-  int dbresult_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -3548,11 +3753,14 @@ class DatabaseFacialImageResponse : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 4;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 4;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 4;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 4;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // @@protoc_insertion_point(class_scope:BioService.DatabaseFacialImageResponse)
  private:
@@ -3561,8 +3769,8 @@ class DatabaseFacialImageResponse : public ::google::protobuf::Message {
   bool _is_default_instance_;
   ::google::protobuf::RepeatedPtrField< ::BioService::FaceCharacteristic > faces_;
   ::BioService::Photo* image_;
+  ::BioService::Exception* exception_;
   int entity_state_;
-  int dbresult_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -3670,11 +3878,14 @@ class FingerprintImage : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 6;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 6;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 6;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 6;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // @@protoc_insertion_point(class_scope:BioService.FingerprintImage)
  private:
@@ -3685,8 +3896,8 @@ class FingerprintImage : public ::google::protobuf::Message {
   ::BioService::Photo* image_;
   ::google::protobuf::internal::ArenaStringPtr template__;
   ::BioService::FingerprintCharacteristic* fingerprint_;
+  ::BioService::Exception* exception_;
   int entity_state_;
-  int dbresult_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -3777,11 +3988,14 @@ class DatabaseFingerprintImageResponse : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 4;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 4;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 4;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 4;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // @@protoc_insertion_point(class_scope:BioService.DatabaseFingerprintImageResponse)
  private:
@@ -3790,8 +4004,8 @@ class DatabaseFingerprintImageResponse : public ::google::protobuf::Message {
   bool _is_default_instance_;
   ::BioService::FingerprintCharacteristic* fingerprint_;
   ::BioService::Photo* image_;
+  ::BioService::Exception* exception_;
   int entity_state_;
-  int dbresult_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -3922,11 +4136,14 @@ class Photo : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 11;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 11;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 11;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 11;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // @@protoc_insertion_point(class_scope:BioService.Photo)
  private:
@@ -3942,7 +4159,7 @@ class Photo : public ::google::protobuf::Message {
   ::google::protobuf::int64 owner_id_;
   int origin_type_;
   int entity_state_;
-  int dbresult_;
+  ::BioService::Exception* exception_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -4044,11 +4261,14 @@ class Visitor : public ::google::protobuf::Message {
   ::std::string* release_card_number();
   void set_allocated_card_number(::std::string* card_number);
 
-  // optional .BioService.Result status = 6;
+  // optional .BioService.Exception status = 6;
+  bool has_status() const;
   void clear_status();
   static const int kStatusFieldNumber = 6;
-  ::BioService::Result status() const;
-  void set_status(::BioService::Result value);
+  const ::BioService::Exception& status() const;
+  ::BioService::Exception* mutable_status();
+  ::BioService::Exception* release_status();
+  void set_allocated_status(::BioService::Exception* status);
 
   // optional .BioService.BiometricData biometricData = 7;
   bool has_biometricdata() const;
@@ -4065,11 +4285,14 @@ class Visitor : public ::google::protobuf::Message {
   ::BioService::EntityState entity_state() const;
   void set_entity_state(::BioService::EntityState value);
 
-  // optional .BioService.Result dbresult = 9;
-  void clear_dbresult();
-  static const int kDbresultFieldNumber = 9;
-  ::BioService::Result dbresult() const;
-  void set_dbresult(::BioService::Result value);
+  // optional .BioService.Exception exception = 9;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 9;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // @@protoc_insertion_point(class_scope:BioService.Visitor)
  private:
@@ -4081,10 +4304,10 @@ class Visitor : public ::google::protobuf::Message {
   ::google::protobuf::int64 locationid_;
   ::google::protobuf::int64 time_;
   ::google::protobuf::internal::ArenaStringPtr card_number_;
+  ::BioService::Exception* status_;
   ::BioService::BiometricData* biometricdata_;
-  int status_;
+  ::BioService::Exception* exception_;
   int entity_state_;
-  int dbresult_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -4655,18 +4878,21 @@ class Response : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .BioService.Result good = 1;
+  // optional .BioService.Exception good = 1;
+  bool has_good() const;
   void clear_good();
   static const int kGoodFieldNumber = 1;
-  ::BioService::Result good() const;
-  void set_good(::BioService::Result value);
+  const ::BioService::Exception& good() const;
+  ::BioService::Exception* mutable_good();
+  ::BioService::Exception* release_good();
+  void set_allocated_good(::BioService::Exception* good);
 
   // @@protoc_insertion_point(class_scope:BioService.Response)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
-  int good_;
+  ::BioService::Exception* good_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -4833,10 +5059,16 @@ class IdentificationData : public ::google::protobuf::Message {
   ::BioService::Photo* release_target_image();
   void set_allocated_target_image(::BioService::Photo* target_image);
 
-  // repeated .BioService.Photo comparison_images = 2;
+  // optional int64 population_id = 2;
+  void clear_population_id();
+  static const int kPopulationIdFieldNumber = 2;
+  ::google::protobuf::int64 population_id() const;
+  void set_population_id(::google::protobuf::int64 value);
+
+  // repeated .BioService.Photo comparison_images = 3;
   int comparison_images_size() const;
   void clear_comparison_images();
-  static const int kComparisonImagesFieldNumber = 2;
+  static const int kComparisonImagesFieldNumber = 3;
   const ::BioService::Photo& comparison_images(int index) const;
   ::BioService::Photo* mutable_comparison_images(int index);
   ::BioService::Photo* add_comparison_images();
@@ -4851,6 +5083,7 @@ class IdentificationData : public ::google::protobuf::Message {
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::BioService::Photo* target_image_;
+  ::google::protobuf::int64 population_id_;
   ::google::protobuf::RepeatedPtrField< ::BioService::Photo > comparison_images_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
@@ -5038,32 +5271,32 @@ class Matches : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class FaceSearchResult : public ::google::protobuf::Message {
+class FaceSearchException : public ::google::protobuf::Message {
  public:
-  FaceSearchResult();
-  virtual ~FaceSearchResult();
+  FaceSearchException();
+  virtual ~FaceSearchException();
 
-  FaceSearchResult(const FaceSearchResult& from);
+  FaceSearchException(const FaceSearchException& from);
 
-  inline FaceSearchResult& operator=(const FaceSearchResult& from) {
+  inline FaceSearchException& operator=(const FaceSearchException& from) {
     CopyFrom(from);
     return *this;
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const FaceSearchResult& default_instance();
+  static const FaceSearchException& default_instance();
 
-  void Swap(FaceSearchResult* other);
+  void Swap(FaceSearchException* other);
 
   // implements Message ----------------------------------------------
 
-  inline FaceSearchResult* New() const { return New(NULL); }
+  inline FaceSearchException* New() const { return New(NULL); }
 
-  FaceSearchResult* New(::google::protobuf::Arena* arena) const;
+  FaceSearchException* New(::google::protobuf::Arena* arena) const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const FaceSearchResult& from);
-  void MergeFrom(const FaceSearchResult& from);
+  void CopyFrom(const FaceSearchException& from);
+  void MergeFrom(const FaceSearchException& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -5078,7 +5311,7 @@ class FaceSearchResult : public ::google::protobuf::Message {
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
-  void InternalSwap(FaceSearchResult* other);
+  void InternalSwap(FaceSearchException* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return _internal_metadata_.arena();
@@ -5129,13 +5362,16 @@ class FaceSearchResult : public ::google::protobuf::Message {
   ::std::string* release_message();
   void set_allocated_message(::std::string* message);
 
-  // optional .BioService.Result good = 4;
-  void clear_good();
-  static const int kGoodFieldNumber = 4;
-  ::BioService::Result good() const;
-  void set_good(::BioService::Result value);
+  // optional .BioService.Exception exception = 4;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 4;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
-  // @@protoc_insertion_point(class_scope:BioService.FaceSearchResult)
+  // @@protoc_insertion_point(class_scope:BioService.FaceSearchException)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -5143,14 +5379,14 @@ class FaceSearchResult : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic > portraits_;
   ::google::protobuf::RepeatedPtrField< ::BioService::Matches > matches_;
   ::google::protobuf::internal::ArenaStringPtr message_;
-  int good_;
+  ::BioService::Exception* exception_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
   friend void protobuf_ShutdownFile_bio_5fservice_2eproto();
 
   void InitAsDefaultInstance();
-  static FaceSearchResult* default_instance_;
+  static FaceSearchException* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -5404,11 +5640,14 @@ class EnrollmentFeedback : public ::google::protobuf::Message {
   ::google::protobuf::int32 quality() const;
   void set_quality(::google::protobuf::int32 value);
 
-  // optional .BioService.Result result = 4;
-  void clear_result();
-  static const int kResultFieldNumber = 4;
-  ::BioService::Result result() const;
-  void set_result(::BioService::Result value);
+  // optional .BioService.Exception Exception = 4;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 4;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
 
   // optional sfixed32 progress = 5;
   void clear_progress();
@@ -5434,10 +5673,10 @@ class EnrollmentFeedback : public ::google::protobuf::Message {
   bool _is_default_instance_;
   ::google::protobuf::int64 characteristic_id_;
   ::google::protobuf::int64 photo_id_;
+  ::BioService::Exception* exception_;
   ::google::protobuf::int32 quality_;
-  int result_;
-  ::google::protobuf::internal::ArenaStringPtr message_;
   ::google::protobuf::int32 progress_;
+  ::google::protobuf::internal::ArenaStringPtr message_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_bio_5fservice_2eproto();
   friend void protobuf_AssignDesc_bio_5fservice_2eproto();
@@ -5590,43 +5829,43 @@ class QueryPhoto : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
-  typedef QueryPhoto_PhotoResultType PhotoResultType;
-  static const PhotoResultType Undefined =
-    QueryPhoto_PhotoResultType_Undefined;
-  static const PhotoResultType Full =
-    QueryPhoto_PhotoResultType_Full;
-  static const PhotoResultType OnlyBytes =
-    QueryPhoto_PhotoResultType_OnlyBytes;
-  static const PhotoResultType NoBytes =
-    QueryPhoto_PhotoResultType_NoBytes;
-  static inline bool PhotoResultType_IsValid(int value) {
-    return QueryPhoto_PhotoResultType_IsValid(value);
+  typedef QueryPhoto_PhotoResponseType PhotoResponseType;
+  static const PhotoResponseType Undefined =
+    QueryPhoto_PhotoResponseType_Undefined;
+  static const PhotoResponseType Full =
+    QueryPhoto_PhotoResponseType_Full;
+  static const PhotoResponseType OnlyBytes =
+    QueryPhoto_PhotoResponseType_OnlyBytes;
+  static const PhotoResponseType NoBytes =
+    QueryPhoto_PhotoResponseType_NoBytes;
+  static inline bool PhotoResponseType_IsValid(int value) {
+    return QueryPhoto_PhotoResponseType_IsValid(value);
   }
-  static const PhotoResultType PhotoResultType_MIN =
-    QueryPhoto_PhotoResultType_PhotoResultType_MIN;
-  static const PhotoResultType PhotoResultType_MAX =
-    QueryPhoto_PhotoResultType_PhotoResultType_MAX;
-  static const int PhotoResultType_ARRAYSIZE =
-    QueryPhoto_PhotoResultType_PhotoResultType_ARRAYSIZE;
+  static const PhotoResponseType PhotoResponseType_MIN =
+    QueryPhoto_PhotoResponseType_PhotoResponseType_MIN;
+  static const PhotoResponseType PhotoResponseType_MAX =
+    QueryPhoto_PhotoResponseType_PhotoResponseType_MAX;
+  static const int PhotoResponseType_ARRAYSIZE =
+    QueryPhoto_PhotoResponseType_PhotoResponseType_ARRAYSIZE;
   static inline const ::google::protobuf::EnumDescriptor*
-  PhotoResultType_descriptor() {
-    return QueryPhoto_PhotoResultType_descriptor();
+  PhotoResponseType_descriptor() {
+    return QueryPhoto_PhotoResponseType_descriptor();
   }
-  static inline const ::std::string& PhotoResultType_Name(PhotoResultType value) {
-    return QueryPhoto_PhotoResultType_Name(value);
+  static inline const ::std::string& PhotoResponseType_Name(PhotoResponseType value) {
+    return QueryPhoto_PhotoResponseType_Name(value);
   }
-  static inline bool PhotoResultType_Parse(const ::std::string& name,
-      PhotoResultType* value) {
-    return QueryPhoto_PhotoResultType_Parse(name, value);
+  static inline bool PhotoResponseType_Parse(const ::std::string& name,
+      PhotoResponseType* value) {
+    return QueryPhoto_PhotoResponseType_Parse(name, value);
   }
 
   // accessors -------------------------------------------------------
 
-  // optional .BioService.QueryPhoto.PhotoResultType with_bytes = 1;
+  // optional .BioService.QueryPhoto.PhotoResponseType with_bytes = 1;
   void clear_with_bytes();
   static const int kWithBytesFieldNumber = 1;
-  ::BioService::QueryPhoto_PhotoResultType with_bytes() const;
-  void set_with_bytes(::BioService::QueryPhoto_PhotoResultType value);
+  ::BioService::QueryPhoto_PhotoResponseType with_bytes() const;
+  void set_with_bytes(::BioService::QueryPhoto_PhotoResponseType value);
 
   // repeated int64 persons = 2;
   int persons_size() const;
@@ -6161,6 +6400,138 @@ class BioClient : public ::google::protobuf::Message {
 // ===================================================================
 
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
+// Exception
+
+// optional bool is_ok = 1;
+inline void Exception::clear_is_ok() {
+  is_ok_ = false;
+}
+inline bool Exception::is_ok() const {
+  // @@protoc_insertion_point(field_get:BioService.Exception.is_ok)
+  return is_ok_;
+}
+inline void Exception::set_is_ok(bool value) {
+  
+  is_ok_ = value;
+  // @@protoc_insertion_point(field_set:BioService.Exception.is_ok)
+}
+
+// optional int64 error_id = 2;
+inline void Exception::clear_error_id() {
+  error_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Exception::error_id() const {
+  // @@protoc_insertion_point(field_get:BioService.Exception.error_id)
+  return error_id_;
+}
+inline void Exception::set_error_id(::google::protobuf::int64 value) {
+  
+  error_id_ = value;
+  // @@protoc_insertion_point(field_set:BioService.Exception.error_id)
+}
+
+// optional string message = 3;
+inline void Exception::clear_message() {
+  message_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Exception::message() const {
+  // @@protoc_insertion_point(field_get:BioService.Exception.message)
+  return message_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Exception::set_message(const ::std::string& value) {
+  
+  message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:BioService.Exception.message)
+}
+inline void Exception::set_message(const char* value) {
+  
+  message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:BioService.Exception.message)
+}
+inline void Exception::set_message(const char* value, size_t size) {
+  
+  message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:BioService.Exception.message)
+}
+inline ::std::string* Exception::mutable_message() {
+  
+  // @@protoc_insertion_point(field_mutable:BioService.Exception.message)
+  return message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Exception::release_message() {
+  // @@protoc_insertion_point(field_release:BioService.Exception.message)
+  
+  return message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Exception::set_allocated_message(::std::string* message) {
+  if (message != NULL) {
+    
+  } else {
+    
+  }
+  message_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), message);
+  // @@protoc_insertion_point(field_set_allocated:BioService.Exception.message)
+}
+
+// -------------------------------------------------------------------
+
+// ObjectResponse
+
+// optional int64 id = 1;
+inline void ObjectResponse::clear_id() {
+  id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 ObjectResponse::id() const {
+  // @@protoc_insertion_point(field_get:BioService.ObjectResponse.id)
+  return id_;
+}
+inline void ObjectResponse::set_id(::google::protobuf::int64 value) {
+  
+  id_ = value;
+  // @@protoc_insertion_point(field_set:BioService.ObjectResponse.id)
+}
+
+// optional .BioService.Exception exception = 2;
+inline bool ObjectResponse::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
+}
+inline void ObjectResponse::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
+}
+inline const ::BioService::Exception& ObjectResponse::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.ObjectResponse.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* ObjectResponse::mutable_exception() {
+  
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.ObjectResponse.exception)
+  return exception_;
+}
+inline ::BioService::Exception* ObjectResponse::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.ObjectResponse.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void ObjectResponse::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.ObjectResponse.exception)
+}
+
+// -------------------------------------------------------------------
+
 // RawIndexes
 
 // repeated int64 indexes = 1;
@@ -6935,18 +7306,42 @@ inline void Person::set_entity_state(::BioService::EntityState value) {
   // @@protoc_insertion_point(field_set:BioService.Person.entity_state)
 }
 
-// optional .BioService.Result dbresult = 18;
-inline void Person::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 18;
+inline bool Person::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result Person::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.Person.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void Person::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void Person::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& Person::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.Person.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* Person::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.Person.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.Person.exception)
+  return exception_;
+}
+inline ::BioService::Exception* Person::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.Person.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void Person::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.Person.exception)
 }
 
 // optional string message = 19;
@@ -7041,18 +7436,42 @@ inline void AccessDevice::set_allocated_portname(::std::string* portname) {
   // @@protoc_insertion_point(field_set_allocated:BioService.AccessDevice.portname)
 }
 
-// optional .BioService.Result dbresult = 2;
-inline void AccessDevice::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 2;
+inline bool AccessDevice::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result AccessDevice::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.AccessDevice.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void AccessDevice::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void AccessDevice::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& AccessDevice::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.AccessDevice.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* AccessDevice::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.AccessDevice.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.AccessDevice.exception)
+  return exception_;
+}
+inline ::BioService::Exception* AccessDevice::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.AccessDevice.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void AccessDevice::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.AccessDevice.exception)
 }
 
 // optional .BioService.EntityState entity_state = 3;
@@ -7117,18 +7536,42 @@ inline void CaptureDevice::set_allocated_devicename(::std::string* devicename) {
   // @@protoc_insertion_point(field_set_allocated:BioService.CaptureDevice.devicename)
 }
 
-// optional .BioService.Result dbresult = 2;
-inline void CaptureDevice::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 2;
+inline bool CaptureDevice::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result CaptureDevice::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.CaptureDevice.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void CaptureDevice::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void CaptureDevice::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& CaptureDevice::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.CaptureDevice.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* CaptureDevice::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.CaptureDevice.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.CaptureDevice.exception)
+  return exception_;
+}
+inline ::BioService::Exception* CaptureDevice::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.CaptureDevice.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void CaptureDevice::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.CaptureDevice.exception)
 }
 
 // optional .BioService.EntityState entity_state = 3;
@@ -7237,18 +7680,42 @@ inline void FingerprintDevice::set_allocated_serial_number(::std::string* serial
   // @@protoc_insertion_point(field_set_allocated:BioService.FingerprintDevice.serial_number)
 }
 
-// optional .BioService.Result dbresult = 3;
-inline void FingerprintDevice::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 3;
+inline bool FingerprintDevice::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result FingerprintDevice::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.FingerprintDevice.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void FingerprintDevice::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void FingerprintDevice::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& FingerprintDevice::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.FingerprintDevice.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* FingerprintDevice::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.FingerprintDevice.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.FingerprintDevice.exception)
+  return exception_;
+}
+inline ::BioService::Exception* FingerprintDevice::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintDevice.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void FingerprintDevice::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.FingerprintDevice.exception)
 }
 
 // optional .BioService.EntityState entity_state = 4;
@@ -7357,18 +7824,42 @@ inline void IrisDevice::set_allocated_serial_number(::std::string* serial_number
   // @@protoc_insertion_point(field_set_allocated:BioService.IrisDevice.serial_number)
 }
 
-// optional .BioService.Result dbresult = 3;
-inline void IrisDevice::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 3;
+inline bool IrisDevice::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result IrisDevice::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.IrisDevice.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void IrisDevice::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void IrisDevice::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& IrisDevice::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.IrisDevice.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* IrisDevice::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.IrisDevice.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.IrisDevice.exception)
+  return exception_;
+}
+inline ::BioService::Exception* IrisDevice::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.IrisDevice.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void IrisDevice::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.IrisDevice.exception)
 }
 
 // optional .BioService.EntityState entity_state = 4;
@@ -7475,18 +7966,42 @@ inline void Card::set_entity_state(::BioService::EntityState value) {
   // @@protoc_insertion_point(field_set:BioService.Card.entity_state)
 }
 
-// optional .BioService.Result dbresult = 5;
-inline void Card::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 5;
+inline bool Card::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result Card::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.Card.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void Card::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void Card::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& Card::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.Card.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* Card::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.Card.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.Card.exception)
+  return exception_;
+}
+inline ::BioService::Exception* Card::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.Card.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void Card::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.Card.exception)
 }
 
 // -------------------------------------------------------------------
@@ -7843,18 +8358,42 @@ inline void Location::set_entity_state(::BioService::EntityState value) {
   // @@protoc_insertion_point(field_set:BioService.Location.entity_state)
 }
 
-// optional .BioService.Result dbresult = 11;
-inline void Location::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 11;
+inline bool Location::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result Location::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.Location.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void Location::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void Location::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& Location::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.Location.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* Location::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.Location.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.Location.exception)
+  return exception_;
+}
+inline ::BioService::Exception* Location::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.Location.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void Location::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.Location.exception)
 }
 
 // -------------------------------------------------------------------
@@ -7919,18 +8458,42 @@ inline void AccessInfo::set_entity_state(::BioService::EntityState value) {
   // @@protoc_insertion_point(field_set:BioService.AccessInfo.entity_state)
 }
 
-// optional .BioService.Result dbresult = 4;
-inline void AccessInfo::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 4;
+inline bool AccessInfo::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result AccessInfo::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.AccessInfo.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void AccessInfo::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void AccessInfo::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& AccessInfo::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.AccessInfo.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* AccessInfo::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.AccessInfo.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.AccessInfo.exception)
+  return exception_;
+}
+inline ::BioService::Exception* AccessInfo::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.AccessInfo.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void AccessInfo::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.AccessInfo.exception)
 }
 
 // -------------------------------------------------------------------
@@ -8215,18 +8778,42 @@ inline void ConfidentPosition::set_entity_state(::BioService::EntityState value)
   // @@protoc_insertion_point(field_set:BioService.ConfidentPosition.entity_state)
 }
 
-// optional .BioService.Result dbresult = 5;
-inline void ConfidentPosition::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 5;
+inline bool ConfidentPosition::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result ConfidentPosition::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.ConfidentPosition.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void ConfidentPosition::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void ConfidentPosition::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& ConfidentPosition::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.ConfidentPosition.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* ConfidentPosition::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.ConfidentPosition.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.ConfidentPosition.exception)
+  return exception_;
+}
+inline ::BioService::Exception* ConfidentPosition::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.ConfidentPosition.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void ConfidentPosition::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.ConfidentPosition.exception)
 }
 
 // -------------------------------------------------------------------
@@ -8337,18 +8924,42 @@ inline void EyesCharacteristic::set_entity_state(::BioService::EntityState value
   // @@protoc_insertion_point(field_set:BioService.EyesCharacteristic.entity_state)
 }
 
-// optional .BioService.Result dbresult = 5;
-inline void EyesCharacteristic::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 5;
+inline bool EyesCharacteristic::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result EyesCharacteristic::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.EyesCharacteristic.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void EyesCharacteristic::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void EyesCharacteristic::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& EyesCharacteristic::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.EyesCharacteristic.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* EyesCharacteristic::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.EyesCharacteristic.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.EyesCharacteristic.exception)
+  return exception_;
+}
+inline ::BioService::Exception* EyesCharacteristic::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.EyesCharacteristic.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void EyesCharacteristic::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.EyesCharacteristic.exception)
 }
 
 // -------------------------------------------------------------------
@@ -8811,18 +9422,42 @@ inline void FaceCharacteristic::set_entity_state(::BioService::EntityState value
   // @@protoc_insertion_point(field_set:BioService.FaceCharacteristic.entity_state)
 }
 
-// optional .BioService.Result dbresult = 26;
-inline void FaceCharacteristic::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 26;
+inline bool FaceCharacteristic::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result FaceCharacteristic::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.FaceCharacteristic.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void FaceCharacteristic::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void FaceCharacteristic::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& FaceCharacteristic::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.FaceCharacteristic.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* FaceCharacteristic::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.FaceCharacteristic.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.FaceCharacteristic.exception)
+  return exception_;
+}
+inline ::BioService::Exception* FaceCharacteristic::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.FaceCharacteristic.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void FaceCharacteristic::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.FaceCharacteristic.exception)
 }
 
 // -------------------------------------------------------------------
@@ -9151,18 +9786,42 @@ inline void FingerprintCharacteristic::set_entity_state(::BioService::EntityStat
   // @@protoc_insertion_point(field_set:BioService.FingerprintCharacteristic.entity_state)
 }
 
-// optional .BioService.Result dbresult = 8;
-inline void FingerprintCharacteristic::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 8;
+inline bool FingerprintCharacteristic::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result FingerprintCharacteristic::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.FingerprintCharacteristic.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void FingerprintCharacteristic::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void FingerprintCharacteristic::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& FingerprintCharacteristic::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.FingerprintCharacteristic.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* FingerprintCharacteristic::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.FingerprintCharacteristic.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.FingerprintCharacteristic.exception)
+  return exception_;
+}
+inline ::BioService::Exception* FingerprintCharacteristic::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintCharacteristic.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void FingerprintCharacteristic::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.FingerprintCharacteristic.exception)
 }
 
 // -------------------------------------------------------------------
@@ -9637,18 +10296,42 @@ inline void FacialImage::set_entity_state(::BioService::EntityState value) {
   // @@protoc_insertion_point(field_set:BioService.FacialImage.entity_state)
 }
 
-// optional .BioService.Result dbresult = 6;
-inline void FacialImage::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 6;
+inline bool FacialImage::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result FacialImage::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.FacialImage.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void FacialImage::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void FacialImage::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& FacialImage::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.FacialImage.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* FacialImage::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.FacialImage.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.FacialImage.exception)
+  return exception_;
+}
+inline ::BioService::Exception* FacialImage::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.FacialImage.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void FacialImage::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.FacialImage.exception)
 }
 
 // -------------------------------------------------------------------
@@ -9737,18 +10420,42 @@ inline void DatabaseFacialImageResponse::set_entity_state(::BioService::EntitySt
   // @@protoc_insertion_point(field_set:BioService.DatabaseFacialImageResponse.entity_state)
 }
 
-// optional .BioService.Result dbresult = 4;
-inline void DatabaseFacialImageResponse::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 4;
+inline bool DatabaseFacialImageResponse::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result DatabaseFacialImageResponse::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.DatabaseFacialImageResponse.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void DatabaseFacialImageResponse::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void DatabaseFacialImageResponse::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& DatabaseFacialImageResponse::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.DatabaseFacialImageResponse.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* DatabaseFacialImageResponse::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.DatabaseFacialImageResponse.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.DatabaseFacialImageResponse.exception)
+  return exception_;
+}
+inline ::BioService::Exception* DatabaseFacialImageResponse::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.DatabaseFacialImageResponse.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void DatabaseFacialImageResponse::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.DatabaseFacialImageResponse.exception)
 }
 
 // -------------------------------------------------------------------
@@ -9903,18 +10610,42 @@ inline void FingerprintImage::set_entity_state(::BioService::EntityState value) 
   // @@protoc_insertion_point(field_set:BioService.FingerprintImage.entity_state)
 }
 
-// optional .BioService.Result dbresult = 6;
-inline void FingerprintImage::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 6;
+inline bool FingerprintImage::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result FingerprintImage::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.FingerprintImage.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void FingerprintImage::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void FingerprintImage::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& FingerprintImage::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.FingerprintImage.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* FingerprintImage::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.FingerprintImage.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.FingerprintImage.exception)
+  return exception_;
+}
+inline ::BioService::Exception* FingerprintImage::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.FingerprintImage.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void FingerprintImage::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.FingerprintImage.exception)
 }
 
 // -------------------------------------------------------------------
@@ -10011,18 +10742,42 @@ inline void DatabaseFingerprintImageResponse::set_entity_state(::BioService::Ent
   // @@protoc_insertion_point(field_set:BioService.DatabaseFingerprintImageResponse.entity_state)
 }
 
-// optional .BioService.Result dbresult = 4;
-inline void DatabaseFingerprintImageResponse::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 4;
+inline bool DatabaseFingerprintImageResponse::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result DatabaseFingerprintImageResponse::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.DatabaseFingerprintImageResponse.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void DatabaseFingerprintImageResponse::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void DatabaseFingerprintImageResponse::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& DatabaseFingerprintImageResponse::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.DatabaseFingerprintImageResponse.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* DatabaseFingerprintImageResponse::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.DatabaseFingerprintImageResponse.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.DatabaseFingerprintImageResponse.exception)
+  return exception_;
+}
+inline ::BioService::Exception* DatabaseFingerprintImageResponse::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.DatabaseFingerprintImageResponse.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void DatabaseFingerprintImageResponse::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.DatabaseFingerprintImageResponse.exception)
 }
 
 // -------------------------------------------------------------------
@@ -10215,18 +10970,42 @@ inline void Photo::set_entity_state(::BioService::EntityState value) {
   // @@protoc_insertion_point(field_set:BioService.Photo.entity_state)
 }
 
-// optional .BioService.Result dbresult = 11;
-inline void Photo::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 11;
+inline bool Photo::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result Photo::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.Photo.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void Photo::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void Photo::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& Photo::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.Photo.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* Photo::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.Photo.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.Photo.exception)
+  return exception_;
+}
+inline ::BioService::Exception* Photo::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.Photo.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void Photo::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.Photo.exception)
 }
 
 // -------------------------------------------------------------------
@@ -10333,18 +11112,42 @@ inline void Visitor::set_allocated_card_number(::std::string* card_number) {
   // @@protoc_insertion_point(field_set_allocated:BioService.Visitor.card_number)
 }
 
-// optional .BioService.Result status = 6;
+// optional .BioService.Exception status = 6;
+inline bool Visitor::has_status() const {
+  return !_is_default_instance_ && status_ != NULL;
+}
 inline void Visitor::clear_status() {
-  status_ = 0;
+  if (GetArenaNoVirtual() == NULL && status_ != NULL) delete status_;
+  status_ = NULL;
 }
-inline ::BioService::Result Visitor::status() const {
+inline const ::BioService::Exception& Visitor::status() const {
   // @@protoc_insertion_point(field_get:BioService.Visitor.status)
-  return static_cast< ::BioService::Result >(status_);
+  return status_ != NULL ? *status_ : *default_instance_->status_;
 }
-inline void Visitor::set_status(::BioService::Result value) {
+inline ::BioService::Exception* Visitor::mutable_status() {
   
-  status_ = value;
-  // @@protoc_insertion_point(field_set:BioService.Visitor.status)
+  if (status_ == NULL) {
+    status_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.Visitor.status)
+  return status_;
+}
+inline ::BioService::Exception* Visitor::release_status() {
+  // @@protoc_insertion_point(field_release:BioService.Visitor.status)
+  
+  ::BioService::Exception* temp = status_;
+  status_ = NULL;
+  return temp;
+}
+inline void Visitor::set_allocated_status(::BioService::Exception* status) {
+  delete status_;
+  status_ = status;
+  if (status) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.Visitor.status)
 }
 
 // optional .BioService.BiometricData biometricData = 7;
@@ -10399,18 +11202,42 @@ inline void Visitor::set_entity_state(::BioService::EntityState value) {
   // @@protoc_insertion_point(field_set:BioService.Visitor.entity_state)
 }
 
-// optional .BioService.Result dbresult = 9;
-inline void Visitor::clear_dbresult() {
-  dbresult_ = 0;
+// optional .BioService.Exception exception = 9;
+inline bool Visitor::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result Visitor::dbresult() const {
-  // @@protoc_insertion_point(field_get:BioService.Visitor.dbresult)
-  return static_cast< ::BioService::Result >(dbresult_);
+inline void Visitor::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void Visitor::set_dbresult(::BioService::Result value) {
+inline const ::BioService::Exception& Visitor::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.Visitor.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* Visitor::mutable_exception() {
   
-  dbresult_ = value;
-  // @@protoc_insertion_point(field_set:BioService.Visitor.dbresult)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.Visitor.exception)
+  return exception_;
+}
+inline ::BioService::Exception* Visitor::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.Visitor.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void Visitor::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.Visitor.exception)
 }
 
 // -------------------------------------------------------------------
@@ -10621,18 +11448,42 @@ BiometricDataList::data() const {
 
 // Response
 
-// optional .BioService.Result good = 1;
+// optional .BioService.Exception good = 1;
+inline bool Response::has_good() const {
+  return !_is_default_instance_ && good_ != NULL;
+}
 inline void Response::clear_good() {
-  good_ = 0;
+  if (GetArenaNoVirtual() == NULL && good_ != NULL) delete good_;
+  good_ = NULL;
 }
-inline ::BioService::Result Response::good() const {
+inline const ::BioService::Exception& Response::good() const {
   // @@protoc_insertion_point(field_get:BioService.Response.good)
-  return static_cast< ::BioService::Result >(good_);
+  return good_ != NULL ? *good_ : *default_instance_->good_;
 }
-inline void Response::set_good(::BioService::Result value) {
+inline ::BioService::Exception* Response::mutable_good() {
   
-  good_ = value;
-  // @@protoc_insertion_point(field_set:BioService.Response.good)
+  if (good_ == NULL) {
+    good_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.Response.good)
+  return good_;
+}
+inline ::BioService::Exception* Response::release_good() {
+  // @@protoc_insertion_point(field_release:BioService.Response.good)
+  
+  ::BioService::Exception* temp = good_;
+  good_ = NULL;
+  return temp;
+}
+inline void Response::set_allocated_good(::BioService::Exception* good) {
+  delete good_;
+  good_ = good;
+  if (good) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.Response.good)
 }
 
 // -------------------------------------------------------------------
@@ -10757,7 +11608,21 @@ inline void IdentificationData::set_allocated_target_image(::BioService::Photo* 
   // @@protoc_insertion_point(field_set_allocated:BioService.IdentificationData.target_image)
 }
 
-// repeated .BioService.Photo comparison_images = 2;
+// optional int64 population_id = 2;
+inline void IdentificationData::clear_population_id() {
+  population_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 IdentificationData::population_id() const {
+  // @@protoc_insertion_point(field_get:BioService.IdentificationData.population_id)
+  return population_id_;
+}
+inline void IdentificationData::set_population_id(::google::protobuf::int64 value) {
+  
+  population_id_ = value;
+  // @@protoc_insertion_point(field_set:BioService.IdentificationData.population_id)
+}
+
+// repeated .BioService.Photo comparison_images = 3;
 inline int IdentificationData::comparison_images_size() const {
   return comparison_images_.size();
 }
@@ -10869,124 +11734,148 @@ Matches::matches() const {
 
 // -------------------------------------------------------------------
 
-// FaceSearchResult
+// FaceSearchException
 
 // repeated .BioService.PortraitCharacteristic portraits = 1;
-inline int FaceSearchResult::portraits_size() const {
+inline int FaceSearchException::portraits_size() const {
   return portraits_.size();
 }
-inline void FaceSearchResult::clear_portraits() {
+inline void FaceSearchException::clear_portraits() {
   portraits_.Clear();
 }
-inline const ::BioService::PortraitCharacteristic& FaceSearchResult::portraits(int index) const {
-  // @@protoc_insertion_point(field_get:BioService.FaceSearchResult.portraits)
+inline const ::BioService::PortraitCharacteristic& FaceSearchException::portraits(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchException.portraits)
   return portraits_.Get(index);
 }
-inline ::BioService::PortraitCharacteristic* FaceSearchResult::mutable_portraits(int index) {
-  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResult.portraits)
+inline ::BioService::PortraitCharacteristic* FaceSearchException::mutable_portraits(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchException.portraits)
   return portraits_.Mutable(index);
 }
-inline ::BioService::PortraitCharacteristic* FaceSearchResult::add_portraits() {
-  // @@protoc_insertion_point(field_add:BioService.FaceSearchResult.portraits)
+inline ::BioService::PortraitCharacteristic* FaceSearchException::add_portraits() {
+  // @@protoc_insertion_point(field_add:BioService.FaceSearchException.portraits)
   return portraits_.Add();
 }
 inline ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic >*
-FaceSearchResult::mutable_portraits() {
-  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchResult.portraits)
+FaceSearchException::mutable_portraits() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchException.portraits)
   return &portraits_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic >&
-FaceSearchResult::portraits() const {
-  // @@protoc_insertion_point(field_list:BioService.FaceSearchResult.portraits)
+FaceSearchException::portraits() const {
+  // @@protoc_insertion_point(field_list:BioService.FaceSearchException.portraits)
   return portraits_;
 }
 
 // repeated .BioService.Matches matches = 2;
-inline int FaceSearchResult::matches_size() const {
+inline int FaceSearchException::matches_size() const {
   return matches_.size();
 }
-inline void FaceSearchResult::clear_matches() {
+inline void FaceSearchException::clear_matches() {
   matches_.Clear();
 }
-inline const ::BioService::Matches& FaceSearchResult::matches(int index) const {
-  // @@protoc_insertion_point(field_get:BioService.FaceSearchResult.matches)
+inline const ::BioService::Matches& FaceSearchException::matches(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchException.matches)
   return matches_.Get(index);
 }
-inline ::BioService::Matches* FaceSearchResult::mutable_matches(int index) {
-  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResult.matches)
+inline ::BioService::Matches* FaceSearchException::mutable_matches(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchException.matches)
   return matches_.Mutable(index);
 }
-inline ::BioService::Matches* FaceSearchResult::add_matches() {
-  // @@protoc_insertion_point(field_add:BioService.FaceSearchResult.matches)
+inline ::BioService::Matches* FaceSearchException::add_matches() {
+  // @@protoc_insertion_point(field_add:BioService.FaceSearchException.matches)
   return matches_.Add();
 }
 inline ::google::protobuf::RepeatedPtrField< ::BioService::Matches >*
-FaceSearchResult::mutable_matches() {
-  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchResult.matches)
+FaceSearchException::mutable_matches() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchException.matches)
   return &matches_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::BioService::Matches >&
-FaceSearchResult::matches() const {
-  // @@protoc_insertion_point(field_list:BioService.FaceSearchResult.matches)
+FaceSearchException::matches() const {
+  // @@protoc_insertion_point(field_list:BioService.FaceSearchException.matches)
   return matches_;
 }
 
 // optional string message = 3;
-inline void FaceSearchResult::clear_message() {
+inline void FaceSearchException::clear_message() {
   message_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& FaceSearchResult::message() const {
-  // @@protoc_insertion_point(field_get:BioService.FaceSearchResult.message)
+inline const ::std::string& FaceSearchException::message() const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchException.message)
   return message_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void FaceSearchResult::set_message(const ::std::string& value) {
+inline void FaceSearchException::set_message(const ::std::string& value) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:BioService.FaceSearchResult.message)
+  // @@protoc_insertion_point(field_set:BioService.FaceSearchException.message)
 }
-inline void FaceSearchResult::set_message(const char* value) {
+inline void FaceSearchException::set_message(const char* value) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:BioService.FaceSearchResult.message)
+  // @@protoc_insertion_point(field_set_char:BioService.FaceSearchException.message)
 }
-inline void FaceSearchResult::set_message(const char* value, size_t size) {
+inline void FaceSearchException::set_message(const char* value, size_t size) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:BioService.FaceSearchResult.message)
+  // @@protoc_insertion_point(field_set_pointer:BioService.FaceSearchException.message)
 }
-inline ::std::string* FaceSearchResult::mutable_message() {
+inline ::std::string* FaceSearchException::mutable_message() {
   
-  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResult.message)
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchException.message)
   return message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* FaceSearchResult::release_message() {
-  // @@protoc_insertion_point(field_release:BioService.FaceSearchResult.message)
+inline ::std::string* FaceSearchException::release_message() {
+  // @@protoc_insertion_point(field_release:BioService.FaceSearchException.message)
   
   return message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void FaceSearchResult::set_allocated_message(::std::string* message) {
+inline void FaceSearchException::set_allocated_message(::std::string* message) {
   if (message != NULL) {
     
   } else {
     
   }
   message_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), message);
-  // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchResult.message)
+  // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchException.message)
 }
 
-// optional .BioService.Result good = 4;
-inline void FaceSearchResult::clear_good() {
-  good_ = 0;
+// optional .BioService.Exception exception = 4;
+inline bool FaceSearchException::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result FaceSearchResult::good() const {
-  // @@protoc_insertion_point(field_get:BioService.FaceSearchResult.good)
-  return static_cast< ::BioService::Result >(good_);
+inline void FaceSearchException::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void FaceSearchResult::set_good(::BioService::Result value) {
+inline const ::BioService::Exception& FaceSearchException::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchException.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* FaceSearchException::mutable_exception() {
   
-  good_ = value;
-  // @@protoc_insertion_point(field_set:BioService.FaceSearchResult.good)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchException.exception)
+  return exception_;
+}
+inline ::BioService::Exception* FaceSearchException::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.FaceSearchException.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void FaceSearchException::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchException.exception)
 }
 
 // -------------------------------------------------------------------
@@ -11147,18 +12036,42 @@ inline void EnrollmentFeedback::set_quality(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:BioService.EnrollmentFeedback.quality)
 }
 
-// optional .BioService.Result result = 4;
-inline void EnrollmentFeedback::clear_result() {
-  result_ = 0;
+// optional .BioService.Exception Exception = 4;
+inline bool EnrollmentFeedback::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
 }
-inline ::BioService::Result EnrollmentFeedback::result() const {
-  // @@protoc_insertion_point(field_get:BioService.EnrollmentFeedback.result)
-  return static_cast< ::BioService::Result >(result_);
+inline void EnrollmentFeedback::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
 }
-inline void EnrollmentFeedback::set_result(::BioService::Result value) {
+inline const ::BioService::Exception& EnrollmentFeedback::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.EnrollmentFeedback.Exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* EnrollmentFeedback::mutable_exception() {
   
-  result_ = value;
-  // @@protoc_insertion_point(field_set:BioService.EnrollmentFeedback.result)
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.EnrollmentFeedback.Exception)
+  return exception_;
+}
+inline ::BioService::Exception* EnrollmentFeedback::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.EnrollmentFeedback.Exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void EnrollmentFeedback::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.EnrollmentFeedback.Exception)
 }
 
 // optional sfixed32 progress = 5;
@@ -11279,15 +12192,15 @@ inline void VerificationFeedback::set_match(float value) {
 
 // QueryPhoto
 
-// optional .BioService.QueryPhoto.PhotoResultType with_bytes = 1;
+// optional .BioService.QueryPhoto.PhotoResponseType with_bytes = 1;
 inline void QueryPhoto::clear_with_bytes() {
   with_bytes_ = 0;
 }
-inline ::BioService::QueryPhoto_PhotoResultType QueryPhoto::with_bytes() const {
+inline ::BioService::QueryPhoto_PhotoResponseType QueryPhoto::with_bytes() const {
   // @@protoc_insertion_point(field_get:BioService.QueryPhoto.with_bytes)
-  return static_cast< ::BioService::QueryPhoto_PhotoResultType >(with_bytes_);
+  return static_cast< ::BioService::QueryPhoto_PhotoResponseType >(with_bytes_);
 }
-inline void QueryPhoto::set_with_bytes(::BioService::QueryPhoto_PhotoResultType value) {
+inline void QueryPhoto::set_with_bytes(::BioService::QueryPhoto_PhotoResponseType value) {
   
   with_bytes_ = value;
   // @@protoc_insertion_point(field_set:BioService.QueryPhoto.with_bytes)
@@ -11821,6 +12734,10 @@ inline void BioClient::set_allocated_mac_address(::std::string* mac_address) {
 
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -11835,10 +12752,10 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::BioService::AccessInfo_AccessType>() {
   return ::BioService::AccessInfo_AccessType_descriptor();
 }
-template <> struct is_proto_enum< ::BioService::QueryPhoto_PhotoResultType> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::BioService::QueryPhoto_PhotoResponseType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::BioService::QueryPhoto_PhotoResultType>() {
-  return ::BioService::QueryPhoto_PhotoResultType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::BioService::QueryPhoto_PhotoResponseType>() {
+  return ::BioService::QueryPhoto_PhotoResponseType_descriptor();
 }
 template <> struct is_proto_enum< ::BioService::ImageFormat> : ::google::protobuf::internal::true_type {};
 template <>
@@ -11859,11 +12776,6 @@ template <> struct is_proto_enum< ::BioService::EyeType> : ::google::protobuf::i
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::BioService::EyeType>() {
   return ::BioService::EyeType_descriptor();
-}
-template <> struct is_proto_enum< ::BioService::Result> : ::google::protobuf::internal::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::BioService::Result>() {
-  return ::BioService::Result_descriptor();
 }
 template <> struct is_proto_enum< ::BioService::Gender> : ::google::protobuf::internal::true_type {};
 template <>

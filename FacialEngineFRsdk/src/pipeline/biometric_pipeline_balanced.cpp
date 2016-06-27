@@ -55,12 +55,12 @@ namespace Pipeline
 		for (auto i = 0; i < MAX_ENROLMENT_BRANCHES_COUNT; ++i)
 		{
 			enrollment_processors_[i] = std::make_unique<FaceCall>(
-				[this, i](FaceInfoAwaitablePtr pInfo)
+			[this, i](FaceInfoAwaitablePtr pInfo)
 			{
 				this->enroll(pInfo);
 				asend(*enrollment_multiplexer_, pInfo);
 			},
-				[this, i](FaceInfoAwaitablePtr pInfo)->bool
+			[this, i](FaceInfoAwaitablePtr pInfo)->bool
 			{
 				if ((nullptr != pInfo) && (i != enrollment_next_filter_id_))
 					return false;
@@ -74,7 +74,7 @@ namespace Pipeline
 		}
 		
 		enrollment_multiplexer_ = std::make_unique<FaceCall>(
-			[this](FaceInfoAwaitablePtr pInfo)
+		[this](FaceInfoAwaitablePtr pInfo)
 		{
 			enrollment_multiplex_queue_.push(pInfo);
 			while ((enrollment_multiplex_queue_.size() > 0))
@@ -87,42 +87,51 @@ namespace Pipeline
 		
 		
 		iso_compliance_test_ = std::make_unique<FaceCall>(
-			[this](FaceInfoAwaitablePtr pInfo)
+		[this](FaceInfoAwaitablePtr pInfo)
 		{
 			this->iso_compliance_test(pInfo);
 			asend(*finish_stage_, pInfo);
-		}
-		);
+		});
 
 		finish_stage_ = std::make_unique<FaceCall>(
 			[this](FaceInfoAwaitablePtr pInfo)
 		  {
-				if (pInfo->done())
-				{
-					governor_.free_unit();
-					std::cout << "done " << pInfo->item()->id() << std::endl;
-				}
-				else
-					std::cout << "not done" << std::endl;
+				if (pInfo->done())			
+					governor_.free_unit();			
 		  });
 	}
 
 	ImageInfoPtr BiometricPipelineBalanced::acquire(const std::string& filename, long task)
 	{
-		if (task & Verification)
-			throw std::exception("cannot acquire only for verification task");
-
-		auto image = push_image_file(filename, task);		
+		task = task & ~Verification;		
+		auto image = push_image(filename, task);		
 		return image;
 	}
 
 	ImageInfoPtr BiometricPipelineBalanced::acquire(const BioContracts::RawImage& raw_image, long task)
 	{
-		if (task & Verification)
-			throw std::exception("cannot acquire only for verification task");
-
+		task = task & ~Verification;
 		auto image = push_image(raw_image, task);
 		return image;		
+	}
+
+	ImageInfoPtr BiometricPipelineBalanced::push_image(const std::string& filename, long task)
+	{
+		BioFacialEngine::FaceVacsIOUtils utils;
+		auto image = utils.loadFromFile(filename);
+		auto result = process_task(image, task, clock());
+		return result;
+	}
+
+	ImageInfoPtr BiometricPipelineBalanced::push_image(const BioContracts::RawImage& raw_image, long task)
+	{
+		BioFacialEngine::FaceVacsIOUtils utils;
+
+		std::string pixel_format = raw_image.pixel_format();
+
+	  auto image = utils.loadFromBytes(raw_image.bytes(), utils.getFormat(pixel_format));
+		auto result = process_task(image, task, raw_image.id());
+		return result;
 	}
 
 
@@ -159,43 +168,12 @@ namespace Pipeline
 		return image_info;
 	}
 
-	ImageInfoPtr BiometricPipelineBalanced::push_image_file(const std::string& filename, long task)
-	{
-		BioFacialEngine::FaceVacsIOUtils utils;
-		auto image = utils.loadFromFile(filename);
-		auto result = process_task(image, task, clock());
-
-		return result;
-	}
-
-	ImageInfoPtr BiometricPipelineBalanced::push_image(const BioContracts::RawImage& raw_image, long task)
-	{
-		BioFacialEngine::FaceVacsIOUtils utils;
-		std::string pixel_format = raw_image.pixel_format();
-
-		try
-		{
-			auto image = utils.loadFromBytes(raw_image.bytes(), raw_image.size(), utils.getFormat(pixel_format));
-			auto result = process_task(image, task, raw_image.id());
-			return result;
-
-		}
-		catch ( std::exception& ex)	{
-			std::cout << "exception on file format" << std::endl;
-			return nullptr;
-		}
-
-		
-
-	}
+	
 
 	ImageInfoPtr BiometricPipelineBalanced::process_task(FRsdkTypes::FaceVacsImage image, long task, long id)
 	{
 		if (image == nullptr)
-		{
-			std::cout << "bad image file" << std::endl;
 			return nullptr;
-		}
 
 		TaskInfo workItem;
 		workItem.first = image;
@@ -215,8 +193,8 @@ namespace Pipeline
 		BioFacialEngine::VerificationPair images;
 
 		parallel_invoke(
-			[&]() {	images.first  = push_image_file(object, object_task); },
-			[&]() {	images.second = push_image_file(object, subject_task); }
+			[&]() {	images.first  = push_image(object, object_task); },
+			[&]() {	images.second = push_image(object, subject_task); }
 		);
 
 		if (images.first == nullptr || images.second == nullptr)
@@ -265,13 +243,13 @@ namespace Pipeline
 		BioFacialEngine::IdentificationPair images;
 		BioFacialEngine::FaceVacsIOUtils utils;
 		parallel_invoke(
-			[&]()	{	images.first = push_image_file(object, object_task);},
+			[&]()	{	images.first = push_image(object, object_task);},
 			[&]()
 		  {
 		 	parallel_for_each(subjects.begin(), subjects.end(),
 				[&](const std::string& item)
 			  {				
-					auto img = push_image_file(item, subject_task);
+					auto img = push_image(item, subject_task);
 					if (img != nullptr)
 						images.second.push_back(img);
 			  });		

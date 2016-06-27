@@ -19,75 +19,70 @@ namespace BioFacialEngine
 		  , { "bmp", BioService::ImageFormat::BMP  }
 		};
 
+	std::string get_file_format(const std::string& filename)
+	{
+		char period('.');
+		std::string format("");
+		for (auto ch = filename.rbegin(); ch != filename.rend(); ++ch)
+		{
+			if (*ch == period)
+				break;
+
+			format += *ch;
+		}
+
+		std::reverse(format.begin(), format.end());
+		return format;
+	}
 	
   FaceVacsImage FaceVacsIOUtils::loadFromFile(const std::string& filename)
-  {
-		std::cout << "loading " << filename << std::endl;
-
+  {	
   	if (filename.size() < 1)
-  		return nullptr;
-  
-  	char period('.');
-  	std::string format("");
-  	for (auto ch = filename.rbegin(); ch != filename.rend(); ++ch)
+  		throw std::exception("Filename is not valid");  
+  	
+  	std::string format(get_file_format(filename));  
+  	auto image_format = getFormat(format);
+  	switch (image_format)
   	{
-  		if (*ch == period)
-  			break;
-  
-  		format += *ch;
-  	}
-  
-  	std::reverse(format.begin(), format.end());
-  
-  	try
-  	{
-  		BioService::ImageFormat image_format = getFormat(format);
-  		switch (image_format)
-  		{
-  		case BioService::JPEG:
-  			return loadJpeg(filename);
-  		case BioService::JPEG2000:
-  			break;
-  		case BioService::PNG:
-  			break;
-  		case BioService::BMP:
-  			break;
-  		case BioService::PGM:
-  			break;
-  		case BioService::GRAYSCALE_8BIT:
-  			break;
-  		default:
-  			break;
-  		}
-  	}
-  	catch (std::invalid_argument& ex)
-  	{
-  		std::cout << ex.what() << std::endl;
-  	}
-  
-  	throw std::invalid_argument("Image format is not supported");
+  	case BioService::JPEG:
+  		return loadJpeg(filename);  
+  	case BioService::PNG:
+			return loadPng(filename);
+  	case BioService::BMP:
+			return loadJpeg(filename);
+  	case BioService::PGM:  	
+		case BioService::JPEG2000:
+  	case BioService::GRAYSCALE_8BIT:
+  	default:
+			throw std::invalid_argument("Image format is not supported");
+  	}   
   }
 
-  FaceVacsImage FaceVacsIOUtils::loadFromBytes( const std::string& image_bytestring
-			                                        , const size_t size
+  FaceVacsImage FaceVacsIOUtils::loadFromBytes( const std::string& image_bytestring			                                       
 			                                        , BioService::ImageFormat image_format )
   {
   	switch (image_format)
   	{
-  	case BioService::ImageFormat::JPEG:
-  		return loadJpeg(image_bytestring, size);
-		case BioService::ImageFormat::PNG:
-			return loadPng(image_bytestring, size);	
-		case BioService::ImageFormat::BMP:
-			return loadPng(image_bytestring, size);
-	
-  	}
-  
-  	throw std::invalid_argument("Image format is not supported");
+  	case BioService::JPEG:
+  		return loadJpeg(image_bytestring, image_bytestring.size());
+		case BioService::PNG:
+			return loadPng(image_bytestring, image_bytestring.size());
+		case BioService::BMP:
+			return loadBmp(image_bytestring, image_bytestring.size());
+
+	  case BioService::JPEG2000 :
+	  case BioService::PGM      :
+	  case BioService::GRAYSCALE_8BIT:
+
+	  case BioService::ImageFormat_INT_MIN_SENTINEL_DO_NOT_USE_:
+	  case BioService::ImageFormat_INT_MAX_SENTINEL_DO_NOT_USE_:
+	  default: 
+			throw std::invalid_argument("Image format is not supported");
+	  }   	
   }
 
 
-	FaceVacsImage FaceVacsIOUtils::loadJpeg(const std::string& filename)
+	FaceVacsImage FaceVacsIOUtils::loadJpeg(const std::string& filename) const
   {
   	try
   	{
@@ -98,7 +93,7 @@ namespace BioFacialEngine
   		std::cout << e.what() << std::endl;
   	}
   
-  	return NULL;
+  	return nullptr;
   }
 
 	FaceVacsImage FaceVacsIOUtils::loadJpeg(const std::string& image_bytestring, const size_t size)

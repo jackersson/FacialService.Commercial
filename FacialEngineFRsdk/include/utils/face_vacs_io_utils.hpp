@@ -13,15 +13,14 @@ namespace BioFacialEngine
 		FRsdkTypes::FaceVacsImage loadFromFile(const std::string& filename);
 
 
-		FRsdkTypes::FaceVacsImage loadFromBytes(const std::string& image_bytestring
-			, const size_t size
-			, BioService::ImageFormat image_format = BioService::ImageFormat::JPEG);
+		FRsdkTypes::FaceVacsImage loadFromBytes( const std::string& image_bytestring	
+		                                       , BioService::ImageFormat image_format = BioService::ImageFormat::JPEG);
 		
 		BioService::ImageFormat getFormat(const std::string& format);
 
 	private:
 	
-		FRsdkTypes::FaceVacsImage loadJpeg(const std::string& filename);
+		FRsdkTypes::FaceVacsImage loadJpeg(const std::string& filename) const;
 		FRsdkTypes::FaceVacsImage loadJpeg(const std::string& image_bytestring, const size_t size);
 		
 

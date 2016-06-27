@@ -1,8 +1,6 @@
 #ifndef RawImage_INCLUDED
 #define RawImage_INCLUDED
 
-#include <iostream>
-
 namespace BioContracts
 {
 	enum ImageFileType
@@ -20,24 +18,21 @@ namespace BioContracts
 	class RawImage
 	{
 	public:
-		RawImage(const std::string& bytes, long id) : p(bytes, id)
-		{
-		
+		RawImage(const std::string& bytes, long id) : pair_(bytes, id), pixel_format_(INVALID)		{
 			pixel_format_ = check_pixel_format(bytes.c_str(), bytes.size());
-			std::cout << "image type " << get_pixel_fomat_name(pixel_format_) << std::endl;
 		}
-		RawImage(const RawImage& raw_image) : p(raw_image.p) {}
+		RawImage(const RawImage& raw_image) : pair_(raw_image.pair_), pixel_format_(INVALID) {}
 
-		long id() const { return p.second; }
+		long id() const { return pair_.second; }
 
-		const std::string& bytes() const { return p.first; }
+		const std::string& bytes() const { return pair_.first; }
 
 		std::string pixel_format() const {
 			return get_pixel_fomat_name(pixel_format_);
-		}
-	
+		}	
 
-		size_t size() const { return p.first.size(); }
+		size_t size() const { return pair_.first.size(); }
+
 	private:
 
 		static std::string get_pixel_fomat_name(ImageFileType pixel_format)
@@ -86,21 +81,21 @@ namespace BioContracts
 					JPG : INVALID;
 
 			case '\x89':
-				return (!strncmp((const char*)data,
+				return (!strncmp(static_cast<const char*>(data),
 					"\x89\x50\x4E\x47\x0D\x0A\x1A\x0A", 8)) ?
 					PNG : INVALID;
 
 			case 'G':
-				return (!strncmp((const char*)data, "GIF87a", 6) ||
-					!strncmp((const char*)data, "GIF89a", 6)) ?
+				return (!strncmp(static_cast<const char*>(data), "GIF87a", 6) ||
+					!strncmp(static_cast<const char*>(data), "GIF89a", 6)) ?
 					GIF : INVALID;
 
 			case 'I':
-				return (!strncmp((const char*)data, "\x49\x49\x2A\x00", 4)) ?
+				return (!strncmp(static_cast<const char*>(data), "\x49\x49\x2A\x00", 4)) ?
 					TIFF : INVALID;
 
 			case 'M':
-				return (!strncmp((const char*)data, "\x4D\x4D\x00\x2A", 4)) ?
+				return (!strncmp(static_cast<const char*>(data), "\x4D\x4D\x00\x2A", 4)) ?
 					TIFF : INVALID;
 
 			case 'B':
@@ -108,16 +103,16 @@ namespace BioContracts
 					BMP : INVALID;
 
 			case 'R':
-				if (strncmp((const char*)data, "RIFF", 4))
+				if (strncmp(static_cast<const char*>(data), "RIFF", 4))
 					return INVALID;
-				if (strncmp((const char*)(data + 8), "WEBP", 4))
+				if (strncmp(static_cast<const char*>(data + 8), "WEBP", 4))
 					return INVALID;
 				return WEBP;
 
 			case '\0':
-				if (!strncmp((const char*)data, "\x00\x00\x01\x00", 4))
+				if (!strncmp(static_cast<const char*>(data), "\x00\x00\x01\x00", 4))
 					return ICO;
-				if (!strncmp((const char*)data, "\x00\x00\x02\x00", 4))
+				if (!strncmp(static_cast<const char*>(data), "\x00\x00\x02\x00", 4))
 					return ICO;
 				return INVALID;
 
@@ -126,9 +121,9 @@ namespace BioContracts
 			}
 		}
 
+		std::pair<std::string, long> pair_;
 		ImageFileType pixel_format_;
 
-		std::pair<std::string, long> p;
 	};
 	
 }
