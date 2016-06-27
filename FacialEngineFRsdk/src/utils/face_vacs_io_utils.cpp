@@ -83,17 +83,9 @@ namespace BioFacialEngine
 
 
 	FaceVacsImage FaceVacsIOUtils::loadJpeg(const std::string& filename) const
-  {
-  	try
-  	{
-  		FaceVacsImage img(new FRsdk::Image(FRsdk::Jpeg::load(std::string(filename))));
-  		return img;
-  	}
-  	catch (std::exception& e) {
-  		std::cout << e.what() << std::endl;
-  	}
-  
-  	return nullptr;
+  {  	
+  	FaceVacsImage img(new FRsdk::Image(FRsdk::Jpeg::load(std::string(filename))));
+  	return img;  
   }
 
 	FaceVacsImage FaceVacsIOUtils::loadJpeg(const std::string& image_bytestring, const size_t size)
