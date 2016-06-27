@@ -10,26 +10,23 @@ namespace BioFacialEngine
 	class FaceVacsIOUtils
 	{
 	public:
-		FRsdkTypes::FaceVacsImage loadFromFile(const std::string& filename);
+		FRsdkTypes::FaceVacsImage loadFromFile(const std::string& filename) const;
 
 
 		FRsdkTypes::FaceVacsImage loadFromBytes( const std::string& image_bytestring	
-		                                       , BioService::ImageFormat image_format = BioService::ImageFormat::JPEG);
+		                                       , BioService::ImageFormat image_format = BioService::ImageFormat::JPEG) const;
 		
-		BioService::ImageFormat getFormat(const std::string& format);
+		BioService::ImageFormat getFormat(const std::string& format) const;
 
 	private:
 	
 		FRsdkTypes::FaceVacsImage loadJpeg(const std::string& filename) const;
-		FRsdkTypes::FaceVacsImage loadJpeg(const std::string& image_bytestring, const size_t size);
-		
+		FRsdkTypes::FaceVacsImage loadJpeg(const std::string& image_bytestring, const size_t size) const;	
 
-		//FRsdkTypes::FaceVacsImage loadJpeg2000(const std::string& filename);
-		FRsdkTypes::FaceVacsImage loadBmp(const std::string& filename);
-		FRsdkTypes::FaceVacsImage loadBmp(const std::string& image_bytestring, const size_t size);
-		//FRsdkTypes::FaceVacsImage loadPgm     (const std::string& filename);
-		FRsdkTypes::FaceVacsImage loadPng(const std::string& filename);
-		FRsdkTypes::FaceVacsImage loadPng(const std::string& image_bytestring, const size_t size);
+		FRsdkTypes::FaceVacsImage loadBmp(const std::string& filename) const;
+		FRsdkTypes::FaceVacsImage loadBmp(const std::string& image_bytestring, const size_t size) const;
+		FRsdkTypes::FaceVacsImage loadPng(const std::string& filename) const;
+		FRsdkTypes::FaceVacsImage loadPng(const std::string& image_bytestring, const size_t size) const;
 
 
 

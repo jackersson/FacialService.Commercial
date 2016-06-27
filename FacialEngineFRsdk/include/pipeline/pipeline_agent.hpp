@@ -26,31 +26,13 @@ namespace Pipeline
 
 		bool IsCancellationPending() const { return false /*receive(m_shutdownPending) || receive(m_cancellationSource)*/; }
 
-		FRsdkEntities::ImageInfoPtr load_image(const std::string& filename) const
-		{
-			FRsdkEntities::ImageInfoPtr pInfo = nullptr;
-			try
-			{
-				if (!IsCancellationPending())
-					pInfo = pipeline_->load_image(filename);
-			}
-			catch (std::exception& e)
-			{
-				ShutdownOnError(0, filename, e);
-			}
-
-			return pInfo;
-		}
-
+		
 		void face_find(FRsdkEntities::ImageInfoPtr pInfo) const
 		{
 			try
 			{
 				if (!IsCancellationPending() && (nullptr != pInfo))										
-					pipeline_->face_find(pInfo);					
-				
-
-				//std::cout << "face_find" << std::endl;
+					pipeline_->face_find(pInfo);								
 			}
 			catch (std::exception& e)	{
 				ShutdownOnError(0, pInfo->image()->name(), e);
@@ -65,11 +47,8 @@ namespace Pipeline
 				if (!IsCancellationPending() && (nullptr != face))
 				{
 					pipeline_->iso_compliance_test(face);
-					pInfo->set_done(IsoComplianceTest);
-					std::cout << "IsoComplianceTest done" << face->id() << std::endl;
+					pInfo->set_done(IsoComplianceTest);			
 				}
-
-				//std::cout << "iso_compliance_test" << std::endl;
 			}
 			catch (std::exception& e)	{
 				ShutdownOnError(0, "eyes find", e);
@@ -85,9 +64,7 @@ namespace Pipeline
 				if (!IsCancellationPending() && (nullptr != face))
 				{
 					pipeline_->portrait_analyze(face);
-					pInfo->set_done(BiometricTask::PortraitAnalysis);
-					std::cout << "portrait_analyze done" << face->id() << std::endl;
-
+					pInfo->set_done(PortraitAnalysis);
 				}
 
 			}
@@ -104,10 +81,9 @@ namespace Pipeline
 				if (!IsCancellationPending() && (nullptr != face))
 				{
 					pipeline_->extract_facial_image(face);
-					pInfo->set_done(FaceImageExtraction);
-					std::cout << "image extraction done" << face->id() << std::endl;
+					pInfo->set_done(FaceImageExtraction);			
 				}
-				//std::cout << "extract_facial_image" << std::endl;
+			
 			}
 			catch (std::exception& e)	{
 				ShutdownOnError(0, "portrait characteristic find", e);
@@ -122,10 +98,9 @@ namespace Pipeline
 				if (!IsCancellationPending() && (nullptr != face))
 				{
 					pipeline_->enroll(face);
-					pInfo->set_done(Enrollment);
-					std::cout << "enrollment done" << face->id() << std::endl;
+					pInfo->set_done(Enrollment);					
 				}
-				//std::cout << "enroll" << std::endl;
+	
 			}
 			catch (std::exception& e)	{
 				ShutdownOnError(0, "portrait characteristic find", e);
@@ -138,8 +113,6 @@ namespace Pipeline
 			{
 				if (!IsCancellationPending())
 					return pipeline_->verify(pInfo);
-
-				//std::cout << "face_find" << std::endl;
 			}
 			catch (std::exception& e)	{
 				ShutdownOnError(0, "portrait characteristic find", e);
@@ -162,18 +135,12 @@ namespace Pipeline
 			return nullptr;
 		}
 
-		/*
-		void finish(FRsdkEntities::FaceInfoPtr pInfo) const
-		{
-			try
-			{
-		   
-			}
-			catch (std::exception& e)	{
-				ShutdownOnError(0, "portrait characteristic find", e);
-			}
+		
+		long create_identification_population(std::list<FRsdkEntities::ImageInfoPtr> images) const
+		{				
+			return pipeline_->create_identification_population(images);
 		}
-		*/
+		
 
 
 	private:

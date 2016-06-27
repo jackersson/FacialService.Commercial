@@ -16,12 +16,17 @@ namespace BioFacialEngine
 		typedef std::pair<FRsdk::FIR, long>  VerificationSubject;
 	public:
 		explicit IdentificationItem( const std::list<FRsdkEntities::ImageInfoPtr>& images
-			                         , FRsdkTypes::FaceVacsConfiguration configuration);
+			                         , FRsdkTypes::FaceVacsConfiguration configuration
+	                             , long id);
 			
 
 		BioContracts::Matches identify(FRsdkEntities::ImageInfoPtr image);
 		
 		void clear();
+
+		long id() const	{
+			return id_;
+		}
 
 		//BioContracts::MatchesPtr matches() const;
 
@@ -41,6 +46,7 @@ namespace BioFacialEngine
 
 		//FirBuilderRef                  fir_builder_;
 		FRsdkTypes::FaceVacsConfiguration configuration_;
+		long id_;
 
 	};
 	typedef std::shared_ptr<IdentificationItem> IdentificationItemPtr;

@@ -8,17 +8,19 @@ using namespace BioContracts;
 namespace BioFacialEngine
 {	
 	IdentificationItem::IdentificationItem( const std::list<ImageInfoPtr>& images
-			                                  , FaceVacsConfiguration configuration)
+			                                  , FaceVacsConfiguration configuration
+	                                      , long id)
 			                                  : load_balancer_(nullptr)
 			                                  //, matches_(std::make_shared<Matches>())
-			                                  , configuration_(configuration)			                             
+			                                  , configuration_(configuration)			
+		                                    , id_(id)
 	{
 		init(images);
 	}
 
 	Matches IdentificationItem::identify(ImageInfoPtr image)
 	{
-		Matches matches_;
+		Matches matches_(id_);
 		parallel_for_each(image->cbegin(), image->cend(),
 			[&](FaceInfoPtr face)
 		  {

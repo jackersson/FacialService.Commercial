@@ -3,6 +3,8 @@ using namespace FRsdkTypes;
 
 namespace BioFacialEngine
 {
+	sitmo::prng_engine FacialIdentification::randomizer_;
+
 	FacialIdentification::FacialIdentification(const std::string& configuration_filename)
 	{
 
@@ -34,19 +36,32 @@ namespace BioFacialEngine
 		catch (std::exception& e) { std::cout << e.what(); return false; }
 	}
 
-	BioContracts::Matches FacialIdentification::identify(IdentificationPair pair)
+	IdentificationItemPtr FacialIdentification::create_population(std::list<FRsdkEntities::ImageInfoPtr> images)
+	{
+		long key = randomizer_();
+		while (items_.find(key) != items_.end())		
+			key = randomizer_();
+
+		auto population = std::make_shared<IdentificationItem>(images, configuration_, key);
+		items_.insert(std::pair<long, IdentificationItemPtr>(key, population));
+
+		return population;
+	}
+
+	BioContracts::Matches FacialIdentification::identify(IdentificationPair pair, long population_id)
 	{		
 		auto object = pair.first;
 		if (object->size() <= 0)
-		{
-			std::cout << "identify no faces detected" << std::endl;
-			return BioContracts::Matches();
-		}
-	
-		auto ident_item(std::make_shared<IdentificationItem>(pair.second, configuration_));
-		items_.push_back(ident_item);
+			return BioContracts::Matches(DEFAULT_POPULATION);
 
-		auto matches = ident_item->identify(pair.first);
+		auto population_info = items_.find(population_id);
+		IdentificationItemPtr population;
+		if (population_id == DEFAULT_POPULATION && population_info == items_.end())		
+			population = create_population(pair.second);
+		else		
+			population = population_info->second;
+
+		auto matches = population->identify(pair.first);
 		
 		return matches;
 	}

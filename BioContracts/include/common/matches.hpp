@@ -13,7 +13,7 @@ namespace BioContracts
 	{
 	public:
 		Match(long face_id, float match) : p(face_id, match) {
-			std::cout << " match find : " << face_id << " " << match << std::endl;
+			std::cout << " Match  -> face : " << face_id << " score: " << match << std::endl;
 		}
 		Match(const Match& match) : p(match.p) {}
 
@@ -29,6 +29,8 @@ namespace BioContracts
 	class Matches
 	{
 	public:			
+		explicit Matches(long population_id) : population_id_(population_id)	{}
+
 		void add( long face_id, const Match& match)
 		{
 			auto it = matches_.find(face_id);
@@ -76,6 +78,7 @@ namespace BioContracts
 		size_t size() const { return matches_.size(); }
 	private:
 		std::map<long, std::list<Match>> matches_;
+		long population_id_;
 	};
 
 	typedef std::shared_ptr<Matches> MatchesPtr;

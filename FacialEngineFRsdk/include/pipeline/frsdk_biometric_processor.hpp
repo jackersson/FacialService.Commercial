@@ -65,12 +65,6 @@ namespace Pipeline
 			catch (std::exception& e) { std::cout << e.what(); return false; }
 		}
 
-		//TODO
-		FRsdkEntities::ImageInfoPtr load_image(const std::string& filename) override
-		{
-			//FRsdkEntities::ImageInfoPtr image(new FRsdkEntities::ImageInfo(filename));
-			return nullptr;
-		}
 
 		void face_find(FRsdkEntities::ImageInfoPtr pInfo) override
 		{		
@@ -93,31 +87,29 @@ namespace Pipeline
 		{
 			auto result = acquisition_->extract_face(pInfo->annotated_image());
 			pInfo->set_facial_image(result);
-
-			//std::cout << "extraction stage " << clock() << std::endl;
-
 		}
 
 		void iso_compliance_test(FRsdkEntities::FaceInfoPtr pInfo) override {
 			auto portrait = pInfo->characteristics().portraitCharacteristics();
-			auto start = clock();
-			std::cout << " iso_compliance_test start " << clock() - start << std::endl;
+			std::cout << "face : " << pInfo->id() << " iso test start " << std::endl;
 			auto result = acquisition_->iso_compliance_test(portrait);
-			std::cout << " iso_compliance_test " << clock() - start << std::endl;
+			
 			FRsdkEntities::FRsdkIsoCompliancePtr iso(new FRsdkEntities::FRsdkIsoCompliance(*result));
 			pInfo->set_iso_compliance(iso);
+			std::cout << "face : " << pInfo->id() << " iso test done " << std::endl;
+
 		}
 
 		void enroll(FRsdkEntities::FaceInfoPtr pInfo) override
 		{		
-			std::cout << "enrollment stage " << pInfo->id() << " " << clock() << std::endl;
-
+			std::cout << "face : " << pInfo->id() << " enrollment start " << std::endl;
+			
 			FRsdk::Enrollment::Feedback
 				feedback((pInfo->enrollment_data()));
 
 			enrollment_->enroll(pInfo->extracted_image(), feedback);
 
-			std::cout << "enrollment stage finnished " << pInfo->id() << " " << clock() << std::endl;
+			std::cout << "face : " << pInfo->id() << " enrollment done " << std::endl;
 		}
 
 		BioContracts::VerificationResultPtr
@@ -139,6 +131,11 @@ namespace Pipeline
 			return vr;			
 		}
 		
+		long create_identification_population( std::list<FRsdkEntities::ImageInfoPtr> images) 
+		{
+			auto population = identifyer_->create_population(images);
+			return population->id();
+		}
 
 	private:
 		BioFacialEngine::FaceVacsAcquisitionPtr     acquisition_;

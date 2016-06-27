@@ -10,6 +10,8 @@ using namespace BioContracts;
 
 namespace Pipeline
 {
+	sitmo::prng_engine BiometricPipelineBalanced::randomizer_;
+
 	BiometricPipelineBalanced::BiometricPipelineBalanced( IBiometricProcessorPtr pipeline)
 			                                                : BiometricPipelineAgent(pipeline)
 			                                                , governor_(MAX_PIPELINE_SLOT_COUNT)
@@ -20,9 +22,8 @@ namespace Pipeline
 			                                                , finish_stage_(nullptr)
 			                                                , enrollment_next_filter_id_(0)
 	{
-		queue_sizes.resize(5, 0);
+		//queue_sizes.resize(5, 0);
 		enrollment_processors_.resize(MAX_ENROLMENT_BRANCHES_COUNT);
-
 		initialize();
 	}
 
@@ -103,201 +104,211 @@ namespace Pipeline
 
 	ImageInfoPtr BiometricPipelineBalanced::acquire(const std::string& filename, long task)
 	{
-		task = task & ~Verification;		
-		auto image = push_image(filename, task);		
-		return image;
+		auto pair = load_image(filename);
+		return acquire(pair, task);
 	}
 
 	ImageInfoPtr BiometricPipelineBalanced::acquire(const BioContracts::RawImage& raw_image, long task)
 	{
-		task = task & ~Verification;
-		auto image = push_image(raw_image, task);
-		return image;		
+		auto pair = load_image(raw_image);
+		return acquire(pair, task);
 	}
 
-	ImageInfoPtr BiometricPipelineBalanced::push_image(const std::string& filename, long task)
+	ImageInfoPtr BiometricPipelineBalanced::load_image(const std::string& filename) const
 	{
 		BioFacialEngine::FaceVacsIOUtils utils;
 		auto image = utils.loadFromFile(filename);
-		auto result = process_task(image, task, clock());
-		return result;
+		return std::make_shared<ImageInfo>(image, abs(static_cast<long>(randomizer_())));
 	}
 
-	ImageInfoPtr BiometricPipelineBalanced::push_image(const BioContracts::RawImage& raw_image, long task)
+	ImageInfoPtr BiometricPipelineBalanced::load_image(const BioContracts::RawImage& raw_image) const
 	{
 		BioFacialEngine::FaceVacsIOUtils utils;
-
-		std::string pixel_format = raw_image.pixel_format();
-
-	  auto image = utils.loadFromBytes(raw_image.bytes(), utils.getFormat(pixel_format));
-		auto result = process_task(image, task, raw_image.id());
-		return result;
-	}
-
-
-	ImageInfoPtr BiometricPipelineBalanced::push_task(TaskInfo task_info)
-	{
-		auto image_info = std::make_shared<ImageInfo>(task_info.first, task_info.id);
-
-		if (nullptr == image_info)
-			return nullptr;
-
-		this->face_find(image_info);
-
-		if (image_info->size() <= 0)
-			return nullptr;
-
-		auto task = task_info.second;
-		auto image_awaitable = std::make_shared<ImageInfoAwaitable>(image_info, task);
-		image_awaitable->init();
-		for( auto it = image_awaitable->cbegin(); it != image_awaitable->cend(); ++it)
-	   // [&](FaceInfoAwaitablePtr face)
-		  {		  	
-				FaceInfoAwaitablePtr face = *it;
-		  	governor_.wait_available_working_unit();
-		  	if (face->has_task(PortraitAnalysis))
-		  		asend(*face_analyzer_, face);
-		  
-		  	if (face->has_task(FaceImageExtraction))
-		  		asend(*facial_image_extractor_, face);
-		 }
-		//);
-
-		image_awaitable->wait_until_empty();
-
-		return image_info;
+		auto image = utils.loadFromBytes( raw_image.bytes()
+		                              	, utils.getFormat(raw_image.pixel_format()));
+		return std::make_shared<ImageInfo>(image, abs(static_cast<long>(randomizer_())));
 	}
 
 	
-
-	ImageInfoPtr BiometricPipelineBalanced::process_task(FRsdkTypes::FaceVacsImage image, long task, long id)
+	ImageInfoPtr BiometricPipelineBalanced::acquire( ImageInfoPtr image
+			                                           , long task)
+	{		
+		task = task & ~Verification;
+		do_task(image, task);
+		return image;
+	}
+	
+	void BiometricPipelineBalanced::do_task(ImageInfoPtr image, long task)
 	{
-		if (image == nullptr)
-			return nullptr;
+		if (nullptr == image)
+			return;
 
-		TaskInfo workItem;
-		workItem.first = image;
-		workItem.second = task;
-		workItem.id = id;
-		return push_task(workItem);
+		this->face_find(image);
+
+		if (image->size() <= 0)
+			throw std::exception("Image does not contain any face");
+
+		auto image_awaitable = std::make_shared<ImageInfoAwaitable>(image, task);
+		image_awaitable->init();
+
+		for (auto it = image_awaitable->cbegin(); it != image_awaitable->cend(); ++it)
+		{
+			FaceInfoAwaitablePtr face = *it;
+			governor_.wait_available_working_unit();
+			if (face->has_task(PortraitAnalysis))
+				asend(*face_analyzer_, face);
+
+			if (face->has_task(FaceImageExtraction))
+				asend(*facial_image_extractor_, face);
+		}
+
+		image_awaitable->wait_until_empty();
 	}
 
-
-	//TODO refactor verify face
-	VerificationResultPtr
-	BiometricPipelineBalanced::verify_face(const std::string& object, const std::string& subject, bool fast)
+	VerificationResultPtr BiometricPipelineBalanced::verify_face( ImageInfoPtr object
+		                                                          , ImageInfoPtr subject
+		                                                          , bool fast )
 	{
+		if (object == nullptr || subject == nullptr)
+			return nullptr;
+
 		auto object_task = fast ? FACIAL_EXTRACTION : FULL_PORTRAIT_ANALYSIS;
 		auto subject_task = object_task | Enrollment;
 
-		BioFacialEngine::VerificationPair images;
-
+		BioFacialEngine::VerificationPair images(object, subject);
 		parallel_invoke(
-			[&]() {	images.first  = push_image(object, object_task); },
-			[&]() {	images.second = push_image(object, subject_task); }
+			[&]() {	do_task(object , object_task ); },
+			[&]() {	do_task(subject, subject_task); }
 		);
 
-		if (images.first == nullptr || images.second == nullptr)
-		{
-			std::cout << "BiometricPipelineBalanced::verify_face bad image data " << std::endl;
-			return nullptr;
-		}
-
-		auto result = this->verify(images);
-		return result;		
+		return this->verify(images);		
 	}
+	
+
+	VerificationResultPtr
+	BiometricPipelineBalanced::verify_face(const std::string& object, const std::string& subject, bool fast)
+	{
+		auto object_info  = load_image(object );
+		auto subject_info = load_image(subject);
+		return verify_face(object_info, subject_info, fast);	
+	}
+	
 
 	VerificationResultPtr 
 	BiometricPipelineBalanced::verify_face( const BioContracts::RawImage& object
 		                                    , const BioContracts::RawImage& subject
 		                                    , bool fast)
 	{
-		auto object_task = fast ? FACIAL_EXTRACTION : FULL_PORTRAIT_ANALYSIS;
-		auto subject_task = object_task | Enrollment;
-
-		BioFacialEngine::VerificationPair images;
-
-		parallel_invoke(
-			[&]() {	images.first  = push_image(object , object_task);  },
-			[&]() {	images.second = push_image(subject, subject_task); }
-		);
-
-		if (images.first == nullptr || images.second == nullptr)
-		{
-			std::cout << "BiometricPipelineBalanced::verify_face bad image data " << std::endl;
-			return nullptr;
-		}
-
-		auto result = this->verify(images);
-		return result;		
+		auto object_info  = load_image(object);
+		auto subject_info = load_image(subject);
+		return verify_face(object_info, subject_info, fast);
 	}
 
 	IdentificationResultPtr
-  BiometricPipelineBalanced::identify_face( const std::string& object
-		                                      , const std::list<std::string>& subjects
+  BiometricPipelineBalanced::identify_face( ImageInfoPtr object
+		                                      , const std::list<ImageInfoPtr>& subjects
 																		      , bool  fast )
 	{
+
+		if (object == nullptr || subjects.size() <= 0)
+			return nullptr;
+
 		auto object_task  = fast ? FACIAL_EXTRACTION : FULL_PORTRAIT_ANALYSIS;
 		auto subject_task = object_task | Enrollment;
 
 		BioFacialEngine::IdentificationPair images;
-		BioFacialEngine::FaceVacsIOUtils utils;
+		images.first = object;
 		parallel_invoke(
-			[&]()	{	images.first = push_image(object, object_task);},
+			[&]()	{	do_task(object, object_task);},
 			[&]()
 		  {
 		 	parallel_for_each(subjects.begin(), subjects.end(),
-				[&](const std::string& item)
-			  {				
-					auto img = push_image(item, subject_task);
-					if (img != nullptr)
-						images.second.push_back(img);
+				[&](ImageInfoPtr item)
+			  {		
+					images.second.push_back(item);
+					do_task(item, subject_task);				
 			  });		
 		  }
 		);
-
-		if (images.first == nullptr || images.second.size() <= 0)
-		{
-			std::cout << "BiometricPipelineBalanced::identify_face bad image data " << std::endl;
-			return nullptr;
-		}
-
-		auto result = this->identify(images);
-		return result;
+		
+		return this->identify(images);
 	}
 
+	
 	IdentificationResultPtr
   BiometricPipelineBalanced::identify_face( const RawImage& object
 		                                      , const std::list<RawImage>& subjects
 																		      , bool  fast )
 	{
-		auto object_task  = fast ? FACIAL_EXTRACTION : FULL_PORTRAIT_ANALYSIS;
-		auto subject_task = object_task | Enrollment;
+		auto object_info  = load_image(object);
 
-		BioFacialEngine::IdentificationPair images;
-		BioFacialEngine::FaceVacsIOUtils utils;
-		parallel_invoke(
-			[&]()	{	images.first = push_image(object, object_task);},
-			[&]()
-		  {
-		 	parallel_for_each(subjects.begin(), subjects.end(),
-				[&](const RawImage& item)
-			  {				
-					auto img = push_image(item, subject_task);
-					if (img != nullptr)
-						images.second.push_back(img);
-			  });		
-		  }
-		);
-
-		if (images.first == nullptr || images.second.size() <= 0)
+		std::list<ImageInfoPtr> subjects_info;
+		for ( auto it = subjects.begin(); it != subjects.end(); ++it)
 		{
-			std::cout << "BiometricPipelineBalanced::identify_face bad image data " << std::endl;
-			return nullptr;
+			auto loaded = load_image(*it);
+			if (loaded == nullptr)
+				subjects_info.push_back(loaded);
+		}
+		return identify_face(object_info, subjects_info, fast);	
+	}
+
+	IdentificationResultPtr
+	BiometricPipelineBalanced::identify_face(const std::string& object
+		                                      , const std::list<std::string>& subjects
+																		      , bool  fast )
+	{
+		auto object_info  = load_image(object);
+
+		std::list<ImageInfoPtr> subjects_info;
+		for ( auto it = subjects.begin(); it != subjects.end(); ++it)
+		{
+			auto loaded = load_image(*it);
+			if (loaded == nullptr)
+				subjects_info.push_back(loaded);
+		}
+		return identify_face(object_info, subjects_info, fast);
+	}
+	
+	long BiometricPipelineBalanced::create_identify_population(const std::list<ImageInfoPtr>& subjects) 
+	{
+		if (subjects.size() <= 0)
+			return -1;
+
+		auto task = FACIAL_EXTRACTION | Enrollment;
+		parallel_for_each(subjects.begin(), subjects.end(),
+			[&](ImageInfoPtr item)
+		  {
+		  	do_task(item, task);
+		  });
+
+		return this->create_identification_population(subjects);
+	}
+
+
+	long BiometricPipelineBalanced::create_identify_population(const std::list<RawImage>& subjects) const
+	{
+		std::list<ImageInfoPtr> subjects_info;
+		for (auto it = subjects.begin(); it != subjects.end(); ++it)
+		{
+			auto loaded = load_image(*it);
+			if (loaded == nullptr)
+				subjects_info.push_back(loaded);
 		}
 
-		auto result = this->identify(images);
-		return result;
+		return this->create_identification_population(subjects_info);
+	}
+
+	long BiometricPipelineBalanced::create_identify_population(const std::list<std::string>& subjects) const
+	{
+		std::list<ImageInfoPtr> subjects_info;
+		for (auto it = subjects.begin(); it != subjects.end(); ++it)
+		{
+			auto loaded = load_image(*it);
+			if (loaded == nullptr)
+				subjects_info.push_back(loaded);
+		}
+
+		return this->create_identification_population(subjects_info);
 	}
 	
 

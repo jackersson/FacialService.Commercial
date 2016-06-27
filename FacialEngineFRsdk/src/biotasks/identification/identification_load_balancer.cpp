@@ -13,8 +13,8 @@ namespace BioFacialEngine
 			                                                  , configuration_(configuration)
 			                                                  , population_(population)
 	{
-		count = 1;
-		init(count);
+		//count = 1;
+		init(1);
 	}
 
 	void IdentificationLoadBalancer::resize(int count)  {

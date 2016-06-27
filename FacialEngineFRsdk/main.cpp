@@ -19,21 +19,17 @@ using namespace Pipeline;
 
 int main(int argc, char** argv)
 {	
-
 	std::string cfg_path = "C:\\FVSDK_9_1_1\\etc\\frsdk.cfg";
-	std::shared_ptr<FRsdkBiometricProcessor> task(new FRsdkBiometricProcessor(cfg_path));
-
-	//long acquire = FaceFind | PortraitAnalysis | FaceImageExtraction | IsoComplianceTest;// | Enrollment;
-
-	std::string shwarc   = "C:\\Users\\User\\Desktop\\face-201.jpg";
-
+	auto task(std::make_shared<FRsdkBiometricProcessor>(cfg_path));
+	
+	std::string image1 = "C:\\Users\\User\\Desktop\\face-20.jpg";
+	std::string image2 = "C:\\Users\\User\\Desktop\\face-201.jpg";
 
 	BiometricPipelineBalanced pipeline(task);
 	
 	unsigned int start = clock();
-	try
-	{
-		FRsdkEntities::ImageInfoPtr ptr1 = pipeline.acquire(shwarc);
+	try	{
+	   VerificationResultPtr ptr1 = pipeline.verify_face(image1, image2);
 	}
 	catch ( std::exception& ex)
 	{

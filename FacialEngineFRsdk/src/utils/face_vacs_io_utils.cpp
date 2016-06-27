@@ -35,7 +35,7 @@ namespace BioFacialEngine
 		return format;
 	}
 	
-  FaceVacsImage FaceVacsIOUtils::loadFromFile(const std::string& filename)
+  FaceVacsImage FaceVacsIOUtils::loadFromFile(const std::string& filename) const
   {	
   	if (filename.size() < 1)
   		throw std::exception("Filename is not valid");  
@@ -59,7 +59,7 @@ namespace BioFacialEngine
   }
 
   FaceVacsImage FaceVacsIOUtils::loadFromBytes( const std::string& image_bytestring			                                       
-			                                        , BioService::ImageFormat image_format )
+			                                        , BioService::ImageFormat image_format ) const
   {
   	switch (image_format)
   	{
@@ -88,92 +88,48 @@ namespace BioFacialEngine
   	return img;  
   }
 
-	FaceVacsImage FaceVacsIOUtils::loadJpeg(const std::string& image_bytestring, const size_t size)
-  {
-  	try
-  	{
-  		FaceVacsImage img(new FRsdk::Image(FRsdk::Jpeg::load(image_bytestring.c_str(), size)));
-  		return img;
-  	}
-  	catch (std::exception& e)	{
-  		std::cout << e.what() << std::endl;
-  	}
-  
-  	return NULL;
+	FaceVacsImage FaceVacsIOUtils::loadJpeg(const std::string& image_bytestring, const size_t size) const
+  {  	
+  	FaceVacsImage img(new FRsdk::Image(FRsdk::Jpeg::load(image_bytestring.c_str(), size)));
+  	return img;
   }
 
-	FaceVacsImage FaceVacsIOUtils::loadPng(const std::string& filename)
-	{
-		try
-		{
-			FaceVacsImage img(new FRsdk::Image(FRsdk::Png::load(std::string(filename))));
-			return img;
-		}
-		catch (std::exception& e) {
-			std::cout << e.what() << std::endl;
-		}
-
-		return NULL;
+	FaceVacsImage FaceVacsIOUtils::loadPng(const std::string& filename) const
+	{		
+		FaceVacsImage img(new FRsdk::Image(FRsdk::Png::load(std::string(filename))));
+		return img;		
 	}
 
-	FaceVacsImage FaceVacsIOUtils::loadPng(const std::string& image_bytestring, const size_t size)
-	{
-		try
-		{
-			std::stringstream png_stream;
-			png_stream << image_bytestring;
-			FaceVacsImage img(new FRsdk::Image(FRsdk::Png::load(png_stream)));
-			return img;
-		}
-		catch (std::exception& e) {
-			std::cout << e.what() << std::endl;
-		}
-
-		return NULL;
+	FaceVacsImage FaceVacsIOUtils::loadPng(const std::string& image_bytestring, const size_t size) const
+	{	
+		std::stringstream png_stream;
+		png_stream << image_bytestring;
+		FaceVacsImage img(new FRsdk::Image(FRsdk::Png::load(png_stream)));
+		return img;		
 	}
 
-	FaceVacsImage FaceVacsIOUtils::loadBmp(const std::string& filename)
-	{
-		try
-		{
-			FaceVacsImage img(new FRsdk::Image(FRsdk::Bmp::load(std::string(filename))));
-			return img;
-		}
-		catch (std::exception& e) {
-			std::cout << e.what() << std::endl;
-		}
-
-		return NULL;
+	FaceVacsImage FaceVacsIOUtils::loadBmp(const std::string& filename) const
+	{		
+		FaceVacsImage img(new FRsdk::Image(FRsdk::Bmp::load(std::string(filename))));
+		return img;		
 	}
 
-	FaceVacsImage FaceVacsIOUtils::loadBmp(const std::string& image_bytestring, const size_t size)
-	{
-		try
-		{
-			std::stringstream png_stream;
-			png_stream << image_bytestring;
-			FaceVacsImage img(new FRsdk::Image(FRsdk::Bmp::load(png_stream)));
-			return img;
-		}
-		catch (std::exception& e) {
-			std::cout << e.what() << std::endl;
-		}
+	FaceVacsImage FaceVacsIOUtils::loadBmp(const std::string& image_bytestring, const size_t size) const
+	{		
+		std::stringstream bmp_stream;
+		bmp_stream << image_bytestring;
+		FaceVacsImage img(new FRsdk::Image(FRsdk::Bmp::load(bmp_stream)));
+		return img;	
 
-		return NULL;
 	}
-
-		//FaceVacsImage loadJpeg2000(const std::string& filename){}
-		//FaceVacsImage loadBmp     (const std::string& filename){}
-		//FaceVacsImage loadPgm     (const std::string& filename){}
-		//FaceVacsImage loadPng     (const std::string& filename){}
-
-	BioService::ImageFormat FaceVacsIOUtils::getFormat(const std::string& format)
+		
+	BioService::ImageFormat FaceVacsIOUtils::getFormat(const std::string& format) const
 	{
 		auto it = image_formats_.find(format);
 		if (it != image_formats_.end())
 			return (*it).second;
-		else
-			throw std::invalid_argument("Image format is not supported");
+		
+		throw std::invalid_argument("Image format is not supported");
 	}
 	
 

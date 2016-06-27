@@ -29,21 +29,36 @@ namespace Pipeline
 		}
 	};
 
+	
+
 	class BiometricPipelineBalanced : BiometricPipelineAgent
-	{
+	{		
 		struct TaskInfo
 		{
+			TaskInfo( long task, FRsdkEntities::ImageInfoPtr image )
+				      : pair_(task, image) {}
 
-			FRsdkTypes::FaceVacsImage first;
-			long second;
-			long id;
+			FRsdkTypes::FaceVacsImage image( ) const	{
+				return pair_.second->image();
+			}
+
+			long image_id() const {
+				return pair_.second->id();
+			}
+
+			long task() const {
+				return pair_.first;
+			}			
+		
+		private:
+			std::pair<long, FRsdkEntities::ImageInfoPtr> pair_;
 		};
 		//typedef std::pair<FRsdkTypes::FaceVacsImage, long> TaskInfo;
 
 		typedef std::unique_ptr<Concurrency::call<FaceInfoAwaitablePtr >> FaceInfoAwaitableCallPtr  ;
 		typedef std::unique_ptr<Concurrency::call<ImageInfoAwaitablePtr>> ImageInfoAwaitableCallPtr ;
 		typedef Concurrency::unbounded_buffer<FaceInfoAwaitablePtr>   FaceInfoAwaitableBuffer   ;
-
+		
 	
 	public:
 		explicit BiometricPipelineBalanced(IBiometricProcessorPtr pipeline);			                                
@@ -77,18 +92,34 @@ namespace Pipeline
 		             , const std::list<BioContracts::RawImage>& subjects
 							   , bool  fast = false );
 
+		long create_identify_population(const std::list<BioContracts::RawImage>& subjects) const;
+		long create_identify_population(const std::list<std::string>& subjects) const;
+		
+
 		void stop();		
 
 		int GetQueueSize(int queue) const { return queue_sizes[queue]; }
 
 	private:
+
+		BioContracts::VerificationResultPtr verify_face( FRsdkEntities::ImageInfoPtr object
+		                                               , FRsdkEntities::ImageInfoPtr subject
+		                                               , bool fast = false);
+
+		BioContracts::IdentificationResultPtr identify_face( FRsdkEntities::ImageInfoPtr object
+		                                                   , const std::list<FRsdkEntities::ImageInfoPtr>& subjects
+		                                                   , bool fast = false);
+
+		FRsdkEntities::ImageInfoPtr acquire(FRsdkEntities::ImageInfoPtr
+			                                   , long task = FAST_PORTRAIT_ANALYSIS);
+
+		FRsdkEntities::ImageInfoPtr load_image(const std::string& filename) const;
+		FRsdkEntities::ImageInfoPtr load_image(const BioContracts::RawImage& raw_image) const;
+
+		long create_identify_population(const std::list<FRsdkEntities::ImageInfoPtr>& subjects);
+
+		void do_task(FRsdkEntities::ImageInfoPtr image, long task);
 	
-		FRsdkEntities::ImageInfoPtr push_image     (const std::string& filename, long task);
-		FRsdkEntities::ImageInfoPtr push_image     (const BioContracts::RawImage& raw_image, long task);
-
-		FRsdkEntities::ImageInfoPtr process_task   (FRsdkTypes::FaceVacsImage image, long task, long id);
-		FRsdkEntities::ImageInfoPtr push_task      (TaskInfo work_item);
-
 
 		PipelineGovernor governor_;
 
@@ -114,6 +145,8 @@ namespace Pipeline
 
 		static const  unsigned int MAX_PIPELINE_SLOT_COUNT = 25;
 		static const  unsigned int MAX_ENROLMENT_BRANCHES_COUNT = 3;
+
+		static sitmo::prng_engine randomizer_;
 
 		
 	};

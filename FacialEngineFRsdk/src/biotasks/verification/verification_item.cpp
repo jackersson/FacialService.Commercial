@@ -11,6 +11,7 @@ namespace BioFacialEngine
 		                                , VerificationLoadBalancerPtr load_balancer)
 																		: load_balancer_(load_balancer)
 		                                , counter_(0)
+		                                , matches_(0)
 	{
 		parallel_for_each(object->cbegin(), object->cend(),
 			[&](FRsdkEntities::FaceInfoPtr face){
