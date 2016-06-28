@@ -17,9 +17,9 @@ namespace BioGrpc
 	{
 	public:
 	
-		BioService::FaceSearchResult* get_face_search_result( BioContracts::IdentificationResultPtr identification_result)
+		BioService::FaceSearchResponse* get_face_search_result( BioContracts::IdentificationResultPtr identification_result)
 		{
-			BioService::FaceSearchResult* result = new BioService::FaceSearchResult();
+			BioService::FaceSearchResponse* result = new BioService::FaceSearchResponse();
 	
 			Concurrency::parallel_invoke(
 			[&]()	{
@@ -37,9 +37,9 @@ namespace BioGrpc
 			return result;
 		}
 
-		BioService::FaceSearchResult* get_face_search_result( BioContracts::VerificationResultPtr verification_result)
+		BioService::FaceSearchResponse* get_face_search_result( BioContracts::VerificationResultPtr verification_result)
 		{
-			BioService::FaceSearchResult* result = new BioService::FaceSearchResult();
+			BioService::FaceSearchResponse* result = new BioService::FaceSearchResponse();
 			BioService::PortraitCharacteristic* target = result->add_portraits();
 			BioService::PortraitCharacteristic* compare = result->add_portraits();
 			Concurrency::parallel_invoke(
@@ -54,7 +54,7 @@ namespace BioGrpc
 			return result;
 		}
 
-		void update_face_search_result(BioService::FaceSearchResult& proto, const BioContracts::Matches& mchs)
+		void update_face_search_result(BioService::FaceSearchResponse& proto, const BioContracts::Matches& mchs)
 		{
 			for (auto it = mchs.cbegin(); it != mchs.cend(); ++it)
 			{

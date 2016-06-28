@@ -27,6 +27,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ObjectResponse_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ObjectResponse_reflection_ = NULL;
+const ::google::protobuf::Descriptor* AcquisitionResponse_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  AcquisitionResponse_reflection_ = NULL;
 const ::google::protobuf::Descriptor* RawIndexes_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   RawIndexes_reflection_ = NULL;
@@ -151,9 +154,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* Matches_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Matches_reflection_ = NULL;
-const ::google::protobuf::Descriptor* FaceSearchException_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* FaceSearchResponse_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  FaceSearchException_reflection_ = NULL;
+  FaceSearchResponse_reflection_ = NULL;
 const ::google::protobuf::Descriptor* AcquiredData_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   AcquiredData_reflection_ = NULL;
@@ -239,7 +242,23 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(ObjectResponse),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectResponse, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectResponse, _is_default_instance_));
-  RawIndexes_descriptor_ = file->message_type(2);
+  AcquisitionResponse_descriptor_ = file->message_type(2);
+  static const int AcquisitionResponse_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcquisitionResponse, portrait_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcquisitionResponse, exception_),
+  };
+  AcquisitionResponse_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      AcquisitionResponse_descriptor_,
+      AcquisitionResponse::default_instance_,
+      AcquisitionResponse_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(AcquisitionResponse),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcquisitionResponse, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcquisitionResponse, _is_default_instance_));
+  RawIndexes_descriptor_ = file->message_type(3);
   static const int RawIndexes_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RawIndexes, indexes_),
   };
@@ -254,7 +273,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(RawIndexes),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RawIndexes, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RawIndexes, _is_default_instance_));
-  Criminal_descriptor_ = file->message_type(3);
+  Criminal_descriptor_ = file->message_type(4);
   static const int Criminal_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Criminal, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Criminal, description_),
@@ -271,7 +290,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(Criminal),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Criminal, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Criminal, _is_default_instance_));
-  FullVisitorData_descriptor_ = file->message_type(4);
+  FullVisitorData_descriptor_ = file->message_type(5);
   static const int FullVisitorData_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FullVisitorData, visitor_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FullVisitorData, face_),
@@ -288,7 +307,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(FullVisitorData),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FullVisitorData, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FullVisitorData, _is_default_instance_));
-  Person_descriptor_ = file->message_type(5);
+  Person_descriptor_ = file->message_type(6);
   static const int Person_offsets_[19] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person, firstname_),
@@ -321,7 +340,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(Person),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person, _is_default_instance_));
-  AccessDevice_descriptor_ = file->message_type(6);
+  AccessDevice_descriptor_ = file->message_type(7);
   static const int AccessDevice_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AccessDevice, portname_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AccessDevice, exception_),
@@ -338,7 +357,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(AccessDevice),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AccessDevice, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AccessDevice, _is_default_instance_));
-  CaptureDevice_descriptor_ = file->message_type(7);
+  CaptureDevice_descriptor_ = file->message_type(8);
   static const int CaptureDevice_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CaptureDevice, devicename_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CaptureDevice, exception_),
@@ -355,7 +374,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(CaptureDevice),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CaptureDevice, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CaptureDevice, _is_default_instance_));
-  FingerprintDevice_descriptor_ = file->message_type(8);
+  FingerprintDevice_descriptor_ = file->message_type(9);
   static const int FingerprintDevice_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintDevice, devicename_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintDevice, serial_number_),
@@ -373,7 +392,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(FingerprintDevice),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintDevice, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintDevice, _is_default_instance_));
-  IrisDevice_descriptor_ = file->message_type(9);
+  IrisDevice_descriptor_ = file->message_type(10);
   static const int IrisDevice_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IrisDevice, devicename_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IrisDevice, serial_number_),
@@ -391,7 +410,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(IrisDevice),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IrisDevice, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IrisDevice, _is_default_instance_));
-  Card_descriptor_ = file->message_type(10);
+  Card_descriptor_ = file->message_type(11);
   static const int Card_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Card, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Card, personid_),
@@ -410,7 +429,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(Card),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Card, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Card, _is_default_instance_));
-  Location_descriptor_ = file->message_type(11);
+  Location_descriptor_ = file->message_type(12);
   static const int Location_offsets_[11] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Location, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Location, location_name_),
@@ -435,7 +454,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(Location),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Location, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Location, _is_default_instance_));
-  AccessInfo_descriptor_ = file->message_type(12);
+  AccessInfo_descriptor_ = file->message_type(13);
   static const int AccessInfo_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AccessInfo, access_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AccessInfo, persons_),
@@ -454,7 +473,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AccessInfo, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AccessInfo, _is_default_instance_));
   AccessInfo_AccessType_descriptor_ = AccessInfo_descriptor_->enum_type(0);
-  LogRecord_descriptor_ = file->message_type(13);
+  LogRecord_descriptor_ = file->message_type(14);
   static const int LogRecord_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LogRecord, message_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LogRecord, detected_time_),
@@ -475,7 +494,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(LogRecord),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LogRecord, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LogRecord, _is_default_instance_));
-  ConfidentPosition_descriptor_ = file->message_type(14);
+  ConfidentPosition_descriptor_ = file->message_type(15);
   static const int ConfidentPosition_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfidentPosition, xpos_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfidentPosition, ypos_),
@@ -494,7 +513,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(ConfidentPosition),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfidentPosition, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfidentPosition, _is_default_instance_));
-  EyesCharacteristic_descriptor_ = file->message_type(15);
+  EyesCharacteristic_descriptor_ = file->message_type(16);
   static const int EyesCharacteristic_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EyesCharacteristic, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EyesCharacteristic, left_eye_),
@@ -513,7 +532,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(EyesCharacteristic),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EyesCharacteristic, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EyesCharacteristic, _is_default_instance_));
-  PortraitCharacteristic_descriptor_ = file->message_type(16);
+  PortraitCharacteristic_descriptor_ = file->message_type(17);
   static const int PortraitCharacteristic_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PortraitCharacteristic, faces_),
   };
@@ -528,7 +547,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(PortraitCharacteristic),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PortraitCharacteristic, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PortraitCharacteristic, _is_default_instance_));
-  FaceCharacteristic_descriptor_ = file->message_type(17);
+  FaceCharacteristic_descriptor_ = file->message_type(18);
   static const int FaceCharacteristic_offsets_[26] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceCharacteristic, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceCharacteristic, box_),
@@ -568,7 +587,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(FaceCharacteristic),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceCharacteristic, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceCharacteristic, _is_default_instance_));
-  Position_descriptor_ = file->message_type(18);
+  Position_descriptor_ = file->message_type(19);
   static const int Position_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Position, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Position, y_),
@@ -584,7 +603,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(Position),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Position, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Position, _is_default_instance_));
-  SurroundingBox_descriptor_ = file->message_type(19);
+  SurroundingBox_descriptor_ = file->message_type(20);
   static const int SurroundingBox_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SurroundingBox, begin_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SurroundingBox, end_),
@@ -600,7 +619,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(SurroundingBox),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SurroundingBox, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SurroundingBox, _is_default_instance_));
-  DetailedEyeCharacteristic_descriptor_ = file->message_type(20);
+  DetailedEyeCharacteristic_descriptor_ = file->message_type(21);
   static const int DetailedEyeCharacteristic_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DetailedEyeCharacteristic, position_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DetailedEyeCharacteristic, is_open_),
@@ -620,7 +639,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(DetailedEyeCharacteristic),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DetailedEyeCharacteristic, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DetailedEyeCharacteristic, _is_default_instance_));
-  FingerprintCharacteristic_descriptor_ = file->message_type(21);
+  FingerprintCharacteristic_descriptor_ = file->message_type(22);
   static const int FingerprintCharacteristic_offsets_[8] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintCharacteristic, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintCharacteristic, position_),
@@ -642,7 +661,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(FingerprintCharacteristic),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintCharacteristic, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintCharacteristic, _is_default_instance_));
-  BioIdentificationRecord_descriptor_ = file->message_type(22);
+  BioIdentificationRecord_descriptor_ = file->message_type(23);
   static const int BioIdentificationRecord_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioIdentificationRecord, bir_url_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioIdentificationRecord, bir_bytestring_),
@@ -658,7 +677,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(BioIdentificationRecord),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioIdentificationRecord, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioIdentificationRecord, _is_default_instance_));
-  BioFingerprintData_descriptor_ = file->message_type(23);
+  BioFingerprintData_descriptor_ = file->message_type(24);
   static const int BioFingerprintData_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioFingerprintData, characteristics_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioFingerprintData, biometric_record_),
@@ -674,7 +693,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(BioFingerprintData),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioFingerprintData, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioFingerprintData, _is_default_instance_));
-  BioPersonData_descriptor_ = file->message_type(24);
+  BioPersonData_descriptor_ = file->message_type(25);
   static const int BioPersonData_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioPersonData, person_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioPersonData, faces_),
@@ -691,7 +710,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(BioPersonData),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioPersonData, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioPersonData, _is_default_instance_));
-  BiometricData_descriptor_ = file->message_type(25);
+  BiometricData_descriptor_ = file->message_type(26);
   static const int BiometricData_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BiometricData, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BiometricData, faces_),
@@ -708,7 +727,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(BiometricData),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BiometricData, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BiometricData, _is_default_instance_));
-  FacialImage_descriptor_ = file->message_type(26);
+  FacialImage_descriptor_ = file->message_type(27);
   static const int FacialImage_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FacialImage, owner_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FacialImage, image_),
@@ -728,7 +747,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(FacialImage),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FacialImage, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FacialImage, _is_default_instance_));
-  DatabaseFacialImageResponse_descriptor_ = file->message_type(27);
+  DatabaseFacialImageResponse_descriptor_ = file->message_type(28);
   static const int DatabaseFacialImageResponse_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DatabaseFacialImageResponse, faces_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DatabaseFacialImageResponse, image_),
@@ -746,7 +765,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(DatabaseFacialImageResponse),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DatabaseFacialImageResponse, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DatabaseFacialImageResponse, _is_default_instance_));
-  FingerprintImage_descriptor_ = file->message_type(28);
+  FingerprintImage_descriptor_ = file->message_type(29);
   static const int FingerprintImage_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintImage, owner_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintImage, image_),
@@ -766,7 +785,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(FingerprintImage),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintImage, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintImage, _is_default_instance_));
-  DatabaseFingerprintImageResponse_descriptor_ = file->message_type(29);
+  DatabaseFingerprintImageResponse_descriptor_ = file->message_type(30);
   static const int DatabaseFingerprintImageResponse_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DatabaseFingerprintImageResponse, fingerprint_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DatabaseFingerprintImageResponse, image_),
@@ -784,7 +803,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(DatabaseFingerprintImageResponse),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DatabaseFingerprintImageResponse, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DatabaseFingerprintImageResponse, _is_default_instance_));
-  Photo_descriptor_ = file->message_type(30);
+  Photo_descriptor_ = file->message_type(31);
   static const int Photo_offsets_[10] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Photo, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Photo, datetime_),
@@ -808,7 +827,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(Photo),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Photo, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Photo, _is_default_instance_));
-  Visitor_descriptor_ = file->message_type(31);
+  Visitor_descriptor_ = file->message_type(32);
   static const int Visitor_offsets_[9] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Visitor, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Visitor, personid_),
@@ -831,7 +850,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(Visitor),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Visitor, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Visitor, _is_default_instance_));
-  VisitorList_descriptor_ = file->message_type(32);
+  VisitorList_descriptor_ = file->message_type(33);
   static const int VisitorList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VisitorList, visitors_),
   };
@@ -846,7 +865,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(VisitorList),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VisitorList, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VisitorList, _is_default_instance_));
-  LocationList_descriptor_ = file->message_type(33);
+  LocationList_descriptor_ = file->message_type(34);
   static const int LocationList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LocationList, locations_),
   };
@@ -861,7 +880,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(LocationList),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LocationList, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LocationList, _is_default_instance_));
-  PersonList_descriptor_ = file->message_type(34);
+  PersonList_descriptor_ = file->message_type(35);
   static const int PersonList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PersonList, persons_),
   };
@@ -876,7 +895,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(PersonList),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PersonList, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PersonList, _is_default_instance_));
-  PhotoList_descriptor_ = file->message_type(35);
+  PhotoList_descriptor_ = file->message_type(36);
   static const int PhotoList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PhotoList, photos_),
   };
@@ -891,7 +910,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(PhotoList),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PhotoList, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PhotoList, _is_default_instance_));
-  CardList_descriptor_ = file->message_type(36);
+  CardList_descriptor_ = file->message_type(37);
   static const int CardList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CardList, cards_),
   };
@@ -906,7 +925,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(CardList),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CardList, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CardList, _is_default_instance_));
-  BiometricDataList_descriptor_ = file->message_type(37);
+  BiometricDataList_descriptor_ = file->message_type(38);
   static const int BiometricDataList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BiometricDataList, data_),
   };
@@ -921,7 +940,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(BiometricDataList),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BiometricDataList, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BiometricDataList, _is_default_instance_));
-  Response_descriptor_ = file->message_type(38);
+  Response_descriptor_ = file->message_type(39);
   static const int Response_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Response, good_),
   };
@@ -936,7 +955,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(Response),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Response, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Response, _is_default_instance_));
-  VerificationData_descriptor_ = file->message_type(39);
+  VerificationData_descriptor_ = file->message_type(40);
   static const int VerificationData_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationData, target_image_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationData, comparison_image_),
@@ -952,7 +971,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(VerificationData),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationData, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationData, _is_default_instance_));
-  IdentificationData_descriptor_ = file->message_type(40);
+  IdentificationData_descriptor_ = file->message_type(41);
   static const int IdentificationData_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IdentificationData, target_image_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IdentificationData, population_id_),
@@ -969,7 +988,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(IdentificationData),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IdentificationData, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(IdentificationData, _is_default_instance_));
-  Match_descriptor_ = file->message_type(41);
+  Match_descriptor_ = file->message_type(42);
   static const int Match_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Match, face_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Match, match_),
@@ -985,7 +1004,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(Match),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Match, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Match, _is_default_instance_));
-  Matches_descriptor_ = file->message_type(42);
+  Matches_descriptor_ = file->message_type(43);
   static const int Matches_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Matches, face_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Matches, matches_),
@@ -1001,25 +1020,25 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(Matches),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Matches, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Matches, _is_default_instance_));
-  FaceSearchException_descriptor_ = file->message_type(43);
-  static const int FaceSearchException_offsets_[4] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchException, portraits_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchException, matches_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchException, message_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchException, exception_),
+  FaceSearchResponse_descriptor_ = file->message_type(44);
+  static const int FaceSearchResponse_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchResponse, portraits_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchResponse, matches_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchResponse, message_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchResponse, exception_),
   };
-  FaceSearchException_reflection_ =
+  FaceSearchResponse_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      FaceSearchException_descriptor_,
-      FaceSearchException::default_instance_,
-      FaceSearchException_offsets_,
+      FaceSearchResponse_descriptor_,
+      FaceSearchResponse::default_instance_,
+      FaceSearchResponse_offsets_,
       -1,
       -1,
       -1,
-      sizeof(FaceSearchException),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchException, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchException, _is_default_instance_));
-  AcquiredData_descriptor_ = file->message_type(44);
+      sizeof(FaceSearchResponse),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchResponse, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FaceSearchResponse, _is_default_instance_));
+  AcquiredData_descriptor_ = file->message_type(45);
   static const int AcquiredData_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcquiredData, image_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcquiredData, owner_id_),
@@ -1035,7 +1054,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(AcquiredData),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcquiredData, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcquiredData, _is_default_instance_));
-  FingerprintAcquiredData_descriptor_ = file->message_type(45);
+  FingerprintAcquiredData_descriptor_ = file->message_type(46);
   static const int FingerprintAcquiredData_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintAcquiredData, data_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintAcquiredData, position_),
@@ -1051,7 +1070,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(FingerprintAcquiredData),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintAcquiredData, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FingerprintAcquiredData, _is_default_instance_));
-  EnrollmentFeedback_descriptor_ = file->message_type(46);
+  EnrollmentFeedback_descriptor_ = file->message_type(47);
   static const int EnrollmentFeedback_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EnrollmentFeedback, characteristic_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EnrollmentFeedback, photo_id_),
@@ -1071,7 +1090,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(EnrollmentFeedback),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EnrollmentFeedback, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EnrollmentFeedback, _is_default_instance_));
-  VerificationFeedback_descriptor_ = file->message_type(47);
+  VerificationFeedback_descriptor_ = file->message_type(48);
   static const int VerificationFeedback_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationFeedback, enrollment_feedback_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationFeedback, match_),
@@ -1087,7 +1106,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(VerificationFeedback),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationFeedback, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VerificationFeedback, _is_default_instance_));
-  QueryPhoto_descriptor_ = file->message_type(48);
+  QueryPhoto_descriptor_ = file->message_type(49);
   static const int QueryPhoto_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPhoto, with_bytes_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPhoto, persons_),
@@ -1106,7 +1125,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPhoto, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPhoto, _is_default_instance_));
   QueryPhoto_PhotoResponseType_descriptor_ = QueryPhoto_descriptor_->enum_type(0);
-  QueryPersons_descriptor_ = file->message_type(49);
+  QueryPersons_descriptor_ = file->message_type(50);
   static const int QueryPersons_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPersons, count_),
   };
@@ -1121,7 +1140,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(QueryPersons),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPersons, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryPersons, _is_default_instance_));
-  QueryLocations_descriptor_ = file->message_type(50);
+  QueryLocations_descriptor_ = file->message_type(51);
   static const int QueryLocations_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryLocations, count_),
   };
@@ -1136,7 +1155,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(QueryLocations),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryLocations, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryLocations, _is_default_instance_));
-  QueryVisitors_descriptor_ = file->message_type(51);
+  QueryVisitors_descriptor_ = file->message_type(52);
   static const int QueryVisitors_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryVisitors, countries_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryVisitors, locations_),
@@ -1156,7 +1175,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(QueryVisitors),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryVisitors, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(QueryVisitors, _is_default_instance_));
-  SocketConfiguration_descriptor_ = file->message_type(52);
+  SocketConfiguration_descriptor_ = file->message_type(53);
   static const int SocketConfiguration_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SocketConfiguration, address_),
   };
@@ -1171,7 +1190,7 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
       sizeof(SocketConfiguration),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SocketConfiguration, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SocketConfiguration, _is_default_instance_));
-  BioClient_descriptor_ = file->message_type(53);
+  BioClient_descriptor_ = file->message_type(54);
   static const int BioClient_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioClient, ip_address_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BioClient, port_number_),
@@ -1215,6 +1234,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
       Exception_descriptor_, &Exception::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       ObjectResponse_descriptor_, &ObjectResponse::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      AcquisitionResponse_descriptor_, &AcquisitionResponse::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       RawIndexes_descriptor_, &RawIndexes::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -1298,7 +1319,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       Matches_descriptor_, &Matches::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      FaceSearchException_descriptor_, &FaceSearchException::default_instance());
+      FaceSearchResponse_descriptor_, &FaceSearchResponse::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       AcquiredData_descriptor_, &AcquiredData::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -1328,6 +1349,8 @@ void protobuf_ShutdownFile_bio_5fservice_2eproto() {
   delete Exception_reflection_;
   delete ObjectResponse::default_instance_;
   delete ObjectResponse_reflection_;
+  delete AcquisitionResponse::default_instance_;
+  delete AcquisitionResponse_reflection_;
   delete RawIndexes::default_instance_;
   delete RawIndexes_reflection_;
   delete Criminal::default_instance_;
@@ -1410,8 +1433,8 @@ void protobuf_ShutdownFile_bio_5fservice_2eproto() {
   delete Match_reflection_;
   delete Matches::default_instance_;
   delete Matches_reflection_;
-  delete FaceSearchException::default_instance_;
-  delete FaceSearchException_reflection_;
+  delete FaceSearchResponse::default_instance_;
+  delete FaceSearchResponse_reflection_;
   delete AcquiredData::default_instance_;
   delete AcquiredData_reflection_;
   delete FingerprintAcquiredData::default_instance_;
@@ -1445,305 +1468,309 @@ void protobuf_AddDesc_bio_5fservice_2eproto() {
     "tion\022\r\n\005is_ok\030\001 \001(\010\022\020\n\010error_id\030\002 \001(\003\022\017\n"
     "\007message\030\003 \001(\t\"F\n\016ObjectResponse\022\n\n\002id\030\001"
     " \001(\003\022(\n\texception\030\002 \001(\0132\025.BioService.Exc"
-    "eption\"\035\n\nRawIndexes\022\017\n\007indexes\030\001 \003(\003\":\n"
-    "\010Criminal\022\n\n\002id\030\001 \001(\003\022\023\n\013description\030\002 \001"
-    "(\t\022\r\n\005alert\030\003 \001(\t\"\221\001\n\017FullVisitorData\022$\n"
-    "\007visitor\030\001 \001(\0132\023.BioService.Visitor\022%\n\004f"
-    "ace\030\002 \001(\0132\027.BioService.FacialImage\0221\n\013fi"
-    "ngerprint\030\003 \001(\0132\034.BioService.Fingerprint"
-    "Image\"\261\004\n\006Person\022\n\n\002id\030\001 \001(\003\022\021\n\tfirstnam"
-    "e\030\002 \001(\t\022\020\n\010lastname\030\003 \001(\t\022\023\n\013dateofbirth"
-    "\030\004 \001(\003\022\"\n\006gender\030\005 \001(\0162\022.BioService.Gend"
-    "er\022\017\n\007country\030\006 \001(\t\022\014\n\004city\030\007 \001(\t\022\020\n\010com"
-    "ments\030\010 \001(\t\022\"\n\006rights\030\t \001(\0162\022.BioService"
-    ".Rights\022\r\n\005email\030\n \001(\t\022\023\n\013thumbnailid\030\013 "
-    "\001(\003\022&\n\010criminal\030\014 \001(\0132\024.BioService.Crimi"
-    "nal\022;\n\014fingerprints\030\r \003(\0132%.BioService.F"
-    "ingerprintCharacteristic\022\037\n\005cards\030\016 \003(\0132"
-    "\020.BioService.Card\022!\n\006photos\030\017 \003(\0132\021.BioS"
-    "ervice.Photo\0221\n\016biometric_data\030\020 \001(\0132\031.B"
-    "ioService.BiometricData\022-\n\014entity_state\030"
-    "\021 \001(\0162\027.BioService.EntityState\022(\n\texcept"
-    "ion\030\022 \001(\0132\025.BioService.Exception\022\017\n\007mess"
-    "age\030\023 \001(\t\"y\n\014AccessDevice\022\020\n\010portname\030\001 "
-    "\001(\t\022(\n\texception\030\002 \001(\0132\025.BioService.Exce"
-    "ption\022-\n\014entity_state\030\003 \001(\0162\027.BioService"
-    ".EntityState\"|\n\rCaptureDevice\022\022\n\ndevicen"
-    "ame\030\001 \001(\t\022(\n\texception\030\002 \001(\0132\025.BioServic"
-    "e.Exception\022-\n\014entity_state\030\003 \001(\0162\027.BioS"
-    "ervice.EntityState\"\227\001\n\021FingerprintDevice"
-    "\022\022\n\ndevicename\030\001 \001(\t\022\025\n\rserial_number\030\002 "
-    "\001(\t\022(\n\texception\030\003 \001(\0132\025.BioService.Exce"
-    "ption\022-\n\014entity_state\030\004 \001(\0162\027.BioService"
-    ".EntityState\"\220\001\n\nIrisDevice\022\022\n\ndevicenam"
-    "e\030\001 \001(\t\022\025\n\rserial_number\030\002 \001(\t\022(\n\texcept"
-    "ion\030\003 \001(\0132\025.BioService.Exception\022-\n\014enti"
-    "ty_state\030\004 \001(\0162\027.BioService.EntityState\""
-    "\224\001\n\004Card\022\n\n\002id\030\001 \001(\003\022\020\n\010personid\030\002 \001(\003\022\025"
-    "\n\runique_number\030\003 \001(\t\022-\n\014entity_state\030\004 "
-    "\001(\0162\027.BioService.EntityState\022(\n\texceptio"
-    "n\030\005 \001(\0132\025.BioService.Exception\"\245\003\n\010Locat"
-    "ion\022\n\n\002id\030\001 \001(\003\022\025\n\rlocation_name\030\002 \001(\t\022\023"
-    "\n\013description\030\003 \001(\t\022\023\n\013mac_address\030\004 \001(\t"
-    "\0220\n\rcaptureDevice\030\005 \001(\0132\031.BioService.Cap"
-    "tureDevice\022.\n\014accessDevice\030\006 \001(\0132\030.BioSe"
-    "rvice.AccessDevice\0228\n\021fingerprintDevice\030"
-    "\007 \001(\0132\035.BioService.FingerprintDevice\022*\n\n"
-    "irisDevice\030\010 \001(\0132\026.BioService.IrisDevice"
-    "\022+\n\013access_info\030\t \001(\0132\026.BioService.Acces"
-    "sInfo\022-\n\014entity_state\030\n \001(\0162\027.BioService"
-    ".EntityState\022(\n\texception\030\013 \001(\0132\025.BioSer"
-    "vice.Exception\"\357\001\n\nAccessInfo\0226\n\013access_"
-    "type\030\001 \001(\0162!.BioService.AccessInfo.Acces"
-    "sType\022#\n\007persons\030\002 \003(\0132\022.BioService.Pers"
-    "on\022-\n\014entity_state\030\003 \001(\0162\027.BioService.En"
-    "tityState\022(\n\texception\030\004 \001(\0132\025.BioServic"
-    "e.Exception\"+\n\nAccessType\022\010\n\004None\020\000\022\007\n\003A"
-    "ll\020\001\022\n\n\006Custom\020\002\"\275\001\n\tLogRecord\022-\n\014messag"
-    "e_type\030\001 \001(\0162\027.BioService.MessageType\022\025\n"
-    "\rdetected_time\030\002 \001(\003\022\031\n\021exception_messag"
-    "e\030\003 \001(\t\022\022\n\nclass_name\030\004 \001(\t\022\025\n\rfunction_"
-    "name\030\005 \001(\t\022\023\n\013line_number\030\006 \001(\003\022\017\n\007comme"
-    "nt\030\007 \001(\t\"\234\001\n\021ConfidentPosition\022\014\n\004xpos\030\001"
-    " \001(\002\022\014\n\004ypos\030\002 \001(\002\022\022\n\nconfidence\030\003 \001(\002\022-"
-    "\n\014entity_state\030\004 \001(\0162\027.BioService.Entity"
-    "State\022(\n\texception\030\005 \001(\0132\025.BioService.Ex"
-    "ception\"\354\001\n\022EyesCharacteristic\022\n\n\002id\030\001 \001"
-    "(\003\0227\n\010left_eye\030\002 \001(\0132%.BioService.Detail"
-    "edEyeCharacteristic\0228\n\tright_eye\030\003 \001(\0132%"
-    ".BioService.DetailedEyeCharacteristic\022-\n"
+    "eption\"u\n\023AcquisitionResponse\0224\n\010portrai"
+    "t\030\001 \001(\0132\".BioService.PortraitCharacteris"
+    "tic\022(\n\texception\030\002 \001(\0132\025.BioService.Exce"
+    "ption\"\035\n\nRawIndexes\022\017\n\007indexes\030\001 \003(\003\":\n\010"
+    "Criminal\022\n\n\002id\030\001 \001(\003\022\023\n\013description\030\002 \001("
+    "\t\022\r\n\005alert\030\003 \001(\t\"\221\001\n\017FullVisitorData\022$\n\007"
+    "visitor\030\001 \001(\0132\023.BioService.Visitor\022%\n\004fa"
+    "ce\030\002 \001(\0132\027.BioService.FacialImage\0221\n\013fin"
+    "gerprint\030\003 \001(\0132\034.BioService.FingerprintI"
+    "mage\"\261\004\n\006Person\022\n\n\002id\030\001 \001(\003\022\021\n\tfirstname"
+    "\030\002 \001(\t\022\020\n\010lastname\030\003 \001(\t\022\023\n\013dateofbirth\030"
+    "\004 \001(\003\022\"\n\006gender\030\005 \001(\0162\022.BioService.Gende"
+    "r\022\017\n\007country\030\006 \001(\t\022\014\n\004city\030\007 \001(\t\022\020\n\010comm"
+    "ents\030\010 \001(\t\022\"\n\006rights\030\t \001(\0162\022.BioService."
+    "Rights\022\r\n\005email\030\n \001(\t\022\023\n\013thumbnailid\030\013 \001"
+    "(\003\022&\n\010criminal\030\014 \001(\0132\024.BioService.Crimin"
+    "al\022;\n\014fingerprints\030\r \003(\0132%.BioService.Fi"
+    "ngerprintCharacteristic\022\037\n\005cards\030\016 \003(\0132\020"
+    ".BioService.Card\022!\n\006photos\030\017 \003(\0132\021.BioSe"
+    "rvice.Photo\0221\n\016biometric_data\030\020 \001(\0132\031.Bi"
+    "oService.BiometricData\022-\n\014entity_state\030\021"
+    " \001(\0162\027.BioService.EntityState\022(\n\texcepti"
+    "on\030\022 \001(\0132\025.BioService.Exception\022\017\n\007messa"
+    "ge\030\023 \001(\t\"y\n\014AccessDevice\022\020\n\010portname\030\001 \001"
+    "(\t\022(\n\texception\030\002 \001(\0132\025.BioService.Excep"
+    "tion\022-\n\014entity_state\030\003 \001(\0162\027.BioService."
+    "EntityState\"|\n\rCaptureDevice\022\022\n\ndevicena"
+    "me\030\001 \001(\t\022(\n\texception\030\002 \001(\0132\025.BioService"
+    ".Exception\022-\n\014entity_state\030\003 \001(\0162\027.BioSe"
+    "rvice.EntityState\"\227\001\n\021FingerprintDevice\022"
+    "\022\n\ndevicename\030\001 \001(\t\022\025\n\rserial_number\030\002 \001"
+    "(\t\022(\n\texception\030\003 \001(\0132\025.BioService.Excep"
+    "tion\022-\n\014entity_state\030\004 \001(\0162\027.BioService."
+    "EntityState\"\220\001\n\nIrisDevice\022\022\n\ndevicename"
+    "\030\001 \001(\t\022\025\n\rserial_number\030\002 \001(\t\022(\n\texcepti"
+    "on\030\003 \001(\0132\025.BioService.Exception\022-\n\014entit"
+    "y_state\030\004 \001(\0162\027.BioService.EntityState\"\224"
+    "\001\n\004Card\022\n\n\002id\030\001 \001(\003\022\020\n\010personid\030\002 \001(\003\022\025\n"
+    "\runique_number\030\003 \001(\t\022-\n\014entity_state\030\004 \001"
+    "(\0162\027.BioService.EntityState\022(\n\texception"
+    "\030\005 \001(\0132\025.BioService.Exception\"\245\003\n\010Locati"
+    "on\022\n\n\002id\030\001 \001(\003\022\025\n\rlocation_name\030\002 \001(\t\022\023\n"
+    "\013description\030\003 \001(\t\022\023\n\013mac_address\030\004 \001(\t\022"
+    "0\n\rcaptureDevice\030\005 \001(\0132\031.BioService.Capt"
+    "ureDevice\022.\n\014accessDevice\030\006 \001(\0132\030.BioSer"
+    "vice.AccessDevice\0228\n\021fingerprintDevice\030\007"
+    " \001(\0132\035.BioService.FingerprintDevice\022*\n\ni"
+    "risDevice\030\010 \001(\0132\026.BioService.IrisDevice\022"
+    "+\n\013access_info\030\t \001(\0132\026.BioService.Access"
+    "Info\022-\n\014entity_state\030\n \001(\0162\027.BioService."
+    "EntityState\022(\n\texception\030\013 \001(\0132\025.BioServ"
+    "ice.Exception\"\357\001\n\nAccessInfo\0226\n\013access_t"
+    "ype\030\001 \001(\0162!.BioService.AccessInfo.Access"
+    "Type\022#\n\007persons\030\002 \003(\0132\022.BioService.Perso"
+    "n\022-\n\014entity_state\030\003 \001(\0162\027.BioService.Ent"
+    "ityState\022(\n\texception\030\004 \001(\0132\025.BioService"
+    ".Exception\"+\n\nAccessType\022\010\n\004None\020\000\022\007\n\003Al"
+    "l\020\001\022\n\n\006Custom\020\002\"\275\001\n\tLogRecord\022-\n\014message"
+    "_type\030\001 \001(\0162\027.BioService.MessageType\022\025\n\r"
+    "detected_time\030\002 \001(\003\022\031\n\021exception_message"
+    "\030\003 \001(\t\022\022\n\nclass_name\030\004 \001(\t\022\025\n\rfunction_n"
+    "ame\030\005 \001(\t\022\023\n\013line_number\030\006 \001(\003\022\017\n\007commen"
+    "t\030\007 \001(\t\"\234\001\n\021ConfidentPosition\022\014\n\004xpos\030\001 "
+    "\001(\002\022\014\n\004ypos\030\002 \001(\002\022\022\n\nconfidence\030\003 \001(\002\022-\n"
     "\014entity_state\030\004 \001(\0162\027.BioService.EntityS"
     "tate\022(\n\texception\030\005 \001(\0132\025.BioService.Exc"
-    "eption\"G\n\026PortraitCharacteristic\022-\n\005face"
-    "s\030\001 \003(\0132\036.BioService.FaceCharacteristic\""
-    "\251\005\n\022FaceCharacteristic\022\n\n\002id\030\001 \001(\003\022\'\n\003bo"
-    "x\030\002 \001(\0132\032.BioService.SurroundingBox\022\024\n\014e"
-    "ye_distance\030\003 \001(\002\022)\n\013face_center\030\004 \001(\0132\024"
-    ".BioService.Position\022\017\n\007glasses\030\005 \001(\002\022\032\n"
-    "\022natural_skin_color\030\006 \001(\002\022\022\n\nhead_width\030"
-    "\007 \001(\002\022\023\n\013head_length\030\010 \001(\002\022\027\n\017pose_angle"
-    "_roll\030\t \001(\002\022\014\n\004chin\030\n \001(\002\022\r\n\005crown\030\013 \001(\002"
-    "\022\020\n\010left_ear\030\014 \001(\002\022\021\n\trigth_ear\030\r \001(\002\022\022\n"
-    "\nconfidence\030\016 \001(\002\022\024\n\014mouth_closed\030\017 \001(\002\022"
-    ")\n\nethnithity\030\020 \001(\0162\025.BioService.Ethnici"
-    "ty\022\013\n\003age\030\021 \001(\017\022\"\n\006gender\030\022 \001(\0162\022.BioSer"
-    "vice.Gender\022,\n\004eyes\030\023 \001(\0132\036.BioService.E"
-    "yesCharacteristic\022\026\n\016compliance_iso\030\024 \001("
-    "\005\022\014\n\004good\030\025 \001(\010\022\026\n\016best_practices\030\026 \001(\010\022"
-    "\020\n\010personid\030\027 \001(\003\022\017\n\007photoid\030\030 \001(\003\022-\n\014en"
-    "tity_state\030\031 \001(\0162\027.BioService.EntityStat"
-    "e\022(\n\texception\030\032 \001(\0132\025.BioService.Except"
-    "ion\" \n\010Position\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"X\n"
-    "\016SurroundingBox\022#\n\005begin\030\001 \001(\0132\024.BioServ"
-    "ice.Position\022!\n\003end\030\002 \001(\0132\024.BioService.P"
-    "osition\"\243\001\n\031DetailedEyeCharacteristic\022&\n"
-    "\010position\030\001 \001(\0132\024.BioService.Position\022\017\n"
-    "\007is_open\030\002 \001(\010\022\027\n\017is_gaze_frontal\030\003 \001(\002\022"
-    "\016\n\006is_red\030\004 \001(\010\022\020\n\010is_tined\030\005 \001(\010\022\022\n\ncon"
-    "fidence\030\006 \001(\002\"\217\002\n\031FingerprintCharacteris"
-    "tic\022\n\n\002id\030\001 \001(\003\022$\n\010position\030\002 \001(\0162\022.BioS"
-    "ervice.Finger\022\027\n\017minutiaes_count\030\003 \001(\017\022\020"
-    "\n\010personid\030\004 \001(\003\022\017\n\007photoid\030\005 \001(\003\022+\n\006ori"
-    "gin\030\006 \001(\0162\033.BioService.PhotoOriginType\022-"
-    "\n\014entity_state\030\007 \001(\0162\027.BioService.Entity"
-    "State\022(\n\texception\030\010 \001(\0132\025.BioService.Ex"
-    "ception\"B\n\027BioIdentificationRecord\022\017\n\007bi"
-    "r_url\030\001 \001(\t\022\026\n\016bir_bytestring\030\002 \001(\014\"\223\001\n\022"
-    "BioFingerprintData\022>\n\017characteristics\030\001 "
-    "\001(\0132%.BioService.FingerprintCharacterist"
-    "ic\022=\n\020biometric_record\030\002 \001(\0132#.BioServic"
-    "e.BioIdentificationRecord\"\221\001\n\rBioPersonD"
-    "ata\022\021\n\tperson_id\030\001 \001(\003\0222\n\005faces\030\002 \003(\0132#."
-    "BioService.BioIdentificationRecord\0229\n\014fi"
-    "ngerprints\030\003 \003(\0132#.BioService.BioIdentif"
-    "icationRecord\"\207\001\n\rBiometricData\022\n\n\002id\030\001 "
-    "\001(\003\022-\n\005faces\030\002 \003(\0132\036.BioService.FaceChar"
-    "acteristic\022;\n\014fingerprints\030\003 \003(\0132%.BioSe"
-    "rvice.FingerprintCharacteristic\"\333\001\n\013Faci"
-    "alImage\022\020\n\010owner_id\030\001 \001(\003\022 \n\005image\030\002 \001(\013"
-    "2\021.BioService.Photo\022\020\n\010template\030\003 \001(\014\022-\n"
-    "\005faces\030\004 \003(\0132\036.BioService.FaceCharacteri"
-    "stic\022-\n\014entity_state\030\005 \001(\0162\027.BioService."
-    "EntityState\022(\n\texception\030\006 \001(\0132\025.BioServ"
-    "ice.Exception\"\307\001\n\033DatabaseFacialImageRes"
-    "ponse\022-\n\005faces\030\001 \003(\0132\036.BioService.FaceCh"
-    "aracteristic\022 \n\005image\030\002 \001(\0132\021.BioService"
-    ".Photo\022-\n\014entity_state\030\003 \001(\0162\027.BioServic"
-    "e.EntityState\022(\n\texception\030\004 \001(\0132\025.BioSe"
-    "rvice.Exception\"\355\001\n\020FingerprintImage\022\020\n\010"
-    "owner_id\030\001 \001(\003\022 \n\005image\030\002 \001(\0132\021.BioServi"
-    "ce.Photo\022\020\n\010template\030\003 \001(\014\022:\n\013fingerprin"
-    "t\030\004 \001(\0132%.BioService.FingerprintCharacte"
-    "ristic\022-\n\014entity_state\030\005 \001(\0162\027.BioServic"
-    "e.EntityState\022(\n\texception\030\006 \001(\0132\025.BioSe"
-    "rvice.Exception\"\331\001\n DatabaseFingerprintI"
-    "mageResponse\022:\n\013fingerprint\030\001 \001(\0132%.BioS"
-    "ervice.FingerprintCharacteristic\022 \n\005imag"
-    "e\030\002 \001(\0132\021.BioService.Photo\022-\n\014entity_sta"
-    "te\030\003 \001(\0162\027.BioService.EntityState\022(\n\texc"
-    "eption\030\004 \001(\0132\025.BioService.Exception\"\210\002\n\005"
-    "Photo\022\n\n\002id\030\001 \001(\003\022\020\n\010datetime\030\003 \001(\003\022\021\n\tp"
-    "hoto_url\030\004 \001(\t\022\022\n\nbytestring\030\005 \001(\014\022\r\n\005wi"
-    "dth\030\006 \001(\003\022\016\n\006height\030\007 \001(\003\0220\n\013origin_type"
-    "\030\010 \001(\0162\033.BioService.PhotoOriginType\022\020\n\010o"
-    "wner_id\030\t \001(\003\022-\n\014entity_state\030\n \001(\0162\027.Bi"
-    "oService.EntityState\022(\n\texception\030\013 \001(\0132"
-    "\025.BioService.Exception\"\220\002\n\007Visitor\022\n\n\002id"
-    "\030\001 \001(\003\022\020\n\010personid\030\002 \001(\003\022\022\n\nlocationid\030\003"
-    " \001(\003\022\014\n\004time\030\004 \001(\003\022\023\n\013card_number\030\005 \001(\t\022"
-    "%\n\006status\030\006 \001(\0132\025.BioService.Exception\0220"
-    "\n\rbiometricData\030\007 \001(\0132\031.BioService.Biome"
-    "tricData\022-\n\014entity_state\030\010 \001(\0162\027.BioServ"
-    "ice.EntityState\022(\n\texception\030\t \001(\0132\025.Bio"
-    "Service.Exception\"4\n\013VisitorList\022%\n\010visi"
-    "tors\030\001 \003(\0132\023.BioService.Visitor\"7\n\014Locat"
-    "ionList\022\'\n\tlocations\030\001 \003(\0132\024.BioService."
-    "Location\"1\n\nPersonList\022#\n\007persons\030\001 \003(\0132"
-    "\022.BioService.Person\".\n\tPhotoList\022!\n\006phot"
-    "os\030\001 \003(\0132\021.BioService.Photo\"+\n\010CardList\022"
-    "\037\n\005cards\030\001 \003(\0132\020.BioService.Card\"<\n\021Biom"
-    "etricDataList\022\'\n\004data\030\001 \003(\0132\031.BioService"
-    ".BiometricData\"/\n\010Response\022#\n\004good\030\001 \001(\013"
-    "2\025.BioService.Exception\"h\n\020VerificationD"
-    "ata\022\'\n\014target_image\030\001 \001(\0132\021.BioService.P"
-    "hoto\022+\n\020comparison_image\030\002 \001(\0132\021.BioServ"
-    "ice.Photo\"\202\001\n\022IdentificationData\022\'\n\014targ"
-    "et_image\030\001 \001(\0132\021.BioService.Photo\022\025\n\rpop"
-    "ulation_id\030\002 \001(\003\022,\n\021comparison_images\030\003 "
-    "\003(\0132\021.BioService.Photo\"\'\n\005Match\022\017\n\007face_"
-    "id\030\002 \001(\003\022\r\n\005match\030\003 \001(\002\">\n\007Matches\022\017\n\007fa"
-    "ce_id\030\001 \001(\003\022\"\n\007matches\030\002 \003(\0132\021.BioServic"
-    "e.Match\"\255\001\n\023FaceSearchException\0225\n\tportr"
-    "aits\030\001 \003(\0132\".BioService.PortraitCharacte"
-    "ristic\022$\n\007matches\030\002 \003(\0132\023.BioService.Mat"
-    "ches\022\017\n\007message\030\003 \001(\t\022(\n\texception\030\004 \001(\013"
-    "2\025.BioService.Exception\"B\n\014AcquiredData\022"
-    " \n\005image\030\001 \001(\0132\021.BioService.Photo\022\020\n\010own"
-    "er_id\030\002 \001(\003\"g\n\027FingerprintAcquiredData\022&"
-    "\n\004data\030\001 \001(\0132\030.BioService.AcquiredData\022$"
-    "\n\010position\030\002 \001(\0162\022.BioService.Finger\"\237\001\n"
-    "\022EnrollmentFeedback\022\031\n\021characteristic_id"
-    "\030\001 \001(\003\022\020\n\010photo_id\030\002 \001(\003\022\017\n\007quality\030\003 \001("
-    "\017\022(\n\tException\030\004 \001(\0132\025.BioService.Except"
-    "ion\022\020\n\010progress\030\005 \001(\017\022\017\n\007message\030\006 \001(\t\"b"
-    "\n\024VerificationFeedback\022;\n\023enrollment_fee"
-    "dback\030\001 \001(\0132\036.BioService.EnrollmentFeedb"
-    "ack\022\r\n\005match\030\002 \001(\002\"\315\001\n\nQueryPhoto\022<\n\nwit"
-    "h_bytes\030\001 \001(\0162(.BioService.QueryPhoto.Ph"
-    "otoResponseType\022\017\n\007persons\030\002 \003(\003\022\016\n\006phot"
-    "os\030\003 \003(\003\022\026\n\016items_per_page\030\004 \001(\003\"H\n\021Phot"
-    "oResponseType\022\r\n\tUndefined\020\000\022\010\n\004Full\020\001\022\r"
-    "\n\tOnlyBytes\020\002\022\013\n\007NoBytes\020\003\"\035\n\014QueryPerso"
-    "ns\022\r\n\005count\030\001 \001(\003\"\037\n\016QueryLocations\022\r\n\005c"
-    "ount\030\001 \001(\003\"\212\001\n\rQueryVisitors\022\021\n\tcountrie"
-    "s\030\002 \003(\t\022\021\n\tlocations\030\003 \003(\003\022\017\n\007persons\030\004 "
-    "\003(\003\022\025\n\rdatetime_from\030\005 \001(\003\022\023\n\013datetime_t"
-    "o\030\006 \001(\003\022\026\n\016items_per_page\030\007 \001(\003\"&\n\023Socke"
-    "tConfiguration\022\017\n\007address\030\001 \001(\t\"I\n\tBioCl"
-    "ient\022\022\n\nip_address\030\001 \001(\t\022\023\n\013port_number\030"
-    "\002 \001(\003\022\023\n\013mac_address\030\003 \001(\t*T\n\013ImageForma"
-    "t\022\010\n\004JPEG\020\000\022\014\n\010JPEG2000\020\001\022\007\n\003PNG\020\002\022\007\n\003BM"
-    "P\020\003\022\007\n\003PGM\020\004\022\022\n\016GRAYSCALE_8BIT\020\005*B\n\013Enti"
-    "tyState\022\r\n\tUnchanged\020\000\022\t\n\005Added\020\001\022\014\n\010Mod"
-    "ified\020\002\022\013\n\007Deleted\020\003*\256\001\n\006Finger\022\007\n\003Any\020\000"
-    "\022\016\n\nRightThumb\020\001\022\r\n\tLeftThumb\020\002\022\016\n\nRight"
-    "Index\020\003\022\r\n\tLeftIndex\020\004\022\017\n\013RightMiddle\020\005\022"
-    "\016\n\nLeftMiddle\020\006\022\r\n\tRightRing\020\007\022\014\n\010LeftRi"
-    "ng\020\010\022\017\n\013RightLittle\020\t\022\016\n\nLeftLittle\020\n*5\n"
-    "\007EyeType\022\013\n\007NoneEye\020\000\022\010\n\004Left\020\001\022\t\n\005Right"
-    "\020\002\022\010\n\004Both\020\003*(\n\006Gender\022\010\n\004None\020\000\022\010\n\004Male"
-    "\020\001\022\n\n\006Female\020\002*\?\n\006Rights\022\n\n\006Custom\020\000\022\014\n\010"
-    "Operator\020\001\022\013\n\007Manager\020\002\022\016\n\nSupervisor\020\003*"
-    "6\n\013MessageType\022\017\n\013Information\020\000\022\t\n\005Error"
-    "\020\001\022\013\n\007Warning\020\002*%\n\rPhotoSizeType\022\010\n\004Full"
-    "\020\000\022\n\n\006Croped\020\001*<\n\017PhotoOriginType\022\014\n\010Enr"
-    "olled\020\000\022\014\n\010Verified\020\001\022\r\n\tThumbnail\020\002*\370\004\n"
-    "\025IsoComplianceTemplate\022\013\n\007Npthing\020\000\022\026\n\022O"
-    "nlyOneFaceVisible\020\001\022\034\n\030goodVerticalFaceP"
-    "osition\020\002\022\034\n\030horizontallyCenteredFace\020\003\022"
-    "\017\n\013widthOfHead\020\004\022\020\n\014lengthOfHead\020\005\022\033\n\027wi"
-    "dthOfHeadBestPractice\020\006\022\034\n\030lengthOfHeadB"
-    "estPractice\020\007\022\016\n\nresolution\020\010\022\032\n\026resolut"
-    "ionBestPractice\020\t\022\"\n\036imageWidthToHeightB"
-    "estPractice\020\n\022\020\n\014goodExposure\020\013\022\030\n\024goodG"
-    "rayScaleProfile\020\014\022\030\n\024hasNaturalSkinColou"
-    "r\020\r\022\016\n\nnoHotSpots\020\016\022#\n\037isBackgroundUnifo"
-    "rmBestPractice\020\017\022\r\n\tisFrontal\020\020\022\031\n\025isFro"
-    "ntalBestPractice\020\021\022\025\n\021isLightingUniform\020"
-    "\022\022\030\n\024eyesOpenBestPractice\020\023\022\037\n\033eyesGazeF"
-    "rontalBestPractice\020\024\022\032\n\026eyesNotRedBestPr"
-    "actice\020\025\022\023\n\017noTintedGlasses\020\026\022\013\n\007isSharp"
-    "\020\027\022\033\n\027mouthClosedBestPractice\020\030*\?\n\tEthni"
-    "city\022\021\n\rUnpredictable\020\000\022\t\n\005White\020\001\022\t\n\005Bl"
-    "ack\020\002\022\t\n\005Asian\020\0032\232\004\n\025BiometricFacialSevi"
-    "ce\022D\n\tAddSocket\022\037.BioService.SocketConfi"
-    "guration\032\024.BioService.Response\"\000\022B\n\007Acqu"
-    "ire\022\021.BioService.Photo\032\".BioService.Port"
-    "raitCharacteristic\"\000\022D\n\006Enroll\022\030.BioServ"
-    "ice.AcquiredData\032\036.BioService.Enrollment"
-    "Feedback\"\000\022F\n\006Verify\022\030.BioService.Acquir"
-    "edData\032 .BioService.VerificationFeedback"
-    "\"\000\022G\n\020CreatePopulation\022\025.BioService.Phot"
-    "oList\032\032.BioService.ObjectResponse\"\000\022M\n\nV"
-    "erifyFace\022\034.BioService.VerificationData\032"
-    "\037.BioService.FaceSearchException\"\000\022Q\n\014Id"
-    "entifyFace\022\036.BioService.IdentificationDa"
-    "ta\032\037.BioService.FaceSearchException\"\0002\313\001"
-    "\n\032BiometricFingerprintSevice\022Z\n\021EnrollFi"
-    "ngerprint\022#.BioService.FingerprintAcquir"
-    "edData\032\036.BioService.EnrollmentFeedback\"\000"
-    "\022Q\n\021VerifyFingerprint\022\030.BioService.Acqui"
-    "redData\032 .BioService.VerificationFeedbac"
-    "k\"\0002\325\001\n\030BiometricDatabaseService\022T\n\016AddF"
-    "acialImage\022\027.BioService.FacialImage\032\'.Bi"
-    "oService.DatabaseFacialImageResponse\"\000\022c"
-    "\n\023AddFingerprintImage\022\034.BioService.Finge"
-    "rprintImage\032,.BioService.DatabaseFingerp"
-    "rintImageResponse\"\0002\240\014\n\016DatabaseSevice\022B"
-    "\n\014PersonSelect\022\030.BioService.QueryPersons"
-    "\032\026.BioService.PersonList\"\000\0225\n\tAddPerson\022"
-    "\022.BioService.Person\032\022.BioService.Person\""
-    "\000\0228\n\014UpdatePerson\022\022.BioService.Person\032\022."
-    "BioService.Person\"\000\0228\n\014RemovePerson\022\022.Bi"
-    "oService.Person\032\022.BioService.Person\"\000\0229\n"
-    "\014SetThumbnail\022\021.BioService.Photo\032\024.BioSe"
-    "rvice.Response\"\000\022/\n\007AddCard\022\020.BioService"
-    ".Card\032\020.BioService.Card\"\000\022;\n\013RemoveCards"
-    "\022\024.BioService.CardList\032\024.BioService.Card"
-    "List\"\000\0222\n\nRemoveCard\022\020.BioService.Card\032\020"
-    ".BioService.Card\"\000\022\?\n\014SelectPhotos\022\026.Bio"
-    "Service.QueryPhoto\032\025.BioService.PhotoLis"
-    "t\"\000\0222\n\010AddPhoto\022\021.BioService.Photo\032\021.Bio"
-    "Service.Photo\"\000\022@\n\014RemovePhotos\022\026.BioSer"
-    "vice.RawIndexes\032\026.BioService.RawIndexes\""
-    "\000\022F\n\016SelectVisitors\022\031.BioService.QueryVi"
-    "sitors\032\027.BioService.VisitorList\"\000\022D\n\025Att"
-    "achVisitorToPerson\022\023.BioService.Visitor\032"
-    "\024.BioService.Response\"\000\022B\n\016RemoveVisitor"
-    "s\022\026.BioService.RawIndexes\032\026.BioService.R"
-    "awIndexes\"\000\022@\n\nAddVisitor\022\033.BioService.F"
-    "ullVisitorData\032\023.BioService.Visitor\"\000\022I\n"
-    "\017SelectLocations\022\032.BioService.QueryLocat"
-    "ions\032\030.BioService.LocationList\"\000\022;\n\013AddL"
-    "ocation\022\024.BioService.Location\032\024.BioServi"
-    "ce.Location\"\000\022>\n\016UpdateLocation\022\024.BioSer"
-    "vice.Location\032\024.BioService.Location\"\000\022>\n"
-    "\016RemoveLocation\022\024.BioService.Location\032\024."
-    "BioService.Location\"\000\022N\n\016AddFingerprint\022"
-    "\034.BioService.FingerprintImage\032\034.BioServi"
-    "ce.FingerprintImage\"\000\022Q\n\021RemoveFingerpri"
-    "nt\022\034.BioService.FingerprintImage\032\034.BioSe"
-    "rvice.FingerprintImage\"\000\022Q\n\021UpdateFinger"
-    "print\022\034.BioService.FingerprintImage\032\034.Bi"
-    "oService.FingerprintImage\"\000\022:\n\tAddClient"
-    "\022\025.BioService.BioClient\032\024.BioService.Res"
-    "ponse\"\000\022=\n\014RemoveClient\022\025.BioService.Bio"
-    "Client\032\024.BioService.Response\"\000B\017\n\007ex.grp"
-    "c\242\002\003RTGb\006proto3", 11935);
+    "eption\"\354\001\n\022EyesCharacteristic\022\n\n\002id\030\001 \001("
+    "\003\0227\n\010left_eye\030\002 \001(\0132%.BioService.Detaile"
+    "dEyeCharacteristic\0228\n\tright_eye\030\003 \001(\0132%."
+    "BioService.DetailedEyeCharacteristic\022-\n\014"
+    "entity_state\030\004 \001(\0162\027.BioService.EntitySt"
+    "ate\022(\n\texception\030\005 \001(\0132\025.BioService.Exce"
+    "ption\"G\n\026PortraitCharacteristic\022-\n\005faces"
+    "\030\001 \003(\0132\036.BioService.FaceCharacteristic\"\251"
+    "\005\n\022FaceCharacteristic\022\n\n\002id\030\001 \001(\003\022\'\n\003box"
+    "\030\002 \001(\0132\032.BioService.SurroundingBox\022\024\n\014ey"
+    "e_distance\030\003 \001(\002\022)\n\013face_center\030\004 \001(\0132\024."
+    "BioService.Position\022\017\n\007glasses\030\005 \001(\002\022\032\n\022"
+    "natural_skin_color\030\006 \001(\002\022\022\n\nhead_width\030\007"
+    " \001(\002\022\023\n\013head_length\030\010 \001(\002\022\027\n\017pose_angle_"
+    "roll\030\t \001(\002\022\014\n\004chin\030\n \001(\002\022\r\n\005crown\030\013 \001(\002\022"
+    "\020\n\010left_ear\030\014 \001(\002\022\021\n\trigth_ear\030\r \001(\002\022\022\n\n"
+    "confidence\030\016 \001(\002\022\024\n\014mouth_closed\030\017 \001(\002\022)"
+    "\n\nethnithity\030\020 \001(\0162\025.BioService.Ethnicit"
+    "y\022\013\n\003age\030\021 \001(\017\022\"\n\006gender\030\022 \001(\0162\022.BioServ"
+    "ice.Gender\022,\n\004eyes\030\023 \001(\0132\036.BioService.Ey"
+    "esCharacteristic\022\026\n\016compliance_iso\030\024 \001(\005"
+    "\022\014\n\004good\030\025 \001(\010\022\026\n\016best_practices\030\026 \001(\010\022\020"
+    "\n\010personid\030\027 \001(\003\022\017\n\007photoid\030\030 \001(\003\022-\n\014ent"
+    "ity_state\030\031 \001(\0162\027.BioService.EntityState"
+    "\022(\n\texception\030\032 \001(\0132\025.BioService.Excepti"
+    "on\" \n\010Position\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"X\n\016"
+    "SurroundingBox\022#\n\005begin\030\001 \001(\0132\024.BioServi"
+    "ce.Position\022!\n\003end\030\002 \001(\0132\024.BioService.Po"
+    "sition\"\243\001\n\031DetailedEyeCharacteristic\022&\n\010"
+    "position\030\001 \001(\0132\024.BioService.Position\022\017\n\007"
+    "is_open\030\002 \001(\010\022\027\n\017is_gaze_frontal\030\003 \001(\002\022\016"
+    "\n\006is_red\030\004 \001(\010\022\020\n\010is_tined\030\005 \001(\010\022\022\n\nconf"
+    "idence\030\006 \001(\002\"\217\002\n\031FingerprintCharacterist"
+    "ic\022\n\n\002id\030\001 \001(\003\022$\n\010position\030\002 \001(\0162\022.BioSe"
+    "rvice.Finger\022\027\n\017minutiaes_count\030\003 \001(\017\022\020\n"
+    "\010personid\030\004 \001(\003\022\017\n\007photoid\030\005 \001(\003\022+\n\006orig"
+    "in\030\006 \001(\0162\033.BioService.PhotoOriginType\022-\n"
+    "\014entity_state\030\007 \001(\0162\027.BioService.EntityS"
+    "tate\022(\n\texception\030\010 \001(\0132\025.BioService.Exc"
+    "eption\"B\n\027BioIdentificationRecord\022\017\n\007bir"
+    "_url\030\001 \001(\t\022\026\n\016bir_bytestring\030\002 \001(\014\"\223\001\n\022B"
+    "ioFingerprintData\022>\n\017characteristics\030\001 \001"
+    "(\0132%.BioService.FingerprintCharacteristi"
+    "c\022=\n\020biometric_record\030\002 \001(\0132#.BioService"
+    ".BioIdentificationRecord\"\221\001\n\rBioPersonDa"
+    "ta\022\021\n\tperson_id\030\001 \001(\003\0222\n\005faces\030\002 \003(\0132#.B"
+    "ioService.BioIdentificationRecord\0229\n\014fin"
+    "gerprints\030\003 \003(\0132#.BioService.BioIdentifi"
+    "cationRecord\"\207\001\n\rBiometricData\022\n\n\002id\030\001 \001"
+    "(\003\022-\n\005faces\030\002 \003(\0132\036.BioService.FaceChara"
+    "cteristic\022;\n\014fingerprints\030\003 \003(\0132%.BioSer"
+    "vice.FingerprintCharacteristic\"\333\001\n\013Facia"
+    "lImage\022\020\n\010owner_id\030\001 \001(\003\022 \n\005image\030\002 \001(\0132"
+    "\021.BioService.Photo\022\020\n\010template\030\003 \001(\014\022-\n\005"
+    "faces\030\004 \003(\0132\036.BioService.FaceCharacteris"
+    "tic\022-\n\014entity_state\030\005 \001(\0162\027.BioService.E"
+    "ntityState\022(\n\texception\030\006 \001(\0132\025.BioServi"
+    "ce.Exception\"\307\001\n\033DatabaseFacialImageResp"
+    "onse\022-\n\005faces\030\001 \003(\0132\036.BioService.FaceCha"
+    "racteristic\022 \n\005image\030\002 \001(\0132\021.BioService."
+    "Photo\022-\n\014entity_state\030\003 \001(\0162\027.BioService"
+    ".EntityState\022(\n\texception\030\004 \001(\0132\025.BioSer"
+    "vice.Exception\"\355\001\n\020FingerprintImage\022\020\n\010o"
+    "wner_id\030\001 \001(\003\022 \n\005image\030\002 \001(\0132\021.BioServic"
+    "e.Photo\022\020\n\010template\030\003 \001(\014\022:\n\013fingerprint"
+    "\030\004 \001(\0132%.BioService.FingerprintCharacter"
+    "istic\022-\n\014entity_state\030\005 \001(\0162\027.BioService"
+    ".EntityState\022(\n\texception\030\006 \001(\0132\025.BioSer"
+    "vice.Exception\"\331\001\n DatabaseFingerprintIm"
+    "ageResponse\022:\n\013fingerprint\030\001 \001(\0132%.BioSe"
+    "rvice.FingerprintCharacteristic\022 \n\005image"
+    "\030\002 \001(\0132\021.BioService.Photo\022-\n\014entity_stat"
+    "e\030\003 \001(\0162\027.BioService.EntityState\022(\n\texce"
+    "ption\030\004 \001(\0132\025.BioService.Exception\"\210\002\n\005P"
+    "hoto\022\n\n\002id\030\001 \001(\003\022\020\n\010datetime\030\003 \001(\003\022\021\n\tph"
+    "oto_url\030\004 \001(\t\022\022\n\nbytestring\030\005 \001(\014\022\r\n\005wid"
+    "th\030\006 \001(\003\022\016\n\006height\030\007 \001(\003\0220\n\013origin_type\030"
+    "\010 \001(\0162\033.BioService.PhotoOriginType\022\020\n\010ow"
+    "ner_id\030\t \001(\003\022-\n\014entity_state\030\n \001(\0162\027.Bio"
+    "Service.EntityState\022(\n\texception\030\013 \001(\0132\025"
+    ".BioService.Exception\"\220\002\n\007Visitor\022\n\n\002id\030"
+    "\001 \001(\003\022\020\n\010personid\030\002 \001(\003\022\022\n\nlocationid\030\003 "
+    "\001(\003\022\014\n\004time\030\004 \001(\003\022\023\n\013card_number\030\005 \001(\t\022%"
+    "\n\006status\030\006 \001(\0132\025.BioService.Exception\0220\n"
+    "\rbiometricData\030\007 \001(\0132\031.BioService.Biomet"
+    "ricData\022-\n\014entity_state\030\010 \001(\0162\027.BioServi"
+    "ce.EntityState\022(\n\texception\030\t \001(\0132\025.BioS"
+    "ervice.Exception\"4\n\013VisitorList\022%\n\010visit"
+    "ors\030\001 \003(\0132\023.BioService.Visitor\"7\n\014Locati"
+    "onList\022\'\n\tlocations\030\001 \003(\0132\024.BioService.L"
+    "ocation\"1\n\nPersonList\022#\n\007persons\030\001 \003(\0132\022"
+    ".BioService.Person\".\n\tPhotoList\022!\n\006photo"
+    "s\030\001 \003(\0132\021.BioService.Photo\"+\n\010CardList\022\037"
+    "\n\005cards\030\001 \003(\0132\020.BioService.Card\"<\n\021Biome"
+    "tricDataList\022\'\n\004data\030\001 \003(\0132\031.BioService."
+    "BiometricData\"/\n\010Response\022#\n\004good\030\001 \001(\0132"
+    "\025.BioService.Exception\"h\n\020VerificationDa"
+    "ta\022\'\n\014target_image\030\001 \001(\0132\021.BioService.Ph"
+    "oto\022+\n\020comparison_image\030\002 \001(\0132\021.BioServi"
+    "ce.Photo\"\202\001\n\022IdentificationData\022\'\n\014targe"
+    "t_image\030\001 \001(\0132\021.BioService.Photo\022\025\n\rpopu"
+    "lation_id\030\002 \001(\003\022,\n\021comparison_images\030\003 \003"
+    "(\0132\021.BioService.Photo\"\'\n\005Match\022\017\n\007face_i"
+    "d\030\002 \001(\003\022\r\n\005match\030\003 \001(\002\">\n\007Matches\022\017\n\007fac"
+    "e_id\030\001 \001(\003\022\"\n\007matches\030\002 \003(\0132\021.BioService"
+    ".Match\"\254\001\n\022FaceSearchResponse\0225\n\tportrai"
+    "ts\030\001 \003(\0132\".BioService.PortraitCharacteri"
+    "stic\022$\n\007matches\030\002 \003(\0132\023.BioService.Match"
+    "es\022\017\n\007message\030\003 \001(\t\022(\n\texception\030\004 \001(\0132\025"
+    ".BioService.Exception\"B\n\014AcquiredData\022 \n"
+    "\005image\030\001 \001(\0132\021.BioService.Photo\022\020\n\010owner"
+    "_id\030\002 \001(\003\"g\n\027FingerprintAcquiredData\022&\n\004"
+    "data\030\001 \001(\0132\030.BioService.AcquiredData\022$\n\010"
+    "position\030\002 \001(\0162\022.BioService.Finger\"\237\001\n\022E"
+    "nrollmentFeedback\022\031\n\021characteristic_id\030\001"
+    " \001(\003\022\020\n\010photo_id\030\002 \001(\003\022\017\n\007quality\030\003 \001(\017\022"
+    "(\n\tException\030\004 \001(\0132\025.BioService.Exceptio"
+    "n\022\020\n\010progress\030\005 \001(\017\022\017\n\007message\030\006 \001(\t\"b\n\024"
+    "VerificationFeedback\022;\n\023enrollment_feedb"
+    "ack\030\001 \001(\0132\036.BioService.EnrollmentFeedbac"
+    "k\022\r\n\005match\030\002 \001(\002\"\315\001\n\nQueryPhoto\022<\n\nwith_"
+    "bytes\030\001 \001(\0162(.BioService.QueryPhoto.Phot"
+    "oResponseType\022\017\n\007persons\030\002 \003(\003\022\016\n\006photos"
+    "\030\003 \003(\003\022\026\n\016items_per_page\030\004 \001(\003\"H\n\021PhotoR"
+    "esponseType\022\r\n\tUndefined\020\000\022\010\n\004Full\020\001\022\r\n\t"
+    "OnlyBytes\020\002\022\013\n\007NoBytes\020\003\"\035\n\014QueryPersons"
+    "\022\r\n\005count\030\001 \001(\003\"\037\n\016QueryLocations\022\r\n\005cou"
+    "nt\030\001 \001(\003\"\212\001\n\rQueryVisitors\022\021\n\tcountries\030"
+    "\002 \003(\t\022\021\n\tlocations\030\003 \003(\003\022\017\n\007persons\030\004 \003("
+    "\003\022\025\n\rdatetime_from\030\005 \001(\003\022\023\n\013datetime_to\030"
+    "\006 \001(\003\022\026\n\016items_per_page\030\007 \001(\003\"&\n\023SocketC"
+    "onfiguration\022\017\n\007address\030\001 \001(\t\"I\n\tBioClie"
+    "nt\022\022\n\nip_address\030\001 \001(\t\022\023\n\013port_number\030\002 "
+    "\001(\003\022\023\n\013mac_address\030\003 \001(\t*T\n\013ImageFormat\022"
+    "\010\n\004JPEG\020\000\022\014\n\010JPEG2000\020\001\022\007\n\003PNG\020\002\022\007\n\003BMP\020"
+    "\003\022\007\n\003PGM\020\004\022\022\n\016GRAYSCALE_8BIT\020\005*B\n\013Entity"
+    "State\022\r\n\tUnchanged\020\000\022\t\n\005Added\020\001\022\014\n\010Modif"
+    "ied\020\002\022\013\n\007Deleted\020\003*\256\001\n\006Finger\022\007\n\003Any\020\000\022\016"
+    "\n\nRightThumb\020\001\022\r\n\tLeftThumb\020\002\022\016\n\nRightIn"
+    "dex\020\003\022\r\n\tLeftIndex\020\004\022\017\n\013RightMiddle\020\005\022\016\n"
+    "\nLeftMiddle\020\006\022\r\n\tRightRing\020\007\022\014\n\010LeftRing"
+    "\020\010\022\017\n\013RightLittle\020\t\022\016\n\nLeftLittle\020\n*5\n\007E"
+    "yeType\022\013\n\007NoneEye\020\000\022\010\n\004Left\020\001\022\t\n\005Right\020\002"
+    "\022\010\n\004Both\020\003*(\n\006Gender\022\010\n\004None\020\000\022\010\n\004Male\020\001"
+    "\022\n\n\006Female\020\002*\?\n\006Rights\022\n\n\006Custom\020\000\022\014\n\010Op"
+    "erator\020\001\022\013\n\007Manager\020\002\022\016\n\nSupervisor\020\003*6\n"
+    "\013MessageType\022\017\n\013Information\020\000\022\t\n\005Error\020\001"
+    "\022\013\n\007Warning\020\002*%\n\rPhotoSizeType\022\010\n\004Full\020\000"
+    "\022\n\n\006Croped\020\001*<\n\017PhotoOriginType\022\014\n\010Enrol"
+    "led\020\000\022\014\n\010Verified\020\001\022\r\n\tThumbnail\020\002*\370\004\n\025I"
+    "soComplianceTemplate\022\013\n\007Npthing\020\000\022\026\n\022Onl"
+    "yOneFaceVisible\020\001\022\034\n\030goodVerticalFacePos"
+    "ition\020\002\022\034\n\030horizontallyCenteredFace\020\003\022\017\n"
+    "\013widthOfHead\020\004\022\020\n\014lengthOfHead\020\005\022\033\n\027widt"
+    "hOfHeadBestPractice\020\006\022\034\n\030lengthOfHeadBes"
+    "tPractice\020\007\022\016\n\nresolution\020\010\022\032\n\026resolutio"
+    "nBestPractice\020\t\022\"\n\036imageWidthToHeightBes"
+    "tPractice\020\n\022\020\n\014goodExposure\020\013\022\030\n\024goodGra"
+    "yScaleProfile\020\014\022\030\n\024hasNaturalSkinColour\020"
+    "\r\022\016\n\nnoHotSpots\020\016\022#\n\037isBackgroundUniform"
+    "BestPractice\020\017\022\r\n\tisFrontal\020\020\022\031\n\025isFront"
+    "alBestPractice\020\021\022\025\n\021isLightingUniform\020\022\022"
+    "\030\n\024eyesOpenBestPractice\020\023\022\037\n\033eyesGazeFro"
+    "ntalBestPractice\020\024\022\032\n\026eyesNotRedBestPrac"
+    "tice\020\025\022\023\n\017noTintedGlasses\020\026\022\013\n\007isSharp\020\027"
+    "\022\033\n\027mouthClosedBestPractice\020\030*\?\n\tEthnici"
+    "ty\022\021\n\rUnpredictable\020\000\022\t\n\005White\020\001\022\t\n\005Blac"
+    "k\020\002\022\t\n\005Asian\020\0032\225\004\n\025BiometricFacialSevice"
+    "\022D\n\tAddSocket\022\037.BioService.SocketConfigu"
+    "ration\032\024.BioService.Response\"\000\022\?\n\007Acquir"
+    "e\022\021.BioService.Photo\032\037.BioService.Acquis"
+    "itionResponse\"\000\022D\n\006Enroll\022\030.BioService.A"
+    "cquiredData\032\036.BioService.EnrollmentFeedb"
+    "ack\"\000\022F\n\006Verify\022\030.BioService.AcquiredDat"
+    "a\032 .BioService.VerificationFeedback\"\000\022G\n"
+    "\020CreatePopulation\022\025.BioService.PhotoList"
+    "\032\032.BioService.ObjectResponse\"\000\022L\n\nVerify"
+    "Face\022\034.BioService.VerificationData\032\036.Bio"
+    "Service.FaceSearchResponse\"\000\022P\n\014Identify"
+    "Face\022\036.BioService.IdentificationData\032\036.B"
+    "ioService.FaceSearchResponse\"\0002\313\001\n\032Biome"
+    "tricFingerprintSevice\022Z\n\021EnrollFingerpri"
+    "nt\022#.BioService.FingerprintAcquiredData\032"
+    "\036.BioService.EnrollmentFeedback\"\000\022Q\n\021Ver"
+    "ifyFingerprint\022\030.BioService.AcquiredData"
+    "\032 .BioService.VerificationFeedback\"\0002\325\001\n"
+    "\030BiometricDatabaseService\022T\n\016AddFacialIm"
+    "age\022\027.BioService.FacialImage\032\'.BioServic"
+    "e.DatabaseFacialImageResponse\"\000\022c\n\023AddFi"
+    "ngerprintImage\022\034.BioService.FingerprintI"
+    "mage\032,.BioService.DatabaseFingerprintIma"
+    "geResponse\"\0002\240\014\n\016DatabaseSevice\022B\n\014Perso"
+    "nSelect\022\030.BioService.QueryPersons\032\026.BioS"
+    "ervice.PersonList\"\000\0225\n\tAddPerson\022\022.BioSe"
+    "rvice.Person\032\022.BioService.Person\"\000\0228\n\014Up"
+    "datePerson\022\022.BioService.Person\032\022.BioServ"
+    "ice.Person\"\000\0228\n\014RemovePerson\022\022.BioServic"
+    "e.Person\032\022.BioService.Person\"\000\0229\n\014SetThu"
+    "mbnail\022\021.BioService.Photo\032\024.BioService.R"
+    "esponse\"\000\022/\n\007AddCard\022\020.BioService.Card\032\020"
+    ".BioService.Card\"\000\022;\n\013RemoveCards\022\024.BioS"
+    "ervice.CardList\032\024.BioService.CardList\"\000\022"
+    "2\n\nRemoveCard\022\020.BioService.Card\032\020.BioSer"
+    "vice.Card\"\000\022\?\n\014SelectPhotos\022\026.BioService"
+    ".QueryPhoto\032\025.BioService.PhotoList\"\000\0222\n\010"
+    "AddPhoto\022\021.BioService.Photo\032\021.BioService"
+    ".Photo\"\000\022@\n\014RemovePhotos\022\026.BioService.Ra"
+    "wIndexes\032\026.BioService.RawIndexes\"\000\022F\n\016Se"
+    "lectVisitors\022\031.BioService.QueryVisitors\032"
+    "\027.BioService.VisitorList\"\000\022D\n\025AttachVisi"
+    "torToPerson\022\023.BioService.Visitor\032\024.BioSe"
+    "rvice.Response\"\000\022B\n\016RemoveVisitors\022\026.Bio"
+    "Service.RawIndexes\032\026.BioService.RawIndex"
+    "es\"\000\022@\n\nAddVisitor\022\033.BioService.FullVisi"
+    "torData\032\023.BioService.Visitor\"\000\022I\n\017Select"
+    "Locations\022\032.BioService.QueryLocations\032\030."
+    "BioService.LocationList\"\000\022;\n\013AddLocation"
+    "\022\024.BioService.Location\032\024.BioService.Loca"
+    "tion\"\000\022>\n\016UpdateLocation\022\024.BioService.Lo"
+    "cation\032\024.BioService.Location\"\000\022>\n\016Remove"
+    "Location\022\024.BioService.Location\032\024.BioServ"
+    "ice.Location\"\000\022N\n\016AddFingerprint\022\034.BioSe"
+    "rvice.FingerprintImage\032\034.BioService.Fing"
+    "erprintImage\"\000\022Q\n\021RemoveFingerprint\022\034.Bi"
+    "oService.FingerprintImage\032\034.BioService.F"
+    "ingerprintImage\"\000\022Q\n\021UpdateFingerprint\022\034"
+    ".BioService.FingerprintImage\032\034.BioServic"
+    "e.FingerprintImage\"\000\022:\n\tAddClient\022\025.BioS"
+    "ervice.BioClient\032\024.BioService.Response\"\000"
+    "\022=\n\014RemoveClient\022\025.BioService.BioClient\032"
+    "\024.BioService.Response\"\000B\017\n\007ex.grpc\242\002\003RTG"
+    "b\006proto3", 12048);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "bio_service.proto", &protobuf_RegisterTypes);
   Exception::default_instance_ = new Exception();
   ObjectResponse::default_instance_ = new ObjectResponse();
+  AcquisitionResponse::default_instance_ = new AcquisitionResponse();
   RawIndexes::default_instance_ = new RawIndexes();
   Criminal::default_instance_ = new Criminal();
   FullVisitorData::default_instance_ = new FullVisitorData();
@@ -1785,7 +1812,7 @@ void protobuf_AddDesc_bio_5fservice_2eproto() {
   IdentificationData::default_instance_ = new IdentificationData();
   Match::default_instance_ = new Match();
   Matches::default_instance_ = new Matches();
-  FaceSearchException::default_instance_ = new FaceSearchException();
+  FaceSearchResponse::default_instance_ = new FaceSearchResponse();
   AcquiredData::default_instance_ = new AcquiredData();
   FingerprintAcquiredData::default_instance_ = new FingerprintAcquiredData();
   EnrollmentFeedback::default_instance_ = new EnrollmentFeedback();
@@ -1798,6 +1825,7 @@ void protobuf_AddDesc_bio_5fservice_2eproto() {
   BioClient::default_instance_ = new BioClient();
   Exception::default_instance_->InitAsDefaultInstance();
   ObjectResponse::default_instance_->InitAsDefaultInstance();
+  AcquisitionResponse::default_instance_->InitAsDefaultInstance();
   RawIndexes::default_instance_->InitAsDefaultInstance();
   Criminal::default_instance_->InitAsDefaultInstance();
   FullVisitorData::default_instance_->InitAsDefaultInstance();
@@ -1839,7 +1867,7 @@ void protobuf_AddDesc_bio_5fservice_2eproto() {
   IdentificationData::default_instance_->InitAsDefaultInstance();
   Match::default_instance_->InitAsDefaultInstance();
   Matches::default_instance_->InitAsDefaultInstance();
-  FaceSearchException::default_instance_->InitAsDefaultInstance();
+  FaceSearchResponse::default_instance_->InitAsDefaultInstance();
   AcquiredData::default_instance_->InitAsDefaultInstance();
   FingerprintAcquiredData::default_instance_->InitAsDefaultInstance();
   EnrollmentFeedback::default_instance_->InitAsDefaultInstance();
@@ -2766,6 +2794,349 @@ void ObjectResponse::set_allocated_exception(::BioService::Exception* exception)
     
   }
   // @@protoc_insertion_point(field_set_allocated:BioService.ObjectResponse.exception)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int AcquisitionResponse::kPortraitFieldNumber;
+const int AcquisitionResponse::kExceptionFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+AcquisitionResponse::AcquisitionResponse()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:BioService.AcquisitionResponse)
+}
+
+void AcquisitionResponse::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+  portrait_ = const_cast< ::BioService::PortraitCharacteristic*>(&::BioService::PortraitCharacteristic::default_instance());
+  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+}
+
+AcquisitionResponse::AcquisitionResponse(const AcquisitionResponse& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:BioService.AcquisitionResponse)
+}
+
+void AcquisitionResponse::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  portrait_ = NULL;
+  exception_ = NULL;
+}
+
+AcquisitionResponse::~AcquisitionResponse() {
+  // @@protoc_insertion_point(destructor:BioService.AcquisitionResponse)
+  SharedDtor();
+}
+
+void AcquisitionResponse::SharedDtor() {
+  if (this != default_instance_) {
+    delete portrait_;
+    delete exception_;
+  }
+}
+
+void AcquisitionResponse::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* AcquisitionResponse::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return AcquisitionResponse_descriptor_;
+}
+
+const AcquisitionResponse& AcquisitionResponse::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_bio_5fservice_2eproto();
+  return *default_instance_;
+}
+
+AcquisitionResponse* AcquisitionResponse::default_instance_ = NULL;
+
+AcquisitionResponse* AcquisitionResponse::New(::google::protobuf::Arena* arena) const {
+  AcquisitionResponse* n = new AcquisitionResponse;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void AcquisitionResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.AcquisitionResponse)
+  if (GetArenaNoVirtual() == NULL && portrait_ != NULL) delete portrait_;
+  portrait_ = NULL;
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
+}
+
+bool AcquisitionResponse::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:BioService.AcquisitionResponse)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .BioService.PortraitCharacteristic portrait = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_portrait()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_exception;
+        break;
+      }
+
+      // optional .BioService.Exception exception = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_exception:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_exception()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:BioService.AcquisitionResponse)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:BioService.AcquisitionResponse)
+  return false;
+#undef DO_
+}
+
+void AcquisitionResponse::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:BioService.AcquisitionResponse)
+  // optional .BioService.PortraitCharacteristic portrait = 1;
+  if (this->has_portrait()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, *this->portrait_, output);
+  }
+
+  // optional .BioService.Exception exception = 2;
+  if (this->has_exception()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, *this->exception_, output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:BioService.AcquisitionResponse)
+}
+
+::google::protobuf::uint8* AcquisitionResponse::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:BioService.AcquisitionResponse)
+  // optional .BioService.PortraitCharacteristic portrait = 1;
+  if (this->has_portrait()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, *this->portrait_, target);
+  }
+
+  // optional .BioService.Exception exception = 2;
+  if (this->has_exception()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, *this->exception_, target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:BioService.AcquisitionResponse)
+  return target;
+}
+
+int AcquisitionResponse::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.AcquisitionResponse)
+  int total_size = 0;
+
+  // optional .BioService.PortraitCharacteristic portrait = 1;
+  if (this->has_portrait()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->portrait_);
+  }
+
+  // optional .BioService.Exception exception = 2;
+  if (this->has_exception()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->exception_);
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void AcquisitionResponse::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.AcquisitionResponse)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const AcquisitionResponse* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const AcquisitionResponse>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.AcquisitionResponse)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.AcquisitionResponse)
+    MergeFrom(*source);
+  }
+}
+
+void AcquisitionResponse::MergeFrom(const AcquisitionResponse& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.AcquisitionResponse)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from.has_portrait()) {
+    mutable_portrait()->::BioService::PortraitCharacteristic::MergeFrom(from.portrait());
+  }
+  if (from.has_exception()) {
+    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+  }
+}
+
+void AcquisitionResponse::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.AcquisitionResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AcquisitionResponse::CopyFrom(const AcquisitionResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.AcquisitionResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AcquisitionResponse::IsInitialized() const {
+
+  return true;
+}
+
+void AcquisitionResponse::Swap(AcquisitionResponse* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void AcquisitionResponse::InternalSwap(AcquisitionResponse* other) {
+  std::swap(portrait_, other->portrait_);
+  std::swap(exception_, other->exception_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata AcquisitionResponse::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = AcquisitionResponse_descriptor_;
+  metadata.reflection = AcquisitionResponse_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// AcquisitionResponse
+
+// optional .BioService.PortraitCharacteristic portrait = 1;
+bool AcquisitionResponse::has_portrait() const {
+  return !_is_default_instance_ && portrait_ != NULL;
+}
+void AcquisitionResponse::clear_portrait() {
+  if (GetArenaNoVirtual() == NULL && portrait_ != NULL) delete portrait_;
+  portrait_ = NULL;
+}
+const ::BioService::PortraitCharacteristic& AcquisitionResponse::portrait() const {
+  // @@protoc_insertion_point(field_get:BioService.AcquisitionResponse.portrait)
+  return portrait_ != NULL ? *portrait_ : *default_instance_->portrait_;
+}
+::BioService::PortraitCharacteristic* AcquisitionResponse::mutable_portrait() {
+  
+  if (portrait_ == NULL) {
+    portrait_ = new ::BioService::PortraitCharacteristic;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.AcquisitionResponse.portrait)
+  return portrait_;
+}
+::BioService::PortraitCharacteristic* AcquisitionResponse::release_portrait() {
+  // @@protoc_insertion_point(field_release:BioService.AcquisitionResponse.portrait)
+  
+  ::BioService::PortraitCharacteristic* temp = portrait_;
+  portrait_ = NULL;
+  return temp;
+}
+void AcquisitionResponse::set_allocated_portrait(::BioService::PortraitCharacteristic* portrait) {
+  delete portrait_;
+  portrait_ = portrait;
+  if (portrait) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.AcquisitionResponse.portrait)
+}
+
+// optional .BioService.Exception exception = 2;
+bool AcquisitionResponse::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
+}
+void AcquisitionResponse::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
+}
+const ::BioService::Exception& AcquisitionResponse::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.AcquisitionResponse.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+::BioService::Exception* AcquisitionResponse::mutable_exception() {
+  
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.AcquisitionResponse.exception)
+  return exception_;
+}
+::BioService::Exception* AcquisitionResponse::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.AcquisitionResponse.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+void AcquisitionResponse::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.AcquisitionResponse.exception)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -23402,32 +23773,32 @@ Matches::matches() const {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int FaceSearchException::kPortraitsFieldNumber;
-const int FaceSearchException::kMatchesFieldNumber;
-const int FaceSearchException::kMessageFieldNumber;
-const int FaceSearchException::kExceptionFieldNumber;
+const int FaceSearchResponse::kPortraitsFieldNumber;
+const int FaceSearchResponse::kMatchesFieldNumber;
+const int FaceSearchResponse::kMessageFieldNumber;
+const int FaceSearchResponse::kExceptionFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-FaceSearchException::FaceSearchException()
+FaceSearchResponse::FaceSearchResponse()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:BioService.FaceSearchException)
+  // @@protoc_insertion_point(constructor:BioService.FaceSearchResponse)
 }
 
-void FaceSearchException::InitAsDefaultInstance() {
+void FaceSearchResponse::InitAsDefaultInstance() {
   _is_default_instance_ = true;
   exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
 }
 
-FaceSearchException::FaceSearchException(const FaceSearchException& from)
+FaceSearchResponse::FaceSearchResponse(const FaceSearchResponse& from)
   : ::google::protobuf::Message(),
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:BioService.FaceSearchException)
+  // @@protoc_insertion_point(copy_constructor:BioService.FaceSearchResponse)
 }
 
-void FaceSearchException::SharedCtor() {
+void FaceSearchResponse::SharedCtor() {
     _is_default_instance_ = false;
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
@@ -23435,45 +23806,45 @@ void FaceSearchException::SharedCtor() {
   exception_ = NULL;
 }
 
-FaceSearchException::~FaceSearchException() {
-  // @@protoc_insertion_point(destructor:BioService.FaceSearchException)
+FaceSearchResponse::~FaceSearchResponse() {
+  // @@protoc_insertion_point(destructor:BioService.FaceSearchResponse)
   SharedDtor();
 }
 
-void FaceSearchException::SharedDtor() {
+void FaceSearchResponse::SharedDtor() {
   message_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
     delete exception_;
   }
 }
 
-void FaceSearchException::SetCachedSize(int size) const {
+void FaceSearchResponse::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* FaceSearchException::descriptor() {
+const ::google::protobuf::Descriptor* FaceSearchResponse::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return FaceSearchException_descriptor_;
+  return FaceSearchResponse_descriptor_;
 }
 
-const FaceSearchException& FaceSearchException::default_instance() {
+const FaceSearchResponse& FaceSearchResponse::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_bio_5fservice_2eproto();
   return *default_instance_;
 }
 
-FaceSearchException* FaceSearchException::default_instance_ = NULL;
+FaceSearchResponse* FaceSearchResponse::default_instance_ = NULL;
 
-FaceSearchException* FaceSearchException::New(::google::protobuf::Arena* arena) const {
-  FaceSearchException* n = new FaceSearchException;
+FaceSearchResponse* FaceSearchResponse::New(::google::protobuf::Arena* arena) const {
+  FaceSearchResponse* n = new FaceSearchResponse;
   if (arena != NULL) {
     arena->Own(n);
   }
   return n;
 }
 
-void FaceSearchException::Clear() {
-// @@protoc_insertion_point(message_clear_start:BioService.FaceSearchException)
+void FaceSearchResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.FaceSearchResponse)
   message_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
@@ -23481,11 +23852,11 @@ void FaceSearchException::Clear() {
   matches_.Clear();
 }
 
-bool FaceSearchException::MergePartialFromCodedStream(
+bool FaceSearchResponse::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:BioService.FaceSearchException)
+  // @@protoc_insertion_point(parse_start:BioService.FaceSearchResponse)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -23532,7 +23903,7 @@ bool FaceSearchException::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->message().data(), this->message().length(),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "BioService.FaceSearchException.message"));
+            "BioService.FaceSearchResponse.message"));
         } else {
           goto handle_unusual;
         }
@@ -23566,17 +23937,17 @@ bool FaceSearchException::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:BioService.FaceSearchException)
+  // @@protoc_insertion_point(parse_success:BioService.FaceSearchResponse)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:BioService.FaceSearchException)
+  // @@protoc_insertion_point(parse_failure:BioService.FaceSearchResponse)
   return false;
 #undef DO_
 }
 
-void FaceSearchException::SerializeWithCachedSizes(
+void FaceSearchResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:BioService.FaceSearchException)
+  // @@protoc_insertion_point(serialize_start:BioService.FaceSearchResponse)
   // repeated .BioService.PortraitCharacteristic portraits = 1;
   for (unsigned int i = 0, n = this->portraits_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
@@ -23594,7 +23965,7 @@ void FaceSearchException::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->message().data(), this->message().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "BioService.FaceSearchException.message");
+      "BioService.FaceSearchResponse.message");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->message(), output);
   }
@@ -23605,12 +23976,12 @@ void FaceSearchException::SerializeWithCachedSizes(
       4, *this->exception_, output);
   }
 
-  // @@protoc_insertion_point(serialize_end:BioService.FaceSearchException)
+  // @@protoc_insertion_point(serialize_end:BioService.FaceSearchResponse)
 }
 
-::google::protobuf::uint8* FaceSearchException::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* FaceSearchResponse::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:BioService.FaceSearchException)
+  // @@protoc_insertion_point(serialize_to_array_start:BioService.FaceSearchResponse)
   // repeated .BioService.PortraitCharacteristic portraits = 1;
   for (unsigned int i = 0, n = this->portraits_size(); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
@@ -23630,7 +24001,7 @@ void FaceSearchException::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->message().data(), this->message().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "BioService.FaceSearchException.message");
+      "BioService.FaceSearchResponse.message");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->message(), target);
@@ -23643,12 +24014,12 @@ void FaceSearchException::SerializeWithCachedSizes(
         4, *this->exception_, target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:BioService.FaceSearchException)
+  // @@protoc_insertion_point(serialize_to_array_end:BioService.FaceSearchResponse)
   return target;
 }
 
-int FaceSearchException::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:BioService.FaceSearchException)
+int FaceSearchResponse::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.FaceSearchResponse)
   int total_size = 0;
 
   // optional string message = 3;
@@ -23687,23 +24058,23 @@ int FaceSearchException::ByteSize() const {
   return total_size;
 }
 
-void FaceSearchException::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:BioService.FaceSearchException)
+void FaceSearchResponse::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.FaceSearchResponse)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  const FaceSearchException* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const FaceSearchException>(
+  const FaceSearchResponse* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const FaceSearchResponse>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.FaceSearchException)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.FaceSearchResponse)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.FaceSearchException)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.FaceSearchResponse)
     MergeFrom(*source);
   }
 }
 
-void FaceSearchException::MergeFrom(const FaceSearchException& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:BioService.FaceSearchException)
+void FaceSearchResponse::MergeFrom(const FaceSearchResponse& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.FaceSearchResponse)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   portraits_.MergeFrom(from.portraits_);
   matches_.MergeFrom(from.matches_);
@@ -23716,30 +24087,30 @@ void FaceSearchException::MergeFrom(const FaceSearchException& from) {
   }
 }
 
-void FaceSearchException::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:BioService.FaceSearchException)
+void FaceSearchResponse::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.FaceSearchResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void FaceSearchException::CopyFrom(const FaceSearchException& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:BioService.FaceSearchException)
+void FaceSearchResponse::CopyFrom(const FaceSearchResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.FaceSearchResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool FaceSearchException::IsInitialized() const {
+bool FaceSearchResponse::IsInitialized() const {
 
   return true;
 }
 
-void FaceSearchException::Swap(FaceSearchException* other) {
+void FaceSearchResponse::Swap(FaceSearchResponse* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void FaceSearchException::InternalSwap(FaceSearchException* other) {
+void FaceSearchResponse::InternalSwap(FaceSearchResponse* other) {
   portraits_.UnsafeArenaSwap(&other->portraits_);
   matches_.UnsafeArenaSwap(&other->matches_);
   message_.Swap(&other->message_);
@@ -23748,149 +24119,149 @@ void FaceSearchException::InternalSwap(FaceSearchException* other) {
   std::swap(_cached_size_, other->_cached_size_);
 }
 
-::google::protobuf::Metadata FaceSearchException::GetMetadata() const {
+::google::protobuf::Metadata FaceSearchResponse::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = FaceSearchException_descriptor_;
-  metadata.reflection = FaceSearchException_reflection_;
+  metadata.descriptor = FaceSearchResponse_descriptor_;
+  metadata.reflection = FaceSearchResponse_reflection_;
   return metadata;
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// FaceSearchException
+// FaceSearchResponse
 
 // repeated .BioService.PortraitCharacteristic portraits = 1;
-int FaceSearchException::portraits_size() const {
+int FaceSearchResponse::portraits_size() const {
   return portraits_.size();
 }
-void FaceSearchException::clear_portraits() {
+void FaceSearchResponse::clear_portraits() {
   portraits_.Clear();
 }
-const ::BioService::PortraitCharacteristic& FaceSearchException::portraits(int index) const {
-  // @@protoc_insertion_point(field_get:BioService.FaceSearchException.portraits)
+const ::BioService::PortraitCharacteristic& FaceSearchResponse::portraits(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResponse.portraits)
   return portraits_.Get(index);
 }
-::BioService::PortraitCharacteristic* FaceSearchException::mutable_portraits(int index) {
-  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchException.portraits)
+::BioService::PortraitCharacteristic* FaceSearchResponse::mutable_portraits(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResponse.portraits)
   return portraits_.Mutable(index);
 }
-::BioService::PortraitCharacteristic* FaceSearchException::add_portraits() {
-  // @@protoc_insertion_point(field_add:BioService.FaceSearchException.portraits)
+::BioService::PortraitCharacteristic* FaceSearchResponse::add_portraits() {
+  // @@protoc_insertion_point(field_add:BioService.FaceSearchResponse.portraits)
   return portraits_.Add();
 }
 ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic >*
-FaceSearchException::mutable_portraits() {
-  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchException.portraits)
+FaceSearchResponse::mutable_portraits() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchResponse.portraits)
   return &portraits_;
 }
 const ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic >&
-FaceSearchException::portraits() const {
-  // @@protoc_insertion_point(field_list:BioService.FaceSearchException.portraits)
+FaceSearchResponse::portraits() const {
+  // @@protoc_insertion_point(field_list:BioService.FaceSearchResponse.portraits)
   return portraits_;
 }
 
 // repeated .BioService.Matches matches = 2;
-int FaceSearchException::matches_size() const {
+int FaceSearchResponse::matches_size() const {
   return matches_.size();
 }
-void FaceSearchException::clear_matches() {
+void FaceSearchResponse::clear_matches() {
   matches_.Clear();
 }
-const ::BioService::Matches& FaceSearchException::matches(int index) const {
-  // @@protoc_insertion_point(field_get:BioService.FaceSearchException.matches)
+const ::BioService::Matches& FaceSearchResponse::matches(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResponse.matches)
   return matches_.Get(index);
 }
-::BioService::Matches* FaceSearchException::mutable_matches(int index) {
-  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchException.matches)
+::BioService::Matches* FaceSearchResponse::mutable_matches(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResponse.matches)
   return matches_.Mutable(index);
 }
-::BioService::Matches* FaceSearchException::add_matches() {
-  // @@protoc_insertion_point(field_add:BioService.FaceSearchException.matches)
+::BioService::Matches* FaceSearchResponse::add_matches() {
+  // @@protoc_insertion_point(field_add:BioService.FaceSearchResponse.matches)
   return matches_.Add();
 }
 ::google::protobuf::RepeatedPtrField< ::BioService::Matches >*
-FaceSearchException::mutable_matches() {
-  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchException.matches)
+FaceSearchResponse::mutable_matches() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchResponse.matches)
   return &matches_;
 }
 const ::google::protobuf::RepeatedPtrField< ::BioService::Matches >&
-FaceSearchException::matches() const {
-  // @@protoc_insertion_point(field_list:BioService.FaceSearchException.matches)
+FaceSearchResponse::matches() const {
+  // @@protoc_insertion_point(field_list:BioService.FaceSearchResponse.matches)
   return matches_;
 }
 
 // optional string message = 3;
-void FaceSearchException::clear_message() {
+void FaceSearchResponse::clear_message() {
   message_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- const ::std::string& FaceSearchException::message() const {
-  // @@protoc_insertion_point(field_get:BioService.FaceSearchException.message)
+ const ::std::string& FaceSearchResponse::message() const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResponse.message)
   return message_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void FaceSearchException::set_message(const ::std::string& value) {
+ void FaceSearchResponse::set_message(const ::std::string& value) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:BioService.FaceSearchException.message)
+  // @@protoc_insertion_point(field_set:BioService.FaceSearchResponse.message)
 }
- void FaceSearchException::set_message(const char* value) {
+ void FaceSearchResponse::set_message(const char* value) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:BioService.FaceSearchException.message)
+  // @@protoc_insertion_point(field_set_char:BioService.FaceSearchResponse.message)
 }
- void FaceSearchException::set_message(const char* value, size_t size) {
+ void FaceSearchResponse::set_message(const char* value, size_t size) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:BioService.FaceSearchException.message)
+  // @@protoc_insertion_point(field_set_pointer:BioService.FaceSearchResponse.message)
 }
- ::std::string* FaceSearchException::mutable_message() {
+ ::std::string* FaceSearchResponse::mutable_message() {
   
-  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchException.message)
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResponse.message)
   return message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- ::std::string* FaceSearchException::release_message() {
-  // @@protoc_insertion_point(field_release:BioService.FaceSearchException.message)
+ ::std::string* FaceSearchResponse::release_message() {
+  // @@protoc_insertion_point(field_release:BioService.FaceSearchResponse.message)
   
   return message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void FaceSearchException::set_allocated_message(::std::string* message) {
+ void FaceSearchResponse::set_allocated_message(::std::string* message) {
   if (message != NULL) {
     
   } else {
     
   }
   message_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), message);
-  // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchException.message)
+  // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchResponse.message)
 }
 
 // optional .BioService.Exception exception = 4;
-bool FaceSearchException::has_exception() const {
+bool FaceSearchResponse::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
-void FaceSearchException::clear_exception() {
+void FaceSearchResponse::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& FaceSearchException::exception() const {
-  // @@protoc_insertion_point(field_get:BioService.FaceSearchException.exception)
+const ::BioService::Exception& FaceSearchResponse::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResponse.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* FaceSearchException::mutable_exception() {
+::BioService::Exception* FaceSearchResponse::mutable_exception() {
   
   if (exception_ == NULL) {
     exception_ = new ::BioService::Exception;
   }
-  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchException.exception)
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResponse.exception)
   return exception_;
 }
-::BioService::Exception* FaceSearchException::release_exception() {
-  // @@protoc_insertion_point(field_release:BioService.FaceSearchException.exception)
+::BioService::Exception* FaceSearchResponse::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.FaceSearchResponse.exception)
   
   ::BioService::Exception* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void FaceSearchException::set_allocated_exception(::BioService::Exception* exception) {
+void FaceSearchResponse::set_allocated_exception(::BioService::Exception* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -23898,7 +24269,7 @@ void FaceSearchException::set_allocated_exception(::BioService::Exception* excep
   } else {
     
   }
-  // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchException.exception)
+  // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchResponse.exception)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

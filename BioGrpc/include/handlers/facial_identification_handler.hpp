@@ -7,7 +7,7 @@
 #include "utils\response_convertor.hpp"
 #include <common/identification_result.hpp>
 
-using BioService::FaceSearchResult;
+using BioService::FaceSearchResponse;
 namespace BioGrpc
 {
 	class FacialIdentificationHandler
@@ -64,13 +64,13 @@ namespace BioGrpc
 			BioContracts::IdentificationResultPtr result =
 				facial_engine_->identify(target_image, comparison_images);
 			std::cout << "facial_engine_->identify" << std::endl;
-			std::shared_ptr<FaceSearchResult>	proto_matches;
+			std::shared_ptr<FaceSearchResponse>	proto_matches;
 			if (result == nullptr)
-				proto_matches = std::make_shared<FaceSearchResult>();
+				proto_matches = std::make_shared<FaceSearchResponse>();
 			else
 			{
 				ResponseConvertor convertor;
-				proto_matches = std::make_shared<FaceSearchResult>(*convertor.get_face_search_result(result));
+				proto_matches = std::make_shared<FaceSearchResponse>(*convertor.get_face_search_result(result));
 			}
 
 			std::cout << "identification done size = " << result->matches().size() << std::endl;
@@ -87,7 +87,7 @@ namespace BioGrpc
 		std::shared_ptr<BioContracts::IFacialEngine> facial_engine_;
 
 		BioService::IdentificationData                        request_;
-		grpc::ServerAsyncResponseWriter<FaceSearchResult>     responder_;
+		grpc::ServerAsyncResponseWriter<FaceSearchResponse>     responder_;
 
 		RequestStatus status_;
 	};

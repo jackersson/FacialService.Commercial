@@ -307,7 +307,7 @@ namespace Pipeline
 			if (loaded == nullptr)
 				subjects_info.push_back(loaded);
 		}
-		//test
+
 		return this->create_identification_population(subjects_info);
 	}
 	

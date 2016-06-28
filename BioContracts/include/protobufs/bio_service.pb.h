@@ -40,6 +40,7 @@ void protobuf_ShutdownFile_bio_5fservice_2eproto();
 class AccessDevice;
 class AccessInfo;
 class AcquiredData;
+class AcquisitionResponse;
 class BioClient;
 class BioFingerprintData;
 class BioIdentificationRecord;
@@ -58,7 +59,7 @@ class EnrollmentFeedback;
 class Exception;
 class EyesCharacteristic;
 class FaceCharacteristic;
-class FaceSearchException;
+class FaceSearchResponse;
 class FacialImage;
 class FingerprintAcquiredData;
 class FingerprintCharacteristic;
@@ -599,6 +600,97 @@ class ObjectResponse : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ObjectResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AcquisitionResponse : public ::google::protobuf::Message {
+ public:
+  AcquisitionResponse();
+  virtual ~AcquisitionResponse();
+
+  AcquisitionResponse(const AcquisitionResponse& from);
+
+  inline AcquisitionResponse& operator=(const AcquisitionResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AcquisitionResponse& default_instance();
+
+  void Swap(AcquisitionResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  inline AcquisitionResponse* New() const { return New(NULL); }
+
+  AcquisitionResponse* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AcquisitionResponse& from);
+  void MergeFrom(const AcquisitionResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(AcquisitionResponse* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .BioService.PortraitCharacteristic portrait = 1;
+  bool has_portrait() const;
+  void clear_portrait();
+  static const int kPortraitFieldNumber = 1;
+  const ::BioService::PortraitCharacteristic& portrait() const;
+  ::BioService::PortraitCharacteristic* mutable_portrait();
+  ::BioService::PortraitCharacteristic* release_portrait();
+  void set_allocated_portrait(::BioService::PortraitCharacteristic* portrait);
+
+  // optional .BioService.Exception exception = 2;
+  bool has_exception() const;
+  void clear_exception();
+  static const int kExceptionFieldNumber = 2;
+  const ::BioService::Exception& exception() const;
+  ::BioService::Exception* mutable_exception();
+  ::BioService::Exception* release_exception();
+  void set_allocated_exception(::BioService::Exception* exception);
+
+  // @@protoc_insertion_point(class_scope:BioService.AcquisitionResponse)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::BioService::PortraitCharacteristic* portrait_;
+  ::BioService::Exception* exception_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_bio_5fservice_2eproto();
+  friend void protobuf_AssignDesc_bio_5fservice_2eproto();
+  friend void protobuf_ShutdownFile_bio_5fservice_2eproto();
+
+  void InitAsDefaultInstance();
+  static AcquisitionResponse* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -5271,32 +5363,32 @@ class Matches : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class FaceSearchException : public ::google::protobuf::Message {
+class FaceSearchResponse : public ::google::protobuf::Message {
  public:
-  FaceSearchException();
-  virtual ~FaceSearchException();
+  FaceSearchResponse();
+  virtual ~FaceSearchResponse();
 
-  FaceSearchException(const FaceSearchException& from);
+  FaceSearchResponse(const FaceSearchResponse& from);
 
-  inline FaceSearchException& operator=(const FaceSearchException& from) {
+  inline FaceSearchResponse& operator=(const FaceSearchResponse& from) {
     CopyFrom(from);
     return *this;
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const FaceSearchException& default_instance();
+  static const FaceSearchResponse& default_instance();
 
-  void Swap(FaceSearchException* other);
+  void Swap(FaceSearchResponse* other);
 
   // implements Message ----------------------------------------------
 
-  inline FaceSearchException* New() const { return New(NULL); }
+  inline FaceSearchResponse* New() const { return New(NULL); }
 
-  FaceSearchException* New(::google::protobuf::Arena* arena) const;
+  FaceSearchResponse* New(::google::protobuf::Arena* arena) const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const FaceSearchException& from);
-  void MergeFrom(const FaceSearchException& from);
+  void CopyFrom(const FaceSearchResponse& from);
+  void MergeFrom(const FaceSearchResponse& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -5311,7 +5403,7 @@ class FaceSearchException : public ::google::protobuf::Message {
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
-  void InternalSwap(FaceSearchException* other);
+  void InternalSwap(FaceSearchResponse* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return _internal_metadata_.arena();
@@ -5371,7 +5463,7 @@ class FaceSearchException : public ::google::protobuf::Message {
   ::BioService::Exception* release_exception();
   void set_allocated_exception(::BioService::Exception* exception);
 
-  // @@protoc_insertion_point(class_scope:BioService.FaceSearchException)
+  // @@protoc_insertion_point(class_scope:BioService.FaceSearchResponse)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -5386,7 +5478,7 @@ class FaceSearchException : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_bio_5fservice_2eproto();
 
   void InitAsDefaultInstance();
-  static FaceSearchException* default_instance_;
+  static FaceSearchResponse* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -6528,6 +6620,86 @@ inline void ObjectResponse::set_allocated_exception(::BioService::Exception* exc
     
   }
   // @@protoc_insertion_point(field_set_allocated:BioService.ObjectResponse.exception)
+}
+
+// -------------------------------------------------------------------
+
+// AcquisitionResponse
+
+// optional .BioService.PortraitCharacteristic portrait = 1;
+inline bool AcquisitionResponse::has_portrait() const {
+  return !_is_default_instance_ && portrait_ != NULL;
+}
+inline void AcquisitionResponse::clear_portrait() {
+  if (GetArenaNoVirtual() == NULL && portrait_ != NULL) delete portrait_;
+  portrait_ = NULL;
+}
+inline const ::BioService::PortraitCharacteristic& AcquisitionResponse::portrait() const {
+  // @@protoc_insertion_point(field_get:BioService.AcquisitionResponse.portrait)
+  return portrait_ != NULL ? *portrait_ : *default_instance_->portrait_;
+}
+inline ::BioService::PortraitCharacteristic* AcquisitionResponse::mutable_portrait() {
+  
+  if (portrait_ == NULL) {
+    portrait_ = new ::BioService::PortraitCharacteristic;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.AcquisitionResponse.portrait)
+  return portrait_;
+}
+inline ::BioService::PortraitCharacteristic* AcquisitionResponse::release_portrait() {
+  // @@protoc_insertion_point(field_release:BioService.AcquisitionResponse.portrait)
+  
+  ::BioService::PortraitCharacteristic* temp = portrait_;
+  portrait_ = NULL;
+  return temp;
+}
+inline void AcquisitionResponse::set_allocated_portrait(::BioService::PortraitCharacteristic* portrait) {
+  delete portrait_;
+  portrait_ = portrait;
+  if (portrait) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.AcquisitionResponse.portrait)
+}
+
+// optional .BioService.Exception exception = 2;
+inline bool AcquisitionResponse::has_exception() const {
+  return !_is_default_instance_ && exception_ != NULL;
+}
+inline void AcquisitionResponse::clear_exception() {
+  if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
+  exception_ = NULL;
+}
+inline const ::BioService::Exception& AcquisitionResponse::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.AcquisitionResponse.exception)
+  return exception_ != NULL ? *exception_ : *default_instance_->exception_;
+}
+inline ::BioService::Exception* AcquisitionResponse::mutable_exception() {
+  
+  if (exception_ == NULL) {
+    exception_ = new ::BioService::Exception;
+  }
+  // @@protoc_insertion_point(field_mutable:BioService.AcquisitionResponse.exception)
+  return exception_;
+}
+inline ::BioService::Exception* AcquisitionResponse::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.AcquisitionResponse.exception)
+  
+  ::BioService::Exception* temp = exception_;
+  exception_ = NULL;
+  return temp;
+}
+inline void AcquisitionResponse::set_allocated_exception(::BioService::Exception* exception) {
+  delete exception_;
+  exception_ = exception;
+  if (exception) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:BioService.AcquisitionResponse.exception)
 }
 
 // -------------------------------------------------------------------
@@ -11734,140 +11906,140 @@ Matches::matches() const {
 
 // -------------------------------------------------------------------
 
-// FaceSearchException
+// FaceSearchResponse
 
 // repeated .BioService.PortraitCharacteristic portraits = 1;
-inline int FaceSearchException::portraits_size() const {
+inline int FaceSearchResponse::portraits_size() const {
   return portraits_.size();
 }
-inline void FaceSearchException::clear_portraits() {
+inline void FaceSearchResponse::clear_portraits() {
   portraits_.Clear();
 }
-inline const ::BioService::PortraitCharacteristic& FaceSearchException::portraits(int index) const {
-  // @@protoc_insertion_point(field_get:BioService.FaceSearchException.portraits)
+inline const ::BioService::PortraitCharacteristic& FaceSearchResponse::portraits(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResponse.portraits)
   return portraits_.Get(index);
 }
-inline ::BioService::PortraitCharacteristic* FaceSearchException::mutable_portraits(int index) {
-  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchException.portraits)
+inline ::BioService::PortraitCharacteristic* FaceSearchResponse::mutable_portraits(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResponse.portraits)
   return portraits_.Mutable(index);
 }
-inline ::BioService::PortraitCharacteristic* FaceSearchException::add_portraits() {
-  // @@protoc_insertion_point(field_add:BioService.FaceSearchException.portraits)
+inline ::BioService::PortraitCharacteristic* FaceSearchResponse::add_portraits() {
+  // @@protoc_insertion_point(field_add:BioService.FaceSearchResponse.portraits)
   return portraits_.Add();
 }
 inline ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic >*
-FaceSearchException::mutable_portraits() {
-  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchException.portraits)
+FaceSearchResponse::mutable_portraits() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchResponse.portraits)
   return &portraits_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic >&
-FaceSearchException::portraits() const {
-  // @@protoc_insertion_point(field_list:BioService.FaceSearchException.portraits)
+FaceSearchResponse::portraits() const {
+  // @@protoc_insertion_point(field_list:BioService.FaceSearchResponse.portraits)
   return portraits_;
 }
 
 // repeated .BioService.Matches matches = 2;
-inline int FaceSearchException::matches_size() const {
+inline int FaceSearchResponse::matches_size() const {
   return matches_.size();
 }
-inline void FaceSearchException::clear_matches() {
+inline void FaceSearchResponse::clear_matches() {
   matches_.Clear();
 }
-inline const ::BioService::Matches& FaceSearchException::matches(int index) const {
-  // @@protoc_insertion_point(field_get:BioService.FaceSearchException.matches)
+inline const ::BioService::Matches& FaceSearchResponse::matches(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResponse.matches)
   return matches_.Get(index);
 }
-inline ::BioService::Matches* FaceSearchException::mutable_matches(int index) {
-  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchException.matches)
+inline ::BioService::Matches* FaceSearchResponse::mutable_matches(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResponse.matches)
   return matches_.Mutable(index);
 }
-inline ::BioService::Matches* FaceSearchException::add_matches() {
-  // @@protoc_insertion_point(field_add:BioService.FaceSearchException.matches)
+inline ::BioService::Matches* FaceSearchResponse::add_matches() {
+  // @@protoc_insertion_point(field_add:BioService.FaceSearchResponse.matches)
   return matches_.Add();
 }
 inline ::google::protobuf::RepeatedPtrField< ::BioService::Matches >*
-FaceSearchException::mutable_matches() {
-  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchException.matches)
+FaceSearchResponse::mutable_matches() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.FaceSearchResponse.matches)
   return &matches_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::BioService::Matches >&
-FaceSearchException::matches() const {
-  // @@protoc_insertion_point(field_list:BioService.FaceSearchException.matches)
+FaceSearchResponse::matches() const {
+  // @@protoc_insertion_point(field_list:BioService.FaceSearchResponse.matches)
   return matches_;
 }
 
 // optional string message = 3;
-inline void FaceSearchException::clear_message() {
+inline void FaceSearchResponse::clear_message() {
   message_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& FaceSearchException::message() const {
-  // @@protoc_insertion_point(field_get:BioService.FaceSearchException.message)
+inline const ::std::string& FaceSearchResponse::message() const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResponse.message)
   return message_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void FaceSearchException::set_message(const ::std::string& value) {
+inline void FaceSearchResponse::set_message(const ::std::string& value) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:BioService.FaceSearchException.message)
+  // @@protoc_insertion_point(field_set:BioService.FaceSearchResponse.message)
 }
-inline void FaceSearchException::set_message(const char* value) {
+inline void FaceSearchResponse::set_message(const char* value) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:BioService.FaceSearchException.message)
+  // @@protoc_insertion_point(field_set_char:BioService.FaceSearchResponse.message)
 }
-inline void FaceSearchException::set_message(const char* value, size_t size) {
+inline void FaceSearchResponse::set_message(const char* value, size_t size) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:BioService.FaceSearchException.message)
+  // @@protoc_insertion_point(field_set_pointer:BioService.FaceSearchResponse.message)
 }
-inline ::std::string* FaceSearchException::mutable_message() {
+inline ::std::string* FaceSearchResponse::mutable_message() {
   
-  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchException.message)
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResponse.message)
   return message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* FaceSearchException::release_message() {
-  // @@protoc_insertion_point(field_release:BioService.FaceSearchException.message)
+inline ::std::string* FaceSearchResponse::release_message() {
+  // @@protoc_insertion_point(field_release:BioService.FaceSearchResponse.message)
   
   return message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void FaceSearchException::set_allocated_message(::std::string* message) {
+inline void FaceSearchResponse::set_allocated_message(::std::string* message) {
   if (message != NULL) {
     
   } else {
     
   }
   message_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), message);
-  // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchException.message)
+  // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchResponse.message)
 }
 
 // optional .BioService.Exception exception = 4;
-inline bool FaceSearchException::has_exception() const {
+inline bool FaceSearchResponse::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
-inline void FaceSearchException::clear_exception() {
+inline void FaceSearchResponse::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-inline const ::BioService::Exception& FaceSearchException::exception() const {
-  // @@protoc_insertion_point(field_get:BioService.FaceSearchException.exception)
+inline const ::BioService::Exception& FaceSearchResponse::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.FaceSearchResponse.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-inline ::BioService::Exception* FaceSearchException::mutable_exception() {
+inline ::BioService::Exception* FaceSearchResponse::mutable_exception() {
   
   if (exception_ == NULL) {
     exception_ = new ::BioService::Exception;
   }
-  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchException.exception)
+  // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResponse.exception)
   return exception_;
 }
-inline ::BioService::Exception* FaceSearchException::release_exception() {
-  // @@protoc_insertion_point(field_release:BioService.FaceSearchException.exception)
+inline ::BioService::Exception* FaceSearchResponse::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.FaceSearchResponse.exception)
   
   ::BioService::Exception* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-inline void FaceSearchException::set_allocated_exception(::BioService::Exception* exception) {
+inline void FaceSearchResponse::set_allocated_exception(::BioService::Exception* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -11875,7 +12047,7 @@ inline void FaceSearchException::set_allocated_exception(::BioService::Exception
   } else {
     
   }
-  // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchException.exception)
+  // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchResponse.exception)
 }
 
 // -------------------------------------------------------------------
@@ -12632,6 +12804,8 @@ inline void BioClient::set_allocated_mac_address(::std::string* mac_address) {
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

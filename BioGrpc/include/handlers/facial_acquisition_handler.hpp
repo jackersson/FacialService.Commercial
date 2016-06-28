@@ -54,14 +54,23 @@ namespace BioGrpc
 
 		void processRequest()
 		{			
-			std::string image_bytestring = request_.bytestring();
+		
+			auto image_bytestring = request_.bytestring();
 
 			BioContracts::RawImage image(image_bytestring, request_.id());
 
 			auto start = clock();
 			std::cout << " acquisition start time : " << start << std::endl;
-			BioContracts::IImageInfoPtr resp =
-				facial_engine_->acquire(image);
+			BioContracts::IImageInfoPtr resp;
+
+			std::string possible_exception("test");
+			try	{
+				resp =	facial_engine_->acquire(image);
+			}
+			catch (std::exception& ex)
+			{
+				possible_exception = ex.what();
+			}
 
 			std::cout << " acquisition done time : " << clock() - start << std::endl;
 			start = clock();
@@ -73,11 +82,17 @@ namespace BioGrpc
 				ResponseConvertor convertor;
 				portrait_characteristics = std::make_shared<BioService::PortraitCharacteristic>
 				                                          	(*convertor.getPortraitCharacteristics(resp));
-			}			
-			
+			}
+
+			auto response = new BioService::AcquisitionResponse();
+			response->set_allocated_portrait(portrait_characteristics.get());
+
+			auto exception(std::make_shared<BioService::Exception>());
+			exception->set_message(possible_exception);
+			response->set_allocated_exception(exception.get());
 			
 			status_ = FINISH;
-			responder_.Finish(*portrait_characteristics, grpc::Status::OK, this);			
+			responder_.Finish(*response, grpc::Status::OK, this);
 
 			std::cout << " finnish " << clock() - start << std::endl;
 		}		
@@ -95,7 +110,7 @@ namespace BioGrpc
 		std::shared_ptr<BioContracts::IFacialEngine> facial_engine_;
 
 		BioService::Photo                    request_;
-		grpc::ServerAsyncResponseWriter<BioService::PortraitCharacteristic>    responder_;
+		grpc::ServerAsyncResponseWriter<BioService::AcquisitionResponse>    responder_;
 
 		RequestStatus status_;
 	};
