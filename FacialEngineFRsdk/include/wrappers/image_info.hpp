@@ -65,7 +65,7 @@ namespace FRsdkEntities
 		FRsdkTypes::FaceVacsImage image_;
 
 		static sitmo::prng_engine randomizer_;
-		//test
+		//test 2
 		long id_;
 	};
 
