@@ -16,7 +16,7 @@ namespace BioGrpc
 	class ResponseConvertor 
 	{
 	public:
-	
+	 // test
 		BioService::FaceSearchResult* get_face_search_result( BioContracts::IdentificationResultPtr identification_result)
 		{
 			BioService::FaceSearchResult* result = new BioService::FaceSearchResult();
