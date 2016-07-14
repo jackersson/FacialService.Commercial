@@ -34,29 +34,49 @@ namespace BioFacialEngine
 		BioContracts::VerificationResultPtr
 		verify(const std::string& object, const std::string& subject) override
 		{
-			auto verify = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;		
+			//auto verify = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;		
 			return pipeline_->verify_face(object, subject);
 		}
 
 		BioContracts::VerificationResultPtr
 		verify(const BioContracts::RawImage& object, const BioContracts::RawImage& subject) override
 		{
-			auto verify = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;
+			//auto verify = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;
 			return pipeline_->verify_face(object, subject);
 		}
 
 		BioContracts::IdentificationResultPtr
 		identify(const std::string& object, const std::list<std::string>& subject) override
 		{
-			auto verify = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;		
+			//auto verify = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;		
 			return pipeline_->identify_face(object, subject);
 		}
 
 		BioContracts::IdentificationResultPtr
 		identify(const BioContracts::RawImage& object, const std::list<BioContracts::RawImage>& subject) override
 		{
-			auto verify = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;
+			//auto verify = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;
 			return pipeline_->identify_face(object, subject);
+		}
+
+		BioContracts::IdentificationResultPtr
+		identify(const BioContracts::RawImage& object, long population_id ) override
+		{
+		
+			//auto verify = Pipeline::BimetricMultiTask::FULL_PORTRAIT_ANALYSIS;
+			return pipeline_->identify_face(object, population_id);
+		}
+
+		BioContracts::IImageInfoSet
+		create_population(const std::list<BioContracts::RawImage>& subjects, long& population_id) override	{
+
+			auto images = pipeline_->load_identification_population(subjects, population_id);
+			BioContracts::IImageInfoSet image_info_set;
+
+			image_info_set.set_identification_images<std::list<FRsdkEntities::ImageInfoPtr>::iterator>
+				(images.begin(), images.end());
+		
+			return image_info_set;
 		}
 		
 		/*

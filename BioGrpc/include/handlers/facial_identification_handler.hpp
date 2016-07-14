@@ -61,9 +61,20 @@ namespace BioGrpc
 				comparison_images.push_back(comparison_image);
       }
 			
-			BioContracts::IdentificationResultPtr result =
-				facial_engine_->identify(target_image, comparison_images);
-			std::cout << "facial_engine_->identify" << std::endl;
+			BioContracts::IdentificationResultPtr result = nullptr;
+			try
+			{
+				if (comparison_images.size() > 0)
+				 result =
+					facial_engine_->identify(target_image, comparison_images);
+				else 
+					result =
+				   	facial_engine_->identify(target_image, request_.population_id());
+				std::cout << "facial_engine_->identify" << std::endl;
+			}catch ( std::exception& exception )
+			{
+				std::cout << " identification exception " << exception.what() << std::endl;
+			}
 			std::shared_ptr<FaceSearchResponse>	proto_matches;
 			if (result == nullptr)
 				proto_matches = std::make_shared<FaceSearchResponse>();
@@ -71,9 +82,10 @@ namespace BioGrpc
 			{
 				ResponseConvertor convertor;
 				proto_matches = std::make_shared<FaceSearchResponse>(*convertor.get_face_search_result(result));
+				std::cout << "identification done size = " << result->matches().size() << std::endl;
 			}
 
-			std::cout << "identification done size = " << result->matches().size() << std::endl;
+			
 			status_ = FINISH;
 			responder_.Finish(*proto_matches, grpc::Status::OK, this);
 		}

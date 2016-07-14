@@ -42,27 +42,35 @@ namespace BioFacialEngine
 		while (items_.find(key) != items_.end())		
 			key = randomizer_();
 
+		if (images.size() <= 0)
+			return nullptr;
+
 		auto population = std::make_shared<IdentificationItem>(images, configuration_, key);
 		items_.insert(std::pair<long, IdentificationItemPtr>(key, population));
 
 		return population;
 	}
 
-	BioContracts::Matches FacialIdentification::identify(IdentificationPair pair, long population_id)
+	BioContracts::Matches FacialIdentification::identify(const IdentificationPair& pair)
 	{		
-		auto object = pair.first;
+		auto object = pair.target_image();
 		if (object->size() <= 0)
-			return BioContracts::Matches(DEFAULT_POPULATION);
-
+			return BioContracts::Matches(IdentificationPair::DEFAULT_POPULATION);
+			
+		long population_id   = pair.population_id();
 		auto population_info = items_.find(population_id);
 		IdentificationItemPtr population;
-		if (population_id == DEFAULT_POPULATION && population_info == items_.end())		
-			population = create_population(pair.second);
+		if (population_id == IdentificationPair::DEFAULT_POPULATION && population_info == items_.end())
+			population = create_population(pair.population());
 		else		
 			population = population_info->second;
 
-		auto matches = population->identify(pair.first);
+		if (population != nullptr)
+		{
+			auto matches = population->identify(pair.target_image());
+			return matches;
+		}
 		
-		return matches;
+		return BioContracts::Matches(IdentificationPair::DEFAULT_POPULATION);
 	}
 }

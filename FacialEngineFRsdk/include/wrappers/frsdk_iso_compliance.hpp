@@ -89,7 +89,7 @@ namespace FRsdkEntities
 
 		void setIsoComplianceBest(int& result, const FRsdk::ISO_19794_5::FullFrontal::Compliance& iso_compliance)
 		{
-			
+			/*
 			
 			concurrency::parallel_invoke(
 
@@ -104,7 +104,7 @@ namespace FRsdkEntities
 			[&]() {setFlag(result, iso_compliance.eyesNotRedBestPractice(), BioService::eyesNotRedBestPractice);									 },
 			[&]() {setFlag(result, iso_compliance.mouthClosedBestPractice(), BioService::mouthClosedBestPractice);  					     }
 			);
-			
+			*/
 		}
 
 		void setIsoComplianceAdditional(int& result, const FRsdk::ISO_19794_5::FullFrontal::Compliance& iso_compliance)

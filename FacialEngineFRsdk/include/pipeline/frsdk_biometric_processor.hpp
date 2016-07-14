@@ -122,16 +122,18 @@ namespace Pipeline
 		}
 
 		BioContracts::IdentificationResultPtr
-		identify(BioFacialEngine::IdentificationPair  pInfo) override
+		identify(const BioFacialEngine::IdentificationPair& pInfo) override
 		{			
 			auto matches = identifyer_->identify(pInfo);		
-			auto vr(std::make_shared<BioContracts::IdentificationResult>(matches, pInfo.first));
-			vr->set_identification_images<std::list<FRsdkEntities::ImageInfoPtr>::iterator>(
-				                            pInfo.second.begin(), pInfo.second.end());			
-			return vr;			
+			auto identification_result(std::make_shared<BioContracts::IdentificationResult>( matches
+				                                                                             , pInfo.target_image()));
+			std::list<FRsdkEntities::ImageInfoPtr> population = pInfo.population();
+			identification_result->set_identification_images<std::list<FRsdkEntities::ImageInfoPtr>::iterator>
+			                     	(	population.begin(), population.end());
+			return identification_result;
 		}
 		
-		long create_identification_population( std::list<FRsdkEntities::ImageInfoPtr> images) 
+		long create_identification_population( const std::list<FRsdkEntities::ImageInfoPtr>& images) 
 		{
 			auto population = identifyer_->create_population(images);
 			return population->id();

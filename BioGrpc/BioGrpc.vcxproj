@@ -81,6 +81,7 @@
     <ClInclude Include="include\calls\add_facial_image_call.hpp" />
     <ClInclude Include="include\clients\bio_clients_manager.hpp" />
     <ClInclude Include="include\clients\bio_database_service_client.hpp" />
+    <ClInclude Include="include\handlers\create_population_handler.hpp" />
     <ClInclude Include="include\handlers\facial_acquisition_handler.hpp" />
     <ClInclude Include="include\handlers\facial_enrollment_handler.hpp" />
     <ClInclude Include="include\handlers\facial_identification_handler.hpp" />

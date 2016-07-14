@@ -70,6 +70,7 @@ namespace BioGrpc
 			catch (std::exception& ex)
 			{
 				possible_exception = ex.what();
+				std::cout << " exception : " << possible_exception << std::endl;
 			}
 
 			std::cout << " acquisition done time : " << clock() - start << std::endl;
@@ -87,7 +88,7 @@ namespace BioGrpc
 			auto response = new BioService::AcquisitionResponse();
 			response->set_allocated_portrait(portrait_characteristics.get());
 
-			auto exception(std::make_shared<BioService::Exception>());
+			auto exception(std::make_shared<BioService::ServiceException>());
 			exception->set_message(possible_exception);
 			response->set_allocated_exception(exception.get());
 			

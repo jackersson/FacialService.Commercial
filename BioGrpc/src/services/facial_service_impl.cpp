@@ -4,6 +4,7 @@
 #include "handlers/facial_enrollment_handler.hpp"
 #include "handlers/facial_acquisition_handler.hpp"
 #include "handlers\facial_verification_handler.hpp"
+#include "handlers/create_population_handler.hpp"
 
 #include "src/cpp/server/dynamic_thread_pool.h"
 
@@ -34,9 +35,10 @@ namespace BioGrpc
 		
 		builder->RegisterService(service_.get());
   
-		addRpcHandler<FacialAcquisitionHandler> (*thread_pool_, builder);
-		addRpcHandler<FacialVerificationHandler>(*thread_pool_, builder);
+		addRpcHandler<FacialAcquisitionHandler>   (*thread_pool_, builder);
+		addRpcHandler<FacialVerificationHandler>  (*thread_pool_, builder);
 		addRpcHandler<FacialIdentificationHandler>(*thread_pool_, builder);
+		addRpcHandler<CreatePopulationHandler>    (*thread_pool_, builder);
 	}
 
 	void FacialServiceImpl::start()

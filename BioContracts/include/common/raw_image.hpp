@@ -18,16 +18,18 @@ namespace BioContracts
 	class RawImage
 	{
 	public:
-		RawImage(const std::string& bytes, long id) : pair_(bytes, id), pixel_format_(INVALID)		{
-			pixel_format_ = check_pixel_format(bytes.c_str(), bytes.size());
+		RawImage(const std::string& bytes, long id) : pair_(bytes, id)		{
+			pixel_format_ = check_pixel_format(bytes.c_str(), bytes.size());			
+			//std::cout << "image_format = " << pixel_format();
 		}
-		RawImage(const RawImage& raw_image) : pair_(raw_image.pair_), pixel_format_(INVALID) {}
+		RawImage(const RawImage& raw_image) : pair_(raw_image.pair_)
+			                                  , pixel_format_(raw_image.pixel_format_){}
 
 		long id() const { return pair_.second; }
 
 		const std::string& bytes() const { return pair_.first; }
 
-		std::string pixel_format() const {
+		std::string pixel_format() const {		
 			return get_pixel_fomat_name(pixel_format_);
 		}	
 

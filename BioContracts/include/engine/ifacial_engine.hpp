@@ -34,6 +34,13 @@ namespace BioContracts
 		virtual IdentificationResultPtr
 		identify(const RawImage& object, const std::list<RawImage>& subjects) = 0;
 
+		virtual IdentificationResultPtr
+			identify(const RawImage& object, long population_id) = 0;
+
+		virtual IImageInfoSet create_population( const std::list<RawImage>& subjects
+			                                     , long& population_id) = 0;
+
+
 		//virtual IImageInfoPtr
 		//	enroll(const std::string& filename) = 0;
 

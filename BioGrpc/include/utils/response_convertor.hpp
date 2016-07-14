@@ -16,6 +16,23 @@ namespace BioGrpc
 	class ResponseConvertor 
 	{
 	public:
+
+		BioService::PopulationCreationResponse* 
+		get_population_creation_response(  BioContracts::IImageInfoSet& images )
+		{
+			BioService::PopulationCreationResponse* response = new BioService::PopulationCreationResponse();
+			//BioService::PortraitCharacteristic* pch = response->add_portrait();
+			//	Concurrency::parallel_for_each(images.cbegin(), images.cend(),
+			//	[&](BioContracts::IImageInfoPtr image)
+			for (auto it = images.cbegin(); it != images.cend(); ++it)
+			{
+				BioService::PortraitCharacteristic* pch = response->add_portrait();
+				updatePortraitCharacteristics(*pch, *it);
+			}//);			  
+		
+			return response;
+				
+		}
 	
 		BioService::FaceSearchResponse* get_face_search_result( BioContracts::IdentificationResultPtr identification_result)
 		{

@@ -16,7 +16,7 @@ namespace Pipeline
 		  FACIAL_EXTRACTION      = FaceFind | FaceImageExtraction
 		, FAST_PORTRAIT_ANALYSIS = FaceFind | PortraitAnalysis
 		, ISO_COMPLIANCE_TEST    = FAST_PORTRAIT_ANALYSIS | IsoComplianceTest
-		, FULL_PORTRAIT_ANALYSIS = FAST_PORTRAIT_ANALYSIS/*ISO_COMPLIANCE_TEST*/ |  FaceImageExtraction
+		, FULL_PORTRAIT_ANALYSIS = ISO_COMPLIANCE_TEST |  FaceImageExtraction
 		, FAST_ENROLLMENT        = FACIAL_EXTRACTION | Enrollment
 		, FULL_ENROLLMENT        = FULL_PORTRAIT_ANALYSIS | Enrollment
 	};
@@ -30,6 +30,7 @@ namespace Pipeline
 	};
 
 	
+	typedef std::list<FRsdkEntities::ImageInfoPtr> ImageInfoSet;
 
 	class BiometricPipelineBalanced : BiometricPipelineAgent
 	{		
@@ -58,7 +59,6 @@ namespace Pipeline
 		typedef std::unique_ptr<Concurrency::call<FaceInfoAwaitablePtr >> FaceInfoAwaitableCallPtr  ;
 		typedef std::unique_ptr<Concurrency::call<ImageInfoAwaitablePtr>> ImageInfoAwaitableCallPtr ;
 		typedef Concurrency::unbounded_buffer<FaceInfoAwaitablePtr>   FaceInfoAwaitableBuffer   ;
-		
 	
 	public:
 		explicit BiometricPipelineBalanced(IBiometricProcessorPtr pipeline);			                                
@@ -88,12 +88,24 @@ namespace Pipeline
 			                                                 , bool fast = false);
 
 		BioContracts::IdentificationResultPtr
+    identify_face( const std::string& object
+		             , long population_id
+							   , bool  fast = false );
+
+		BioContracts::IdentificationResultPtr
     identify_face( const BioContracts::RawImage& object
 		             , const std::list<BioContracts::RawImage>& subjects
 							   , bool  fast = false );
 
-		long create_identify_population(const std::list<BioContracts::RawImage>& subjects) const;
-		long create_identify_population(const std::list<std::string>& subjects) const;
+		BioContracts::IdentificationResultPtr
+    identify_face( const BioContracts::RawImage& object
+		             , long population_id
+							   , bool  fast = false );
+
+		ImageInfoSet load_identification_population( const std::list<BioContracts::RawImage>& subjects
+			                                                , long& population_id);
+		ImageInfoSet load_identification_population( const std::list<std::string>& subjects
+			                                                , long& population_id);
 		
 
 		void stop();		
@@ -116,7 +128,7 @@ namespace Pipeline
 		FRsdkEntities::ImageInfoPtr load_image(const std::string& filename) const;
 		FRsdkEntities::ImageInfoPtr load_image(const BioContracts::RawImage& raw_image) const;
 
-		long create_identify_population(const std::list<FRsdkEntities::ImageInfoPtr>& subjects);
+		long prepare_identification_population(const std::list<FRsdkEntities::ImageInfoPtr>& subjects);
 
 		void do_task(FRsdkEntities::ImageInfoPtr image, long task);
 	

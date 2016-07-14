@@ -3,6 +3,8 @@
 
 #include "common/iface_characteristics.hpp"
 #include <string>
+#include <list>
+#include <ppl.h>
 
 namespace BioContracts
 {
@@ -37,6 +39,39 @@ namespace BioContracts
 
 	typedef std::shared_ptr<IFaceInfo>  IFaceInfoPtr ;
 	typedef std::shared_ptr<IImageInfo> IImageInfoPtr;
+
+	class IImageInfoSet
+	{
+	public:
+	  IImageInfoSet(){}		
+		template <typename Iter>
+		void set_identification_images(Iter begin, Iter end)
+		{
+			Concurrency::parallel_for_each(begin, end,
+				[&](IImageInfoPtr image){
+				images_.push_back(image);
+			}
+			);
+		}
+
+		std::list<IImageInfoPtr>::const_iterator cbegin() const {
+			return images_.cbegin();
+		}
+
+		std::list<IImageInfoPtr>::const_iterator cend() const {
+			return images_.cend();
+		}
+
+		size_t size() const
+	  {
+			return images_.size();
+	  }
+
+	private:	
+		std::list<IImageInfoPtr> images_;
+	};	
+
+	//typedef std::list<IImageInfoPtr> IImageInfoSet;
 }
 
 #endif

@@ -21,12 +21,12 @@ namespace BioService {
 
 namespace {
 
-const ::google::protobuf::Descriptor* Exception_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* ServiceException_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  Exception_reflection_ = NULL;
-const ::google::protobuf::Descriptor* ObjectResponse_descriptor_ = NULL;
+  ServiceException_reflection_ = NULL;
+const ::google::protobuf::Descriptor* PopulationCreationResponse_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  ObjectResponse_reflection_ = NULL;
+  PopulationCreationResponse_reflection_ = NULL;
 const ::google::protobuf::Descriptor* AcquisitionResponse_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   AcquisitionResponse_reflection_ = NULL;
@@ -192,6 +192,7 @@ const ::google::protobuf::EnumDescriptor* ImageFormat_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EntityState_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* Finger_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* EyeType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* AccessState_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* Gender_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* Rights_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* MessageType_descriptor_ = NULL;
@@ -209,39 +210,40 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "bio_service.proto");
   GOOGLE_CHECK(file != NULL);
-  Exception_descriptor_ = file->message_type(0);
-  static const int Exception_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Exception, is_ok_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Exception, error_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Exception, message_),
+  ServiceException_descriptor_ = file->message_type(0);
+  static const int ServiceException_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServiceException, is_ok_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServiceException, error_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServiceException, message_),
   };
-  Exception_reflection_ =
+  ServiceException_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      Exception_descriptor_,
-      Exception::default_instance_,
-      Exception_offsets_,
+      ServiceException_descriptor_,
+      ServiceException::default_instance_,
+      ServiceException_offsets_,
       -1,
       -1,
       -1,
-      sizeof(Exception),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Exception, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Exception, _is_default_instance_));
-  ObjectResponse_descriptor_ = file->message_type(1);
-  static const int ObjectResponse_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectResponse, id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectResponse, exception_),
+      sizeof(ServiceException),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServiceException, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServiceException, _is_default_instance_));
+  PopulationCreationResponse_descriptor_ = file->message_type(1);
+  static const int PopulationCreationResponse_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PopulationCreationResponse, id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PopulationCreationResponse, portrait_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PopulationCreationResponse, exception_),
   };
-  ObjectResponse_reflection_ =
+  PopulationCreationResponse_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      ObjectResponse_descriptor_,
-      ObjectResponse::default_instance_,
-      ObjectResponse_offsets_,
+      PopulationCreationResponse_descriptor_,
+      PopulationCreationResponse::default_instance_,
+      PopulationCreationResponse_offsets_,
       -1,
       -1,
       -1,
-      sizeof(ObjectResponse),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectResponse, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectResponse, _is_default_instance_));
+      sizeof(PopulationCreationResponse),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PopulationCreationResponse, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PopulationCreationResponse, _is_default_instance_));
   AcquisitionResponse_descriptor_ = file->message_type(2);
   static const int AcquisitionResponse_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AcquisitionResponse, portrait_),
@@ -1211,13 +1213,14 @@ void protobuf_AssignDesc_bio_5fservice_2eproto() {
   EntityState_descriptor_ = file->enum_type(1);
   Finger_descriptor_ = file->enum_type(2);
   EyeType_descriptor_ = file->enum_type(3);
-  Gender_descriptor_ = file->enum_type(4);
-  Rights_descriptor_ = file->enum_type(5);
-  MessageType_descriptor_ = file->enum_type(6);
-  PhotoSizeType_descriptor_ = file->enum_type(7);
-  PhotoOriginType_descriptor_ = file->enum_type(8);
-  IsoComplianceTemplate_descriptor_ = file->enum_type(9);
-  Ethnicity_descriptor_ = file->enum_type(10);
+  AccessState_descriptor_ = file->enum_type(4);
+  Gender_descriptor_ = file->enum_type(5);
+  Rights_descriptor_ = file->enum_type(6);
+  MessageType_descriptor_ = file->enum_type(7);
+  PhotoSizeType_descriptor_ = file->enum_type(8);
+  PhotoOriginType_descriptor_ = file->enum_type(9);
+  IsoComplianceTemplate_descriptor_ = file->enum_type(10);
+  Ethnicity_descriptor_ = file->enum_type(11);
 }
 
 namespace {
@@ -1231,9 +1234,9 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      Exception_descriptor_, &Exception::default_instance());
+      ServiceException_descriptor_, &ServiceException::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      ObjectResponse_descriptor_, &ObjectResponse::default_instance());
+      PopulationCreationResponse_descriptor_, &PopulationCreationResponse::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       AcquisitionResponse_descriptor_, &AcquisitionResponse::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -1345,10 +1348,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
 }  // namespace
 
 void protobuf_ShutdownFile_bio_5fservice_2eproto() {
-  delete Exception::default_instance_;
-  delete Exception_reflection_;
-  delete ObjectResponse::default_instance_;
-  delete ObjectResponse_reflection_;
+  delete ServiceException::default_instance_;
+  delete ServiceException_reflection_;
+  delete PopulationCreationResponse::default_instance_;
+  delete PopulationCreationResponse_reflection_;
   delete AcquisitionResponse::default_instance_;
   delete AcquisitionResponse_reflection_;
   delete RawIndexes::default_instance_;
@@ -1464,84 +1467,88 @@ void protobuf_AddDesc_bio_5fservice_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\021bio_service.proto\022\nBioService\"=\n\tExcep"
-    "tion\022\r\n\005is_ok\030\001 \001(\010\022\020\n\010error_id\030\002 \001(\003\022\017\n"
-    "\007message\030\003 \001(\t\"F\n\016ObjectResponse\022\n\n\002id\030\001"
-    " \001(\003\022(\n\texception\030\002 \001(\0132\025.BioService.Exc"
-    "eption\"u\n\023AcquisitionResponse\0224\n\010portrai"
-    "t\030\001 \001(\0132\".BioService.PortraitCharacteris"
-    "tic\022(\n\texception\030\002 \001(\0132\025.BioService.Exce"
-    "ption\"\035\n\nRawIndexes\022\017\n\007indexes\030\001 \003(\003\":\n\010"
-    "Criminal\022\n\n\002id\030\001 \001(\003\022\023\n\013description\030\002 \001("
-    "\t\022\r\n\005alert\030\003 \001(\t\"\221\001\n\017FullVisitorData\022$\n\007"
-    "visitor\030\001 \001(\0132\023.BioService.Visitor\022%\n\004fa"
-    "ce\030\002 \001(\0132\027.BioService.FacialImage\0221\n\013fin"
-    "gerprint\030\003 \001(\0132\034.BioService.FingerprintI"
-    "mage\"\261\004\n\006Person\022\n\n\002id\030\001 \001(\003\022\021\n\tfirstname"
-    "\030\002 \001(\t\022\020\n\010lastname\030\003 \001(\t\022\023\n\013dateofbirth\030"
-    "\004 \001(\003\022\"\n\006gender\030\005 \001(\0162\022.BioService.Gende"
-    "r\022\017\n\007country\030\006 \001(\t\022\014\n\004city\030\007 \001(\t\022\020\n\010comm"
-    "ents\030\010 \001(\t\022\"\n\006rights\030\t \001(\0162\022.BioService."
-    "Rights\022\r\n\005email\030\n \001(\t\022\023\n\013thumbnailid\030\013 \001"
-    "(\003\022&\n\010criminal\030\014 \001(\0132\024.BioService.Crimin"
-    "al\022;\n\014fingerprints\030\r \003(\0132%.BioService.Fi"
-    "ngerprintCharacteristic\022\037\n\005cards\030\016 \003(\0132\020"
-    ".BioService.Card\022!\n\006photos\030\017 \003(\0132\021.BioSe"
-    "rvice.Photo\0221\n\016biometric_data\030\020 \001(\0132\031.Bi"
-    "oService.BiometricData\022-\n\014entity_state\030\021"
-    " \001(\0162\027.BioService.EntityState\022(\n\texcepti"
-    "on\030\022 \001(\0132\025.BioService.Exception\022\017\n\007messa"
-    "ge\030\023 \001(\t\"y\n\014AccessDevice\022\020\n\010portname\030\001 \001"
-    "(\t\022(\n\texception\030\002 \001(\0132\025.BioService.Excep"
-    "tion\022-\n\014entity_state\030\003 \001(\0162\027.BioService."
-    "EntityState\"|\n\rCaptureDevice\022\022\n\ndevicena"
-    "me\030\001 \001(\t\022(\n\texception\030\002 \001(\0132\025.BioService"
-    ".Exception\022-\n\014entity_state\030\003 \001(\0162\027.BioSe"
-    "rvice.EntityState\"\227\001\n\021FingerprintDevice\022"
-    "\022\n\ndevicename\030\001 \001(\t\022\025\n\rserial_number\030\002 \001"
-    "(\t\022(\n\texception\030\003 \001(\0132\025.BioService.Excep"
-    "tion\022-\n\014entity_state\030\004 \001(\0162\027.BioService."
-    "EntityState\"\220\001\n\nIrisDevice\022\022\n\ndevicename"
-    "\030\001 \001(\t\022\025\n\rserial_number\030\002 \001(\t\022(\n\texcepti"
-    "on\030\003 \001(\0132\025.BioService.Exception\022-\n\014entit"
-    "y_state\030\004 \001(\0162\027.BioService.EntityState\"\224"
-    "\001\n\004Card\022\n\n\002id\030\001 \001(\003\022\020\n\010personid\030\002 \001(\003\022\025\n"
-    "\runique_number\030\003 \001(\t\022-\n\014entity_state\030\004 \001"
-    "(\0162\027.BioService.EntityState\022(\n\texception"
-    "\030\005 \001(\0132\025.BioService.Exception\"\245\003\n\010Locati"
-    "on\022\n\n\002id\030\001 \001(\003\022\025\n\rlocation_name\030\002 \001(\t\022\023\n"
-    "\013description\030\003 \001(\t\022\023\n\013mac_address\030\004 \001(\t\022"
-    "0\n\rcaptureDevice\030\005 \001(\0132\031.BioService.Capt"
-    "ureDevice\022.\n\014accessDevice\030\006 \001(\0132\030.BioSer"
-    "vice.AccessDevice\0228\n\021fingerprintDevice\030\007"
-    " \001(\0132\035.BioService.FingerprintDevice\022*\n\ni"
-    "risDevice\030\010 \001(\0132\026.BioService.IrisDevice\022"
-    "+\n\013access_info\030\t \001(\0132\026.BioService.Access"
-    "Info\022-\n\014entity_state\030\n \001(\0162\027.BioService."
-    "EntityState\022(\n\texception\030\013 \001(\0132\025.BioServ"
-    "ice.Exception\"\357\001\n\nAccessInfo\0226\n\013access_t"
-    "ype\030\001 \001(\0162!.BioService.AccessInfo.Access"
-    "Type\022#\n\007persons\030\002 \003(\0132\022.BioService.Perso"
+    "\n\021bio_service.proto\022\nBioService\"D\n\020Servi"
+    "ceException\022\r\n\005is_ok\030\001 \001(\010\022\020\n\010error_id\030\002"
+    " \001(\003\022\017\n\007message\030\003 \001(\t\"\217\001\n\032PopulationCrea"
+    "tionResponse\022\n\n\002id\030\001 \001(\003\0224\n\010portrait\030\002 \003"
+    "(\0132\".BioService.PortraitCharacteristic\022/"
+    "\n\texception\030\003 \001(\0132\034.BioService.ServiceEx"
+    "ception\"|\n\023AcquisitionResponse\0224\n\010portra"
+    "it\030\001 \001(\0132\".BioService.PortraitCharacteri"
+    "stic\022/\n\texception\030\002 \001(\0132\034.BioService.Ser"
+    "viceException\"\035\n\nRawIndexes\022\017\n\007indexes\030\001"
+    " \003(\003\":\n\010Criminal\022\n\n\002id\030\001 \001(\003\022\023\n\013descript"
+    "ion\030\002 \001(\t\022\r\n\005alert\030\003 \001(\t\"\221\001\n\017FullVisitor"
+    "Data\022$\n\007visitor\030\001 \001(\0132\023.BioService.Visit"
+    "or\022%\n\004face\030\002 \001(\0132\027.BioService.FacialImag"
+    "e\0221\n\013fingerprint\030\003 \001(\0132\034.BioService.Fing"
+    "erprintImage\"\270\004\n\006Person\022\n\n\002id\030\001 \001(\003\022\021\n\tf"
+    "irstname\030\002 \001(\t\022\020\n\010lastname\030\003 \001(\t\022\023\n\013date"
+    "ofbirth\030\004 \001(\003\022\"\n\006gender\030\005 \001(\0162\022.BioServi"
+    "ce.Gender\022\017\n\007country\030\006 \001(\t\022\014\n\004city\030\007 \001(\t"
+    "\022\020\n\010comments\030\010 \001(\t\022\"\n\006rights\030\t \001(\0162\022.Bio"
+    "Service.Rights\022\r\n\005email\030\n \001(\t\022\023\n\013thumbna"
+    "ilid\030\013 \001(\003\022&\n\010criminal\030\014 \001(\0132\024.BioServic"
+    "e.Criminal\022;\n\014fingerprints\030\r \003(\0132%.BioSe"
+    "rvice.FingerprintCharacteristic\022\037\n\005cards"
+    "\030\016 \003(\0132\020.BioService.Card\022!\n\006photos\030\017 \003(\013"
+    "2\021.BioService.Photo\0221\n\016biometric_data\030\020 "
+    "\001(\0132\031.BioService.BiometricData\022-\n\014entity"
+    "_state\030\021 \001(\0162\027.BioService.EntityState\022/\n"
+    "\texception\030\022 \001(\0132\034.BioService.ServiceExc"
+    "eption\022\017\n\007message\030\023 \001(\t\"\200\001\n\014AccessDevice"
+    "\022\020\n\010portname\030\001 \001(\t\022/\n\texception\030\002 \001(\0132\034."
+    "BioService.ServiceException\022-\n\014entity_st"
+    "ate\030\003 \001(\0162\027.BioService.EntityState\"\203\001\n\rC"
+    "aptureDevice\022\022\n\ndevicename\030\001 \001(\t\022/\n\texce"
+    "ption\030\002 \001(\0132\034.BioService.ServiceExceptio"
     "n\022-\n\014entity_state\030\003 \001(\0162\027.BioService.Ent"
-    "ityState\022(\n\texception\030\004 \001(\0132\025.BioService"
-    ".Exception\"+\n\nAccessType\022\010\n\004None\020\000\022\007\n\003Al"
-    "l\020\001\022\n\n\006Custom\020\002\"\275\001\n\tLogRecord\022-\n\014message"
-    "_type\030\001 \001(\0162\027.BioService.MessageType\022\025\n\r"
-    "detected_time\030\002 \001(\003\022\031\n\021exception_message"
-    "\030\003 \001(\t\022\022\n\nclass_name\030\004 \001(\t\022\025\n\rfunction_n"
-    "ame\030\005 \001(\t\022\023\n\013line_number\030\006 \001(\003\022\017\n\007commen"
-    "t\030\007 \001(\t\"\234\001\n\021ConfidentPosition\022\014\n\004xpos\030\001 "
-    "\001(\002\022\014\n\004ypos\030\002 \001(\002\022\022\n\nconfidence\030\003 \001(\002\022-\n"
-    "\014entity_state\030\004 \001(\0162\027.BioService.EntityS"
-    "tate\022(\n\texception\030\005 \001(\0132\025.BioService.Exc"
-    "eption\"\354\001\n\022EyesCharacteristic\022\n\n\002id\030\001 \001("
-    "\003\0227\n\010left_eye\030\002 \001(\0132%.BioService.Detaile"
-    "dEyeCharacteristic\0228\n\tright_eye\030\003 \001(\0132%."
-    "BioService.DetailedEyeCharacteristic\022-\n\014"
+    "ityState\"\236\001\n\021FingerprintDevice\022\022\n\ndevice"
+    "name\030\001 \001(\t\022\025\n\rserial_number\030\002 \001(\t\022/\n\texc"
+    "eption\030\003 \001(\0132\034.BioService.ServiceExcepti"
+    "on\022-\n\014entity_state\030\004 \001(\0162\027.BioService.En"
+    "tityState\"\227\001\n\nIrisDevice\022\022\n\ndevicename\030\001"
+    " \001(\t\022\025\n\rserial_number\030\002 \001(\t\022/\n\texception"
+    "\030\003 \001(\0132\034.BioService.ServiceException\022-\n\014"
     "entity_state\030\004 \001(\0162\027.BioService.EntitySt"
-    "ate\022(\n\texception\030\005 \001(\0132\025.BioService.Exce"
+    "ate\"\233\001\n\004Card\022\n\n\002id\030\001 \001(\003\022\020\n\010personid\030\002 \001"
+    "(\003\022\025\n\runique_number\030\003 \001(\t\022-\n\014entity_stat"
+    "e\030\004 \001(\0162\027.BioService.EntityState\022/\n\texce"
+    "ption\030\005 \001(\0132\034.BioService.ServiceExceptio"
+    "n\"\254\003\n\010Location\022\n\n\002id\030\001 \001(\003\022\025\n\rlocation_n"
+    "ame\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\023\n\013mac_ad"
+    "dress\030\004 \001(\t\0220\n\rcaptureDevice\030\005 \001(\0132\031.Bio"
+    "Service.CaptureDevice\022.\n\014accessDevice\030\006 "
+    "\001(\0132\030.BioService.AccessDevice\0228\n\021fingerp"
+    "rintDevice\030\007 \001(\0132\035.BioService.Fingerprin"
+    "tDevice\022*\n\nirisDevice\030\010 \001(\0132\026.BioService"
+    ".IrisDevice\022+\n\013access_info\030\t \001(\0132\026.BioSe"
+    "rvice.AccessInfo\022-\n\014entity_state\030\n \001(\0162\027"
+    ".BioService.EntityState\022/\n\texception\030\013 \001"
+    "(\0132\034.BioService.ServiceException\"\366\001\n\nAcc"
+    "essInfo\0226\n\013access_type\030\001 \001(\0162!.BioServic"
+    "e.AccessInfo.AccessType\022#\n\007persons\030\002 \003(\013"
+    "2\022.BioService.Person\022-\n\014entity_state\030\003 \001"
+    "(\0162\027.BioService.EntityState\022/\n\texception"
+    "\030\004 \001(\0132\034.BioService.ServiceException\"+\n\n"
+    "AccessType\022\010\n\004None\020\000\022\007\n\003All\020\001\022\n\n\006Custom\020"
+    "\002\"\275\001\n\tLogRecord\022-\n\014message_type\030\001 \001(\0162\027."
+    "BioService.MessageType\022\025\n\rdetected_time\030"
+    "\002 \001(\003\022\031\n\021exception_message\030\003 \001(\t\022\022\n\nclas"
+    "s_name\030\004 \001(\t\022\025\n\rfunction_name\030\005 \001(\t\022\023\n\013l"
+    "ine_number\030\006 \001(\003\022\017\n\007comment\030\007 \001(\t\"\243\001\n\021Co"
+    "nfidentPosition\022\014\n\004xpos\030\001 \001(\002\022\014\n\004ypos\030\002 "
+    "\001(\002\022\022\n\nconfidence\030\003 \001(\002\022-\n\014entity_state\030"
+    "\004 \001(\0162\027.BioService.EntityState\022/\n\texcept"
+    "ion\030\005 \001(\0132\034.BioService.ServiceException\""
+    "\363\001\n\022EyesCharacteristic\022\n\n\002id\030\001 \001(\003\0227\n\010le"
+    "ft_eye\030\002 \001(\0132%.BioService.DetailedEyeCha"
+    "racteristic\0228\n\tright_eye\030\003 \001(\0132%.BioServ"
+    "ice.DetailedEyeCharacteristic\022-\n\014entity_"
+    "state\030\004 \001(\0162\027.BioService.EntityState\022/\n\t"
+    "exception\030\005 \001(\0132\034.BioService.ServiceExce"
     "ption\"G\n\026PortraitCharacteristic\022-\n\005faces"
-    "\030\001 \003(\0132\036.BioService.FaceCharacteristic\"\251"
+    "\030\001 \003(\0132\036.BioService.FaceCharacteristic\"\260"
     "\005\n\022FaceCharacteristic\022\n\n\002id\030\001 \001(\003\022\'\n\003box"
     "\030\002 \001(\0132\032.BioService.SurroundingBox\022\024\n\014ey"
     "e_distance\030\003 \001(\002\022)\n\013face_center\030\004 \001(\0132\024."
@@ -1558,218 +1565,221 @@ void protobuf_AddDesc_bio_5fservice_2eproto() {
     "\022\014\n\004good\030\025 \001(\010\022\026\n\016best_practices\030\026 \001(\010\022\020"
     "\n\010personid\030\027 \001(\003\022\017\n\007photoid\030\030 \001(\003\022-\n\014ent"
     "ity_state\030\031 \001(\0162\027.BioService.EntityState"
-    "\022(\n\texception\030\032 \001(\0132\025.BioService.Excepti"
-    "on\" \n\010Position\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"X\n\016"
-    "SurroundingBox\022#\n\005begin\030\001 \001(\0132\024.BioServi"
-    "ce.Position\022!\n\003end\030\002 \001(\0132\024.BioService.Po"
-    "sition\"\243\001\n\031DetailedEyeCharacteristic\022&\n\010"
-    "position\030\001 \001(\0132\024.BioService.Position\022\017\n\007"
-    "is_open\030\002 \001(\010\022\027\n\017is_gaze_frontal\030\003 \001(\002\022\016"
-    "\n\006is_red\030\004 \001(\010\022\020\n\010is_tined\030\005 \001(\010\022\022\n\nconf"
-    "idence\030\006 \001(\002\"\217\002\n\031FingerprintCharacterist"
-    "ic\022\n\n\002id\030\001 \001(\003\022$\n\010position\030\002 \001(\0162\022.BioSe"
-    "rvice.Finger\022\027\n\017minutiaes_count\030\003 \001(\017\022\020\n"
-    "\010personid\030\004 \001(\003\022\017\n\007photoid\030\005 \001(\003\022+\n\006orig"
-    "in\030\006 \001(\0162\033.BioService.PhotoOriginType\022-\n"
-    "\014entity_state\030\007 \001(\0162\027.BioService.EntityS"
-    "tate\022(\n\texception\030\010 \001(\0132\025.BioService.Exc"
-    "eption\"B\n\027BioIdentificationRecord\022\017\n\007bir"
-    "_url\030\001 \001(\t\022\026\n\016bir_bytestring\030\002 \001(\014\"\223\001\n\022B"
-    "ioFingerprintData\022>\n\017characteristics\030\001 \001"
-    "(\0132%.BioService.FingerprintCharacteristi"
-    "c\022=\n\020biometric_record\030\002 \001(\0132#.BioService"
-    ".BioIdentificationRecord\"\221\001\n\rBioPersonDa"
-    "ta\022\021\n\tperson_id\030\001 \001(\003\0222\n\005faces\030\002 \003(\0132#.B"
-    "ioService.BioIdentificationRecord\0229\n\014fin"
-    "gerprints\030\003 \003(\0132#.BioService.BioIdentifi"
-    "cationRecord\"\207\001\n\rBiometricData\022\n\n\002id\030\001 \001"
-    "(\003\022-\n\005faces\030\002 \003(\0132\036.BioService.FaceChara"
-    "cteristic\022;\n\014fingerprints\030\003 \003(\0132%.BioSer"
-    "vice.FingerprintCharacteristic\"\333\001\n\013Facia"
-    "lImage\022\020\n\010owner_id\030\001 \001(\003\022 \n\005image\030\002 \001(\0132"
-    "\021.BioService.Photo\022\020\n\010template\030\003 \001(\014\022-\n\005"
-    "faces\030\004 \003(\0132\036.BioService.FaceCharacteris"
-    "tic\022-\n\014entity_state\030\005 \001(\0162\027.BioService.E"
-    "ntityState\022(\n\texception\030\006 \001(\0132\025.BioServi"
-    "ce.Exception\"\307\001\n\033DatabaseFacialImageResp"
-    "onse\022-\n\005faces\030\001 \003(\0132\036.BioService.FaceCha"
-    "racteristic\022 \n\005image\030\002 \001(\0132\021.BioService."
-    "Photo\022-\n\014entity_state\030\003 \001(\0162\027.BioService"
-    ".EntityState\022(\n\texception\030\004 \001(\0132\025.BioSer"
-    "vice.Exception\"\355\001\n\020FingerprintImage\022\020\n\010o"
-    "wner_id\030\001 \001(\003\022 \n\005image\030\002 \001(\0132\021.BioServic"
-    "e.Photo\022\020\n\010template\030\003 \001(\014\022:\n\013fingerprint"
-    "\030\004 \001(\0132%.BioService.FingerprintCharacter"
-    "istic\022-\n\014entity_state\030\005 \001(\0162\027.BioService"
-    ".EntityState\022(\n\texception\030\006 \001(\0132\025.BioSer"
-    "vice.Exception\"\331\001\n DatabaseFingerprintIm"
-    "ageResponse\022:\n\013fingerprint\030\001 \001(\0132%.BioSe"
-    "rvice.FingerprintCharacteristic\022 \n\005image"
-    "\030\002 \001(\0132\021.BioService.Photo\022-\n\014entity_stat"
-    "e\030\003 \001(\0162\027.BioService.EntityState\022(\n\texce"
-    "ption\030\004 \001(\0132\025.BioService.Exception\"\210\002\n\005P"
-    "hoto\022\n\n\002id\030\001 \001(\003\022\020\n\010datetime\030\003 \001(\003\022\021\n\tph"
-    "oto_url\030\004 \001(\t\022\022\n\nbytestring\030\005 \001(\014\022\r\n\005wid"
-    "th\030\006 \001(\003\022\016\n\006height\030\007 \001(\003\0220\n\013origin_type\030"
-    "\010 \001(\0162\033.BioService.PhotoOriginType\022\020\n\010ow"
-    "ner_id\030\t \001(\003\022-\n\014entity_state\030\n \001(\0162\027.Bio"
-    "Service.EntityState\022(\n\texception\030\013 \001(\0132\025"
-    ".BioService.Exception\"\220\002\n\007Visitor\022\n\n\002id\030"
-    "\001 \001(\003\022\020\n\010personid\030\002 \001(\003\022\022\n\nlocationid\030\003 "
-    "\001(\003\022\014\n\004time\030\004 \001(\003\022\023\n\013card_number\030\005 \001(\t\022%"
-    "\n\006status\030\006 \001(\0132\025.BioService.Exception\0220\n"
-    "\rbiometricData\030\007 \001(\0132\031.BioService.Biomet"
-    "ricData\022-\n\014entity_state\030\010 \001(\0162\027.BioServi"
-    "ce.EntityState\022(\n\texception\030\t \001(\0132\025.BioS"
-    "ervice.Exception\"4\n\013VisitorList\022%\n\010visit"
-    "ors\030\001 \003(\0132\023.BioService.Visitor\"7\n\014Locati"
-    "onList\022\'\n\tlocations\030\001 \003(\0132\024.BioService.L"
-    "ocation\"1\n\nPersonList\022#\n\007persons\030\001 \003(\0132\022"
-    ".BioService.Person\".\n\tPhotoList\022!\n\006photo"
-    "s\030\001 \003(\0132\021.BioService.Photo\"+\n\010CardList\022\037"
-    "\n\005cards\030\001 \003(\0132\020.BioService.Card\"<\n\021Biome"
-    "tricDataList\022\'\n\004data\030\001 \003(\0132\031.BioService."
-    "BiometricData\"/\n\010Response\022#\n\004good\030\001 \001(\0132"
-    "\025.BioService.Exception\"h\n\020VerificationDa"
-    "ta\022\'\n\014target_image\030\001 \001(\0132\021.BioService.Ph"
-    "oto\022+\n\020comparison_image\030\002 \001(\0132\021.BioServi"
-    "ce.Photo\"\202\001\n\022IdentificationData\022\'\n\014targe"
-    "t_image\030\001 \001(\0132\021.BioService.Photo\022\025\n\rpopu"
-    "lation_id\030\002 \001(\003\022,\n\021comparison_images\030\003 \003"
-    "(\0132\021.BioService.Photo\"\'\n\005Match\022\017\n\007face_i"
-    "d\030\002 \001(\003\022\r\n\005match\030\003 \001(\002\">\n\007Matches\022\017\n\007fac"
-    "e_id\030\001 \001(\003\022\"\n\007matches\030\002 \003(\0132\021.BioService"
-    ".Match\"\254\001\n\022FaceSearchResponse\0225\n\tportrai"
-    "ts\030\001 \003(\0132\".BioService.PortraitCharacteri"
-    "stic\022$\n\007matches\030\002 \003(\0132\023.BioService.Match"
-    "es\022\017\n\007message\030\003 \001(\t\022(\n\texception\030\004 \001(\0132\025"
-    ".BioService.Exception\"B\n\014AcquiredData\022 \n"
-    "\005image\030\001 \001(\0132\021.BioService.Photo\022\020\n\010owner"
-    "_id\030\002 \001(\003\"g\n\027FingerprintAcquiredData\022&\n\004"
-    "data\030\001 \001(\0132\030.BioService.AcquiredData\022$\n\010"
-    "position\030\002 \001(\0162\022.BioService.Finger\"\237\001\n\022E"
-    "nrollmentFeedback\022\031\n\021characteristic_id\030\001"
-    " \001(\003\022\020\n\010photo_id\030\002 \001(\003\022\017\n\007quality\030\003 \001(\017\022"
-    "(\n\tException\030\004 \001(\0132\025.BioService.Exceptio"
-    "n\022\020\n\010progress\030\005 \001(\017\022\017\n\007message\030\006 \001(\t\"b\n\024"
-    "VerificationFeedback\022;\n\023enrollment_feedb"
-    "ack\030\001 \001(\0132\036.BioService.EnrollmentFeedbac"
-    "k\022\r\n\005match\030\002 \001(\002\"\315\001\n\nQueryPhoto\022<\n\nwith_"
-    "bytes\030\001 \001(\0162(.BioService.QueryPhoto.Phot"
-    "oResponseType\022\017\n\007persons\030\002 \003(\003\022\016\n\006photos"
-    "\030\003 \003(\003\022\026\n\016items_per_page\030\004 \001(\003\"H\n\021PhotoR"
-    "esponseType\022\r\n\tUndefined\020\000\022\010\n\004Full\020\001\022\r\n\t"
-    "OnlyBytes\020\002\022\013\n\007NoBytes\020\003\"\035\n\014QueryPersons"
-    "\022\r\n\005count\030\001 \001(\003\"\037\n\016QueryLocations\022\r\n\005cou"
-    "nt\030\001 \001(\003\"\212\001\n\rQueryVisitors\022\021\n\tcountries\030"
-    "\002 \003(\t\022\021\n\tlocations\030\003 \003(\003\022\017\n\007persons\030\004 \003("
-    "\003\022\025\n\rdatetime_from\030\005 \001(\003\022\023\n\013datetime_to\030"
-    "\006 \001(\003\022\026\n\016items_per_page\030\007 \001(\003\"&\n\023SocketC"
-    "onfiguration\022\017\n\007address\030\001 \001(\t\"I\n\tBioClie"
-    "nt\022\022\n\nip_address\030\001 \001(\t\022\023\n\013port_number\030\002 "
-    "\001(\003\022\023\n\013mac_address\030\003 \001(\t*T\n\013ImageFormat\022"
-    "\010\n\004JPEG\020\000\022\014\n\010JPEG2000\020\001\022\007\n\003PNG\020\002\022\007\n\003BMP\020"
-    "\003\022\007\n\003PGM\020\004\022\022\n\016GRAYSCALE_8BIT\020\005*B\n\013Entity"
-    "State\022\r\n\tUnchanged\020\000\022\t\n\005Added\020\001\022\014\n\010Modif"
-    "ied\020\002\022\013\n\007Deleted\020\003*\256\001\n\006Finger\022\007\n\003Any\020\000\022\016"
-    "\n\nRightThumb\020\001\022\r\n\tLeftThumb\020\002\022\016\n\nRightIn"
-    "dex\020\003\022\r\n\tLeftIndex\020\004\022\017\n\013RightMiddle\020\005\022\016\n"
-    "\nLeftMiddle\020\006\022\r\n\tRightRing\020\007\022\014\n\010LeftRing"
-    "\020\010\022\017\n\013RightLittle\020\t\022\016\n\nLeftLittle\020\n*5\n\007E"
-    "yeType\022\013\n\007NoneEye\020\000\022\010\n\004Left\020\001\022\t\n\005Right\020\002"
-    "\022\010\n\004Both\020\003*(\n\006Gender\022\010\n\004None\020\000\022\010\n\004Male\020\001"
-    "\022\n\n\006Female\020\002*\?\n\006Rights\022\n\n\006Custom\020\000\022\014\n\010Op"
-    "erator\020\001\022\013\n\007Manager\020\002\022\016\n\nSupervisor\020\003*6\n"
-    "\013MessageType\022\017\n\013Information\020\000\022\t\n\005Error\020\001"
-    "\022\013\n\007Warning\020\002*%\n\rPhotoSizeType\022\010\n\004Full\020\000"
-    "\022\n\n\006Croped\020\001*<\n\017PhotoOriginType\022\014\n\010Enrol"
-    "led\020\000\022\014\n\010Verified\020\001\022\r\n\tThumbnail\020\002*\370\004\n\025I"
-    "soComplianceTemplate\022\013\n\007Npthing\020\000\022\026\n\022Onl"
-    "yOneFaceVisible\020\001\022\034\n\030goodVerticalFacePos"
-    "ition\020\002\022\034\n\030horizontallyCenteredFace\020\003\022\017\n"
-    "\013widthOfHead\020\004\022\020\n\014lengthOfHead\020\005\022\033\n\027widt"
-    "hOfHeadBestPractice\020\006\022\034\n\030lengthOfHeadBes"
-    "tPractice\020\007\022\016\n\nresolution\020\010\022\032\n\026resolutio"
-    "nBestPractice\020\t\022\"\n\036imageWidthToHeightBes"
-    "tPractice\020\n\022\020\n\014goodExposure\020\013\022\030\n\024goodGra"
-    "yScaleProfile\020\014\022\030\n\024hasNaturalSkinColour\020"
-    "\r\022\016\n\nnoHotSpots\020\016\022#\n\037isBackgroundUniform"
-    "BestPractice\020\017\022\r\n\tisFrontal\020\020\022\031\n\025isFront"
-    "alBestPractice\020\021\022\025\n\021isLightingUniform\020\022\022"
-    "\030\n\024eyesOpenBestPractice\020\023\022\037\n\033eyesGazeFro"
-    "ntalBestPractice\020\024\022\032\n\026eyesNotRedBestPrac"
-    "tice\020\025\022\023\n\017noTintedGlasses\020\026\022\013\n\007isSharp\020\027"
-    "\022\033\n\027mouthClosedBestPractice\020\030*\?\n\tEthnici"
-    "ty\022\021\n\rUnpredictable\020\000\022\t\n\005White\020\001\022\t\n\005Blac"
-    "k\020\002\022\t\n\005Asian\020\0032\225\004\n\025BiometricFacialSevice"
-    "\022D\n\tAddSocket\022\037.BioService.SocketConfigu"
-    "ration\032\024.BioService.Response\"\000\022\?\n\007Acquir"
-    "e\022\021.BioService.Photo\032\037.BioService.Acquis"
-    "itionResponse\"\000\022D\n\006Enroll\022\030.BioService.A"
-    "cquiredData\032\036.BioService.EnrollmentFeedb"
-    "ack\"\000\022F\n\006Verify\022\030.BioService.AcquiredDat"
-    "a\032 .BioService.VerificationFeedback\"\000\022G\n"
-    "\020CreatePopulation\022\025.BioService.PhotoList"
-    "\032\032.BioService.ObjectResponse\"\000\022L\n\nVerify"
-    "Face\022\034.BioService.VerificationData\032\036.Bio"
-    "Service.FaceSearchResponse\"\000\022P\n\014Identify"
-    "Face\022\036.BioService.IdentificationData\032\036.B"
-    "ioService.FaceSearchResponse\"\0002\313\001\n\032Biome"
-    "tricFingerprintSevice\022Z\n\021EnrollFingerpri"
-    "nt\022#.BioService.FingerprintAcquiredData\032"
-    "\036.BioService.EnrollmentFeedback\"\000\022Q\n\021Ver"
-    "ifyFingerprint\022\030.BioService.AcquiredData"
-    "\032 .BioService.VerificationFeedback\"\0002\325\001\n"
-    "\030BiometricDatabaseService\022T\n\016AddFacialIm"
-    "age\022\027.BioService.FacialImage\032\'.BioServic"
-    "e.DatabaseFacialImageResponse\"\000\022c\n\023AddFi"
-    "ngerprintImage\022\034.BioService.FingerprintI"
-    "mage\032,.BioService.DatabaseFingerprintIma"
-    "geResponse\"\0002\240\014\n\016DatabaseSevice\022B\n\014Perso"
-    "nSelect\022\030.BioService.QueryPersons\032\026.BioS"
-    "ervice.PersonList\"\000\0225\n\tAddPerson\022\022.BioSe"
-    "rvice.Person\032\022.BioService.Person\"\000\0228\n\014Up"
-    "datePerson\022\022.BioService.Person\032\022.BioServ"
-    "ice.Person\"\000\0228\n\014RemovePerson\022\022.BioServic"
-    "e.Person\032\022.BioService.Person\"\000\0229\n\014SetThu"
-    "mbnail\022\021.BioService.Photo\032\024.BioService.R"
-    "esponse\"\000\022/\n\007AddCard\022\020.BioService.Card\032\020"
-    ".BioService.Card\"\000\022;\n\013RemoveCards\022\024.BioS"
-    "ervice.CardList\032\024.BioService.CardList\"\000\022"
-    "2\n\nRemoveCard\022\020.BioService.Card\032\020.BioSer"
-    "vice.Card\"\000\022\?\n\014SelectPhotos\022\026.BioService"
-    ".QueryPhoto\032\025.BioService.PhotoList\"\000\0222\n\010"
-    "AddPhoto\022\021.BioService.Photo\032\021.BioService"
-    ".Photo\"\000\022@\n\014RemovePhotos\022\026.BioService.Ra"
-    "wIndexes\032\026.BioService.RawIndexes\"\000\022F\n\016Se"
-    "lectVisitors\022\031.BioService.QueryVisitors\032"
-    "\027.BioService.VisitorList\"\000\022D\n\025AttachVisi"
-    "torToPerson\022\023.BioService.Visitor\032\024.BioSe"
-    "rvice.Response\"\000\022B\n\016RemoveVisitors\022\026.Bio"
-    "Service.RawIndexes\032\026.BioService.RawIndex"
-    "es\"\000\022@\n\nAddVisitor\022\033.BioService.FullVisi"
-    "torData\032\023.BioService.Visitor\"\000\022I\n\017Select"
-    "Locations\022\032.BioService.QueryLocations\032\030."
-    "BioService.LocationList\"\000\022;\n\013AddLocation"
-    "\022\024.BioService.Location\032\024.BioService.Loca"
-    "tion\"\000\022>\n\016UpdateLocation\022\024.BioService.Lo"
-    "cation\032\024.BioService.Location\"\000\022>\n\016Remove"
-    "Location\022\024.BioService.Location\032\024.BioServ"
-    "ice.Location\"\000\022N\n\016AddFingerprint\022\034.BioSe"
-    "rvice.FingerprintImage\032\034.BioService.Fing"
-    "erprintImage\"\000\022Q\n\021RemoveFingerprint\022\034.Bi"
-    "oService.FingerprintImage\032\034.BioService.F"
-    "ingerprintImage\"\000\022Q\n\021UpdateFingerprint\022\034"
-    ".BioService.FingerprintImage\032\034.BioServic"
-    "e.FingerprintImage\"\000\022:\n\tAddClient\022\025.BioS"
-    "ervice.BioClient\032\024.BioService.Response\"\000"
-    "\022=\n\014RemoveClient\022\025.BioService.BioClient\032"
-    "\024.BioService.Response\"\000B\017\n\007ex.grpc\242\002\003RTG"
-    "b\006proto3", 12048);
+    "\022/\n\texception\030\032 \001(\0132\034.BioService.Service"
+    "Exception\" \n\010Position\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 "
+    "\001(\002\"X\n\016SurroundingBox\022#\n\005begin\030\001 \001(\0132\024.B"
+    "ioService.Position\022!\n\003end\030\002 \001(\0132\024.BioSer"
+    "vice.Position\"\243\001\n\031DetailedEyeCharacteris"
+    "tic\022&\n\010position\030\001 \001(\0132\024.BioService.Posit"
+    "ion\022\017\n\007is_open\030\002 \001(\010\022\027\n\017is_gaze_frontal\030"
+    "\003 \001(\002\022\016\n\006is_red\030\004 \001(\010\022\020\n\010is_tined\030\005 \001(\010\022"
+    "\022\n\nconfidence\030\006 \001(\002\"\226\002\n\031FingerprintChara"
+    "cteristic\022\n\n\002id\030\001 \001(\003\022$\n\010position\030\002 \001(\0162"
+    "\022.BioService.Finger\022\027\n\017minutiaes_count\030\003"
+    " \001(\017\022\020\n\010personid\030\004 \001(\003\022\017\n\007photoid\030\005 \001(\003\022"
+    "+\n\006origin\030\006 \001(\0162\033.BioService.PhotoOrigin"
+    "Type\022-\n\014entity_state\030\007 \001(\0162\027.BioService."
+    "EntityState\022/\n\texception\030\010 \001(\0132\034.BioServ"
+    "ice.ServiceException\"B\n\027BioIdentificatio"
+    "nRecord\022\017\n\007bir_url\030\001 \001(\t\022\026\n\016bir_bytestri"
+    "ng\030\002 \001(\014\"\223\001\n\022BioFingerprintData\022>\n\017chara"
+    "cteristics\030\001 \001(\0132%.BioService.Fingerprin"
+    "tCharacteristic\022=\n\020biometric_record\030\002 \001("
+    "\0132#.BioService.BioIdentificationRecord\"\221"
+    "\001\n\rBioPersonData\022\021\n\tperson_id\030\001 \001(\003\0222\n\005f"
+    "aces\030\002 \003(\0132#.BioService.BioIdentificatio"
+    "nRecord\0229\n\014fingerprints\030\003 \003(\0132#.BioServi"
+    "ce.BioIdentificationRecord\"\207\001\n\rBiometric"
+    "Data\022\n\n\002id\030\001 \001(\003\022-\n\005faces\030\002 \003(\0132\036.BioSer"
+    "vice.FaceCharacteristic\022;\n\014fingerprints\030"
+    "\003 \003(\0132%.BioService.FingerprintCharacteri"
+    "stic\"\342\001\n\013FacialImage\022\020\n\010owner_id\030\001 \001(\003\022 "
+    "\n\005image\030\002 \001(\0132\021.BioService.Photo\022\020\n\010temp"
+    "late\030\003 \001(\014\022-\n\005faces\030\004 \003(\0132\036.BioService.F"
+    "aceCharacteristic\022-\n\014entity_state\030\005 \001(\0162"
+    "\027.BioService.EntityState\022/\n\texception\030\006 "
+    "\001(\0132\034.BioService.ServiceException\"\316\001\n\033Da"
+    "tabaseFacialImageResponse\022-\n\005faces\030\001 \003(\013"
+    "2\036.BioService.FaceCharacteristic\022 \n\005imag"
+    "e\030\002 \001(\0132\021.BioService.Photo\022-\n\014entity_sta"
+    "te\030\003 \001(\0162\027.BioService.EntityState\022/\n\texc"
+    "eption\030\004 \001(\0132\034.BioService.ServiceExcepti"
+    "on\"\364\001\n\020FingerprintImage\022\020\n\010owner_id\030\001 \001("
+    "\003\022 \n\005image\030\002 \001(\0132\021.BioService.Photo\022\020\n\010t"
+    "emplate\030\003 \001(\014\022:\n\013fingerprint\030\004 \001(\0132%.Bio"
+    "Service.FingerprintCharacteristic\022-\n\014ent"
+    "ity_state\030\005 \001(\0162\027.BioService.EntityState"
+    "\022/\n\texception\030\006 \001(\0132\034.BioService.Service"
+    "Exception\"\340\001\n DatabaseFingerprintImageRe"
+    "sponse\022:\n\013fingerprint\030\001 \001(\0132%.BioService"
+    ".FingerprintCharacteristic\022 \n\005image\030\002 \001("
+    "\0132\021.BioService.Photo\022-\n\014entity_state\030\003 \001"
+    "(\0162\027.BioService.EntityState\022/\n\texception"
+    "\030\004 \001(\0132\034.BioService.ServiceException\"\217\002\n"
+    "\005Photo\022\n\n\002id\030\001 \001(\003\022\020\n\010datetime\030\003 \001(\003\022\021\n\t"
+    "photo_url\030\004 \001(\t\022\022\n\nbytestring\030\005 \001(\014\022\r\n\005w"
+    "idth\030\006 \001(\003\022\016\n\006height\030\007 \001(\003\0220\n\013origin_typ"
+    "e\030\010 \001(\0162\033.BioService.PhotoOriginType\022\020\n\010"
+    "owner_id\030\t \001(\003\022-\n\014entity_state\030\n \001(\0162\027.B"
+    "ioService.EntityState\022/\n\texception\030\013 \001(\013"
+    "2\034.BioService.ServiceException\"\231\002\n\007Visit"
+    "or\022\n\n\002id\030\001 \001(\003\022\020\n\010personid\030\002 \001(\003\022\022\n\nloca"
+    "tionid\030\003 \001(\003\022\014\n\004time\030\004 \001(\003\022\023\n\013card_numbe"
+    "r\030\005 \001(\t\022\'\n\006status\030\006 \001(\0162\027.BioService.Acc"
+    "essState\0220\n\rbiometricData\030\007 \001(\0132\031.BioSer"
+    "vice.BiometricData\022-\n\014entity_state\030\010 \001(\016"
+    "2\027.BioService.EntityState\022/\n\texception\030\t"
+    " \001(\0132\034.BioService.ServiceException\"4\n\013Vi"
+    "sitorList\022%\n\010visitors\030\001 \003(\0132\023.BioService"
+    ".Visitor\"7\n\014LocationList\022\'\n\tlocations\030\001 "
+    "\003(\0132\024.BioService.Location\"1\n\nPersonList\022"
+    "#\n\007persons\030\001 \003(\0132\022.BioService.Person\".\n\t"
+    "PhotoList\022!\n\006photos\030\001 \003(\0132\021.BioService.P"
+    "hoto\"+\n\010CardList\022\037\n\005cards\030\001 \003(\0132\020.BioSer"
+    "vice.Card\"<\n\021BiometricDataList\022\'\n\004data\030\001"
+    " \003(\0132\031.BioService.BiometricData\"\030\n\010Respo"
+    "nse\022\014\n\004good\030\001 \001(\010\"h\n\020VerificationData\022\'\n"
+    "\014target_image\030\001 \001(\0132\021.BioService.Photo\022+"
+    "\n\020comparison_image\030\002 \001(\0132\021.BioService.Ph"
+    "oto\"\202\001\n\022IdentificationData\022\'\n\014target_ima"
+    "ge\030\001 \001(\0132\021.BioService.Photo\022\025\n\rpopulatio"
+    "n_id\030\002 \001(\003\022,\n\021comparison_images\030\003 \003(\0132\021."
+    "BioService.Photo\"\'\n\005Match\022\017\n\007face_id\030\002 \001"
+    "(\003\022\r\n\005match\030\003 \001(\002\">\n\007Matches\022\017\n\007face_id\030"
+    "\001 \001(\003\022\"\n\007matches\030\002 \003(\0132\021.BioService.Matc"
+    "h\"\263\001\n\022FaceSearchResponse\0225\n\tportraits\030\001 "
+    "\003(\0132\".BioService.PortraitCharacteristic\022"
+    "$\n\007matches\030\002 \003(\0132\023.BioService.Matches\022\017\n"
+    "\007message\030\003 \001(\t\022/\n\texception\030\004 \001(\0132\034.BioS"
+    "ervice.ServiceException\"B\n\014AcquiredData\022"
+    " \n\005image\030\001 \001(\0132\021.BioService.Photo\022\020\n\010own"
+    "er_id\030\002 \001(\003\"g\n\027FingerprintAcquiredData\022&"
+    "\n\004data\030\001 \001(\0132\030.BioService.AcquiredData\022$"
+    "\n\010position\030\002 \001(\0162\022.BioService.Finger\"\246\001\n"
+    "\022EnrollmentFeedback\022\031\n\021characteristic_id"
+    "\030\001 \001(\003\022\020\n\010photo_id\030\002 \001(\003\022\017\n\007quality\030\003 \001("
+    "\017\022/\n\tException\030\004 \001(\0132\034.BioService.Servic"
+    "eException\022\020\n\010progress\030\005 \001(\017\022\017\n\007message\030"
+    "\006 \001(\t\"b\n\024VerificationFeedback\022;\n\023enrollm"
+    "ent_feedback\030\001 \001(\0132\036.BioService.Enrollme"
+    "ntFeedback\022\r\n\005match\030\002 \001(\002\"\315\001\n\nQueryPhoto"
+    "\022<\n\nwith_bytes\030\001 \001(\0162(.BioService.QueryP"
+    "hoto.PhotoResponseType\022\017\n\007persons\030\002 \003(\003\022"
+    "\016\n\006photos\030\003 \003(\003\022\026\n\016items_per_page\030\004 \001(\003\""
+    "H\n\021PhotoResponseType\022\r\n\tUndefined\020\000\022\010\n\004F"
+    "ull\020\001\022\r\n\tOnlyBytes\020\002\022\013\n\007NoBytes\020\003\"\035\n\014Que"
+    "ryPersons\022\r\n\005count\030\001 \001(\003\"\037\n\016QueryLocatio"
+    "ns\022\r\n\005count\030\001 \001(\003\"\212\001\n\rQueryVisitors\022\021\n\tc"
+    "ountries\030\002 \003(\t\022\021\n\tlocations\030\003 \003(\003\022\017\n\007per"
+    "sons\030\004 \003(\003\022\025\n\rdatetime_from\030\005 \001(\003\022\023\n\013dat"
+    "etime_to\030\006 \001(\003\022\026\n\016items_per_page\030\007 \001(\003\"&"
+    "\n\023SocketConfiguration\022\017\n\007address\030\001 \001(\t\"I"
+    "\n\tBioClient\022\022\n\nip_address\030\001 \001(\t\022\023\n\013port_"
+    "number\030\002 \001(\003\022\023\n\013mac_address\030\003 \001(\t*T\n\013Ima"
+    "geFormat\022\010\n\004JPEG\020\000\022\014\n\010JPEG2000\020\001\022\007\n\003PNG\020"
+    "\002\022\007\n\003BMP\020\003\022\007\n\003PGM\020\004\022\022\n\016GRAYSCALE_8BIT\020\005*"
+    "B\n\013EntityState\022\r\n\tUnchanged\020\000\022\t\n\005Added\020\001"
+    "\022\014\n\010Modified\020\002\022\013\n\007Deleted\020\003*\256\001\n\006Finger\022\007"
+    "\n\003Any\020\000\022\016\n\nRightThumb\020\001\022\r\n\tLeftThumb\020\002\022\016"
+    "\n\nRightIndex\020\003\022\r\n\tLeftIndex\020\004\022\017\n\013RightMi"
+    "ddle\020\005\022\016\n\nLeftMiddle\020\006\022\r\n\tRightRing\020\007\022\014\n"
+    "\010LeftRing\020\010\022\017\n\013RightLittle\020\t\022\016\n\nLeftLitt"
+    "le\020\n*5\n\007EyeType\022\013\n\007NoneEye\020\000\022\010\n\004Left\020\001\022\t"
+    "\n\005Right\020\002\022\010\n\004Both\020\003*2\n\013AccessState\022\r\n\tNo"
+    "neState\020\000\022\n\n\006Access\020\001\022\010\n\004Deny\020\002*(\n\006Gende"
+    "r\022\010\n\004None\020\000\022\010\n\004Male\020\001\022\n\n\006Female\020\002*\?\n\006Rig"
+    "hts\022\n\n\006Custom\020\000\022\014\n\010Operator\020\001\022\013\n\007Manager"
+    "\020\002\022\016\n\nSupervisor\020\003*6\n\013MessageType\022\017\n\013Inf"
+    "ormation\020\000\022\t\n\005Error\020\001\022\013\n\007Warning\020\002*%\n\rPh"
+    "otoSizeType\022\010\n\004Full\020\000\022\n\n\006Croped\020\001*<\n\017Pho"
+    "toOriginType\022\014\n\010Enrolled\020\000\022\014\n\010Verified\020\001"
+    "\022\r\n\tThumbnail\020\002*\370\004\n\025IsoComplianceTemplat"
+    "e\022\013\n\007Npthing\020\000\022\026\n\022OnlyOneFaceVisible\020\001\022\034"
+    "\n\030goodVerticalFacePosition\020\002\022\034\n\030horizont"
+    "allyCenteredFace\020\003\022\017\n\013widthOfHead\020\004\022\020\n\014l"
+    "engthOfHead\020\005\022\033\n\027widthOfHeadBestPractice"
+    "\020\006\022\034\n\030lengthOfHeadBestPractice\020\007\022\016\n\nreso"
+    "lution\020\010\022\032\n\026resolutionBestPractice\020\t\022\"\n\036"
+    "imageWidthToHeightBestPractice\020\n\022\020\n\014good"
+    "Exposure\020\013\022\030\n\024goodGrayScaleProfile\020\014\022\030\n\024"
+    "hasNaturalSkinColour\020\r\022\016\n\nnoHotSpots\020\016\022#"
+    "\n\037isBackgroundUniformBestPractice\020\017\022\r\n\ti"
+    "sFrontal\020\020\022\031\n\025isFrontalBestPractice\020\021\022\025\n"
+    "\021isLightingUniform\020\022\022\030\n\024eyesOpenBestPrac"
+    "tice\020\023\022\037\n\033eyesGazeFrontalBestPractice\020\024\022"
+    "\032\n\026eyesNotRedBestPractice\020\025\022\023\n\017noTintedG"
+    "lasses\020\026\022\013\n\007isSharp\020\027\022\033\n\027mouthClosedBest"
+    "Practice\020\030*\?\n\tEthnicity\022\021\n\rUnpredictable"
+    "\020\000\022\t\n\005White\020\001\022\t\n\005Black\020\002\022\t\n\005Asian\020\0032\241\004\n\025"
+    "BiometricFacialSevice\022D\n\tAddSocket\022\037.Bio"
+    "Service.SocketConfiguration\032\024.BioService"
+    ".Response\"\000\022\?\n\007Acquire\022\021.BioService.Phot"
+    "o\032\037.BioService.AcquisitionResponse\"\000\022D\n\006"
+    "Enroll\022\030.BioService.AcquiredData\032\036.BioSe"
+    "rvice.EnrollmentFeedback\"\000\022F\n\006Verify\022\030.B"
+    "ioService.AcquiredData\032 .BioService.Veri"
+    "ficationFeedback\"\000\022S\n\020CreatePopulation\022\025"
+    ".BioService.PhotoList\032&.BioService.Popul"
+    "ationCreationResponse\"\000\022L\n\nVerifyFace\022\034."
+    "BioService.VerificationData\032\036.BioService"
+    ".FaceSearchResponse\"\000\022P\n\014IdentifyFace\022\036."
+    "BioService.IdentificationData\032\036.BioServi"
+    "ce.FaceSearchResponse\"\0002\313\001\n\032BiometricFin"
+    "gerprintSevice\022Z\n\021EnrollFingerprint\022#.Bi"
+    "oService.FingerprintAcquiredData\032\036.BioSe"
+    "rvice.EnrollmentFeedback\"\000\022Q\n\021VerifyFing"
+    "erprint\022\030.BioService.AcquiredData\032 .BioS"
+    "ervice.VerificationFeedback\"\0002\325\001\n\030Biomet"
+    "ricDatabaseService\022T\n\016AddFacialImage\022\027.B"
+    "ioService.FacialImage\032\'.BioService.Datab"
+    "aseFacialImageResponse\"\000\022c\n\023AddFingerpri"
+    "ntImage\022\034.BioService.FingerprintImage\032,."
+    "BioService.DatabaseFingerprintImageRespo"
+    "nse\"\0002\240\014\n\016DatabaseSevice\022B\n\014PersonSelect"
+    "\022\030.BioService.QueryPersons\032\026.BioService."
+    "PersonList\"\000\0225\n\tAddPerson\022\022.BioService.P"
+    "erson\032\022.BioService.Person\"\000\0228\n\014UpdatePer"
+    "son\022\022.BioService.Person\032\022.BioService.Per"
+    "son\"\000\0228\n\014RemovePerson\022\022.BioService.Perso"
+    "n\032\022.BioService.Person\"\000\0229\n\014SetThumbnail\022"
+    "\021.BioService.Photo\032\024.BioService.Response"
+    "\"\000\022/\n\007AddCard\022\020.BioService.Card\032\020.BioSer"
+    "vice.Card\"\000\022;\n\013RemoveCards\022\024.BioService."
+    "CardList\032\024.BioService.CardList\"\000\0222\n\nRemo"
+    "veCard\022\020.BioService.Card\032\020.BioService.Ca"
+    "rd\"\000\022\?\n\014SelectPhotos\022\026.BioService.QueryP"
+    "hoto\032\025.BioService.PhotoList\"\000\0222\n\010AddPhot"
+    "o\022\021.BioService.Photo\032\021.BioService.Photo\""
+    "\000\022@\n\014RemovePhotos\022\026.BioService.RawIndexe"
+    "s\032\026.BioService.RawIndexes\"\000\022F\n\016SelectVis"
+    "itors\022\031.BioService.QueryVisitors\032\027.BioSe"
+    "rvice.VisitorList\"\000\022D\n\025AttachVisitorToPe"
+    "rson\022\023.BioService.Visitor\032\024.BioService.R"
+    "esponse\"\000\022B\n\016RemoveVisitors\022\026.BioService"
+    ".RawIndexes\032\026.BioService.RawIndexes\"\000\022@\n"
+    "\nAddVisitor\022\033.BioService.FullVisitorData"
+    "\032\023.BioService.Visitor\"\000\022I\n\017SelectLocatio"
+    "ns\022\032.BioService.QueryLocations\032\030.BioServ"
+    "ice.LocationList\"\000\022;\n\013AddLocation\022\024.BioS"
+    "ervice.Location\032\024.BioService.Location\"\000\022"
+    ">\n\016UpdateLocation\022\024.BioService.Location\032"
+    "\024.BioService.Location\"\000\022>\n\016RemoveLocatio"
+    "n\022\024.BioService.Location\032\024.BioService.Loc"
+    "ation\"\000\022N\n\016AddFingerprint\022\034.BioService.F"
+    "ingerprintImage\032\034.BioService.Fingerprint"
+    "Image\"\000\022Q\n\021RemoveFingerprint\022\034.BioServic"
+    "e.FingerprintImage\032\034.BioService.Fingerpr"
+    "intImage\"\000\022Q\n\021UpdateFingerprint\022\034.BioSer"
+    "vice.FingerprintImage\032\034.BioService.Finge"
+    "rprintImage\"\000\022:\n\tAddClient\022\025.BioService."
+    "BioClient\032\024.BioService.Response\"\000\022=\n\014Rem"
+    "oveClient\022\025.BioService.BioClient\032\024.BioSe"
+    "rvice.Response\"\000B\017\n\007ex.grpc\242\002\003RTGb\006proto"
+    "3", 12321);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "bio_service.proto", &protobuf_RegisterTypes);
-  Exception::default_instance_ = new Exception();
-  ObjectResponse::default_instance_ = new ObjectResponse();
+  ServiceException::default_instance_ = new ServiceException();
+  PopulationCreationResponse::default_instance_ = new PopulationCreationResponse();
   AcquisitionResponse::default_instance_ = new AcquisitionResponse();
   RawIndexes::default_instance_ = new RawIndexes();
   Criminal::default_instance_ = new Criminal();
@@ -1823,8 +1833,8 @@ void protobuf_AddDesc_bio_5fservice_2eproto() {
   QueryVisitors::default_instance_ = new QueryVisitors();
   SocketConfiguration::default_instance_ = new SocketConfiguration();
   BioClient::default_instance_ = new BioClient();
-  Exception::default_instance_->InitAsDefaultInstance();
-  ObjectResponse::default_instance_->InitAsDefaultInstance();
+  ServiceException::default_instance_->InitAsDefaultInstance();
+  PopulationCreationResponse::default_instance_->InitAsDefaultInstance();
   AcquisitionResponse::default_instance_->InitAsDefaultInstance();
   RawIndexes::default_instance_->InitAsDefaultInstance();
   Criminal::default_instance_->InitAsDefaultInstance();
@@ -1954,6 +1964,21 @@ bool EyeType_IsValid(int value) {
     case 1:
     case 2:
     case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* AccessState_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return AccessState_descriptor_;
+}
+bool AccessState_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
       return true;
     default:
       return false;
@@ -2102,30 +2127,30 @@ static void MergeFromFail(int line) {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Exception::kIsOkFieldNumber;
-const int Exception::kErrorIdFieldNumber;
-const int Exception::kMessageFieldNumber;
+const int ServiceException::kIsOkFieldNumber;
+const int ServiceException::kErrorIdFieldNumber;
+const int ServiceException::kMessageFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-Exception::Exception()
+ServiceException::ServiceException()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:BioService.Exception)
+  // @@protoc_insertion_point(constructor:BioService.ServiceException)
 }
 
-void Exception::InitAsDefaultInstance() {
+void ServiceException::InitAsDefaultInstance() {
   _is_default_instance_ = true;
 }
 
-Exception::Exception(const Exception& from)
+ServiceException::ServiceException(const ServiceException& from)
   : ::google::protobuf::Message(),
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:BioService.Exception)
+  // @@protoc_insertion_point(copy_constructor:BioService.ServiceException)
 }
 
-void Exception::SharedCtor() {
+void ServiceException::SharedCtor() {
     _is_default_instance_ = false;
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
@@ -2134,54 +2159,54 @@ void Exception::SharedCtor() {
   message_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-Exception::~Exception() {
-  // @@protoc_insertion_point(destructor:BioService.Exception)
+ServiceException::~ServiceException() {
+  // @@protoc_insertion_point(destructor:BioService.ServiceException)
   SharedDtor();
 }
 
-void Exception::SharedDtor() {
+void ServiceException::SharedDtor() {
   message_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
 
-void Exception::SetCachedSize(int size) const {
+void ServiceException::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* Exception::descriptor() {
+const ::google::protobuf::Descriptor* ServiceException::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Exception_descriptor_;
+  return ServiceException_descriptor_;
 }
 
-const Exception& Exception::default_instance() {
+const ServiceException& ServiceException::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_bio_5fservice_2eproto();
   return *default_instance_;
 }
 
-Exception* Exception::default_instance_ = NULL;
+ServiceException* ServiceException::default_instance_ = NULL;
 
-Exception* Exception::New(::google::protobuf::Arena* arena) const {
-  Exception* n = new Exception;
+ServiceException* ServiceException::New(::google::protobuf::Arena* arena) const {
+  ServiceException* n = new ServiceException;
   if (arena != NULL) {
     arena->Own(n);
   }
   return n;
 }
 
-void Exception::Clear() {
-// @@protoc_insertion_point(message_clear_start:BioService.Exception)
+void ServiceException::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.ServiceException)
   is_ok_ = false;
   error_id_ = GOOGLE_LONGLONG(0);
   message_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
-bool Exception::MergePartialFromCodedStream(
+bool ServiceException::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:BioService.Exception)
+  // @@protoc_insertion_point(parse_start:BioService.ServiceException)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -2225,7 +2250,7 @@ bool Exception::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->message().data(), this->message().length(),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "BioService.Exception.message"));
+            "BioService.ServiceException.message"));
         } else {
           goto handle_unusual;
         }
@@ -2246,17 +2271,17 @@ bool Exception::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:BioService.Exception)
+  // @@protoc_insertion_point(parse_success:BioService.ServiceException)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:BioService.Exception)
+  // @@protoc_insertion_point(parse_failure:BioService.ServiceException)
   return false;
 #undef DO_
 }
 
-void Exception::SerializeWithCachedSizes(
+void ServiceException::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:BioService.Exception)
+  // @@protoc_insertion_point(serialize_start:BioService.ServiceException)
   // optional bool is_ok = 1;
   if (this->is_ok() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->is_ok(), output);
@@ -2272,17 +2297,17 @@ void Exception::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->message().data(), this->message().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "BioService.Exception.message");
+      "BioService.ServiceException.message");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->message(), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:BioService.Exception)
+  // @@protoc_insertion_point(serialize_end:BioService.ServiceException)
 }
 
-::google::protobuf::uint8* Exception::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* ServiceException::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:BioService.Exception)
+  // @@protoc_insertion_point(serialize_to_array_start:BioService.ServiceException)
   // optional bool is_ok = 1;
   if (this->is_ok() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->is_ok(), target);
@@ -2298,18 +2323,18 @@ void Exception::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->message().data(), this->message().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "BioService.Exception.message");
+      "BioService.ServiceException.message");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->message(), target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:BioService.Exception)
+  // @@protoc_insertion_point(serialize_to_array_end:BioService.ServiceException)
   return target;
 }
 
-int Exception::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:BioService.Exception)
+int ServiceException::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.ServiceException)
   int total_size = 0;
 
   // optional bool is_ok = 1;
@@ -2337,23 +2362,23 @@ int Exception::ByteSize() const {
   return total_size;
 }
 
-void Exception::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:BioService.Exception)
+void ServiceException::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.ServiceException)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  const Exception* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const Exception>(
+  const ServiceException* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const ServiceException>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.Exception)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.ServiceException)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.Exception)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.ServiceException)
     MergeFrom(*source);
   }
 }
 
-void Exception::MergeFrom(const Exception& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:BioService.Exception)
+void ServiceException::MergeFrom(const ServiceException& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.ServiceException)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.is_ok() != 0) {
     set_is_ok(from.is_ok());
@@ -2367,30 +2392,30 @@ void Exception::MergeFrom(const Exception& from) {
   }
 }
 
-void Exception::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:BioService.Exception)
+void ServiceException::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.ServiceException)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Exception::CopyFrom(const Exception& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:BioService.Exception)
+void ServiceException::CopyFrom(const ServiceException& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.ServiceException)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Exception::IsInitialized() const {
+bool ServiceException::IsInitialized() const {
 
   return true;
 }
 
-void Exception::Swap(Exception* other) {
+void ServiceException::Swap(ServiceException* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void Exception::InternalSwap(Exception* other) {
+void ServiceException::InternalSwap(ServiceException* other) {
   std::swap(is_ok_, other->is_ok_);
   std::swap(error_id_, other->error_id_);
   message_.Swap(&other->message_);
@@ -2398,87 +2423,87 @@ void Exception::InternalSwap(Exception* other) {
   std::swap(_cached_size_, other->_cached_size_);
 }
 
-::google::protobuf::Metadata Exception::GetMetadata() const {
+::google::protobuf::Metadata ServiceException::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = Exception_descriptor_;
-  metadata.reflection = Exception_reflection_;
+  metadata.descriptor = ServiceException_descriptor_;
+  metadata.reflection = ServiceException_reflection_;
   return metadata;
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// Exception
+// ServiceException
 
 // optional bool is_ok = 1;
-void Exception::clear_is_ok() {
+void ServiceException::clear_is_ok() {
   is_ok_ = false;
 }
- bool Exception::is_ok() const {
-  // @@protoc_insertion_point(field_get:BioService.Exception.is_ok)
+ bool ServiceException::is_ok() const {
+  // @@protoc_insertion_point(field_get:BioService.ServiceException.is_ok)
   return is_ok_;
 }
- void Exception::set_is_ok(bool value) {
+ void ServiceException::set_is_ok(bool value) {
   
   is_ok_ = value;
-  // @@protoc_insertion_point(field_set:BioService.Exception.is_ok)
+  // @@protoc_insertion_point(field_set:BioService.ServiceException.is_ok)
 }
 
 // optional int64 error_id = 2;
-void Exception::clear_error_id() {
+void ServiceException::clear_error_id() {
   error_id_ = GOOGLE_LONGLONG(0);
 }
- ::google::protobuf::int64 Exception::error_id() const {
-  // @@protoc_insertion_point(field_get:BioService.Exception.error_id)
+ ::google::protobuf::int64 ServiceException::error_id() const {
+  // @@protoc_insertion_point(field_get:BioService.ServiceException.error_id)
   return error_id_;
 }
- void Exception::set_error_id(::google::protobuf::int64 value) {
+ void ServiceException::set_error_id(::google::protobuf::int64 value) {
   
   error_id_ = value;
-  // @@protoc_insertion_point(field_set:BioService.Exception.error_id)
+  // @@protoc_insertion_point(field_set:BioService.ServiceException.error_id)
 }
 
 // optional string message = 3;
-void Exception::clear_message() {
+void ServiceException::clear_message() {
   message_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- const ::std::string& Exception::message() const {
-  // @@protoc_insertion_point(field_get:BioService.Exception.message)
+ const ::std::string& ServiceException::message() const {
+  // @@protoc_insertion_point(field_get:BioService.ServiceException.message)
   return message_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void Exception::set_message(const ::std::string& value) {
+ void ServiceException::set_message(const ::std::string& value) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:BioService.Exception.message)
+  // @@protoc_insertion_point(field_set:BioService.ServiceException.message)
 }
- void Exception::set_message(const char* value) {
+ void ServiceException::set_message(const char* value) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:BioService.Exception.message)
+  // @@protoc_insertion_point(field_set_char:BioService.ServiceException.message)
 }
- void Exception::set_message(const char* value, size_t size) {
+ void ServiceException::set_message(const char* value, size_t size) {
   
   message_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:BioService.Exception.message)
+  // @@protoc_insertion_point(field_set_pointer:BioService.ServiceException.message)
 }
- ::std::string* Exception::mutable_message() {
+ ::std::string* ServiceException::mutable_message() {
   
-  // @@protoc_insertion_point(field_mutable:BioService.Exception.message)
+  // @@protoc_insertion_point(field_mutable:BioService.ServiceException.message)
   return message_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- ::std::string* Exception::release_message() {
-  // @@protoc_insertion_point(field_release:BioService.Exception.message)
+ ::std::string* ServiceException::release_message() {
+  // @@protoc_insertion_point(field_release:BioService.ServiceException.message)
   
   return message_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void Exception::set_allocated_message(::std::string* message) {
+ void ServiceException::set_allocated_message(::std::string* message) {
   if (message != NULL) {
     
   } else {
     
   }
   message_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), message);
-  // @@protoc_insertion_point(field_set_allocated:BioService.Exception.message)
+  // @@protoc_insertion_point(field_set_allocated:BioService.ServiceException.message)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -2486,84 +2511,86 @@ void Exception::clear_message() {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ObjectResponse::kIdFieldNumber;
-const int ObjectResponse::kExceptionFieldNumber;
+const int PopulationCreationResponse::kIdFieldNumber;
+const int PopulationCreationResponse::kPortraitFieldNumber;
+const int PopulationCreationResponse::kExceptionFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-ObjectResponse::ObjectResponse()
+PopulationCreationResponse::PopulationCreationResponse()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:BioService.ObjectResponse)
+  // @@protoc_insertion_point(constructor:BioService.PopulationCreationResponse)
 }
 
-void ObjectResponse::InitAsDefaultInstance() {
+void PopulationCreationResponse::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
-ObjectResponse::ObjectResponse(const ObjectResponse& from)
+PopulationCreationResponse::PopulationCreationResponse(const PopulationCreationResponse& from)
   : ::google::protobuf::Message(),
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:BioService.ObjectResponse)
+  // @@protoc_insertion_point(copy_constructor:BioService.PopulationCreationResponse)
 }
 
-void ObjectResponse::SharedCtor() {
+void PopulationCreationResponse::SharedCtor() {
     _is_default_instance_ = false;
   _cached_size_ = 0;
   id_ = GOOGLE_LONGLONG(0);
   exception_ = NULL;
 }
 
-ObjectResponse::~ObjectResponse() {
-  // @@protoc_insertion_point(destructor:BioService.ObjectResponse)
+PopulationCreationResponse::~PopulationCreationResponse() {
+  // @@protoc_insertion_point(destructor:BioService.PopulationCreationResponse)
   SharedDtor();
 }
 
-void ObjectResponse::SharedDtor() {
+void PopulationCreationResponse::SharedDtor() {
   if (this != default_instance_) {
     delete exception_;
   }
 }
 
-void ObjectResponse::SetCachedSize(int size) const {
+void PopulationCreationResponse::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* ObjectResponse::descriptor() {
+const ::google::protobuf::Descriptor* PopulationCreationResponse::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return ObjectResponse_descriptor_;
+  return PopulationCreationResponse_descriptor_;
 }
 
-const ObjectResponse& ObjectResponse::default_instance() {
+const PopulationCreationResponse& PopulationCreationResponse::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_bio_5fservice_2eproto();
   return *default_instance_;
 }
 
-ObjectResponse* ObjectResponse::default_instance_ = NULL;
+PopulationCreationResponse* PopulationCreationResponse::default_instance_ = NULL;
 
-ObjectResponse* ObjectResponse::New(::google::protobuf::Arena* arena) const {
-  ObjectResponse* n = new ObjectResponse;
+PopulationCreationResponse* PopulationCreationResponse::New(::google::protobuf::Arena* arena) const {
+  PopulationCreationResponse* n = new PopulationCreationResponse;
   if (arena != NULL) {
     arena->Own(n);
   }
   return n;
 }
 
-void ObjectResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:BioService.ObjectResponse)
+void PopulationCreationResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:BioService.PopulationCreationResponse)
   id_ = GOOGLE_LONGLONG(0);
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
+  portrait_.Clear();
 }
 
-bool ObjectResponse::MergePartialFromCodedStream(
+bool PopulationCreationResponse::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:BioService.ObjectResponse)
+  // @@protoc_insertion_point(parse_start:BioService.PopulationCreationResponse)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -2579,13 +2606,30 @@ bool ObjectResponse::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_exception;
+        if (input->ExpectTag(18)) goto parse_portrait;
         break;
       }
 
-      // optional .BioService.Exception exception = 2;
+      // repeated .BioService.PortraitCharacteristic portrait = 2;
       case 2: {
         if (tag == 18) {
+         parse_portrait:
+          DO_(input->IncrementRecursionDepth());
+         parse_loop_portrait:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
+                input, add_portrait()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_loop_portrait;
+        input->UnsafeDecrementRecursionDepth();
+        if (input->ExpectTag(26)) goto parse_exception;
+        break;
+      }
+
+      // optional .BioService.ServiceException exception = 3;
+      case 3: {
+        if (tag == 26) {
          parse_exception:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_exception()));
@@ -2609,52 +2653,65 @@ bool ObjectResponse::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:BioService.ObjectResponse)
+  // @@protoc_insertion_point(parse_success:BioService.PopulationCreationResponse)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:BioService.ObjectResponse)
+  // @@protoc_insertion_point(parse_failure:BioService.PopulationCreationResponse)
   return false;
 #undef DO_
 }
 
-void ObjectResponse::SerializeWithCachedSizes(
+void PopulationCreationResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:BioService.ObjectResponse)
+  // @@protoc_insertion_point(serialize_start:BioService.PopulationCreationResponse)
   // optional int64 id = 1;
   if (this->id() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->id(), output);
   }
 
-  // optional .BioService.Exception exception = 2;
-  if (this->has_exception()) {
+  // repeated .BioService.PortraitCharacteristic portrait = 2;
+  for (unsigned int i = 0, n = this->portrait_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->exception_, output);
+      2, this->portrait(i), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:BioService.ObjectResponse)
+  // optional .BioService.ServiceException exception = 3;
+  if (this->has_exception()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, *this->exception_, output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:BioService.PopulationCreationResponse)
 }
 
-::google::protobuf::uint8* ObjectResponse::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* PopulationCreationResponse::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:BioService.ObjectResponse)
+  // @@protoc_insertion_point(serialize_to_array_start:BioService.PopulationCreationResponse)
   // optional int64 id = 1;
   if (this->id() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->id(), target);
   }
 
-  // optional .BioService.Exception exception = 2;
+  // repeated .BioService.PortraitCharacteristic portrait = 2;
+  for (unsigned int i = 0, n = this->portrait_size(); i < n; i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->portrait(i), target);
+  }
+
+  // optional .BioService.ServiceException exception = 3;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        2, *this->exception_, target);
+        3, *this->exception_, target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:BioService.ObjectResponse)
+  // @@protoc_insertion_point(serialize_to_array_end:BioService.PopulationCreationResponse)
   return target;
 }
 
-int ObjectResponse::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:BioService.ObjectResponse)
+int PopulationCreationResponse::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:BioService.PopulationCreationResponse)
   int total_size = 0;
 
   // optional int64 id = 1;
@@ -2664,11 +2721,19 @@ int ObjectResponse::ByteSize() const {
         this->id());
   }
 
-  // optional .BioService.Exception exception = 2;
+  // optional .BioService.ServiceException exception = 3;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->exception_);
+  }
+
+  // repeated .BioService.PortraitCharacteristic portrait = 2;
+  total_size += 1 * this->portrait_size();
+  for (int i = 0; i < this->portrait_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->portrait(i));
   }
 
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
@@ -2677,115 +2742,147 @@ int ObjectResponse::ByteSize() const {
   return total_size;
 }
 
-void ObjectResponse::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:BioService.ObjectResponse)
+void PopulationCreationResponse::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:BioService.PopulationCreationResponse)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  const ObjectResponse* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const ObjectResponse>(
+  const PopulationCreationResponse* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const PopulationCreationResponse>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.ObjectResponse)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:BioService.PopulationCreationResponse)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.ObjectResponse)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:BioService.PopulationCreationResponse)
     MergeFrom(*source);
   }
 }
 
-void ObjectResponse::MergeFrom(const ObjectResponse& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:BioService.ObjectResponse)
+void PopulationCreationResponse::MergeFrom(const PopulationCreationResponse& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:BioService.PopulationCreationResponse)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  portrait_.MergeFrom(from.portrait_);
   if (from.id() != 0) {
     set_id(from.id());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
-void ObjectResponse::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:BioService.ObjectResponse)
+void PopulationCreationResponse::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:BioService.PopulationCreationResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void ObjectResponse::CopyFrom(const ObjectResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:BioService.ObjectResponse)
+void PopulationCreationResponse::CopyFrom(const PopulationCreationResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:BioService.PopulationCreationResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ObjectResponse::IsInitialized() const {
+bool PopulationCreationResponse::IsInitialized() const {
 
   return true;
 }
 
-void ObjectResponse::Swap(ObjectResponse* other) {
+void PopulationCreationResponse::Swap(PopulationCreationResponse* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void ObjectResponse::InternalSwap(ObjectResponse* other) {
+void PopulationCreationResponse::InternalSwap(PopulationCreationResponse* other) {
   std::swap(id_, other->id_);
+  portrait_.UnsafeArenaSwap(&other->portrait_);
   std::swap(exception_, other->exception_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
-::google::protobuf::Metadata ObjectResponse::GetMetadata() const {
+::google::protobuf::Metadata PopulationCreationResponse::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = ObjectResponse_descriptor_;
-  metadata.reflection = ObjectResponse_reflection_;
+  metadata.descriptor = PopulationCreationResponse_descriptor_;
+  metadata.reflection = PopulationCreationResponse_reflection_;
   return metadata;
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// ObjectResponse
+// PopulationCreationResponse
 
 // optional int64 id = 1;
-void ObjectResponse::clear_id() {
+void PopulationCreationResponse::clear_id() {
   id_ = GOOGLE_LONGLONG(0);
 }
- ::google::protobuf::int64 ObjectResponse::id() const {
-  // @@protoc_insertion_point(field_get:BioService.ObjectResponse.id)
+ ::google::protobuf::int64 PopulationCreationResponse::id() const {
+  // @@protoc_insertion_point(field_get:BioService.PopulationCreationResponse.id)
   return id_;
 }
- void ObjectResponse::set_id(::google::protobuf::int64 value) {
+ void PopulationCreationResponse::set_id(::google::protobuf::int64 value) {
   
   id_ = value;
-  // @@protoc_insertion_point(field_set:BioService.ObjectResponse.id)
+  // @@protoc_insertion_point(field_set:BioService.PopulationCreationResponse.id)
 }
 
-// optional .BioService.Exception exception = 2;
-bool ObjectResponse::has_exception() const {
+// repeated .BioService.PortraitCharacteristic portrait = 2;
+int PopulationCreationResponse::portrait_size() const {
+  return portrait_.size();
+}
+void PopulationCreationResponse::clear_portrait() {
+  portrait_.Clear();
+}
+const ::BioService::PortraitCharacteristic& PopulationCreationResponse::portrait(int index) const {
+  // @@protoc_insertion_point(field_get:BioService.PopulationCreationResponse.portrait)
+  return portrait_.Get(index);
+}
+::BioService::PortraitCharacteristic* PopulationCreationResponse::mutable_portrait(int index) {
+  // @@protoc_insertion_point(field_mutable:BioService.PopulationCreationResponse.portrait)
+  return portrait_.Mutable(index);
+}
+::BioService::PortraitCharacteristic* PopulationCreationResponse::add_portrait() {
+  // @@protoc_insertion_point(field_add:BioService.PopulationCreationResponse.portrait)
+  return portrait_.Add();
+}
+::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic >*
+PopulationCreationResponse::mutable_portrait() {
+  // @@protoc_insertion_point(field_mutable_list:BioService.PopulationCreationResponse.portrait)
+  return &portrait_;
+}
+const ::google::protobuf::RepeatedPtrField< ::BioService::PortraitCharacteristic >&
+PopulationCreationResponse::portrait() const {
+  // @@protoc_insertion_point(field_list:BioService.PopulationCreationResponse.portrait)
+  return portrait_;
+}
+
+// optional .BioService.ServiceException exception = 3;
+bool PopulationCreationResponse::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
-void ObjectResponse::clear_exception() {
+void PopulationCreationResponse::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& ObjectResponse::exception() const {
-  // @@protoc_insertion_point(field_get:BioService.ObjectResponse.exception)
+const ::BioService::ServiceException& PopulationCreationResponse::exception() const {
+  // @@protoc_insertion_point(field_get:BioService.PopulationCreationResponse.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* ObjectResponse::mutable_exception() {
+::BioService::ServiceException* PopulationCreationResponse::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
-  // @@protoc_insertion_point(field_mutable:BioService.ObjectResponse.exception)
+  // @@protoc_insertion_point(field_mutable:BioService.PopulationCreationResponse.exception)
   return exception_;
 }
-::BioService::Exception* ObjectResponse::release_exception() {
-  // @@protoc_insertion_point(field_release:BioService.ObjectResponse.exception)
+::BioService::ServiceException* PopulationCreationResponse::release_exception() {
+  // @@protoc_insertion_point(field_release:BioService.PopulationCreationResponse.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void ObjectResponse::set_allocated_exception(::BioService::Exception* exception) {
+void PopulationCreationResponse::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -2793,7 +2890,7 @@ void ObjectResponse::set_allocated_exception(::BioService::Exception* exception)
   } else {
     
   }
-  // @@protoc_insertion_point(field_set_allocated:BioService.ObjectResponse.exception)
+  // @@protoc_insertion_point(field_set_allocated:BioService.PopulationCreationResponse.exception)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -2814,7 +2911,7 @@ AcquisitionResponse::AcquisitionResponse()
 void AcquisitionResponse::InitAsDefaultInstance() {
   _is_default_instance_ = true;
   portrait_ = const_cast< ::BioService::PortraitCharacteristic*>(&::BioService::PortraitCharacteristic::default_instance());
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 AcquisitionResponse::AcquisitionResponse(const AcquisitionResponse& from)
@@ -2899,7 +2996,7 @@ bool AcquisitionResponse::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 2;
+      // optional .BioService.ServiceException exception = 2;
       case 2: {
         if (tag == 18) {
          parse_exception:
@@ -2942,7 +3039,7 @@ void AcquisitionResponse::SerializeWithCachedSizes(
       1, *this->portrait_, output);
   }
 
-  // optional .BioService.Exception exception = 2;
+  // optional .BioService.ServiceException exception = 2;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, *this->exception_, output);
@@ -2961,7 +3058,7 @@ void AcquisitionResponse::SerializeWithCachedSizes(
         1, *this->portrait_, target);
   }
 
-  // optional .BioService.Exception exception = 2;
+  // optional .BioService.ServiceException exception = 2;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -2983,7 +3080,7 @@ int AcquisitionResponse::ByteSize() const {
         *this->portrait_);
   }
 
-  // optional .BioService.Exception exception = 2;
+  // optional .BioService.ServiceException exception = 2;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -3018,7 +3115,7 @@ void AcquisitionResponse::MergeFrom(const AcquisitionResponse& from) {
     mutable_portrait()->::BioService::PortraitCharacteristic::MergeFrom(from.portrait());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -3101,7 +3198,7 @@ void AcquisitionResponse::set_allocated_portrait(::BioService::PortraitCharacter
   // @@protoc_insertion_point(field_set_allocated:BioService.AcquisitionResponse.portrait)
 }
 
-// optional .BioService.Exception exception = 2;
+// optional .BioService.ServiceException exception = 2;
 bool AcquisitionResponse::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -3109,26 +3206,26 @@ void AcquisitionResponse::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& AcquisitionResponse::exception() const {
+const ::BioService::ServiceException& AcquisitionResponse::exception() const {
   // @@protoc_insertion_point(field_get:BioService.AcquisitionResponse.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* AcquisitionResponse::mutable_exception() {
+::BioService::ServiceException* AcquisitionResponse::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.AcquisitionResponse.exception)
   return exception_;
 }
-::BioService::Exception* AcquisitionResponse::release_exception() {
+::BioService::ServiceException* AcquisitionResponse::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.AcquisitionResponse.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void AcquisitionResponse::set_allocated_exception(::BioService::Exception* exception) {
+void AcquisitionResponse::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -4304,7 +4401,7 @@ void Person::InitAsDefaultInstance() {
   _is_default_instance_ = true;
   criminal_ = const_cast< ::BioService::Criminal*>(&::BioService::Criminal::default_instance());
   biometric_data_ = const_cast< ::BioService::BiometricData*>(&::BioService::BiometricData::default_instance());
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 Person::Person(const Person& from)
@@ -4687,7 +4784,7 @@ bool Person::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 18;
+      // optional .BioService.ServiceException exception = 18;
       case 18: {
         if (tag == 146) {
          parse_exception:
@@ -4864,7 +4961,7 @@ void Person::SerializeWithCachedSizes(
       17, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 18;
+  // optional .BioService.ServiceException exception = 18;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       18, *this->exception_, output);
@@ -5020,7 +5117,7 @@ void Person::SerializeWithCachedSizes(
       17, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 18;
+  // optional .BioService.ServiceException exception = 18;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -5141,7 +5238,7 @@ int Person::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 18;
+  // optional .BioService.ServiceException exception = 18;
   if (this->has_exception()) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -5255,7 +5352,7 @@ void Person::MergeFrom(const Person& from) {
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
   if (from.message().size() > 0) {
 
@@ -5835,7 +5932,7 @@ void Person::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.Person.entity_state)
 }
 
-// optional .BioService.Exception exception = 18;
+// optional .BioService.ServiceException exception = 18;
 bool Person::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -5843,26 +5940,26 @@ void Person::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& Person::exception() const {
+const ::BioService::ServiceException& Person::exception() const {
   // @@protoc_insertion_point(field_get:BioService.Person.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* Person::mutable_exception() {
+::BioService::ServiceException* Person::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.Person.exception)
   return exception_;
 }
-::BioService::Exception* Person::release_exception() {
+::BioService::ServiceException* Person::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.Person.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void Person::set_allocated_exception(::BioService::Exception* exception) {
+void Person::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -5935,7 +6032,7 @@ AccessDevice::AccessDevice()
 
 void AccessDevice::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 AccessDevice::AccessDevice(const AccessDevice& from)
@@ -6026,7 +6123,7 @@ bool AccessDevice::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 2;
+      // optional .BioService.ServiceException exception = 2;
       case 2: {
         if (tag == 18) {
          parse_exception:
@@ -6089,7 +6186,7 @@ void AccessDevice::SerializeWithCachedSizes(
       1, this->portname(), output);
   }
 
-  // optional .BioService.Exception exception = 2;
+  // optional .BioService.ServiceException exception = 2;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, *this->exception_, output);
@@ -6118,7 +6215,7 @@ void AccessDevice::SerializeWithCachedSizes(
         1, this->portname(), target);
   }
 
-  // optional .BioService.Exception exception = 2;
+  // optional .BioService.ServiceException exception = 2;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -6146,7 +6243,7 @@ int AccessDevice::ByteSize() const {
         this->portname());
   }
 
-  // optional .BioService.Exception exception = 2;
+  // optional .BioService.ServiceException exception = 2;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -6188,7 +6285,7 @@ void AccessDevice::MergeFrom(const AccessDevice& from) {
     portname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.portname_);
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
   if (from.entity_state() != 0) {
     set_entity_state(from.entity_state());
@@ -6281,7 +6378,7 @@ void AccessDevice::clear_portname() {
   // @@protoc_insertion_point(field_set_allocated:BioService.AccessDevice.portname)
 }
 
-// optional .BioService.Exception exception = 2;
+// optional .BioService.ServiceException exception = 2;
 bool AccessDevice::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -6289,26 +6386,26 @@ void AccessDevice::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& AccessDevice::exception() const {
+const ::BioService::ServiceException& AccessDevice::exception() const {
   // @@protoc_insertion_point(field_get:BioService.AccessDevice.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* AccessDevice::mutable_exception() {
+::BioService::ServiceException* AccessDevice::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.AccessDevice.exception)
   return exception_;
 }
-::BioService::Exception* AccessDevice::release_exception() {
+::BioService::ServiceException* AccessDevice::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.AccessDevice.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void AccessDevice::set_allocated_exception(::BioService::Exception* exception) {
+void AccessDevice::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -6351,7 +6448,7 @@ CaptureDevice::CaptureDevice()
 
 void CaptureDevice::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 CaptureDevice::CaptureDevice(const CaptureDevice& from)
@@ -6442,7 +6539,7 @@ bool CaptureDevice::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 2;
+      // optional .BioService.ServiceException exception = 2;
       case 2: {
         if (tag == 18) {
          parse_exception:
@@ -6505,7 +6602,7 @@ void CaptureDevice::SerializeWithCachedSizes(
       1, this->devicename(), output);
   }
 
-  // optional .BioService.Exception exception = 2;
+  // optional .BioService.ServiceException exception = 2;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, *this->exception_, output);
@@ -6534,7 +6631,7 @@ void CaptureDevice::SerializeWithCachedSizes(
         1, this->devicename(), target);
   }
 
-  // optional .BioService.Exception exception = 2;
+  // optional .BioService.ServiceException exception = 2;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -6562,7 +6659,7 @@ int CaptureDevice::ByteSize() const {
         this->devicename());
   }
 
-  // optional .BioService.Exception exception = 2;
+  // optional .BioService.ServiceException exception = 2;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -6604,7 +6701,7 @@ void CaptureDevice::MergeFrom(const CaptureDevice& from) {
     devicename_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.devicename_);
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
   if (from.entity_state() != 0) {
     set_entity_state(from.entity_state());
@@ -6697,7 +6794,7 @@ void CaptureDevice::clear_devicename() {
   // @@protoc_insertion_point(field_set_allocated:BioService.CaptureDevice.devicename)
 }
 
-// optional .BioService.Exception exception = 2;
+// optional .BioService.ServiceException exception = 2;
 bool CaptureDevice::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -6705,26 +6802,26 @@ void CaptureDevice::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& CaptureDevice::exception() const {
+const ::BioService::ServiceException& CaptureDevice::exception() const {
   // @@protoc_insertion_point(field_get:BioService.CaptureDevice.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* CaptureDevice::mutable_exception() {
+::BioService::ServiceException* CaptureDevice::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.CaptureDevice.exception)
   return exception_;
 }
-::BioService::Exception* CaptureDevice::release_exception() {
+::BioService::ServiceException* CaptureDevice::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.CaptureDevice.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void CaptureDevice::set_allocated_exception(::BioService::Exception* exception) {
+void CaptureDevice::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -6768,7 +6865,7 @@ FingerprintDevice::FingerprintDevice()
 
 void FingerprintDevice::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 FingerprintDevice::FingerprintDevice(const FingerprintDevice& from)
@@ -6879,7 +6976,7 @@ bool FingerprintDevice::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 3;
+      // optional .BioService.ServiceException exception = 3;
       case 3: {
         if (tag == 26) {
          parse_exception:
@@ -6952,7 +7049,7 @@ void FingerprintDevice::SerializeWithCachedSizes(
       2, this->serial_number(), output);
   }
 
-  // optional .BioService.Exception exception = 3;
+  // optional .BioService.ServiceException exception = 3;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, *this->exception_, output);
@@ -6992,7 +7089,7 @@ void FingerprintDevice::SerializeWithCachedSizes(
         2, this->serial_number(), target);
   }
 
-  // optional .BioService.Exception exception = 3;
+  // optional .BioService.ServiceException exception = 3;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -7027,7 +7124,7 @@ int FingerprintDevice::ByteSize() const {
         this->serial_number());
   }
 
-  // optional .BioService.Exception exception = 3;
+  // optional .BioService.ServiceException exception = 3;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -7073,7 +7170,7 @@ void FingerprintDevice::MergeFrom(const FingerprintDevice& from) {
     serial_number_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.serial_number_);
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
   if (from.entity_state() != 0) {
     set_entity_state(from.entity_state());
@@ -7211,7 +7308,7 @@ void FingerprintDevice::clear_serial_number() {
   // @@protoc_insertion_point(field_set_allocated:BioService.FingerprintDevice.serial_number)
 }
 
-// optional .BioService.Exception exception = 3;
+// optional .BioService.ServiceException exception = 3;
 bool FingerprintDevice::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -7219,26 +7316,26 @@ void FingerprintDevice::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& FingerprintDevice::exception() const {
+const ::BioService::ServiceException& FingerprintDevice::exception() const {
   // @@protoc_insertion_point(field_get:BioService.FingerprintDevice.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* FingerprintDevice::mutable_exception() {
+::BioService::ServiceException* FingerprintDevice::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.FingerprintDevice.exception)
   return exception_;
 }
-::BioService::Exception* FingerprintDevice::release_exception() {
+::BioService::ServiceException* FingerprintDevice::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.FingerprintDevice.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void FingerprintDevice::set_allocated_exception(::BioService::Exception* exception) {
+void FingerprintDevice::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -7282,7 +7379,7 @@ IrisDevice::IrisDevice()
 
 void IrisDevice::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 IrisDevice::IrisDevice(const IrisDevice& from)
@@ -7393,7 +7490,7 @@ bool IrisDevice::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 3;
+      // optional .BioService.ServiceException exception = 3;
       case 3: {
         if (tag == 26) {
          parse_exception:
@@ -7466,7 +7563,7 @@ void IrisDevice::SerializeWithCachedSizes(
       2, this->serial_number(), output);
   }
 
-  // optional .BioService.Exception exception = 3;
+  // optional .BioService.ServiceException exception = 3;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, *this->exception_, output);
@@ -7506,7 +7603,7 @@ void IrisDevice::SerializeWithCachedSizes(
         2, this->serial_number(), target);
   }
 
-  // optional .BioService.Exception exception = 3;
+  // optional .BioService.ServiceException exception = 3;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -7541,7 +7638,7 @@ int IrisDevice::ByteSize() const {
         this->serial_number());
   }
 
-  // optional .BioService.Exception exception = 3;
+  // optional .BioService.ServiceException exception = 3;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -7587,7 +7684,7 @@ void IrisDevice::MergeFrom(const IrisDevice& from) {
     serial_number_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.serial_number_);
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
   if (from.entity_state() != 0) {
     set_entity_state(from.entity_state());
@@ -7725,7 +7822,7 @@ void IrisDevice::clear_serial_number() {
   // @@protoc_insertion_point(field_set_allocated:BioService.IrisDevice.serial_number)
 }
 
-// optional .BioService.Exception exception = 3;
+// optional .BioService.ServiceException exception = 3;
 bool IrisDevice::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -7733,26 +7830,26 @@ void IrisDevice::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& IrisDevice::exception() const {
+const ::BioService::ServiceException& IrisDevice::exception() const {
   // @@protoc_insertion_point(field_get:BioService.IrisDevice.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* IrisDevice::mutable_exception() {
+::BioService::ServiceException* IrisDevice::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.IrisDevice.exception)
   return exception_;
 }
-::BioService::Exception* IrisDevice::release_exception() {
+::BioService::ServiceException* IrisDevice::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.IrisDevice.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void IrisDevice::set_allocated_exception(::BioService::Exception* exception) {
+void IrisDevice::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -7797,7 +7894,7 @@ Card::Card()
 
 void Card::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 Card::Card(const Card& from)
@@ -7957,7 +8054,7 @@ bool Card::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 5;
+      // optional .BioService.ServiceException exception = 5;
       case 5: {
         if (tag == 42) {
          parse_exception:
@@ -8020,7 +8117,7 @@ void Card::SerializeWithCachedSizes(
       4, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 5;
+  // optional .BioService.ServiceException exception = 5;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       5, *this->exception_, output);
@@ -8059,7 +8156,7 @@ void Card::SerializeWithCachedSizes(
       4, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 5;
+  // optional .BioService.ServiceException exception = 5;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -8101,7 +8198,7 @@ int Card::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 5;
+  // optional .BioService.ServiceException exception = 5;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -8146,7 +8243,7 @@ void Card::MergeFrom(const Card& from) {
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -8280,7 +8377,7 @@ void Card::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.Card.entity_state)
 }
 
-// optional .BioService.Exception exception = 5;
+// optional .BioService.ServiceException exception = 5;
 bool Card::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -8288,26 +8385,26 @@ void Card::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& Card::exception() const {
+const ::BioService::ServiceException& Card::exception() const {
   // @@protoc_insertion_point(field_get:BioService.Card.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* Card::mutable_exception() {
+::BioService::ServiceException* Card::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.Card.exception)
   return exception_;
 }
-::BioService::Exception* Card::release_exception() {
+::BioService::ServiceException* Card::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.Card.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void Card::set_allocated_exception(::BioService::Exception* exception) {
+void Card::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -8349,7 +8446,7 @@ void Location::InitAsDefaultInstance() {
   fingerprintdevice_ = const_cast< ::BioService::FingerprintDevice*>(&::BioService::FingerprintDevice::default_instance());
   irisdevice_ = const_cast< ::BioService::IrisDevice*>(&::BioService::IrisDevice::default_instance());
   access_info_ = const_cast< ::BioService::AccessInfo*>(&::BioService::AccessInfo::default_instance());
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 Location::Location(const Location& from)
@@ -8598,7 +8695,7 @@ bool Location::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 11;
+      // optional .BioService.ServiceException exception = 11;
       case 11: {
         if (tag == 90) {
          parse_exception:
@@ -8706,7 +8803,7 @@ void Location::SerializeWithCachedSizes(
       10, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 11;
+  // optional .BioService.ServiceException exception = 11;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       11, *this->exception_, output);
@@ -8797,7 +8894,7 @@ void Location::SerializeWithCachedSizes(
       10, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 11;
+  // optional .BioService.ServiceException exception = 11;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -8881,7 +8978,7 @@ int Location::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 11;
+  // optional .BioService.ServiceException exception = 11;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -8946,7 +9043,7 @@ void Location::MergeFrom(const Location& from) {
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -9350,7 +9447,7 @@ void Location::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.Location.entity_state)
 }
 
-// optional .BioService.Exception exception = 11;
+// optional .BioService.ServiceException exception = 11;
 bool Location::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -9358,26 +9455,26 @@ void Location::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& Location::exception() const {
+const ::BioService::ServiceException& Location::exception() const {
   // @@protoc_insertion_point(field_get:BioService.Location.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* Location::mutable_exception() {
+::BioService::ServiceException* Location::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.Location.exception)
   return exception_;
 }
-::BioService::Exception* Location::release_exception() {
+::BioService::ServiceException* Location::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.Location.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void Location::set_allocated_exception(::BioService::Exception* exception) {
+void Location::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -9430,7 +9527,7 @@ AccessInfo::AccessInfo()
 
 void AccessInfo::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 AccessInfo::AccessInfo(const AccessInfo& from)
@@ -9571,7 +9668,7 @@ bool AccessInfo::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 4;
+      // optional .BioService.ServiceException exception = 4;
       case 4: {
         if (tag == 34) {
          parse_exception:
@@ -9626,7 +9723,7 @@ void AccessInfo::SerializeWithCachedSizes(
       3, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 4;
+  // optional .BioService.ServiceException exception = 4;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, *this->exception_, output);
@@ -9657,7 +9754,7 @@ void AccessInfo::SerializeWithCachedSizes(
       3, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 4;
+  // optional .BioService.ServiceException exception = 4;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -9684,7 +9781,7 @@ int AccessInfo::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 4;
+  // optional .BioService.ServiceException exception = 4;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -9731,7 +9828,7 @@ void AccessInfo::MergeFrom(const AccessInfo& from) {
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -9836,7 +9933,7 @@ void AccessInfo::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.AccessInfo.entity_state)
 }
 
-// optional .BioService.Exception exception = 4;
+// optional .BioService.ServiceException exception = 4;
 bool AccessInfo::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -9844,26 +9941,26 @@ void AccessInfo::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& AccessInfo::exception() const {
+const ::BioService::ServiceException& AccessInfo::exception() const {
   // @@protoc_insertion_point(field_get:BioService.AccessInfo.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* AccessInfo::mutable_exception() {
+::BioService::ServiceException* AccessInfo::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.AccessInfo.exception)
   return exception_;
 }
-::BioService::Exception* AccessInfo::release_exception() {
+::BioService::ServiceException* AccessInfo::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.AccessInfo.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void AccessInfo::set_allocated_exception(::BioService::Exception* exception) {
+void AccessInfo::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -10629,7 +10726,7 @@ ConfidentPosition::ConfidentPosition()
 
 void ConfidentPosition::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 ConfidentPosition::ConfidentPosition(const ConfidentPosition& from)
@@ -10783,7 +10880,7 @@ bool ConfidentPosition::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 5;
+      // optional .BioService.ServiceException exception = 5;
       case 5: {
         if (tag == 42) {
          parse_exception:
@@ -10841,7 +10938,7 @@ void ConfidentPosition::SerializeWithCachedSizes(
       4, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 5;
+  // optional .BioService.ServiceException exception = 5;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       5, *this->exception_, output);
@@ -10874,7 +10971,7 @@ void ConfidentPosition::SerializeWithCachedSizes(
       4, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 5;
+  // optional .BioService.ServiceException exception = 5;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -10910,7 +11007,7 @@ int ConfidentPosition::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 5;
+  // optional .BioService.ServiceException exception = 5;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -10954,7 +11051,7 @@ void ConfidentPosition::MergeFrom(const ConfidentPosition& from) {
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -11058,7 +11155,7 @@ void ConfidentPosition::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.ConfidentPosition.entity_state)
 }
 
-// optional .BioService.Exception exception = 5;
+// optional .BioService.ServiceException exception = 5;
 bool ConfidentPosition::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -11066,26 +11163,26 @@ void ConfidentPosition::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& ConfidentPosition::exception() const {
+const ::BioService::ServiceException& ConfidentPosition::exception() const {
   // @@protoc_insertion_point(field_get:BioService.ConfidentPosition.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* ConfidentPosition::mutable_exception() {
+::BioService::ServiceException* ConfidentPosition::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.ConfidentPosition.exception)
   return exception_;
 }
-::BioService::Exception* ConfidentPosition::release_exception() {
+::BioService::ServiceException* ConfidentPosition::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.ConfidentPosition.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void ConfidentPosition::set_allocated_exception(::BioService::Exception* exception) {
+void ConfidentPosition::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -11118,7 +11215,7 @@ void EyesCharacteristic::InitAsDefaultInstance() {
   _is_default_instance_ = true;
   left_eye_ = const_cast< ::BioService::DetailedEyeCharacteristic*>(&::BioService::DetailedEyeCharacteristic::default_instance());
   right_eye_ = const_cast< ::BioService::DetailedEyeCharacteristic*>(&::BioService::DetailedEyeCharacteristic::default_instance());
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 EyesCharacteristic::EyesCharacteristic(const EyesCharacteristic& from)
@@ -11255,7 +11352,7 @@ bool EyesCharacteristic::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 5;
+      // optional .BioService.ServiceException exception = 5;
       case 5: {
         if (tag == 42) {
          parse_exception:
@@ -11315,7 +11412,7 @@ void EyesCharacteristic::SerializeWithCachedSizes(
       4, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 5;
+  // optional .BioService.ServiceException exception = 5;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       5, *this->exception_, output);
@@ -11352,7 +11449,7 @@ void EyesCharacteristic::SerializeWithCachedSizes(
       4, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 5;
+  // optional .BioService.ServiceException exception = 5;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -11394,7 +11491,7 @@ int EyesCharacteristic::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 5;
+  // optional .BioService.ServiceException exception = 5;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -11438,7 +11535,7 @@ void EyesCharacteristic::MergeFrom(const EyesCharacteristic& from) {
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -11590,7 +11687,7 @@ void EyesCharacteristic::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.EyesCharacteristic.entity_state)
 }
 
-// optional .BioService.Exception exception = 5;
+// optional .BioService.ServiceException exception = 5;
 bool EyesCharacteristic::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -11598,26 +11695,26 @@ void EyesCharacteristic::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& EyesCharacteristic::exception() const {
+const ::BioService::ServiceException& EyesCharacteristic::exception() const {
   // @@protoc_insertion_point(field_get:BioService.EyesCharacteristic.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* EyesCharacteristic::mutable_exception() {
+::BioService::ServiceException* EyesCharacteristic::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.EyesCharacteristic.exception)
   return exception_;
 }
-::BioService::Exception* EyesCharacteristic::release_exception() {
+::BioService::ServiceException* EyesCharacteristic::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.EyesCharacteristic.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void EyesCharacteristic::set_allocated_exception(::BioService::Exception* exception) {
+void EyesCharacteristic::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -11925,7 +12022,7 @@ void FaceCharacteristic::InitAsDefaultInstance() {
   box_ = const_cast< ::BioService::SurroundingBox*>(&::BioService::SurroundingBox::default_instance());
   face_center_ = const_cast< ::BioService::Position*>(&::BioService::Position::default_instance());
   eyes_ = const_cast< ::BioService::EyesCharacteristic*>(&::BioService::EyesCharacteristic::default_instance());
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 FaceCharacteristic::FaceCharacteristic(const FaceCharacteristic& from)
@@ -12426,7 +12523,7 @@ bool FaceCharacteristic::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 26;
+      // optional .BioService.ServiceException exception = 26;
       case 26: {
         if (tag == 210) {
          parse_exception:
@@ -12594,7 +12691,7 @@ void FaceCharacteristic::SerializeWithCachedSizes(
       25, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 26;
+  // optional .BioService.ServiceException exception = 26;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       26, *this->exception_, output);
@@ -12740,7 +12837,7 @@ void FaceCharacteristic::SerializeWithCachedSizes(
       25, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 26;
+  // optional .BioService.ServiceException exception = 26;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -12897,7 +12994,7 @@ int FaceCharacteristic::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 26;
+  // optional .BioService.ServiceException exception = 26;
   if (this->has_exception()) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -13004,7 +13101,7 @@ void FaceCharacteristic::MergeFrom(const FaceCharacteristic& from) {
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -13495,7 +13592,7 @@ void FaceCharacteristic::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.FaceCharacteristic.entity_state)
 }
 
-// optional .BioService.Exception exception = 26;
+// optional .BioService.ServiceException exception = 26;
 bool FaceCharacteristic::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -13503,26 +13600,26 @@ void FaceCharacteristic::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& FaceCharacteristic::exception() const {
+const ::BioService::ServiceException& FaceCharacteristic::exception() const {
   // @@protoc_insertion_point(field_get:BioService.FaceCharacteristic.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* FaceCharacteristic::mutable_exception() {
+::BioService::ServiceException* FaceCharacteristic::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.FaceCharacteristic.exception)
   return exception_;
 }
-::BioService::Exception* FaceCharacteristic::release_exception() {
+::BioService::ServiceException* FaceCharacteristic::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.FaceCharacteristic.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void FaceCharacteristic::set_allocated_exception(::BioService::Exception* exception) {
+void FaceCharacteristic::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -14734,7 +14831,7 @@ FingerprintCharacteristic::FingerprintCharacteristic()
 
 void FingerprintCharacteristic::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 FingerprintCharacteristic::FingerprintCharacteristic(const FingerprintCharacteristic& from)
@@ -14938,7 +15035,7 @@ bool FingerprintCharacteristic::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 8;
+      // optional .BioService.ServiceException exception = 8;
       case 8: {
         if (tag == 66) {
          parse_exception:
@@ -15013,7 +15110,7 @@ void FingerprintCharacteristic::SerializeWithCachedSizes(
       7, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 8;
+  // optional .BioService.ServiceException exception = 8;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       8, *this->exception_, output);
@@ -15063,7 +15160,7 @@ void FingerprintCharacteristic::SerializeWithCachedSizes(
       7, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 8;
+  // optional .BioService.ServiceException exception = 8;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -15122,7 +15219,7 @@ int FingerprintCharacteristic::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 8;
+  // optional .BioService.ServiceException exception = 8;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -15175,7 +15272,7 @@ void FingerprintCharacteristic::MergeFrom(const FingerprintCharacteristic& from)
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -15324,7 +15421,7 @@ void FingerprintCharacteristic::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.FingerprintCharacteristic.entity_state)
 }
 
-// optional .BioService.Exception exception = 8;
+// optional .BioService.ServiceException exception = 8;
 bool FingerprintCharacteristic::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -15332,26 +15429,26 @@ void FingerprintCharacteristic::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& FingerprintCharacteristic::exception() const {
+const ::BioService::ServiceException& FingerprintCharacteristic::exception() const {
   // @@protoc_insertion_point(field_get:BioService.FingerprintCharacteristic.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* FingerprintCharacteristic::mutable_exception() {
+::BioService::ServiceException* FingerprintCharacteristic::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.FingerprintCharacteristic.exception)
   return exception_;
 }
-::BioService::Exception* FingerprintCharacteristic::release_exception() {
+::BioService::ServiceException* FingerprintCharacteristic::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.FingerprintCharacteristic.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void FingerprintCharacteristic::set_allocated_exception(::BioService::Exception* exception) {
+void FingerprintCharacteristic::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -16847,7 +16944,7 @@ FacialImage::FacialImage()
 void FacialImage::InitAsDefaultInstance() {
   _is_default_instance_ = true;
   image_ = const_cast< ::BioService::Photo*>(&::BioService::Photo::default_instance());
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 FacialImage::FacialImage(const FacialImage& from)
@@ -17002,7 +17099,7 @@ bool FacialImage::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 6;
+      // optional .BioService.ServiceException exception = 6;
       case 6: {
         if (tag == 50) {
          parse_exception:
@@ -17068,7 +17165,7 @@ void FacialImage::SerializeWithCachedSizes(
       5, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 6;
+  // optional .BioService.ServiceException exception = 6;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       6, *this->exception_, output);
@@ -17112,7 +17209,7 @@ void FacialImage::SerializeWithCachedSizes(
       5, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 6;
+  // optional .BioService.ServiceException exception = 6;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -17154,7 +17251,7 @@ int FacialImage::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 6;
+  // optional .BioService.ServiceException exception = 6;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -17208,7 +17305,7 @@ void FacialImage::MergeFrom(const FacialImage& from) {
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -17397,7 +17494,7 @@ void FacialImage::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.FacialImage.entity_state)
 }
 
-// optional .BioService.Exception exception = 6;
+// optional .BioService.ServiceException exception = 6;
 bool FacialImage::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -17405,26 +17502,26 @@ void FacialImage::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& FacialImage::exception() const {
+const ::BioService::ServiceException& FacialImage::exception() const {
   // @@protoc_insertion_point(field_get:BioService.FacialImage.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* FacialImage::mutable_exception() {
+::BioService::ServiceException* FacialImage::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.FacialImage.exception)
   return exception_;
 }
-::BioService::Exception* FacialImage::release_exception() {
+::BioService::ServiceException* FacialImage::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.FacialImage.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void FacialImage::set_allocated_exception(::BioService::Exception* exception) {
+void FacialImage::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -17455,7 +17552,7 @@ DatabaseFacialImageResponse::DatabaseFacialImageResponse()
 void DatabaseFacialImageResponse::InitAsDefaultInstance() {
   _is_default_instance_ = true;
   image_ = const_cast< ::BioService::Photo*>(&::BioService::Photo::default_instance());
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 DatabaseFacialImageResponse::DatabaseFacialImageResponse(const DatabaseFacialImageResponse& from)
@@ -17576,7 +17673,7 @@ bool DatabaseFacialImageResponse::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 4;
+      // optional .BioService.ServiceException exception = 4;
       case 4: {
         if (tag == 34) {
          parse_exception:
@@ -17631,7 +17728,7 @@ void DatabaseFacialImageResponse::SerializeWithCachedSizes(
       3, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 4;
+  // optional .BioService.ServiceException exception = 4;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, *this->exception_, output);
@@ -17663,7 +17760,7 @@ void DatabaseFacialImageResponse::SerializeWithCachedSizes(
       3, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 4;
+  // optional .BioService.ServiceException exception = 4;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -17691,7 +17788,7 @@ int DatabaseFacialImageResponse::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 4;
+  // optional .BioService.ServiceException exception = 4;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -17738,7 +17835,7 @@ void DatabaseFacialImageResponse::MergeFrom(const DatabaseFacialImageResponse& f
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -17867,7 +17964,7 @@ void DatabaseFacialImageResponse::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.DatabaseFacialImageResponse.entity_state)
 }
 
-// optional .BioService.Exception exception = 4;
+// optional .BioService.ServiceException exception = 4;
 bool DatabaseFacialImageResponse::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -17875,26 +17972,26 @@ void DatabaseFacialImageResponse::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& DatabaseFacialImageResponse::exception() const {
+const ::BioService::ServiceException& DatabaseFacialImageResponse::exception() const {
   // @@protoc_insertion_point(field_get:BioService.DatabaseFacialImageResponse.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* DatabaseFacialImageResponse::mutable_exception() {
+::BioService::ServiceException* DatabaseFacialImageResponse::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.DatabaseFacialImageResponse.exception)
   return exception_;
 }
-::BioService::Exception* DatabaseFacialImageResponse::release_exception() {
+::BioService::ServiceException* DatabaseFacialImageResponse::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.DatabaseFacialImageResponse.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void DatabaseFacialImageResponse::set_allocated_exception(::BioService::Exception* exception) {
+void DatabaseFacialImageResponse::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -17928,7 +18025,7 @@ void FingerprintImage::InitAsDefaultInstance() {
   _is_default_instance_ = true;
   image_ = const_cast< ::BioService::Photo*>(&::BioService::Photo::default_instance());
   fingerprint_ = const_cast< ::BioService::FingerprintCharacteristic*>(&::BioService::FingerprintCharacteristic::default_instance());
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 FingerprintImage::FingerprintImage(const FingerprintImage& from)
@@ -18082,7 +18179,7 @@ bool FingerprintImage::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 6;
+      // optional .BioService.ServiceException exception = 6;
       case 6: {
         if (tag == 50) {
          parse_exception:
@@ -18148,7 +18245,7 @@ void FingerprintImage::SerializeWithCachedSizes(
       5, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 6;
+  // optional .BioService.ServiceException exception = 6;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       6, *this->exception_, output);
@@ -18192,7 +18289,7 @@ void FingerprintImage::SerializeWithCachedSizes(
       5, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 6;
+  // optional .BioService.ServiceException exception = 6;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -18241,7 +18338,7 @@ int FingerprintImage::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 6;
+  // optional .BioService.ServiceException exception = 6;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -18289,7 +18386,7 @@ void FingerprintImage::MergeFrom(const FingerprintImage& from) {
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -18486,7 +18583,7 @@ void FingerprintImage::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.FingerprintImage.entity_state)
 }
 
-// optional .BioService.Exception exception = 6;
+// optional .BioService.ServiceException exception = 6;
 bool FingerprintImage::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -18494,26 +18591,26 @@ void FingerprintImage::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& FingerprintImage::exception() const {
+const ::BioService::ServiceException& FingerprintImage::exception() const {
   // @@protoc_insertion_point(field_get:BioService.FingerprintImage.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* FingerprintImage::mutable_exception() {
+::BioService::ServiceException* FingerprintImage::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.FingerprintImage.exception)
   return exception_;
 }
-::BioService::Exception* FingerprintImage::release_exception() {
+::BioService::ServiceException* FingerprintImage::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.FingerprintImage.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void FingerprintImage::set_allocated_exception(::BioService::Exception* exception) {
+void FingerprintImage::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -18545,7 +18642,7 @@ void DatabaseFingerprintImageResponse::InitAsDefaultInstance() {
   _is_default_instance_ = true;
   fingerprint_ = const_cast< ::BioService::FingerprintCharacteristic*>(&::BioService::FingerprintCharacteristic::default_instance());
   image_ = const_cast< ::BioService::Photo*>(&::BioService::Photo::default_instance());
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 DatabaseFingerprintImageResponse::DatabaseFingerprintImageResponse(const DatabaseFingerprintImageResponse& from)
@@ -18665,7 +18762,7 @@ bool DatabaseFingerprintImageResponse::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 4;
+      // optional .BioService.ServiceException exception = 4;
       case 4: {
         if (tag == 34) {
          parse_exception:
@@ -18720,7 +18817,7 @@ void DatabaseFingerprintImageResponse::SerializeWithCachedSizes(
       3, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 4;
+  // optional .BioService.ServiceException exception = 4;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, *this->exception_, output);
@@ -18752,7 +18849,7 @@ void DatabaseFingerprintImageResponse::SerializeWithCachedSizes(
       3, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 4;
+  // optional .BioService.ServiceException exception = 4;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -18787,7 +18884,7 @@ int DatabaseFingerprintImageResponse::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 4;
+  // optional .BioService.ServiceException exception = 4;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -18828,7 +18925,7 @@ void DatabaseFingerprintImageResponse::MergeFrom(const DatabaseFingerprintImageR
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -18965,7 +19062,7 @@ void DatabaseFingerprintImageResponse::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.DatabaseFingerprintImageResponse.entity_state)
 }
 
-// optional .BioService.Exception exception = 4;
+// optional .BioService.ServiceException exception = 4;
 bool DatabaseFingerprintImageResponse::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -18973,26 +19070,26 @@ void DatabaseFingerprintImageResponse::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& DatabaseFingerprintImageResponse::exception() const {
+const ::BioService::ServiceException& DatabaseFingerprintImageResponse::exception() const {
   // @@protoc_insertion_point(field_get:BioService.DatabaseFingerprintImageResponse.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* DatabaseFingerprintImageResponse::mutable_exception() {
+::BioService::ServiceException* DatabaseFingerprintImageResponse::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.DatabaseFingerprintImageResponse.exception)
   return exception_;
 }
-::BioService::Exception* DatabaseFingerprintImageResponse::release_exception() {
+::BioService::ServiceException* DatabaseFingerprintImageResponse::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.DatabaseFingerprintImageResponse.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void DatabaseFingerprintImageResponse::set_allocated_exception(::BioService::Exception* exception) {
+void DatabaseFingerprintImageResponse::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -19028,7 +19125,7 @@ Photo::Photo()
 
 void Photo::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 Photo::Photo(const Photo& from)
@@ -19270,7 +19367,7 @@ bool Photo::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 11;
+      // optional .BioService.ServiceException exception = 11;
       case 11: {
         if (tag == 90) {
          parse_exception:
@@ -19360,7 +19457,7 @@ void Photo::SerializeWithCachedSizes(
       10, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 11;
+  // optional .BioService.ServiceException exception = 11;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       11, *this->exception_, output);
@@ -19427,7 +19524,7 @@ void Photo::SerializeWithCachedSizes(
       10, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 11;
+  // optional .BioService.ServiceException exception = 11;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -19503,7 +19600,7 @@ int Photo::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 11;
+  // optional .BioService.ServiceException exception = 11;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -19564,7 +19661,7 @@ void Photo::MergeFrom(const Photo& from) {
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -19803,7 +19900,7 @@ void Photo::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.Photo.entity_state)
 }
 
-// optional .BioService.Exception exception = 11;
+// optional .BioService.ServiceException exception = 11;
 bool Photo::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -19811,26 +19908,26 @@ void Photo::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& Photo::exception() const {
+const ::BioService::ServiceException& Photo::exception() const {
   // @@protoc_insertion_point(field_get:BioService.Photo.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* Photo::mutable_exception() {
+::BioService::ServiceException* Photo::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.Photo.exception)
   return exception_;
 }
-::BioService::Exception* Photo::release_exception() {
+::BioService::ServiceException* Photo::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.Photo.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void Photo::set_allocated_exception(::BioService::Exception* exception) {
+void Photo::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -19865,9 +19962,8 @@ Visitor::Visitor()
 
 void Visitor::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  status_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
   biometricdata_ = const_cast< ::BioService::BiometricData*>(&::BioService::BiometricData::default_instance());
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 Visitor::Visitor(const Visitor& from)
@@ -19887,7 +19983,7 @@ void Visitor::SharedCtor() {
   locationid_ = GOOGLE_LONGLONG(0);
   time_ = GOOGLE_LONGLONG(0);
   card_number_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  status_ = NULL;
+  status_ = 0;
   biometricdata_ = NULL;
   entity_state_ = 0;
   exception_ = NULL;
@@ -19901,7 +19997,6 @@ Visitor::~Visitor() {
 void Visitor::SharedDtor() {
   card_number_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
-    delete status_;
     delete biometricdata_;
     delete exception_;
   }
@@ -19951,12 +20046,10 @@ void Visitor::Clear() {
 } while (0)
 
   ZR_(id_, time_);
+  ZR_(status_, entity_state_);
   card_number_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && status_ != NULL) delete status_;
-  status_ = NULL;
   if (GetArenaNoVirtual() == NULL && biometricdata_ != NULL) delete biometricdata_;
   biometricdata_ = NULL;
-  entity_state_ = 0;
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 
@@ -20047,16 +20140,19 @@ bool Visitor::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(50)) goto parse_status;
+        if (input->ExpectTag(48)) goto parse_status;
         break;
       }
 
-      // optional .BioService.Exception status = 6;
+      // optional .BioService.AccessState status = 6;
       case 6: {
-        if (tag == 50) {
+        if (tag == 48) {
          parse_status:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_status()));
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_status(static_cast< ::BioService::AccessState >(value));
         } else {
           goto handle_unusual;
         }
@@ -20093,7 +20189,7 @@ bool Visitor::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 9;
+      // optional .BioService.ServiceException exception = 9;
       case 9: {
         if (tag == 74) {
          parse_exception:
@@ -20160,10 +20256,10 @@ void Visitor::SerializeWithCachedSizes(
       5, this->card_number(), output);
   }
 
-  // optional .BioService.Exception status = 6;
-  if (this->has_status()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, *this->status_, output);
+  // optional .BioService.AccessState status = 6;
+  if (this->status() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      6, this->status(), output);
   }
 
   // optional .BioService.BiometricData biometricData = 7;
@@ -20178,7 +20274,7 @@ void Visitor::SerializeWithCachedSizes(
       8, this->entity_state(), output);
   }
 
-  // optional .BioService.Exception exception = 9;
+  // optional .BioService.ServiceException exception = 9;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       9, *this->exception_, output);
@@ -20221,11 +20317,10 @@ void Visitor::SerializeWithCachedSizes(
         5, this->card_number(), target);
   }
 
-  // optional .BioService.Exception status = 6;
-  if (this->has_status()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        6, *this->status_, target);
+  // optional .BioService.AccessState status = 6;
+  if (this->status() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      6, this->status(), target);
   }
 
   // optional .BioService.BiometricData biometricData = 7;
@@ -20241,7 +20336,7 @@ void Visitor::SerializeWithCachedSizes(
       8, this->entity_state(), target);
   }
 
-  // optional .BioService.Exception exception = 9;
+  // optional .BioService.ServiceException exception = 9;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -20291,11 +20386,10 @@ int Visitor::ByteSize() const {
         this->card_number());
   }
 
-  // optional .BioService.Exception status = 6;
-  if (this->has_status()) {
+  // optional .BioService.AccessState status = 6;
+  if (this->status() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->status_);
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->status());
   }
 
   // optional .BioService.BiometricData biometricData = 7;
@@ -20311,7 +20405,7 @@ int Visitor::ByteSize() const {
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->entity_state());
   }
 
-  // optional .BioService.Exception exception = 9;
+  // optional .BioService.ServiceException exception = 9;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -20358,8 +20452,8 @@ void Visitor::MergeFrom(const Visitor& from) {
 
     card_number_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.card_number_);
   }
-  if (from.has_status()) {
-    mutable_status()->::BioService::Exception::MergeFrom(from.status());
+  if (from.status() != 0) {
+    set_status(from.status());
   }
   if (from.has_biometricdata()) {
     mutable_biometricdata()->::BioService::BiometricData::MergeFrom(from.biometricdata());
@@ -20368,7 +20462,7 @@ void Visitor::MergeFrom(const Visitor& from) {
     set_entity_state(from.entity_state());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -20520,42 +20614,18 @@ void Visitor::clear_card_number() {
   // @@protoc_insertion_point(field_set_allocated:BioService.Visitor.card_number)
 }
 
-// optional .BioService.Exception status = 6;
-bool Visitor::has_status() const {
-  return !_is_default_instance_ && status_ != NULL;
-}
+// optional .BioService.AccessState status = 6;
 void Visitor::clear_status() {
-  if (GetArenaNoVirtual() == NULL && status_ != NULL) delete status_;
-  status_ = NULL;
+  status_ = 0;
 }
-const ::BioService::Exception& Visitor::status() const {
+ ::BioService::AccessState Visitor::status() const {
   // @@protoc_insertion_point(field_get:BioService.Visitor.status)
-  return status_ != NULL ? *status_ : *default_instance_->status_;
+  return static_cast< ::BioService::AccessState >(status_);
 }
-::BioService::Exception* Visitor::mutable_status() {
+ void Visitor::set_status(::BioService::AccessState value) {
   
-  if (status_ == NULL) {
-    status_ = new ::BioService::Exception;
-  }
-  // @@protoc_insertion_point(field_mutable:BioService.Visitor.status)
-  return status_;
-}
-::BioService::Exception* Visitor::release_status() {
-  // @@protoc_insertion_point(field_release:BioService.Visitor.status)
-  
-  ::BioService::Exception* temp = status_;
-  status_ = NULL;
-  return temp;
-}
-void Visitor::set_allocated_status(::BioService::Exception* status) {
-  delete status_;
-  status_ = status;
-  if (status) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:BioService.Visitor.status)
+  status_ = value;
+  // @@protoc_insertion_point(field_set:BioService.Visitor.status)
 }
 
 // optional .BioService.BiometricData biometricData = 7;
@@ -20610,7 +20680,7 @@ void Visitor::clear_entity_state() {
   // @@protoc_insertion_point(field_set:BioService.Visitor.entity_state)
 }
 
-// optional .BioService.Exception exception = 9;
+// optional .BioService.ServiceException exception = 9;
 bool Visitor::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -20618,26 +20688,26 @@ void Visitor::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& Visitor::exception() const {
+const ::BioService::ServiceException& Visitor::exception() const {
   // @@protoc_insertion_point(field_get:BioService.Visitor.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* Visitor::mutable_exception() {
+::BioService::ServiceException* Visitor::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.Visitor.exception)
   return exception_;
 }
-::BioService::Exception* Visitor::release_exception() {
+::BioService::ServiceException* Visitor::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.Visitor.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void Visitor::set_allocated_exception(::BioService::Exception* exception) {
+void Visitor::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -22182,7 +22252,6 @@ Response::Response()
 
 void Response::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  good_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
 }
 
 Response::Response(const Response& from)
@@ -22196,7 +22265,7 @@ Response::Response(const Response& from)
 void Response::SharedCtor() {
     _is_default_instance_ = false;
   _cached_size_ = 0;
-  good_ = NULL;
+  good_ = false;
 }
 
 Response::~Response() {
@@ -22206,7 +22275,6 @@ Response::~Response() {
 
 void Response::SharedDtor() {
   if (this != default_instance_) {
-    delete good_;
   }
 }
 
@@ -22237,8 +22305,7 @@ Response* Response::New(::google::protobuf::Arena* arena) const {
 
 void Response::Clear() {
 // @@protoc_insertion_point(message_clear_start:BioService.Response)
-  if (GetArenaNoVirtual() == NULL && good_ != NULL) delete good_;
-  good_ = NULL;
+  good_ = false;
 }
 
 bool Response::MergePartialFromCodedStream(
@@ -22251,11 +22318,13 @@ bool Response::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .BioService.Exception good = 1;
+      // optional bool good = 1;
       case 1: {
-        if (tag == 10) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_good()));
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &good_)));
+
         } else {
           goto handle_unusual;
         }
@@ -22287,10 +22356,9 @@ failure:
 void Response::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:BioService.Response)
-  // optional .BioService.Exception good = 1;
-  if (this->has_good()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *this->good_, output);
+  // optional bool good = 1;
+  if (this->good() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->good(), output);
   }
 
   // @@protoc_insertion_point(serialize_end:BioService.Response)
@@ -22299,11 +22367,9 @@ void Response::SerializeWithCachedSizes(
 ::google::protobuf::uint8* Response::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:BioService.Response)
-  // optional .BioService.Exception good = 1;
-  if (this->has_good()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        1, *this->good_, target);
+  // optional bool good = 1;
+  if (this->good() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->good(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:BioService.Response)
@@ -22314,11 +22380,9 @@ int Response::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:BioService.Response)
   int total_size = 0;
 
-  // optional .BioService.Exception good = 1;
-  if (this->has_good()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->good_);
+  // optional bool good = 1;
+  if (this->good() != 0) {
+    total_size += 1 + 1;
   }
 
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
@@ -22345,8 +22409,8 @@ void Response::MergeFrom(const ::google::protobuf::Message& from) {
 void Response::MergeFrom(const Response& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:BioService.Response)
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  if (from.has_good()) {
-    mutable_good()->::BioService::Exception::MergeFrom(from.good());
+  if (from.good() != 0) {
+    set_good(from.good());
   }
 }
 
@@ -22390,42 +22454,18 @@ void Response::InternalSwap(Response* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // Response
 
-// optional .BioService.Exception good = 1;
-bool Response::has_good() const {
-  return !_is_default_instance_ && good_ != NULL;
-}
+// optional bool good = 1;
 void Response::clear_good() {
-  if (GetArenaNoVirtual() == NULL && good_ != NULL) delete good_;
-  good_ = NULL;
+  good_ = false;
 }
-const ::BioService::Exception& Response::good() const {
+ bool Response::good() const {
   // @@protoc_insertion_point(field_get:BioService.Response.good)
-  return good_ != NULL ? *good_ : *default_instance_->good_;
-}
-::BioService::Exception* Response::mutable_good() {
-  
-  if (good_ == NULL) {
-    good_ = new ::BioService::Exception;
-  }
-  // @@protoc_insertion_point(field_mutable:BioService.Response.good)
   return good_;
 }
-::BioService::Exception* Response::release_good() {
-  // @@protoc_insertion_point(field_release:BioService.Response.good)
+ void Response::set_good(bool value) {
   
-  ::BioService::Exception* temp = good_;
-  good_ = NULL;
-  return temp;
-}
-void Response::set_allocated_good(::BioService::Exception* good) {
-  delete good_;
-  good_ = good;
-  if (good) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:BioService.Response.good)
+  good_ = value;
+  // @@protoc_insertion_point(field_set:BioService.Response.good)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -23787,7 +23827,7 @@ FaceSearchResponse::FaceSearchResponse()
 
 void FaceSearchResponse::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 FaceSearchResponse::FaceSearchResponse(const FaceSearchResponse& from)
@@ -23911,7 +23951,7 @@ bool FaceSearchResponse::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception exception = 4;
+      // optional .BioService.ServiceException exception = 4;
       case 4: {
         if (tag == 34) {
          parse_exception:
@@ -23970,7 +24010,7 @@ void FaceSearchResponse::SerializeWithCachedSizes(
       3, this->message(), output);
   }
 
-  // optional .BioService.Exception exception = 4;
+  // optional .BioService.ServiceException exception = 4;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, *this->exception_, output);
@@ -24007,7 +24047,7 @@ void FaceSearchResponse::SerializeWithCachedSizes(
         3, this->message(), target);
   }
 
-  // optional .BioService.Exception exception = 4;
+  // optional .BioService.ServiceException exception = 4;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -24029,7 +24069,7 @@ int FaceSearchResponse::ByteSize() const {
         this->message());
   }
 
-  // optional .BioService.Exception exception = 4;
+  // optional .BioService.ServiceException exception = 4;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -24083,7 +24123,7 @@ void FaceSearchResponse::MergeFrom(const FaceSearchResponse& from) {
     message_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.message_);
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
 }
 
@@ -24234,7 +24274,7 @@ void FaceSearchResponse::clear_message() {
   // @@protoc_insertion_point(field_set_allocated:BioService.FaceSearchResponse.message)
 }
 
-// optional .BioService.Exception exception = 4;
+// optional .BioService.ServiceException exception = 4;
 bool FaceSearchResponse::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -24242,26 +24282,26 @@ void FaceSearchResponse::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& FaceSearchResponse::exception() const {
+const ::BioService::ServiceException& FaceSearchResponse::exception() const {
   // @@protoc_insertion_point(field_get:BioService.FaceSearchResponse.exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* FaceSearchResponse::mutable_exception() {
+::BioService::ServiceException* FaceSearchResponse::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.FaceSearchResponse.exception)
   return exception_;
 }
-::BioService::Exception* FaceSearchResponse::release_exception() {
+::BioService::ServiceException* FaceSearchResponse::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.FaceSearchResponse.exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void FaceSearchResponse::set_allocated_exception(::BioService::Exception* exception) {
+void FaceSearchResponse::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {
@@ -24925,7 +24965,7 @@ EnrollmentFeedback::EnrollmentFeedback()
 
 void EnrollmentFeedback::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  exception_ = const_cast< ::BioService::Exception*>(&::BioService::Exception::default_instance());
+  exception_ = const_cast< ::BioService::ServiceException*>(&::BioService::ServiceException::default_instance());
 }
 
 EnrollmentFeedback::EnrollmentFeedback(const EnrollmentFeedback& from)
@@ -25068,7 +25108,7 @@ bool EnrollmentFeedback::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .BioService.Exception Exception = 4;
+      // optional .BioService.ServiceException Exception = 4;
       case 4: {
         if (tag == 34) {
          parse_Exception:
@@ -25152,7 +25192,7 @@ void EnrollmentFeedback::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteSFixed32(3, this->quality(), output);
   }
 
-  // optional .BioService.Exception Exception = 4;
+  // optional .BioService.ServiceException Exception = 4;
   if (this->has_exception()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, *this->exception_, output);
@@ -25194,7 +25234,7 @@ void EnrollmentFeedback::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteSFixed32ToArray(3, this->quality(), target);
   }
 
-  // optional .BioService.Exception Exception = 4;
+  // optional .BioService.ServiceException Exception = 4;
   if (this->has_exception()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -25244,7 +25284,7 @@ int EnrollmentFeedback::ByteSize() const {
     total_size += 1 + 4;
   }
 
-  // optional .BioService.Exception Exception = 4;
+  // optional .BioService.ServiceException Exception = 4;
   if (this->has_exception()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -25297,7 +25337,7 @@ void EnrollmentFeedback::MergeFrom(const EnrollmentFeedback& from) {
     set_quality(from.quality());
   }
   if (from.has_exception()) {
-    mutable_exception()->::BioService::Exception::MergeFrom(from.exception());
+    mutable_exception()->::BioService::ServiceException::MergeFrom(from.exception());
   }
   if (from.progress() != 0) {
     set_progress(from.progress());
@@ -25395,7 +25435,7 @@ void EnrollmentFeedback::clear_quality() {
   // @@protoc_insertion_point(field_set:BioService.EnrollmentFeedback.quality)
 }
 
-// optional .BioService.Exception Exception = 4;
+// optional .BioService.ServiceException Exception = 4;
 bool EnrollmentFeedback::has_exception() const {
   return !_is_default_instance_ && exception_ != NULL;
 }
@@ -25403,26 +25443,26 @@ void EnrollmentFeedback::clear_exception() {
   if (GetArenaNoVirtual() == NULL && exception_ != NULL) delete exception_;
   exception_ = NULL;
 }
-const ::BioService::Exception& EnrollmentFeedback::exception() const {
+const ::BioService::ServiceException& EnrollmentFeedback::exception() const {
   // @@protoc_insertion_point(field_get:BioService.EnrollmentFeedback.Exception)
   return exception_ != NULL ? *exception_ : *default_instance_->exception_;
 }
-::BioService::Exception* EnrollmentFeedback::mutable_exception() {
+::BioService::ServiceException* EnrollmentFeedback::mutable_exception() {
   
   if (exception_ == NULL) {
-    exception_ = new ::BioService::Exception;
+    exception_ = new ::BioService::ServiceException;
   }
   // @@protoc_insertion_point(field_mutable:BioService.EnrollmentFeedback.Exception)
   return exception_;
 }
-::BioService::Exception* EnrollmentFeedback::release_exception() {
+::BioService::ServiceException* EnrollmentFeedback::release_exception() {
   // @@protoc_insertion_point(field_release:BioService.EnrollmentFeedback.Exception)
   
-  ::BioService::Exception* temp = exception_;
+  ::BioService::ServiceException* temp = exception_;
   exception_ = NULL;
   return temp;
 }
-void EnrollmentFeedback::set_allocated_exception(::BioService::Exception* exception) {
+void EnrollmentFeedback::set_allocated_exception(::BioService::ServiceException* exception) {
   delete exception_;
   exception_ = exception;
   if (exception) {

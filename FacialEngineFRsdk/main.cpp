@@ -19,17 +19,37 @@ using namespace Pipeline;
 
 int main(int argc, char** argv)
 {	
+	std::cout << "Here" << std::endl;
 	std::string cfg_path = "C:\\FVSDK_9_1_1\\etc\\frsdk.cfg";
 	auto task(std::make_shared<FRsdkBiometricProcessor>(cfg_path));
 	
 	std::string image1 = "C:\\Users\\User\\Desktop\\face-20.jpg";
 	std::string image2 = "C:\\Users\\User\\Desktop\\face-201.jpg";
 
+	std::string rivs       = "C:\\Users\\User\\Desktop\\men3.jpg";
+
+	std::string rivs_kerry = "C:\\Users\\User\\Desktop\\rivz.jpg";
+	std::string men2       = "C:\\Users\\User\\Desktop\\men2.jpg";
+
+	std::list<std::string> population = { rivs_kerry , men2 };
+
 	BiometricPipelineBalanced pipeline(task);
+
+	long population_id = -1;
+	try
+	{
+//		population_id = pipeline.load_identification_population(population);
+	}
+	catch (std::exception& ex)
+	{
+		std::cout << ex.what();
+	}
 	
-	unsigned int start = clock();
-	try	{
-	   VerificationResultPtr ptr1 = pipeline.verify_face(image1, image2);
+	
+	try	{		
+		 unsigned int start = clock();
+	   IdentificationResultPtr ptr1 = pipeline.identify_face(rivs, population_id);
+		 std::cout << "match = " << clock() - start << std::endl;
 	}
 	catch ( std::exception& ex)
 	{
@@ -37,7 +57,7 @@ int main(int argc, char** argv)
 	}
 
 
-	std::cout << "pipeline = " << clock() - start << std::endl;
+	
 	std::cin.get();
 	std::cout << std::endl;	
 

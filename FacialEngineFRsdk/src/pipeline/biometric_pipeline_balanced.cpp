@@ -205,9 +205,47 @@ namespace Pipeline
 	}
 
 	IdentificationResultPtr
+	BiometricPipelineBalanced::identify_face( const std::string& object
+			                                    , long population_id
+			                                    , bool fast        )
+	{
+		auto object_task = fast ? FACIAL_EXTRACTION : FULL_PORTRAIT_ANALYSIS;
+		auto object_info = load_image(object);
+
+		if (object_info == nullptr)
+			return nullptr;
+
+		BioFacialEngine::IdentificationPair ident_pair(object_info, population_id);
+		do_task(object_info, object_task);
+
+		return this->identify(ident_pair);
+	}
+
+	IdentificationResultPtr
+	BiometricPipelineBalanced::identify_face( const RawImage& object
+			                                    , long population_id
+			                                    , bool fast          )
+	{
+
+		if (population_id == -1)
+			throw std::exception("Population id cannot be -1");
+
+		auto object_task = fast ? FACIAL_EXTRACTION : FULL_PORTRAIT_ANALYSIS;
+		auto object_info = load_image(object);
+
+		if (object_info == nullptr)
+			return nullptr;
+
+		BioFacialEngine::IdentificationPair ident_pair(object_info, population_id);
+		do_task(object_info, object_task);
+
+		return this->identify(ident_pair);
+	}
+
+	IdentificationResultPtr
   BiometricPipelineBalanced::identify_face( ImageInfoPtr object
 		                                      , const std::list<ImageInfoPtr>& subjects
-																		      , bool  fast )
+																		      , bool fast )
 	{
 
 		if (object == nullptr || subjects.size() <= 0)
@@ -216,8 +254,8 @@ namespace Pipeline
 		auto object_task  = fast ? FACIAL_EXTRACTION : FULL_PORTRAIT_ANALYSIS;
 		auto subject_task = object_task | Enrollment;
 
-		BioFacialEngine::IdentificationPair images;
-		images.first = object;
+		BioFacialEngine::IdentificationPair ident_pair(object);
+		
 		parallel_invoke(
 			[&]()	{	do_task(object, object_task);},
 			[&]()
@@ -225,13 +263,13 @@ namespace Pipeline
 		 	parallel_for_each(subjects.begin(), subjects.end(),
 				[&](ImageInfoPtr item)
 			  {		
-					images.second.push_back(item);
+					ident_pair.add_population_image(item);
 					do_task(item, subject_task);				
 			  });		
 		  }
 		);
 		
-		return this->identify(images);
+		return this->identify(ident_pair);
 	}
 
 	
@@ -269,46 +307,50 @@ namespace Pipeline
 		return identify_face(object_info, subjects_info, fast);
 	}
 	
-	long BiometricPipelineBalanced::create_identify_population(const std::list<ImageInfoPtr>& subjects) 
-	{
+	long BiometricPipelineBalanced::prepare_identification_population(const std::list<ImageInfoPtr>& subjects)
+	{		
 		if (subjects.size() <= 0)
 			return -1;
 
 		auto task = FACIAL_EXTRACTION | Enrollment;
 		parallel_for_each(subjects.begin(), subjects.end(),
-			[&](ImageInfoPtr item)
-		  {
-		  	do_task(item, task);
-		  });
+		[&](ImageInfoPtr item)
+		{
+		 	do_task(item, task);
+	   });
 
 		return this->create_identification_population(subjects);
 	}
 
 
-	long BiometricPipelineBalanced::create_identify_population(const std::list<RawImage>& subjects) const
+	ImageInfoSet 
+	BiometricPipelineBalanced::load_identification_population( const std::list<RawImage>& subjects
+			                                                     , long& population_id)
 	{
-		std::list<ImageInfoPtr> subjects_info;
+		ImageInfoSet subjects_info;
 		for (auto it = subjects.begin(); it != subjects.end(); ++it)
 		{
 			auto loaded = load_image(*it);
-			if (loaded == nullptr)
+			if (loaded != nullptr)
 				subjects_info.push_back(loaded);
 		}
-
-		return this->create_identification_population(subjects_info);
+		population_id = this->prepare_identification_population(subjects_info);
+		return subjects_info;
 	}
 
-	long BiometricPipelineBalanced::create_identify_population(const std::list<std::string>& subjects) const
+	ImageInfoSet 
+	BiometricPipelineBalanced::load_identification_population( const std::list<std::string>& subjects
+			                                                     , long& population_id)
 	{
-		std::list<ImageInfoPtr> subjects_info;
+		ImageInfoSet subjects_info;
 		for (auto it = subjects.begin(); it != subjects.end(); ++it)
 		{
 			auto loaded = load_image(*it);
-			if (loaded == nullptr)
+			if (loaded != nullptr)
 				subjects_info.push_back(loaded);
 		}
-
-		return this->create_identification_population(subjects_info);
+		population_id = this->prepare_identification_population(subjects_info);
+		return subjects_info;
 	}
 	
 
