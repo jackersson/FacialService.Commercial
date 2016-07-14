@@ -20,6 +20,7 @@ static const char* BiometricFacialSevice_method_names[] = {
   "/BioService.BiometricFacialSevice/Acquire",
   "/BioService.BiometricFacialSevice/Enroll",
   "/BioService.BiometricFacialSevice/Verify",
+  "/BioService.BiometricFacialSevice/CreatePopulation",
   "/BioService.BiometricFacialSevice/VerifyFace",
   "/BioService.BiometricFacialSevice/IdentifyFace",
 };
@@ -34,8 +35,9 @@ BiometricFacialSevice::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterfac
   , rpcmethod_Acquire_(BiometricFacialSevice_method_names[1], ::grpc::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_Enroll_(BiometricFacialSevice_method_names[2], ::grpc::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_Verify_(BiometricFacialSevice_method_names[3], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_VerifyFace_(BiometricFacialSevice_method_names[4], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_IdentifyFace_(BiometricFacialSevice_method_names[5], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CreatePopulation_(BiometricFacialSevice_method_names[4], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_VerifyFace_(BiometricFacialSevice_method_names[5], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_IdentifyFace_(BiometricFacialSevice_method_names[6], ::grpc::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status BiometricFacialSevice::Stub::AddSocket(::grpc::ClientContext* context, const ::BioService::SocketConfiguration& request, ::BioService::Response* response) {
@@ -46,12 +48,12 @@ BiometricFacialSevice::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterfac
   return new ::grpc::ClientAsyncResponseReader< ::BioService::Response>(channel_.get(), cq, rpcmethod_AddSocket_, context, request);
 }
 
-::grpc::Status BiometricFacialSevice::Stub::Acquire(::grpc::ClientContext* context, const ::BioService::Photo& request, ::BioService::PortraitCharacteristic* response) {
+::grpc::Status BiometricFacialSevice::Stub::Acquire(::grpc::ClientContext* context, const ::BioService::Photo& request, ::BioService::AcquisitionResponse* response) {
   return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_Acquire_, context, request, response);
 }
 
-::grpc::ClientAsyncResponseReader< ::BioService::PortraitCharacteristic>* BiometricFacialSevice::Stub::AsyncAcquireRaw(::grpc::ClientContext* context, const ::BioService::Photo& request, ::grpc::CompletionQueue* cq) {
-  return new ::grpc::ClientAsyncResponseReader< ::BioService::PortraitCharacteristic>(channel_.get(), cq, rpcmethod_Acquire_, context, request);
+::grpc::ClientAsyncResponseReader< ::BioService::AcquisitionResponse>* BiometricFacialSevice::Stub::AsyncAcquireRaw(::grpc::ClientContext* context, const ::BioService::Photo& request, ::grpc::CompletionQueue* cq) {
+  return new ::grpc::ClientAsyncResponseReader< ::BioService::AcquisitionResponse>(channel_.get(), cq, rpcmethod_Acquire_, context, request);
 }
 
 ::grpc::Status BiometricFacialSevice::Stub::Enroll(::grpc::ClientContext* context, const ::BioService::AcquiredData& request, ::BioService::EnrollmentFeedback* response) {
@@ -70,20 +72,28 @@ BiometricFacialSevice::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterfac
   return new ::grpc::ClientAsyncResponseReader< ::BioService::VerificationFeedback>(channel_.get(), cq, rpcmethod_Verify_, context, request);
 }
 
-::grpc::Status BiometricFacialSevice::Stub::VerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::BioService::FaceSearchResult* response) {
+::grpc::Status BiometricFacialSevice::Stub::CreatePopulation(::grpc::ClientContext* context, const ::BioService::PhotoList& request, ::BioService::PopulationCreationResponse* response) {
+  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_CreatePopulation_, context, request, response);
+}
+
+::grpc::ClientAsyncResponseReader< ::BioService::PopulationCreationResponse>* BiometricFacialSevice::Stub::AsyncCreatePopulationRaw(::grpc::ClientContext* context, const ::BioService::PhotoList& request, ::grpc::CompletionQueue* cq) {
+  return new ::grpc::ClientAsyncResponseReader< ::BioService::PopulationCreationResponse>(channel_.get(), cq, rpcmethod_CreatePopulation_, context, request);
+}
+
+::grpc::Status BiometricFacialSevice::Stub::VerifyFace(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::BioService::FaceSearchResponse* response) {
   return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_VerifyFace_, context, request, response);
 }
 
-::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResult>* BiometricFacialSevice::Stub::AsyncVerifyFaceRaw(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) {
-  return new ::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResult>(channel_.get(), cq, rpcmethod_VerifyFace_, context, request);
+::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResponse>* BiometricFacialSevice::Stub::AsyncVerifyFaceRaw(::grpc::ClientContext* context, const ::BioService::VerificationData& request, ::grpc::CompletionQueue* cq) {
+  return new ::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResponse>(channel_.get(), cq, rpcmethod_VerifyFace_, context, request);
 }
 
-::grpc::Status BiometricFacialSevice::Stub::IdentifyFace(::grpc::ClientContext* context, const ::BioService::IdentificationData& request, ::BioService::FaceSearchResult* response) {
+::grpc::Status BiometricFacialSevice::Stub::IdentifyFace(::grpc::ClientContext* context, const ::BioService::IdentificationData& request, ::BioService::FaceSearchResponse* response) {
   return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_IdentifyFace_, context, request, response);
 }
 
-::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResult>* BiometricFacialSevice::Stub::AsyncIdentifyFaceRaw(::grpc::ClientContext* context, const ::BioService::IdentificationData& request, ::grpc::CompletionQueue* cq) {
-  return new ::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResult>(channel_.get(), cq, rpcmethod_IdentifyFace_, context, request);
+::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResponse>* BiometricFacialSevice::Stub::AsyncIdentifyFaceRaw(::grpc::ClientContext* context, const ::BioService::IdentificationData& request, ::grpc::CompletionQueue* cq) {
+  return new ::grpc::ClientAsyncResponseReader< ::BioService::FaceSearchResponse>(channel_.get(), cq, rpcmethod_IdentifyFace_, context, request);
 }
 
 BiometricFacialSevice::Service::Service() {
@@ -96,7 +106,7 @@ BiometricFacialSevice::Service::Service() {
   AddMethod(new ::grpc::RpcServiceMethod(
       BiometricFacialSevice_method_names[1],
       ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< BiometricFacialSevice::Service, ::BioService::Photo, ::BioService::PortraitCharacteristic>(
+      new ::grpc::RpcMethodHandler< BiometricFacialSevice::Service, ::BioService::Photo, ::BioService::AcquisitionResponse>(
           std::mem_fn(&BiometricFacialSevice::Service::Acquire), this)));
   AddMethod(new ::grpc::RpcServiceMethod(
       BiometricFacialSevice_method_names[2],
@@ -111,12 +121,17 @@ BiometricFacialSevice::Service::Service() {
   AddMethod(new ::grpc::RpcServiceMethod(
       BiometricFacialSevice_method_names[4],
       ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< BiometricFacialSevice::Service, ::BioService::VerificationData, ::BioService::FaceSearchResult>(
-          std::mem_fn(&BiometricFacialSevice::Service::VerifyFace), this)));
+      new ::grpc::RpcMethodHandler< BiometricFacialSevice::Service, ::BioService::PhotoList, ::BioService::PopulationCreationResponse>(
+          std::mem_fn(&BiometricFacialSevice::Service::CreatePopulation), this)));
   AddMethod(new ::grpc::RpcServiceMethod(
       BiometricFacialSevice_method_names[5],
       ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< BiometricFacialSevice::Service, ::BioService::IdentificationData, ::BioService::FaceSearchResult>(
+      new ::grpc::RpcMethodHandler< BiometricFacialSevice::Service, ::BioService::VerificationData, ::BioService::FaceSearchResponse>(
+          std::mem_fn(&BiometricFacialSevice::Service::VerifyFace), this)));
+  AddMethod(new ::grpc::RpcServiceMethod(
+      BiometricFacialSevice_method_names[6],
+      ::grpc::RpcMethod::NORMAL_RPC,
+      new ::grpc::RpcMethodHandler< BiometricFacialSevice::Service, ::BioService::IdentificationData, ::BioService::FaceSearchResponse>(
           std::mem_fn(&BiometricFacialSevice::Service::IdentifyFace), this)));
 }
 
@@ -130,7 +145,7 @@ BiometricFacialSevice::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status BiometricFacialSevice::Service::Acquire(::grpc::ServerContext* context, const ::BioService::Photo* request, ::BioService::PortraitCharacteristic* response) {
+::grpc::Status BiometricFacialSevice::Service::Acquire(::grpc::ServerContext* context, const ::BioService::Photo* request, ::BioService::AcquisitionResponse* response) {
   (void) context;
   (void) request;
   (void) response;
@@ -151,14 +166,21 @@ BiometricFacialSevice::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status BiometricFacialSevice::Service::VerifyFace(::grpc::ServerContext* context, const ::BioService::VerificationData* request, ::BioService::FaceSearchResult* response) {
+::grpc::Status BiometricFacialSevice::Service::CreatePopulation(::grpc::ServerContext* context, const ::BioService::PhotoList* request, ::BioService::PopulationCreationResponse* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status BiometricFacialSevice::Service::IdentifyFace(::grpc::ServerContext* context, const ::BioService::IdentificationData* request, ::BioService::FaceSearchResult* response) {
+::grpc::Status BiometricFacialSevice::Service::VerifyFace(::grpc::ServerContext* context, const ::BioService::VerificationData* request, ::BioService::FaceSearchResponse* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status BiometricFacialSevice::Service::IdentifyFace(::grpc::ServerContext* context, const ::BioService::IdentificationData* request, ::BioService::FaceSearchResponse* response) {
   (void) context;
   (void) request;
   (void) response;
@@ -229,69 +251,6 @@ BiometricFingerprintSevice::Service::~Service() {
 }
 
 
-static const char* BiometricDatabaseService_method_names[] = {
-  "/BioService.BiometricDatabaseService/AddFacialImage",
-  "/BioService.BiometricDatabaseService/AddFingerprintImage",
-};
-
-std::unique_ptr< BiometricDatabaseService::Stub> BiometricDatabaseService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
-  std::unique_ptr< BiometricDatabaseService::Stub> stub(new BiometricDatabaseService::Stub(channel));
-  return stub;
-}
-
-BiometricDatabaseService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
-  : channel_(channel), rpcmethod_AddFacialImage_(BiometricDatabaseService_method_names[0], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_AddFingerprintImage_(BiometricDatabaseService_method_names[1], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  {}
-
-::grpc::Status BiometricDatabaseService::Stub::AddFacialImage(::grpc::ClientContext* context, const ::BioService::FacialImage& request, ::BioService::DatabaseFacialImageResponse* response) {
-  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_AddFacialImage_, context, request, response);
-}
-
-::grpc::ClientAsyncResponseReader< ::BioService::DatabaseFacialImageResponse>* BiometricDatabaseService::Stub::AsyncAddFacialImageRaw(::grpc::ClientContext* context, const ::BioService::FacialImage& request, ::grpc::CompletionQueue* cq) {
-  return new ::grpc::ClientAsyncResponseReader< ::BioService::DatabaseFacialImageResponse>(channel_.get(), cq, rpcmethod_AddFacialImage_, context, request);
-}
-
-::grpc::Status BiometricDatabaseService::Stub::AddFingerprintImage(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::BioService::DatabaseFingerprintImageResponse* response) {
-  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_AddFingerprintImage_, context, request, response);
-}
-
-::grpc::ClientAsyncResponseReader< ::BioService::DatabaseFingerprintImageResponse>* BiometricDatabaseService::Stub::AsyncAddFingerprintImageRaw(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::grpc::CompletionQueue* cq) {
-  return new ::grpc::ClientAsyncResponseReader< ::BioService::DatabaseFingerprintImageResponse>(channel_.get(), cq, rpcmethod_AddFingerprintImage_, context, request);
-}
-
-BiometricDatabaseService::Service::Service() {
-  (void)BiometricDatabaseService_method_names;
-  AddMethod(new ::grpc::RpcServiceMethod(
-      BiometricDatabaseService_method_names[0],
-      ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< BiometricDatabaseService::Service, ::BioService::FacialImage, ::BioService::DatabaseFacialImageResponse>(
-          std::mem_fn(&BiometricDatabaseService::Service::AddFacialImage), this)));
-  AddMethod(new ::grpc::RpcServiceMethod(
-      BiometricDatabaseService_method_names[1],
-      ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< BiometricDatabaseService::Service, ::BioService::FingerprintImage, ::BioService::DatabaseFingerprintImageResponse>(
-          std::mem_fn(&BiometricDatabaseService::Service::AddFingerprintImage), this)));
-}
-
-BiometricDatabaseService::Service::~Service() {
-}
-
-::grpc::Status BiometricDatabaseService::Service::AddFacialImage(::grpc::ServerContext* context, const ::BioService::FacialImage* request, ::BioService::DatabaseFacialImageResponse* response) {
-  (void) context;
-  (void) request;
-  (void) response;
-  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-}
-
-::grpc::Status BiometricDatabaseService::Service::AddFingerprintImage(::grpc::ServerContext* context, const ::BioService::FingerprintImage* request, ::BioService::DatabaseFingerprintImageResponse* response) {
-  (void) context;
-  (void) request;
-  (void) response;
-  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-}
-
-
 static const char* DatabaseSevice_method_names[] = {
   "/BioService.DatabaseSevice/PersonSelect",
   "/BioService.DatabaseSevice/AddPerson",
@@ -307,14 +266,10 @@ static const char* DatabaseSevice_method_names[] = {
   "/BioService.DatabaseSevice/SelectVisitors",
   "/BioService.DatabaseSevice/AttachVisitorToPerson",
   "/BioService.DatabaseSevice/RemoveVisitors",
-  "/BioService.DatabaseSevice/AddVisitor",
   "/BioService.DatabaseSevice/SelectLocations",
   "/BioService.DatabaseSevice/AddLocation",
   "/BioService.DatabaseSevice/UpdateLocation",
   "/BioService.DatabaseSevice/RemoveLocation",
-  "/BioService.DatabaseSevice/AddFingerprint",
-  "/BioService.DatabaseSevice/RemoveFingerprint",
-  "/BioService.DatabaseSevice/UpdateFingerprint",
   "/BioService.DatabaseSevice/AddClient",
   "/BioService.DatabaseSevice/RemoveClient",
 };
@@ -339,16 +294,12 @@ DatabaseSevice::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& cha
   , rpcmethod_SelectVisitors_(DatabaseSevice_method_names[11], ::grpc::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_AttachVisitorToPerson_(DatabaseSevice_method_names[12], ::grpc::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_RemoveVisitors_(DatabaseSevice_method_names[13], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_AddVisitor_(DatabaseSevice_method_names[14], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_SelectLocations_(DatabaseSevice_method_names[15], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_AddLocation_(DatabaseSevice_method_names[16], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_UpdateLocation_(DatabaseSevice_method_names[17], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_RemoveLocation_(DatabaseSevice_method_names[18], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_AddFingerprint_(DatabaseSevice_method_names[19], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_RemoveFingerprint_(DatabaseSevice_method_names[20], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_UpdateFingerprint_(DatabaseSevice_method_names[21], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_AddClient_(DatabaseSevice_method_names[22], ::grpc::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_RemoveClient_(DatabaseSevice_method_names[23], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_SelectLocations_(DatabaseSevice_method_names[14], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_AddLocation_(DatabaseSevice_method_names[15], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_UpdateLocation_(DatabaseSevice_method_names[16], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_RemoveLocation_(DatabaseSevice_method_names[17], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_AddClient_(DatabaseSevice_method_names[18], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_RemoveClient_(DatabaseSevice_method_names[19], ::grpc::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status DatabaseSevice::Stub::PersonSelect(::grpc::ClientContext* context, const ::BioService::QueryPersons& request, ::BioService::PersonList* response) {
@@ -463,14 +414,6 @@ DatabaseSevice::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& cha
   return new ::grpc::ClientAsyncResponseReader< ::BioService::RawIndexes>(channel_.get(), cq, rpcmethod_RemoveVisitors_, context, request);
 }
 
-::grpc::Status DatabaseSevice::Stub::AddVisitor(::grpc::ClientContext* context, const ::BioService::FullVisitorData& request, ::BioService::Visitor* response) {
-  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_AddVisitor_, context, request, response);
-}
-
-::grpc::ClientAsyncResponseReader< ::BioService::Visitor>* DatabaseSevice::Stub::AsyncAddVisitorRaw(::grpc::ClientContext* context, const ::BioService::FullVisitorData& request, ::grpc::CompletionQueue* cq) {
-  return new ::grpc::ClientAsyncResponseReader< ::BioService::Visitor>(channel_.get(), cq, rpcmethod_AddVisitor_, context, request);
-}
-
 ::grpc::Status DatabaseSevice::Stub::SelectLocations(::grpc::ClientContext* context, const ::BioService::QueryLocations& request, ::BioService::LocationList* response) {
   return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_SelectLocations_, context, request, response);
 }
@@ -501,30 +444,6 @@ DatabaseSevice::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& cha
 
 ::grpc::ClientAsyncResponseReader< ::BioService::Location>* DatabaseSevice::Stub::AsyncRemoveLocationRaw(::grpc::ClientContext* context, const ::BioService::Location& request, ::grpc::CompletionQueue* cq) {
   return new ::grpc::ClientAsyncResponseReader< ::BioService::Location>(channel_.get(), cq, rpcmethod_RemoveLocation_, context, request);
-}
-
-::grpc::Status DatabaseSevice::Stub::AddFingerprint(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::BioService::FingerprintImage* response) {
-  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_AddFingerprint_, context, request, response);
-}
-
-::grpc::ClientAsyncResponseReader< ::BioService::FingerprintImage>* DatabaseSevice::Stub::AsyncAddFingerprintRaw(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::grpc::CompletionQueue* cq) {
-  return new ::grpc::ClientAsyncResponseReader< ::BioService::FingerprintImage>(channel_.get(), cq, rpcmethod_AddFingerprint_, context, request);
-}
-
-::grpc::Status DatabaseSevice::Stub::RemoveFingerprint(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::BioService::FingerprintImage* response) {
-  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_RemoveFingerprint_, context, request, response);
-}
-
-::grpc::ClientAsyncResponseReader< ::BioService::FingerprintImage>* DatabaseSevice::Stub::AsyncRemoveFingerprintRaw(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::grpc::CompletionQueue* cq) {
-  return new ::grpc::ClientAsyncResponseReader< ::BioService::FingerprintImage>(channel_.get(), cq, rpcmethod_RemoveFingerprint_, context, request);
-}
-
-::grpc::Status DatabaseSevice::Stub::UpdateFingerprint(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::BioService::FingerprintImage* response) {
-  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_UpdateFingerprint_, context, request, response);
-}
-
-::grpc::ClientAsyncResponseReader< ::BioService::FingerprintImage>* DatabaseSevice::Stub::AsyncUpdateFingerprintRaw(::grpc::ClientContext* context, const ::BioService::FingerprintImage& request, ::grpc::CompletionQueue* cq) {
-  return new ::grpc::ClientAsyncResponseReader< ::BioService::FingerprintImage>(channel_.get(), cq, rpcmethod_UpdateFingerprint_, context, request);
 }
 
 ::grpc::Status DatabaseSevice::Stub::AddClient(::grpc::ClientContext* context, const ::BioService::BioClient& request, ::BioService::Response* response) {
@@ -618,50 +537,30 @@ DatabaseSevice::Service::Service() {
   AddMethod(new ::grpc::RpcServiceMethod(
       DatabaseSevice_method_names[14],
       ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< DatabaseSevice::Service, ::BioService::FullVisitorData, ::BioService::Visitor>(
-          std::mem_fn(&DatabaseSevice::Service::AddVisitor), this)));
-  AddMethod(new ::grpc::RpcServiceMethod(
-      DatabaseSevice_method_names[15],
-      ::grpc::RpcMethod::NORMAL_RPC,
       new ::grpc::RpcMethodHandler< DatabaseSevice::Service, ::BioService::QueryLocations, ::BioService::LocationList>(
           std::mem_fn(&DatabaseSevice::Service::SelectLocations), this)));
   AddMethod(new ::grpc::RpcServiceMethod(
-      DatabaseSevice_method_names[16],
+      DatabaseSevice_method_names[15],
       ::grpc::RpcMethod::NORMAL_RPC,
       new ::grpc::RpcMethodHandler< DatabaseSevice::Service, ::BioService::Location, ::BioService::Location>(
           std::mem_fn(&DatabaseSevice::Service::AddLocation), this)));
   AddMethod(new ::grpc::RpcServiceMethod(
-      DatabaseSevice_method_names[17],
+      DatabaseSevice_method_names[16],
       ::grpc::RpcMethod::NORMAL_RPC,
       new ::grpc::RpcMethodHandler< DatabaseSevice::Service, ::BioService::Location, ::BioService::Location>(
           std::mem_fn(&DatabaseSevice::Service::UpdateLocation), this)));
   AddMethod(new ::grpc::RpcServiceMethod(
-      DatabaseSevice_method_names[18],
+      DatabaseSevice_method_names[17],
       ::grpc::RpcMethod::NORMAL_RPC,
       new ::grpc::RpcMethodHandler< DatabaseSevice::Service, ::BioService::Location, ::BioService::Location>(
           std::mem_fn(&DatabaseSevice::Service::RemoveLocation), this)));
   AddMethod(new ::grpc::RpcServiceMethod(
-      DatabaseSevice_method_names[19],
-      ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< DatabaseSevice::Service, ::BioService::FingerprintImage, ::BioService::FingerprintImage>(
-          std::mem_fn(&DatabaseSevice::Service::AddFingerprint), this)));
-  AddMethod(new ::grpc::RpcServiceMethod(
-      DatabaseSevice_method_names[20],
-      ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< DatabaseSevice::Service, ::BioService::FingerprintImage, ::BioService::FingerprintImage>(
-          std::mem_fn(&DatabaseSevice::Service::RemoveFingerprint), this)));
-  AddMethod(new ::grpc::RpcServiceMethod(
-      DatabaseSevice_method_names[21],
-      ::grpc::RpcMethod::NORMAL_RPC,
-      new ::grpc::RpcMethodHandler< DatabaseSevice::Service, ::BioService::FingerprintImage, ::BioService::FingerprintImage>(
-          std::mem_fn(&DatabaseSevice::Service::UpdateFingerprint), this)));
-  AddMethod(new ::grpc::RpcServiceMethod(
-      DatabaseSevice_method_names[22],
+      DatabaseSevice_method_names[18],
       ::grpc::RpcMethod::NORMAL_RPC,
       new ::grpc::RpcMethodHandler< DatabaseSevice::Service, ::BioService::BioClient, ::BioService::Response>(
           std::mem_fn(&DatabaseSevice::Service::AddClient), this)));
   AddMethod(new ::grpc::RpcServiceMethod(
-      DatabaseSevice_method_names[23],
+      DatabaseSevice_method_names[19],
       ::grpc::RpcMethod::NORMAL_RPC,
       new ::grpc::RpcMethodHandler< DatabaseSevice::Service, ::BioService::BioClient, ::BioService::Response>(
           std::mem_fn(&DatabaseSevice::Service::RemoveClient), this)));
@@ -768,13 +667,6 @@ DatabaseSevice::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status DatabaseSevice::Service::AddVisitor(::grpc::ServerContext* context, const ::BioService::FullVisitorData* request, ::BioService::Visitor* response) {
-  (void) context;
-  (void) request;
-  (void) response;
-  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-}
-
 ::grpc::Status DatabaseSevice::Service::SelectLocations(::grpc::ServerContext* context, const ::BioService::QueryLocations* request, ::BioService::LocationList* response) {
   (void) context;
   (void) request;
@@ -797,27 +689,6 @@ DatabaseSevice::Service::~Service() {
 }
 
 ::grpc::Status DatabaseSevice::Service::RemoveLocation(::grpc::ServerContext* context, const ::BioService::Location* request, ::BioService::Location* response) {
-  (void) context;
-  (void) request;
-  (void) response;
-  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-}
-
-::grpc::Status DatabaseSevice::Service::AddFingerprint(::grpc::ServerContext* context, const ::BioService::FingerprintImage* request, ::BioService::FingerprintImage* response) {
-  (void) context;
-  (void) request;
-  (void) response;
-  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-}
-
-::grpc::Status DatabaseSevice::Service::RemoveFingerprint(::grpc::ServerContext* context, const ::BioService::FingerprintImage* request, ::BioService::FingerprintImage* response) {
-  (void) context;
-  (void) request;
-  (void) response;
-  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-}
-
-::grpc::Status DatabaseSevice::Service::UpdateFingerprint(::grpc::ServerContext* context, const ::BioService::FingerprintImage* request, ::BioService::FingerprintImage* response) {
   (void) context;
   (void) request;
   (void) response;

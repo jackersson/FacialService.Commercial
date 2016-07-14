@@ -7,7 +7,7 @@
 #include "utils\response_convertor.hpp"
 #include <common/verification_result.hpp>
 
-using BioService::FaceSearchResult;
+using BioService::FaceSearchResponse;
 namespace BioGrpc
 {
 	class FacialVerificationHandler
@@ -58,13 +58,13 @@ namespace BioGrpc
 			BioContracts::VerificationResultPtr result =
 				facial_engine_->verify(target_image, comparison_image);
 
-			std::shared_ptr<FaceSearchResult>	proto_matches;
+			std::shared_ptr<FaceSearchResponse>	proto_matches;
 			if (result == nullptr)
-				proto_matches = std::make_shared<FaceSearchResult>();			
+				proto_matches = std::make_shared<FaceSearchResponse>();
 			else
 			{
 				ResponseConvertor convertor;
-				proto_matches = std::make_shared<FaceSearchResult>(*convertor.get_face_search_result(result));
+				proto_matches = std::make_shared<FaceSearchResponse>(*convertor.get_face_search_result(result));
 			}
 			std::cout << "verification done size = " << result->matches().size() << std::endl;
 			status_ = FINISH;

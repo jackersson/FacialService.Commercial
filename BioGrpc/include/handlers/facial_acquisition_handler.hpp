@@ -75,7 +75,7 @@ namespace BioGrpc
 				                                          	(*convertor.getPortraitCharacteristics(resp));
 			}			
 			
-			
+			//added fff
 			status_ = FINISH;
 			responder_.Finish(*portrait_characteristics, grpc::Status::OK, this);			
 
@@ -95,7 +95,7 @@ namespace BioGrpc
 		std::shared_ptr<BioContracts::IFacialEngine> facial_engine_;
 
 		BioService::Photo                    request_;
-		grpc::ServerAsyncResponseWriter<BioService::PortraitCharacteristic>    responder_;
+		grpc::ServerAsyncResponseWriter<BioService::AcquisitionResponse>    responder_;
 
 		RequestStatus status_;
 	};

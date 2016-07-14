@@ -1,2 +1,0 @@
-# FacialService
-FacialService Web Service 
