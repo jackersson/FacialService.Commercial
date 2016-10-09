@@ -126,7 +126,7 @@ namespace Pipeline
 		BioFacialEngine::FaceVacsIOUtils utils;
 		auto image = utils.loadFromBytes( raw_image.bytes()
 		                              	, utils.getFormat(raw_image.pixel_format()));
-		return std::make_shared<ImageInfo>(image, abs(static_cast<long>(randomizer_())));
+		return std::make_shared<ImageInfo>(image, raw_image.id());
 	}
 
 	

@@ -42,7 +42,7 @@ namespace BioGrpc
 			}
 			else
 			{
-				GPR_ASSERT(status_ == FINISH);
+				//GPR_ASSERT(status_ == FINISH);
 				delete this;
 			}
 		}

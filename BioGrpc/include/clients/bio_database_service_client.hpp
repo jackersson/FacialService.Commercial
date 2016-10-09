@@ -8,6 +8,7 @@
 #include "ibio_database_client.hpp"
 
 #include "src/cpp/server/dynamic_thread_pool.h"
+#include <calls/add_facial_image_call.hpp>
 
 namespace BioGrpc
 {

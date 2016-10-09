@@ -139,7 +139,7 @@ namespace BioGrpc
 				
 			}
 		}
-		
+		/*
 		BioService::FacialImage* getFacialImage( long owner_biometric_data_id
 			                                     , const BioService::Photo& photo 
 																					 , BioContracts::IImageInfoPtr )
@@ -154,14 +154,13 @@ namespace BioGrpc
 			//	BioService::FaceCharacteristic* proto_face = facial_image->add_faces();
 			//	updateFaceCharacteristicResponse(*proto_face, face);
 			//}
-			//*/
-		//	BioFacialEngine::FRsdkFaceCharacteristic face = characteristics.getEnrollmentAbleFace();
+			//	//	BioFacialEngine::FRsdkFaceCharacteristic face = characteristics.getEnrollmentAbleFace();
 
 			//facial_image->set_template_(face.firTemplate());
 
 			return facial_image;
 		}
-
+		*/
 		//todo will send to database
 		void update_main_face_characteristic( BioService::FaceCharacteristic& proto_face
 			                                   , const BioContracts::IFaceCharacteristics& face)
@@ -171,6 +170,8 @@ namespace BioGrpc
 
 			Concurrency::parallel_invoke(
 			  [&](){proto_face.set_allocated_box(toProtoSurroundingBox(face.faceBox()));				},
+				[&]() {				}
+				/*
 			  [&](){proto_face.set_eye_distance (face.eyeDistance());													},
 			  [&](){proto_face.set_allocated_face_center(toProtoPosition(face.faceCenter()));	},
 			  [&](){proto_face.set_glasses(face.glasses());																		},
@@ -180,6 +181,7 @@ namespace BioGrpc
 			  [&](){proto_face.set_pose_angle_roll(face.poseAngleRoll());											},
 			  [&](){proto_face.set_chin(face.chin());																					},
 			  [&](){proto_face.set_crown(face.crown());																				}
+				*/
 			 
 			);
 				
@@ -188,6 +190,7 @@ namespace BioGrpc
 		void update_additional_face_characteristic(BioService::FaceCharacteristic& proto_face
 			, const BioContracts::IFaceCharacteristics& face)
 		{
+			/*
 			Concurrency::parallel_invoke(	
 				[&](){proto_face.set_left_ear(face.leftEar());																		},
 				[&](){proto_face.set_rigth_ear(face.rightEar());																	},		
@@ -196,17 +199,20 @@ namespace BioGrpc
 				[&](){proto_face.set_age(face.age());																						},
 				[&](){proto_face.set_gender(toProtoGender(face.isMale()));												}
 			);
+			*/
 
 		}
 
 		void update_iso_compliance_info( BioService::FaceCharacteristic& proto_face
 		                         , const BioContracts::IComlianceIsoTemplate& face) const
 		{
+			/*
 			Concurrency::parallel_invoke(
 			[&](){proto_face.set_compliance_iso(face.isoTemplate()            );	 },
 			[&](){proto_face.set_good          (face.isoCompatible()          );	 },
 			[&](){proto_face.set_best_practices(face.bestPracticeCompatible() );	 }
 			);
+			*/
 		}
 
 		void update_min_face_info( BioService::FaceCharacteristic& proto_face
@@ -218,7 +224,7 @@ namespace BioGrpc
 		void update_eyes_info( BioService::FaceCharacteristic& proto_face
 			                   , const BioContracts::IEyes& eyes)
 		{
-			proto_face.set_allocated_eyes(toProtoEyesCharacteristics(eyes));
+			//proto_face.set_allocated_eyes(toProtoEyesCharacteristics(eyes));
 		}
 
 		BioService::Gender toProtoGender(bool is_male)
@@ -227,17 +233,20 @@ namespace BioGrpc
 				             : BioService::Gender::Female;
 		}
 
-		BioService::SurroundingBox* toProtoSurroundingBox(const BioContracts::IBox& box)
+		BioService::Box* toProtoSurroundingBox(const BioContracts::IBox& box)
 		{
 
-			auto proto_box = new BioService::SurroundingBox();
+			auto proto_box = new BioService::Box();
+			const BioContracts::IPosition& origin = box.origin();
+			const BioContracts::IPosition& end = box.end();
 			Concurrency::parallel_invoke(
-			[&](){proto_box->set_allocated_begin(toProtoPosition(box.origin()));},
-			[&](){proto_box->set_allocated_end  (toProtoPosition(box.end()));	 }
+				[&]() {proto_box->set_allocated_begin(toProtoPosition(origin)); },
+				[&]() {proto_box->set_width(std::abs(origin.x() - end.x()));	 },
+				[&]() {proto_box->set_height(std::abs(origin.y() - end.y()));	 }
 			);
 			return proto_box;
 		}
-
+		/*
 		BioService::Ethnicity toProtoEthnithity( BioContracts::Ethnicity eth )
 		{
 			switch(eth)
@@ -275,7 +284,7 @@ namespace BioGrpc
 			proto_detailed_eyes->set_is_tined          (eye.tinted()        );
 			return proto_detailed_eyes;
 		}
-
+		*/
 		//BioService::Position* toProtoPosition(const BioContracts::FaceLocation& face)
 		//{
 		//	return toProtoPosition(face.pos);
